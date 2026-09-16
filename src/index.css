@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Product Sans', 'Plus Jakarta Sans', 'Open Sans', system-ui, -apple-system, sans-serif;
+    --font-display: 'Product Sans', 'Plus Jakarta Sans', sans-serif;
+    --font-serif: 'Product Sans', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #F8F9FA;
+    color: #1e293b;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom editorial & brand typography styles - Unified to Google / Product Sans */
+.font-editorial,
+.font-brand,
+.font-google,
+.font-product {
+  font-family: 'Product Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Elegant light mode scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Clean subtle borders and shadows */
+.card-clean {
+  background-color: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}

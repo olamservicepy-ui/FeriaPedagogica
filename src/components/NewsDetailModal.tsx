@@ -1,0 +1,307 @@
+import React, { useEffect } from 'react';
+import {
+  X,
+  Calendar,
+  Users,
+  Clock,
+  BookOpen,
+  Link as LinkIcon,
+  Printer,
+  Share2,
+  ChevronLeft,
+  Check
+} from 'lucide-react';
+import type { NewsArticle, GlossaryItem } from '../types/news';
+import { InteractiveText } from './InteractiveText';
+import { IRPerspectiveCard } from './IRPerspectiveCard';
+
+interface NewsDetailModalProps {
+  article: NewsArticle | null;
+  allGlossary: GlossaryItem[];
+  onClose: () => void;
+  onSelectTerm?: (term: string) => void;
+}
+
+export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
+  article,
+  allGlossary,
+  onClose,
+  onSelectTerm,
+}) => {
+  const [copied, setCopied] = React.useState(false);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (article) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [article]);
+
+  if (!article) return null;
+
+  // Combine article glossary with global glossary for in-text enrichment
+  const combinedGlossaryMap = new Map<string, GlossaryItem>();
+  for (const item of allGlossary) {
+    if (item.term && item.definition) {
+      combinedGlossaryMap.set(item.term.toLowerCase(), item);
+    }
+  }
+  for (const item of article.glossary || []) {
+    if (item.term && item.definition) {
+      combinedGlossaryMap.set(item.term.toLowerCase(), item);
+    }
+  }
+  const combinedGlossary = Array.from(combinedGlossaryMap.values());
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const totalWords = (article.full_text?.join(' ') || '').split(/\s+/).length;
+  const readTimeMinutes = Math.max(2, Math.ceil(totalWords / 160));
+
+  const getRegionBadgeStyle = (region: string) => {
+    switch (region.toLowerCase()) {
+      case 'américa latina':
+        return 'bg-emerald-50 text-emerald-800 border-emerald-200';
+      case 'asia-pacífico':
+        return 'bg-amber-50 text-amber-900 border-amber-200';
+      case 'europa':
+        return 'bg-blue-50 text-blue-900 border-blue-200';
+      case 'global':
+      default:
+        return 'bg-indigo-50 text-indigo-900 border-indigo-200';
+    }
+  };
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 lg:p-6 bg-slate-900/40 backdrop-blur-xs animate-in fade-in duration-200"
+    >
+      <div
+        className="relative w-full h-full md:h-auto md:max-h-[92vh] max-w-4xl bg-white border-0 md:border border-slate-200 md:rounded-2xl shadow-2xl flex flex-col overflow-hidden text-slate-900 font-sans"
+      >
+        {/* Top Sticky Bar */}
+        <div className="sticky top-0 z-20 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-white/95 border-b border-slate-200 backdrop-blur-md">
+          <button
+            onClick={onClose}
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-xs font-semibold text-slate-700 hover:text-slate-950 transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4 text-emerald-700" />
+            <span className="truncate max-w-[120px] sm:max-w-none">Volver a portada</span>
+          </button>
+
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <button
+              onClick={handleCopyLink}
+              title="Copiar enlace"
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+              aria-label="Compartir"
+            >
+              {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Share2 className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={handlePrint}
+              title="Imprimir o guardar como PDF"
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors hidden sm:inline-flex"
+              aria-label="Imprimir"
+            >
+              <Printer className="w-4 h-4" />
+            </button>
+            <button
+              onClick={onClose}
+              aria-label="Cerrar lectura"
+              className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Scrollable Article Content */}
+        <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10 space-y-6 sm:space-y-8">
+          {/* Article Header & Metadata */}
+          <header className="space-y-3 sm:space-y-4 pb-5 sm:pb-6 border-b border-slate-200">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className={`px-2.5 py-1 rounded-full text-xs font-semibold border uppercase tracking-wider ${getRegionBadgeStyle(article.region)}`}>
+                  {article.region}
+                </span>
+                <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                  {article.topic}
+                </span>
+              </div>
+              <span className="flex items-center gap-1.5 text-xs text-slate-500 font-mono">
+                <Clock className="w-3.5 h-3.5 text-slate-400" />
+                {readTimeMinutes} min de lectura
+              </span>
+            </div>
+
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900 leading-snug font-sans break-words">
+              {article.title}
+            </h1>
+
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2 text-xs sm:text-sm text-slate-600">
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 border border-slate-200 shrink-0">
+                  <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[10px] sm:text-xs text-slate-400 block font-mono">Investigación académica</span>
+                  <span className="font-semibold text-slate-800 break-words font-sans">{article.authors.join(', ')}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5 font-mono text-[11px] sm:text-xs text-slate-500">
+                <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                <span>Fecha: {article.date}</span>
+              </div>
+            </div>
+          </header>
+
+          {/* Executive Summary Box */}
+          {article.summary_bullets && article.summary_bullets.length > 0 && (
+            <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 sm:p-6 space-y-3 overflow-hidden break-words">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-800 font-mono">
+                <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
+                Puntos Clave del Análisis
+              </div>
+              <ul className="space-y-2">
+                {article.summary_bullets.map((bullet, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 sm:gap-3 text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed break-words font-sans">
+                    <span className="text-emerald-600 font-bold shrink-0 mt-0.5">•</span>
+                    <span className="break-words flex-1 min-w-0">{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Article Full Text with In-Text Interactive Glossary Tooltips */}
+          <div className="space-y-5 sm:space-y-6 text-slate-700 font-sans text-sm sm:text-base md:text-lg leading-relaxed break-words">
+            {article.full_text.map((paragraph, idx) => (
+              <InteractiveText
+                key={idx}
+                text={paragraph}
+                glossary={combinedGlossary}
+                className="text-justify"
+              />
+            ))}
+          </div>
+
+          {/* Guide banner for interactive glossary tooltips */}
+          <div className="text-xs text-slate-600 bg-emerald-50/50 rounded-lg p-3 border border-emerald-200/60 flex items-center gap-2.5">
+            <BookOpen className="w-4 h-4 text-emerald-700 shrink-0" />
+            <span className="leading-normal font-sans">
+              <strong>Guía interactiva:</strong> Los conceptos con subrayado punteado verde poseen definiciones académicas del glosario. Toca o pasa el cursor sobre ellos para consultar su concepto.
+            </span>
+          </div>
+
+          {/* Perspectiva de Relaciones Internacionales */}
+          {article.ir_perspective && (
+            <IRPerspectiveCard perspective={article.ir_perspective} />
+          )}
+
+          {/* Article Glossary Box */}
+          {article.glossary && article.glossary.length > 0 && (
+            <section className="rounded-xl bg-slate-50 border border-slate-200 p-4 sm:p-6 md:p-8 space-y-4 overflow-hidden break-words font-sans">
+              <div className="flex items-center gap-3 pb-3 border-b border-slate-200">
+                <div className="p-2 rounded-lg bg-emerald-100 text-emerald-800 shrink-0">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold text-slate-900 tracking-tight">
+                    Glosario Conceptual del Artículo
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Términos técnicos y diplomáticos empleados en este documento
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
+                {article.glossary.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 sm:p-4 rounded-lg bg-white border border-slate-200 hover:border-emerald-300 transition-colors shadow-xs overflow-hidden break-words"
+                  >
+                    <div className="flex items-center justify-between mb-1.5 gap-2">
+                      <span className="font-semibold text-xs sm:text-sm text-emerald-800 truncate">
+                        {item.term}
+                      </span>
+                      {onSelectTerm && (
+                        <button
+                          onClick={() => {
+                            onClose();
+                            onSelectTerm(item.term);
+                          }}
+                          className="text-[10px] sm:text-[11px] text-slate-500 hover:text-emerald-700 underline shrink-0"
+                        >
+                          Ver en A-Z
+                        </button>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed font-sans break-words">
+                      {item.definition}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Sources / References */}
+          {article.sources && article.sources.length > 0 && (
+            <section className="rounded-xl bg-slate-50 border border-slate-200 p-4 sm:p-6 space-y-3 overflow-hidden break-words font-sans">
+              <h4 className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-slate-500 font-bold flex items-center gap-2">
+                <LinkIcon className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                Fuentes & Referencias Académicas Consultadas
+              </h4>
+              <ul className="space-y-2 text-xs text-slate-600 font-mono">
+                {article.sources.map((src, idx) => (
+                  <li key={idx} className="flex items-start gap-2 break-words">
+                    <span className="text-emerald-700 font-bold shrink-0">[{idx + 1}]</span>
+                    <span className="break-words flex-1">{src}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+
+        {/* Modal Footer */}
+        <div className="px-4 py-3 sm:px-6 sm:py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600 font-sans">
+          <span className="truncate max-w-[180px] sm:max-w-none">Feria Pedagógica RRII</span>
+          <button
+            onClick={onClose}
+            className="px-4 py-2 min-h-[40px] rounded-lg bg-white hover:bg-slate-100 text-slate-800 font-medium border border-slate-200 shadow-xs transition-colors"
+          >
+            Cerrar Lectura
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
