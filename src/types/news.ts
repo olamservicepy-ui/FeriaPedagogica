@@ -21,6 +21,8 @@ export interface NewsArticle {
   ir_perspective: IRPerspective;
   sources: string[];
   read_time_minutes?: number;
+  author_image?: string;
+  author_role?: string;
 }
 
 export interface GlobalGlossaryEntry {

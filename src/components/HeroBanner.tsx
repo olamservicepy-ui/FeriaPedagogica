@@ -17,20 +17,20 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   regionsCount,
 }) => {
   return (
-    <section className="relative overflow-hidden pt-6 pb-8 sm:pt-12 sm:pb-14 md:pt-16 md:pb-16 border-b border-slate-200/80 bg-gradient-to-b from-white via-[#F8F9FA] to-[#F8F9FA]">
+    <section className="relative overflow-hidden pt-6 pb-8 sm:pt-12 sm:pb-14 md:pt-16 md:pb-16 border-b border-slate-200/60 bg-gradient-to-b from-white via-[#F8F9FA] to-[#F8F9FA]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4 sm:space-y-6 relative">
         {/* Top Tag */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-white border border-slate-200 text-slate-700 shadow-xs max-w-full">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100/80 backdrop-blur-sm border border-slate-200/40 text-slate-700 shadow-[0_2px_8px_rgba(0,0,0,0.02)] max-w-full">
           <Compass className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
           <span className="truncate font-sans">Feria Pedagógica Universitaria de Relaciones Internacionales</span>
         </div>
 
         {/* Main Headline */}
         <div className="space-y-2 sm:space-y-3">
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-slate-900 tracking-tight font-sans leading-tight break-words">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 font-sans leading-tight break-words">
             Análisis de Economía Internacional & Geopolítica Global
           </h1>
-          <p className="text-xs sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto font-sans leading-relaxed">
+          <p className="text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] max-w-2xl mx-auto font-sans">
             Plataforma de divulgación académica y pensamiento estratégico elaborada por estudiantes. Investigaciones coyunturales, perspectiva de relaciones internacionales y glosario conceptual interactivo.
           </p>
         </div>
@@ -44,12 +44,12 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar por tema, país, autor (ej: 'BRICS', 'litio', 'Mercosur')..."
-              className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-2xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 transition-all text-xs sm:text-base shadow-sm font-sans"
+              className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] focus:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out text-[15px] sm:text-[16px] font-sans"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 sm:right-4 p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                className="absolute right-3 sm:right-4 p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100/80 transition-all duration-300 ease-out"
                 title="Limpiar búsqueda"
                 aria-label="Limpiar búsqueda"
               >
@@ -60,20 +60,20 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
         </div>
 
         {/* Statistics Pill Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pt-2 sm:pt-4 text-xs sm:text-sm text-slate-600 font-sans">
-          <div className="flex items-center gap-1.5 sm:gap-2 bg-white px-3 py-1 rounded-full border border-slate-200/80 shadow-xs">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4 text-xs sm:text-sm text-slate-600 font-sans">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-slate-200/50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
             <span className="text-slate-900 font-bold">{articlesCount}</span>
             <span>Artículos</span>
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-2 bg-white px-3 py-1 rounded-full border border-slate-200/80 shadow-xs">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-slate-200/50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
             <span className="w-2 h-2 rounded-full bg-amber-500" />
             <span className="text-slate-900 font-bold">{glossaryCount}</span>
             <span>Términos conceptuales</span>
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-2 bg-white px-3 py-1 rounded-full border border-slate-200/80 shadow-xs">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-slate-200/50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
             <Globe className="w-3.5 h-3.5 text-blue-600" />
             <span className="text-slate-900 font-bold">{regionsCount}</span>
             <span>Regiones geoeconómicas</span>

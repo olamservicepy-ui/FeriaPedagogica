@@ -1,50 +1,74 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+}
+
 @layer base {
   :root {
-    --font-sans: 'Product Sans', 'Plus Jakarta Sans', 'Open Sans', system-ui, -apple-system, sans-serif;
-    --font-display: 'Product Sans', 'Plus Jakarta Sans', sans-serif;
-    --font-serif: 'Product Sans', 'Plus Jakarta Sans', sans-serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+    --font-serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
   }
 
+  html,
   body {
-    font-family: var(--font-sans);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
     background-color: #F8F9FA;
-    color: #1e293b;
+    color: #0f172a;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Titulares predeterminados Apple Editorial */
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    color: #0f172a;
   }
 }
 
-/* Custom editorial & brand typography styles - Unified to Google / Product Sans */
+/* Clases editoriales Apple SF Pro */
 .font-editorial,
 .font-brand,
-.font-google,
-.font-product {
-  font-family: 'Product Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+.font-apple {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
 }
 
-/* Elegant light mode scrollbar */
+/* Tarjeta y contenedor con acabado Apple: frosted glass, bordes limpios y sombras ultraligeras */
+.apple-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.apple-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+}
+
+/* Scrollbar refinado estilo macOS */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 4px;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
-}
-
-/* Clean subtle borders and shadows */
-.card-clean {
-  background-color: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
 }

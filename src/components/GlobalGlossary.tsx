@@ -90,32 +90,32 @@ export const GlobalGlossary: React.FC<GlobalGlossaryProps> = ({
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-300 font-sans">
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-2.5 sm:space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
           <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
           Compendio Conceptual
         </div>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 break-words font-sans">
           Glosario Global de Economía Internacional
         </h2>
-        <p className="text-xs sm:text-sm md:text-base text-slate-600 font-sans">
+        <p className="text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] font-sans">
           Índice unificado y desduplicado con todos los conceptos teóricos, regulatorios y geopolíticos analizados en las investigaciones de la feria.
         </p>
       </div>
 
       {/* Live Search Bar */}
       <div className="max-w-xl mx-auto relative">
-        <Search className="w-4 h-4 sm:w-5 sm:h-5 absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+        <Search className="w-4 h-4 sm:w-5 sm:h-5 absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Buscar concepto o definición en vivo..."
-          className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 transition-all text-xs sm:text-sm shadow-xs font-sans"
+          className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] focus:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out text-[15px] sm:text-[16px] font-sans"
         />
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className="absolute right-3.5 sm:right-4 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-700 p-1"
+            className="absolute right-3.5 sm:right-4 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-700 p-1.5 rounded-xl transition-all duration-300 ease-out"
             aria-label="Limpiar búsqueda"
           >
             Limpiar
@@ -124,13 +124,13 @@ export const GlobalGlossary: React.FC<GlobalGlossaryProps> = ({
       </div>
 
       {/* Alphabet Selector with touch-friendly targets */}
-      <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 p-2 bg-white border border-slate-200/80 rounded-2xl max-w-3xl mx-auto shadow-xs">
+      <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 p-2.5 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-2xl max-w-3xl mx-auto shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
         <button
           onClick={() => setSelectedLetter('TODOS')}
-          className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300 ease-out ${
             selectedLetter === 'TODOS'
-              ? 'bg-emerald-700 text-white shadow-xs font-semibold'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+              ? 'bg-emerald-700 text-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] font-semibold'
+              : 'bg-slate-100/80 backdrop-blur-sm hover:bg-slate-200/80 border border-slate-200/40 text-slate-700'
           }`}
         >
           TODOS ({globalEntries.length})
@@ -141,10 +141,10 @@ export const GlobalGlossary: React.FC<GlobalGlossaryProps> = ({
             <button
               key={letter}
               onClick={() => setSelectedLetter(letter)}
-              className={`min-w-[34px] min-h-[38px] rounded-lg text-xs font-semibold flex items-center justify-center transition-all ${
+              className={`min-w-[36px] min-h-[38px] rounded-xl text-xs font-semibold flex items-center justify-center transition-all duration-300 ease-out ${
                 isCurrent
-                  ? 'bg-emerald-700 text-white font-semibold shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  ? 'bg-emerald-700 text-white font-semibold shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)]'
+                  : 'bg-slate-100/80 backdrop-blur-sm hover:bg-slate-200/80 border border-slate-200/40 text-slate-700'
               }`}
             >
               {letter}
@@ -155,12 +155,12 @@ export const GlobalGlossary: React.FC<GlobalGlossaryProps> = ({
 
       {/* Glossary Items List */}
       {filteredEntries.length === 0 ? (
-        <div className="p-8 sm:p-12 text-center bg-white rounded-2xl border border-slate-200 max-w-lg mx-auto shadow-xs">
+        <div className="p-8 sm:p-12 text-center bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/60 max-w-lg mx-auto shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
           <BookOpen className="w-8 h-8 text-slate-400 mx-auto mb-3" />
-          <h4 className="text-base font-semibold text-slate-800 mb-1">
+          <h4 className="text-base font-semibold tracking-tight text-slate-900 mb-1">
             No se encontraron conceptos
           </h4>
-          <p className="text-xs text-slate-500 font-sans">
+          <p className="text-slate-600 font-normal leading-relaxed text-[15px] font-sans">
             Intenta con otra palabra clave o selecciona "TODOS" en el selector alfabético.
           </p>
         </div>
@@ -169,24 +169,24 @@ export const GlobalGlossary: React.FC<GlobalGlossaryProps> = ({
           {filteredEntries.map((entry, idx) => (
             <div
               key={idx}
-              className="flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-emerald-300 transition-all duration-200 shadow-xs hover:shadow-sm group overflow-hidden break-words font-sans"
+              className="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out group overflow-hidden break-words font-sans"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <h3 className="text-sm sm:text-base font-semibold text-slate-900 group-hover:text-emerald-700 transition-colors truncate">
+                  <h3 className="text-base font-semibold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors truncate font-sans">
                     {entry.term}
                   </h3>
                   <span className="shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-600 text-xs font-mono flex items-center justify-center font-bold">
                     {entry.term.charAt(0).toUpperCase()}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4 break-words font-sans">
+                <p className="text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[16px] mb-4 break-words font-sans">
                   {entry.definition}
                 </p>
               </div>
 
               {/* Linked Articles */}
-              <div className="pt-3 border-t border-slate-100 mt-auto">
+              <div className="pt-3 border-t border-slate-100/80 mt-auto">
                 <span className="text-[10px] sm:text-[11px] font-mono text-slate-500 uppercase tracking-wider block mb-1.5 flex items-center gap-1">
                   <FileText className="w-3 h-3 text-emerald-600 shrink-0" />
                   Mencionado en:
@@ -199,10 +199,10 @@ export const GlobalGlossary: React.FC<GlobalGlossaryProps> = ({
                       <button
                         key={aid}
                         onClick={() => handleArticleClick(aid)}
-                        className="text-left text-xs text-slate-600 hover:text-emerald-700 flex items-center justify-between gap-1 w-full group/link py-1 min-h-[36px]"
+                        className="text-left text-xs sm:text-sm text-slate-600 hover:text-emerald-700 flex items-center justify-between gap-1 w-full group/link py-1 min-h-[36px] transition-colors"
                       >
                         <span className="truncate flex-1 font-sans">{article.title}</span>
-                        <ArrowRight className="w-3 h-3 shrink-0 text-emerald-600 opacity-80" />
+                        <ArrowRight className="w-3.5 h-3.5 shrink-0 text-emerald-600 opacity-80" />
                       </button>
                     );
                   })}
