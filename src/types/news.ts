@@ -23,6 +23,8 @@ export interface NewsArticle {
   read_time_minutes?: number;
   author_image?: string;
   author_role?: string;
+  source_file?: string;
+  status?: 'draft' | 'published';
 }
 
 export interface GlobalGlossaryEntry {

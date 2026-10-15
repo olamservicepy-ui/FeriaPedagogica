@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
-import { Globe2, BookOpen, Layers, Award, Sparkles, Menu, X, PlusCircle } from 'lucide-react';
+import {
+  Globe2,
+  BookOpen,
+  Layers,
+  Award,
+  Sparkles,
+  Menu,
+  X,
+  ShieldCheck,
+  Lock
+} from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'news' | 'glossary' | 'about' | 'admin';
-  setActiveTab: (tab: 'news' | 'glossary' | 'about' | 'admin') => void;
+  activeTab: 'news' | 'glossary' | 'about' | 'admin' | 'login';
+  setActiveTab: (tab: 'news' | 'glossary' | 'about' | 'admin' | 'login') => void;
   articlesCount: number;
   glossaryCount: number;
   onOpenAIAssistant?: () => void;
+  isAdminLoggedIn?: boolean;
+  onLogout?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -15,10 +27,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   articlesCount,
   glossaryCount,
   onOpenAIAssistant,
+  isAdminLoggedIn,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleTabClick = (tab: 'news' | 'glossary' | 'about' | 'admin') => {
+  const handleTabClick = (tab: 'news' | 'glossary' | 'about' | 'admin' | 'login') => {
     setActiveTab(tab);
     setMobileMenuOpen(false);
   };
@@ -52,10 +65,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Nav Tabs */}
-          <nav className="hidden sm:flex items-center gap-2">
+          <nav className="hidden sm:flex items-center gap-1.5 md:gap-2">
             <button
               onClick={() => handleTabClick('news')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer ${
                 activeTab === 'news'
                   ? 'bg-slate-100/90 backdrop-blur-sm text-emerald-950 border border-slate-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/60'
@@ -70,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleTabClick('glossary')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer ${
                 activeTab === 'glossary'
                   ? 'bg-slate-100/90 backdrop-blur-sm text-emerald-950 border border-slate-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/60'
@@ -85,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleTabClick('about')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer ${
                 activeTab === 'about'
                   ? 'bg-slate-100/90 backdrop-blur-sm text-emerald-950 border border-slate-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/60'
@@ -101,24 +114,31 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="button"
                 onClick={onOpenAIAssistant}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-50/80 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all cursor-pointer"
-                title="Consultar al Asistente Académico IA (Llama-3.1 en Groq)"
+                title="Consultar al Asistente Académico IA"
               >
                 <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                 <span className="hidden lg:inline">Asistente IA</span>
               </button>
             )}
 
-            {/* Direct Publishing / Admin Button */}
+            {/* Admin / Moderation Button */}
             <button
               onClick={() => handleTabClick('admin')}
               className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ease-out cursor-pointer ml-1 ${
                 activeTab === 'admin'
-                  ? 'bg-emerald-800 text-white shadow-sm'
-                  : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+                  ? 'bg-slate-900 text-white shadow-sm'
+                  : isAdminLoggedIn
+                  ? 'bg-emerald-100 text-emerald-900 border border-emerald-300 shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+                  : 'bg-slate-100/80 text-slate-700 hover:bg-slate-200/80 border border-slate-200/80'
               }`}
+              title={isAdminLoggedIn ? 'Panel de Moderación (Sesión Activa)' : 'Ingreso de Administrador / Moderador'}
             >
-              <PlusCircle className="w-4 h-4" />
-              <span>Publicar</span>
+              {isAdminLoggedIn ? (
+                <ShieldCheck className="w-4 h-4 text-emerald-700" />
+              ) : (
+                <Lock className="w-3.5 h-3.5 text-slate-500" />
+              )}
+              <span>{isAdminLoggedIn ? 'Panel Admin' : 'Admin'}</span>
             </button>
           </nav>
 
@@ -138,7 +158,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Navigation (Frosted Glass) */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-t border-slate-200/50 bg-white/90 backdrop-blur-xl px-4 pt-3 pb-5 space-y-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 text-slate-900">
+        <div className="sm:hidden border-t border-slate-200/50 bg-white/95 backdrop-blur-xl px-4 pt-3 pb-5 space-y-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 text-slate-900">
           <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest px-2 pb-1">
             Navegación Móvil
           </div>
@@ -204,9 +224,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Sparkles className="w-4 h-4 text-emerald-600" />
                 <span>Asistente Académico IA</span>
               </div>
-              <span className="text-[10px] font-mono uppercase font-bold px-2 py-0.5 bg-white/60 text-emerald-800 rounded">
-                Llama-3.1
-              </span>
             </button>
           )}
 
@@ -214,16 +231,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => handleTabClick('admin')}
             className={`w-full flex items-center justify-between min-h-[48px] px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-out ${
               activeTab === 'admin'
-                ? 'bg-emerald-800 text-white shadow-[0_2px_8px_rgba(0,0,0,0.1)]'
-                : 'bg-emerald-50/90 text-emerald-900 border border-emerald-200/80'
+                ? 'bg-slate-900 text-white shadow-sm'
+                : 'bg-slate-100 text-slate-800 border border-slate-200'
             }`}
           >
             <div className="flex items-center gap-3">
-              <PlusCircle className="w-4 h-4" />
-              <span>Publicar Nuevo Artículo (/admin)</span>
+              {isAdminLoggedIn ? <ShieldCheck className="w-4 h-4 text-emerald-400" /> : <Lock className="w-4 h-4" />}
+              <span>{isAdminLoggedIn ? 'Panel de Moderación (Admin)' : 'Ingreso Administrador'}</span>
             </div>
-            <span className="text-[10px] font-mono uppercase font-bold px-2 py-0.5 bg-white/40 rounded">
-              Nuevo
+            <span className="text-[10px] font-mono uppercase font-bold px-2 py-0.5 bg-slate-200 text-slate-700 rounded">
+              {isAdminLoggedIn ? 'Activo' : 'Acceso'}
             </span>
           </button>
         </div>
@@ -231,4 +248,3 @@ export const Navbar: React.FC<NavbarProps> = ({
     </header>
   );
 };
-

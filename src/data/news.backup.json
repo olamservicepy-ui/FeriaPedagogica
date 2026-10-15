@@ -1,0 +1,2113 @@
+[
+  {
+    "id": "litio-triangulo-sudamericano-transicion-energetica",
+    "title": "La Guerra por el Litio en el Triángulo Sudamericano y la Transición Energética",
+    "region": "América Latina",
+    "topic": "Energía & Recursos",
+    "date": "2026-09-15",
+    "authors": [
+      "Sofía M. Valenzuela",
+      "Lucas D. Arismendi"
+    ],
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_role": "Investigación: Sofía M. Valenzuela (Alumna RI) y Lucas D. Arismendi",
+    "summary_bullets": [
+      "Argentina, Bolivia y Chile concentran más del 55% de las reservas probadas de litio en salmueras del planeta, convirtiéndose en el epicentro de la pugna geoeconómica por la electromovilidad.",
+      "La ausencia de una política coordinada a nivel regional impide la conformación de una 'OPEP del litio', propiciando esquemas dispares de estatización frente a concesiones privadas.",
+      "Las inversiones chinas en refinerías y adquisiciones de yacimientos contrastan con la lentitud de los acuerdos comerciales preferenciales promovidos por Estados Unidos y la Unión Europea."
+    ],
+    "full_text": [
+      "La descarbonización de la matriz energética global ha catapultado al carbonato e hidróxido de litio a la categoría de metales críticos de primer orden. En el altiplano andino compartido por Argentina, Bolivia y Chile, los salares de Atacama, Uyuni y del Hombre Muerto concentran yacimientos cuya extracción por evaporación ostenta costos de producción significativamente inferiores a los del litio de roca dura o espodumena presente en Australia.",
+      "Sin embargo, las tres naciones han abordado la gobernanza de este recurso estratégico desde paradigmas institucionales marcadamente divergentes. Mientras que Chile consolidó un modelo de alianzas público-privadas a través de Codelco y SQM, y Bolivia optó por una nacionalización integral con participación estatal directa mediante YLB, Argentina delegó el dominio originario a las provincias conforme al artículo 124 de su Constitución Nacional, atrayendo capitales foráneos de manera descentralizada pero heterogénea.",
+      "Esta atomización normativa obstaculiza el desarrollo de eslabonamientos productivos aguas abajo, tales como la fabricación local de celdas de batería y cátodos. La mayor parte del mineral extraído continúa exportándose como materia prima sin mayor valor agregado con destino casi exclusivo a plantas químicas y fundiciones en la República Popular China, consolidando una renovada dependencia primario-exportadora para el Sur Global.",
+      "Asimismo, los crecientes conflictos socioambientales relacionados con la huella hídrica en cuencas hiperáridas y las demandas de consulta previa por parte de comunidades originarias exigen una diplomacia minera mucho más inclusiva y con estrictos estándares de licencia social."
+    ],
+    "glossary": [
+      {
+        "term": "Triángulo del Litio",
+        "definition": "Zona geográfica del altiplano sudamericano comprendida entre Argentina, Bolivia y Chile que alberga las mayores reservas mundiales de litio en salmueras."
+      },
+      {
+        "term": "Extracción Directa de Litio (EDL)",
+        "definition": "Conjunto de tecnologías emergentes que permiten adsorber o filtrar selectivamente los iones de litio de la salmuera sin necesidad de lagunas de evaporación masiva, reduciendo drásticamente el consumo de agua."
+      },
+      {
+        "term": "Cadena de Valor de Baterías",
+        "definition": "Secuencia de fases industriales que abarca desde la extracción minera del mineral bruto, su refinamiento químico a grado batería, la fabricación de cátodos/ánodos y celdas, hasta el ensamblaje de packs para vehículos eléctricos."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "El acceso al litio y a las tierras raras constituye el nuevo teatro de competencia hegemónica entre las superpotencias. El control de las cadenas de valor de la electromovilidad determinará qué bloque lidera la revolución industrial del siglo XXI, transformando a los países andinos en zonas de disputa geoestratégica.",
+      "strategic_recommendations": [
+        "Impulsar un Tratado Marco de Cooperación Minera del Mercosur y la Comunidad Andina para armonizar regalías e incentivos de transferencia tecnológica.",
+        "Exigir compromisos de inversión vinculantes en plantas de industrialización local como condición sine qua non para el otorgamiento de nuevas concesiones mineras.",
+        "Crear un Instituto Regional del Litio que investigue tecnologías de Extracción Directa de Litio (EDL) con mínimo impacto hídrico y ambiental."
+      ]
+    },
+    "sources": [
+      "Comisión Chilena del Cobre (COCHILCO) - Mercado Global del Litio 2025/2026",
+      "Yacimientos de Litio Bolivianos (YLB) - Informe de Gestión Estratégica",
+      "Banco Interamericano de Desarrollo (BID) - Minerales Críticos para la Transición Energética en América Latina",
+      "Financial Times - The Geopolitics of South American Lithium"
+    ]
+  },
+  {
+    "id": "expansion-brics-desdolarizacion-sur-global",
+    "title": "Expansión de los BRICS+ y Desdolarización del Comercio Bilateral: Retos Estructurales para el Sur Global",
+    "region": "Global",
+    "topic": "Monedas & Deuda",
+    "date": "2026-09-12",
+    "authors": [
+      "Camila V. Morales",
+      "Mateo E. Benítez"
+    ],
+    "author_image": "/authors/camila-morales.jpg",
+    "author_role": "Investigación: Camila V. Morales (Alumna RI) y Mateo E. Benítez",
+    "summary_bullets": [
+      "El incremento del comercio liquidado en monedas locales dentro del bloque BRICS+ busca mitigar la exposición a sanciones financieras unilaterales y a la volatilidad de la tasa de interés de la Reserva Federal.",
+      "A pesar del avance del sistema mBridge y acuerdos en yuanes, la persistente falta de profundidad en mercados de capitales no occidentales limita la convertibilidad y la creación de una moneda de reserva alternativa a corto plazo.",
+      "Las economías intermedias enfrentan el dilema estratégico de diversificar reservas sin comprometer sus líneas de crédito tradicionales en dólares y euros."
+    ],
+    "full_text": [
+      "Durante la última década, la hegemonía del dólar estadounidense como divisa vehicular del comercio internacional ha comenzado a experimentar fricciones sin precedentes. La reciente ampliación de los BRICS+ ha acelerado las iniciativas orientadas a la desdolarización progresiva de los intercambios intabloque, impulsada prioritariamente por economías emergentes interesadas en blindar sus transacciones ante eventuales medidas coercitivas o bloqueos al sistema SWIFT.",
+      "El mecanismo central de esta transformación reposa en el fortalecimiento de sistemas bilaterales de pago en monedas locales y en la adopción del petroyuán para contratos energéticos estratégicos. En paralelo, iniciativas multilaterales como la plataforma mBridge —un protocolo de pagos transfronterizos basado en monedas digitales de bancos centrales— demuestran que la infraestructura tecnológica para una arquitectura financiera multipolar ya no es una mera hipótesis académica, sino una realidad operativa en desarrollo.",
+      "No obstante, los analistas de economía política internacional subrayan que la sustitución efectiva de una moneda de reserva global exige requisitos institucionales robustos: mercados secundarios de deuda líquidos, previsibilidad en el estado de derecho financiero y plena convertibilidad de la cuenta de capitales. Por ende, la transición no se perfila como un reemplazo hegemónico inmediato del billete verde por el renminbi o una canasta común, sino como una fragmentación geoeconómica caracterizada por zonas de influencia monetaria regionalizada.",
+      "Para los países del Sur Global, esta coyuntura abre una ventana de maniobra sin precedentes para negociar mejores condiciones de financiamiento con instituciones como el Nuevo Banco de Desarrollo (NDB), si bien exige una gestión macroprudencial sumamente sofisticada para evitar el arbitraje cambiario adverso y la acumulación de activos no líquidos."
+    ],
+    "glossary": [
+      {
+        "term": "Desdolarización",
+        "definition": "Proceso mediante el cual estados o agentes económicos reducen su dependencia del dólar estadounidense para transacciones comerciales internacionales, reservas monetarias e instrumentos de deuda."
+      },
+      {
+        "term": "SWIFT",
+        "definition": "Sociedad para las Comunicaciones Financieras Interbancarias Mundiales; red de mensajería financiera internacional estandarizada que comunica transacciones seguras entre bancos de todo el planeta."
+      },
+      {
+        "term": "Sur Global",
+        "definition": "Concepto de relaciones internacionales que engloba a países en desarrollo de América Latina, África, Asia y Oceanía, caracterizados por historias comunes de inserción periférica y búsqueda de un orden multilateral equitativo."
+      },
+      {
+        "term": "Petroyuán",
+        "definition": "Denominación y liquidación de contratos de compraventa de hidrocarburos utilizando el yuan chino (renminbi) en lugar del esquema tradicional respaldado en dólares estadounidenses."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La geopolítica monetaria ha pasado de ser un instrumento secundario a constituirse en el núcleo duro de la competencia estratégica entre potencias. La utilización del sistema financiero global como herramienta de presión ('weaponized interdependence') ha motivado al bloque euroasiático y a economías emergentes a edificar canales alternativos de liquidación soberana.",
+      "strategic_recommendations": [
+        "Establecer mesas interinstitucionales entre Bancos Centrales y Cancillerías para monitorear la liquidez y riesgos de contraparte en convenios de swap de divisas.",
+        "Diversificar de manera prudente la composición de las reservas internacionales hacia activos reales, oro y canastas de divisas multipolares.",
+        "Articular posiciones coordinadas en organismos multilaterales (FMI, Banco Mundial) exigiendo mayor representatividad y cuotas de voto para las economías en desarrollo."
+      ]
+    },
+    "sources": [
+      "Bank for International Settlements (BIS) - Cross-border Payments Report 2025/2026",
+      "International Monetary Fund (IMF) - Currency Composition of Official Foreign Exchange Reserves (COFER)",
+      "Center for Economic and Policy Research (CEPR) - The Rise of Alternative Payment Rails",
+      "Reuters Geopolitics - BRICS Expansion and Energy Settlements"
+    ]
+  },
+  {
+    "id": "clausula-ambiental-ue-mercosur-asimetrias",
+    "title": "La Cláusula Ambiental del Acuerdo UE-Mercosur: Asimetrías Regulatorias y Soberanía Agroindustrial",
+    "region": "América Latina",
+    "topic": "Comercio",
+    "date": "2026-09-08",
+    "authors": [
+      "Lucía S. Albarracín",
+      "Joaquín R. Peralta"
+    ],
+    "author_image": "/authors/lucia-albarracin.jpg",
+    "author_role": "Investigación: Lucía S. Albarracín (Alumna RI) y Joaquín R. Peralta",
+    "summary_bullets": [
+      "Las exigencias del Reglamento Europeo sobre Deforestación (EUDR) introducen mecanismos de auditoría satelital que son percibidos por los países del Mercosur como barreras paraarancelarias encubiertas.",
+      "La falta de reconocimiento explícito al principio de Trato Especial y Diferenciado amenaza la competitividad de pequeños y medianos productores del cono sur frente a los subsidios agrícolas de la PAC europea.",
+      "Una diplomacia técnica concertada entre Brasil, Argentina, Paraguay y Uruguay resulta imperativa para negociar fondos de transición ambiental y homologación de certificaciones locales."
+    ],
+    "full_text": [
+      "Tras más de dos décadas de negociaciones intermitentes, el acuerdo birregional entre la Unión Europea y el Mercosur se encuentra en un punto de inflexión definitivo condicionado por la agenda verde. La introducción de anexos ambientales vinculantes y la aplicación extraterritorial del Reglamento EUDR han reformulado los términos del intercambio comercial transatlántico, desatando intensos debates sobre soberanía regulatoria y proteccionismo sofisticado.",
+      "Para los sectores productivos sudamericanos, la obligación de certificar trazabilidad georreferenciada libre de deforestación desde el predio de origen impone costos operativos asimétricos. Mientras los agricultores europeos gozan de generosas asignaciones de la Política Agrícola Común (PAC), los exportadores agropecuarios del Mercosur deben financiar la infraestructura de monitoreo sin recibir a cambio garantías de precios preferenciales o plazos de adecuación graduales acordes al trato especial y diferenciado.",
+      "Desde el prisma de la diplomacia comercial, los países del Mercosur argumentan que las normativas comunitarias europeas funcionan fácticamente como barreras paraarancelarias unilaterales que violentan los compromisos adquiridos en el marco de la Organización Mundial del Comercio (OMC). Esta tensión pone de manifiesto la colisión entre el imperativo de la mitigación climática global y la preservación de la competitividad de economías cuya inserción externa depende sustancialmente de la exportación de commodities alimentarias.",
+      "El desenlace de esta negociación no solo definirá el futuro del comercio birregional, sino que sentará un precedente sistémico para futuros tratados comerciales del siglo XXI, donde los estándares medioambientales y sanitarios se perfilan como el principal campo de batalla de la política comercial internacional."
+    ],
+    "glossary": [
+      {
+        "term": "Reglamento EUDR",
+        "definition": "European Union Deforestation Regulation; normativa de la UE que prohíbe el ingreso al mercado comunitario de productos (soja, carne, café, madera, etc.) derivados de tierras deforestadas con posterioridad a diciembre de 2020."
+      },
+      {
+        "term": "Barreras Paraarancelarias",
+        "definition": "Medidas no arancelarias (técnicas, ambientales, fitosanitarias o administrativas) que dificultan o encarecen la importación de bienes de origen extranjero, actuando como mecanismos de protección indirecta."
+      },
+      {
+        "term": "Trato Especial y Diferenciado",
+        "definition": "Principio del derecho de la OMC que otorga a los países en desarrollo períodos de implementación más prolongados, compromisos arancelarios más flexibles y cooperación técnica asistida."
+      },
+      {
+        "term": "Mercosur",
+        "definition": "Mercado Común del Sur; bloque de integración subregional fundado en 1991 mediante el Tratado de Asunción por Argentina, Brasil, Paraguay y Uruguay, al que se incorporó Bolivia."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Europa busca proyectar poder normativo global ('Brussels Effect') exportando sus estándares ambientales a sus socios comerciales. Por su parte, América Latina reivindica que la transición ecológica no debe ser financiada a costa del subdesarrollo industrial de la periferia ni mediante la imposición de vetos unilaterales a su aparato exportador.",
+      "strategic_recommendations": [
+        "Exigir en las mesas de redacción final la creación de un Fondo Verde de Cooperación Técnica financiado por la UE para absorber los costos de trazabilidad de los pequeños productores.",
+        "Consolidar una postura negociadora común e inquebrantable dentro del Mercosur, evitando que la diplomacia bilateral fragmente la fortaleza del bloque.",
+        "Acudir de manera preventiva al Órgano de Solución de Diferencias de la OMC en caso de que las cláusulas de auditoría satelital vulneren el principio de no discriminación (GATT Art. III y XX)."
+      ]
+    },
+    "sources": [
+      "Organización Mundial del Comercio (OMC) - Comité de Comercio y Medio Ambiente 2025",
+      "Comisión Económica para América Latina y el Caribe (CEPAL) - Balance Preliminar del Comercio Exterior Regional",
+      "European Parliament Think Tank - EUDR Implementation Briefing",
+      "Ministerio de Relaciones Exteriores, Comercio Internacional y Culto - Posición del Mercosur"
+    ]
+  },
+  {
+    "id": "geopolitica-semiconductores-estrecho-taiwan",
+    "title": "Geopolítica de los Semiconductores: La 'Chokepoint Economy' en el Estrecho de Taiwán y la Seguridad Tecnológica",
+    "region": "Asia-Pacífico",
+    "topic": "Tecnología & Comercio",
+    "date": "2026-09-01",
+    "authors": [
+      "Ignacio T. Chen",
+      "Valentina D. Rossi"
+    ],
+    "author_image": "/authors/ignacio-chen.jpg",
+    "author_role": "Investigación: Ignacio T. Chen (Alumno RI) y Valentina D. Rossi",
+    "summary_bullets": [
+      "Más del 60% de la producción global de microchips avanzados y el 90% de los chips de última generación (menos de 3nm) provienen de fábricas concentradas geográficamente en Taiwán.",
+      "Las legislaciones de subsidios estatales como el CHIPS Act y la estrategia de 'friendshoring' intentan relocalizar la manufactura, pero tropiezan con la escasez de mano de obra especializada y altos costos de capital.",
+      "La dependencia crítica de la litografía ultravioleta extrema (EUV) convierte a cadenas globales de suministro en puntos de estrangulamiento geopolítico ('chokepoints') altamente vulnerables a fricciones navales."
+    ],
+    "full_text": [
+      "En el tablero de las relaciones internacionales contemporáneas, el microprocesador ha reemplazado al petróleo como el recurso estratégico por excelencia. La concentración de la fundición de obleas de silicio de máxima densidad en la isla de Taiwán, capitaneada por TSMC, ha generado el llamado 'escudo de silicio', una paradoja donde la supremacía tecnológica actúa simultáneamente como disuasivo de seguridad y como epicentro de vulnerabilidad planetaria.",
+      "La cadena de valor del silicio se caracteriza por cuellos de botella extremos o chokepoints. Ningún país reúne la totalidad de las etapas industriales: el diseño de chips avanzados reside en Estados Unidos, la maquinaria de litografía ultravioleta extrema (EUV) es monopolio de la firma holandesa ASML, los químicos ultra puros se originan en Japón, mientras que el ensamblaje y encapsulado final se distribuye en el sudeste asiático.",
+      "Frente al temor de un bloqueo naval o disrupción bélica en el estrecho de Taiwán, las principales potencias han emprendido una carrera de subsidios sin precedentes. Tanto el CHIPS Act estadounidense como la Ley Europea de Chips destinan cientos de miles de millones de dólares a la construcción de mega-fundiciones en suelo propio o en naciones aliadas bajo la doctrina del nearshoring o friendshoring.",
+      "Sin embargo, la relocalización de fábricas avanzadas afronta rigideces severas: la curva de aprendizaje de los ingenieros locales, la disponibilidad energética ininterrumpida y las gigantescas economías de escala de la cuenca asiática imposibilitan una autarquía tecnológica en el corto y mediano plazo. Por consiguiente, la diplomacia de los semiconductores se ha convertido en el vector dominante de las alianzas estratégicas en el Indo-Pacífico."
+    ],
+    "glossary": [
+      {
+        "term": "Chokepoint",
+        "definition": "Punto de estrangulamiento geográfico o técnico crítico donde el flujo de comercio, insumos estratégicos o energía puede ser interrumpido fácilmente, paralizando sectores industriales enteros."
+      },
+      {
+        "term": "Litografía Ultravioleta Extrema (EUV)",
+        "definition": "Tecnología de manufactura de microchips que utiliza luz ultravioleta de longitud de onda extremadamente corta (13.5 nm) para imprimir circuitos microscópicos de máxima densidad en obleas de silicio."
+      },
+      {
+        "term": "Nearshoring",
+        "definition": "Estrategia empresarial y geopolítica que consiste en trasladar procesos de producción o abastecimiento a países cercanos geográficamente y con afinidad comercial, para reducir riesgos de disrupción logística."
+      },
+      {
+        "term": "CHIPS Act",
+        "definition": "Legislación estadounidense aprobada para subsidiar masivamente la investigación científica y la producción doméstica de semiconductores, buscando reducir la dependencia de la manufactura asiática."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La pugna por la hegemonía tecnológica entre Washington y Beijing redefine los mapas de alianzas. El acceso a microelectrónica de frontera es la precondición material para el dominio de la inteligencia artificial militar, la computación cuántica y las telecomunicaciones globales de próxima generación.",
+      "strategic_recommendations": [
+        "Adoptar políticas de seguridad económica que consideren los semiconductores como bienes públicos estratégicos con reservas de contingencia.",
+        "Estimular convenios de cooperación con universidades técnicas del sudeste asiático y Europa para la formación de talento especializado en diseño de circuitos integrados.",
+        "Mantener canales diplomáticos multilaterales que eviten la militarización de los estrechos de navegación comercial en el mar de China Meridional."
+      ]
+    },
+    "sources": [
+      "Center for Strategic and International Studies (CSIS) - Chokepoints: The Geography of Global Semiconductor Production",
+      "Semiconductor Industry Association (SIA) - State of the Industry 2025",
+      "Nikkei Asia - Silicon Shield and Taiwan Strait Geopolitics",
+      "Foreign Affairs - The New Economics of Strategic Technology"
+    ]
+  },
+  {
+    "id": "paraguay-riesgo-pais-107-puntos",
+    "title": "Bajo riesgo país de Paraguay (107 puntos) y sus implicancias para la inversión extranjera",
+    "topic": "Finanzas",
+    "region": "Cono Sur",
+    "date": "2026-09-07",
+    "authors": [
+      "Araceli Alejandra Paredes Sugastti"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Paraguay registra un EMBI de 107 puntos básicos, situándose entre los países con menor riesgo financiero de Sudamérica.",
+      "La inflación se redujo a 1,5 % interanual en agosto 2026 y la tasa política monetaria se mantiene estable, reforzando la confianza de inversionistas internacionales.",
+      "Este entorno de bajo riesgo favorece la atracción de proyectos de inversión a largo plazo y abre espacio para reformas estructurales."
+    ],
+    "full_text": [
+      "El presente trabajo analiza el reciente indicador de riesgo país (EMBI) de Paraguay, que alcanzó los 107 puntos básicos según el medio ABC Color el 7 de septiembre de 2026, posicionándolo como uno de los países con menor percepción de riesgo financiero en la región sudamericana.",
+      "Los datos macroeconómicos subyacentes muestran una inflación bajo control, descendiendo a 1,5 % interanual en agosto de 2026, y una tasa política monetaria estable, lo que ha generado confianza entre los inversionistas internacionales y ha permitido que el país mantenga un costo de financiamiento relativamente bajo.",
+      "En el contexto internacional, este bajo nivel de riesgo país potencia la credibilidad de Paraguay, creando un entorno predecible para la inversión extranjera directa y facilitando la ejecución de proyectos estructurales que requieren financiamiento a largo plazo."
+    ],
+    "glossary": [
+      {
+        "term": "Riesgo país (EMBI)",
+        "definition": "Índice elaborado por instituciones financieras internacionales que mide la diferencia de rendimiento entre los bonos soberanos de un país emergente y los bonos de referencia, sirviendo como referencia para inversiones en deuda pública internacional."
+      },
+      {
+        "term": "Puntos básicos",
+        "definition": "Unidad de medida utilizada en finanzas para expresar diferencias o variaciones porcentuales; un punto básico equivale a 0,01 %."
+      },
+      {
+        "term": "Tasa política monetaria",
+        "definition": "Tasa de interés de referencia fijada por el Banco Central del Paraguay para regular la liquidez del sistema financiero."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, al mantener un EMBI de 107 puntos, se destaca en un entorno regional caracterizado por volatilidad macroeconómica en países vecinos como Argentina y Brasil, lo que le otorga una posición estratégica como refugio de estabilidad financiera en el Cono Sur.",
+      "strategic_recommendations": [
+        "Aprovechar el bajo riesgo país para negociar acuerdos de inversión con fondos multilaterales y bancos de desarrollo que ofrezcan condiciones favorables.",
+        "Implementar reformas estructurales en infraestructura y energía que potencien la competitividad exportadora y diversifiquen la base productiva."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Ara Sugastti.docx"
+  },
+  {
+    "id": "impacto-apreciacion-guarani-exportaciones-paraguay",
+    "title": "Impacto de la apreciación del guaraní en las exportaciones paraguayas",
+    "topic": "Comercio",
+    "region": "Cono Sur",
+    "date": "2026-09-09",
+    "authors": [
+      "Aracely Villalba Russi"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Capex estima que la apreciación del guaraní redujo en un 19 % el valor exportado en los últimos 12 meses, equivalentes a US$ 869 millones en productos primarios.",
+      "Un guaraní más fuerte abarata importaciones pero disminuye la competitividad de los productos paraguayos en los mercados internacionales.",
+      "Se plantea la necesidad de políticas macroeconómicas que mantengan la estabilidad sin sacrificar la capacidad exportadora."
+    ],
+    "full_text": [
+      "La Cámara Paraguaya de Exportadores (Capex) ha alertado sobre la fuerte apreciación del guaraní frente al dólar estadounidense, un fenómeno que, según datos del Banco Central del Paraguay, está erosionando los ingresos de los exportadores al convertir sus ventas en dólares a una moneda nacional más cara.",
+      "El análisis de Capex indica que la pérdida de competitividad representa aproximadamente el 19 % del valor exportado en el último año, con un impacto estimado de US$ 869 millones en productos primarios, lo que evidencia una vulnerabilidad estructural de la economía paraguaya dependiente de materias primas y de la volatilidad cambiaria.",
+      "Ante este escenario, se sugiere que Paraguay diversifique sus mercados, fortalezca la diplomacia económica y fomente la producción de bienes con mayor valor agregado, de modo que la política cambiaria y macroeconómica pueda equilibrar estabilidad y competitividad internacional."
+    ],
+    "glossary": [
+      {
+        "term": "Apreciación",
+        "definition": "Aumento del valor de una moneda respecto a otra; en este caso, el guaraní gana valor frente al dólar."
+      },
+      {
+        "term": "Tipo de cambio",
+        "definition": "Valor de una moneda expresado en relación con otra, por ejemplo cuántos guaraníes se necesitan para comprar un dólar."
+      },
+      {
+        "term": "Riesgo cambiario",
+        "definition": "Posibilidad de incurrir en pérdidas financieras debido a variaciones en el valor de una moneda frente a otra."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La apreciación del guaraní se inserta en un contexto regional donde la fortaleza de las monedas locales puede alterar los flujos comerciales del Mercosur, generando tensiones entre países exportadores y consumidores de bienes intermedios, y requiriendo una coordinación de políticas cambiarias y de comercio exterior.",
+      "strategic_recommendations": [
+        "Diversificar los destinos de exportación hacia Asia, Europa y otros mercados para reducir la dependencia de socios tradicionales.",
+        "Fortalecer la diplomacia económica y comercial, aprovechando los mecanismos del Mercosur y acuerdos bilaterales para negociar condiciones de acceso más favorables."
+      ]
+    },
+    "sources": [
+      "ABC Color",
+      "Banco Central del Paraguay (BCP)",
+      "Capex"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Ara Villalba.docx"
+  },
+  {
+    "id": "refuerzan-controles-para-frenar-ingreso-ilegal-de-pollos-huevos-y-carne-de-cerdo",
+    "title": "Controles reforzados contra el ingreso ilegal de pollos, huevos y carne de cerdo en Paraguay",
+    "topic": "Comercio",
+    "region": "Cono Sur",
+    "date": "2026-09-09",
+    "authors": [
+      "Avis Jhovanca Benitez"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Se realizó una reunión interinstitucional liderada por el ministro del Interior para combatir el contrabando de pollos, huevos y carne de cerdo, sectores clave de la producción nacional paraguaya.",
+      "El encuentro propuso la creación de una mesa técnica que mejore la coordinación entre fiscalización, sanidad animal y autoridades fronterizas, reduciendo la pérdida de ingresos fiscales y protegiendo la salud pública.",
+      "Se destacan desafíos regulatorios como la falta de trazabilidad y la presencia de un mercado informal que favorece la competencia desleal, requiriendo acciones conjuntas a nivel regional."
+    ],
+    "full_text": [
+      "La noticia informa sobre una reunión interinstitucional celebrada en Paraguay con el objetivo de fortalecer los controles contra el ingreso ilegal de productos avícolas y porcinos, principalmente pollos, huevos y carne de cerdo, sectores estratégicos para la economía nacional.",
+      "Durante la sesión, encabezada por el ministro del Interior, Enrique Riera, se identificaron problemáticas como el contrabando de carne de cerdo, la comercialización informal de huevos y el ingreso ilegal de pollos faenados; se acordó crear una mesa técnica que armonice la fiscalización, la sanidad animal y la coordinación fronteriza, estableciendo procedimientos claros para la incautación y manejo de animales confiscados.",
+      "El impacto internacional se refleja en la necesidad de cooperación con países vecinos para evitar flujos ilícitos que afectan la competitividad de la producción nacional; la conclusión subraya que la coordinación institucional y la diplomacia regional son esenciales para garantizar un comercio seguro y formal."
+    ],
+    "glossary": [
+      {
+        "term": "Contrabando",
+        "definition": "Ingreso o salida ilegal de bienes de un país, evitando los controles y obligaciones establecidos por la legislación."
+      },
+      {
+        "term": "Comercialización",
+        "definition": "Proceso mediante el cual bienes o productos son distribuidos y vendidos en el mercado."
+      },
+      {
+        "term": "Producción nacional",
+        "definition": "Conjunto de bienes y servicios producidos dentro del territorio de un país."
+      },
+      {
+        "term": "Sector avícola",
+        "definition": "Actividad económica relacionada con la crianza, producción y comercialización de aves y sus productos, como carne y huevos."
+      },
+      {
+        "term": "Sector porcino",
+        "definition": "Actividad económica vinculada a la cría de cerdos y a la producción y comercialización de carne porcina."
+      },
+      {
+        "term": "Fiscalización",
+        "definition": "Acción de controlar y verificar que las actividades económicas cumplan las normas vigentes."
+      },
+      {
+        "term": "Mercado informal",
+        "definition": "Espacio o conjunto de actividades comerciales que funcionan fuera de determinados controles, registros u obligaciones legales."
+      },
+      {
+        "term": "Competencia desleal",
+        "definition": "Situación en la que determinados comerciantes obtienen ventajas mediante prácticas contrarias a las normas, afectando a quienes operan legalmente."
+      },
+      {
+        "term": "Incautación",
+        "definition": "Retención de bienes por parte de las autoridades cuando existen indicios de infracción o ilegalidad."
+      },
+      {
+        "term": "Cadena productiva",
+        "definition": "Conjunto de etapas y actores que intervienen desde la producción de un bien hasta su distribución y llegada al consumidor."
+      }
+    ],
+    "source_file": "Avis.docx"
+  },
+  {
+    "id": "analisis-economia-paraguaya-internacional",
+    "title": "Dinámica cambiaria del guaraní frente al dólar y sus implicancias económicas en Paraguay",
+    "topic": "Economía",
+    "region": "América Latina",
+    "date": "2026-09-17",
+    "authors": [
+      "Aylén Janeth Benítez Closs"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "La diversificación productiva y la llegada de capitales internacionales estabilizan el flujo de divisas, modificando la dinámica del tipo de cambio en Paraguay.",
+      "Un guaraní más fuerte reduce el costo de importaciones pero presiona a los exportadores que perciben ingresos en dólares y costos en guaraníes.",
+      "Se destaca la necesidad de fortalecer la formación técnica y la competitividad para sostener el crecimiento económico a largo plazo."
+    ],
+    "full_text": [
+      "El artículo de ABC Color del 9 de septiembre de 2026 explica que la dinámica del dólar en Paraguay cambió debido a la diversificación productiva, la aparición de nuevos sectores exportadores y el ingreso de capitales internacionales, lo que ha hecho más estable el flujo de divisas durante el año.",
+      "Los economistas consultados señalan que algunos ahorristas prefieren invertir en guaraníes, mientras que quienes reciben dólares tienden a convertirlos rápidamente a moneda nacional; este proceso genera una apreciación cambiaria que beneficia a consumidores e importadores pero crea presión sobre exportadores cuyos ingresos están en dólares y cuyos costos se pagan en guaraníes.",
+      "En conclusión, el fortalecimiento del guaraní tiene efectos mixtos y subraya la importancia de monitorear su impacto en exportaciones, inversiones y empleo, así como de continuar diversificando la producción, mejorar la competitividad y reforzar la formación técnica para garantizar un crecimiento económico sostenible."
+    ],
+    "glossary": [
+      {
+        "term": "Tipo de cambio",
+        "definition": "Precio de una moneda expresado en otra moneda, por ejemplo, el valor del dólar en guaraníes."
+      },
+      {
+        "term": "Divisas",
+        "definition": "Monedas extranjeras utilizadas en operaciones comerciales y financieras."
+      },
+      {
+        "term": "Diversificación productiva",
+        "definition": "Proceso de ampliar la variedad de bienes y servicios que produce o exporta un país."
+      },
+      {
+        "term": "Apreciación cambiaria",
+        "definition": "Aumento del valor de una moneda nacional frente a una moneda extranjera."
+      },
+      {
+        "term": "Competitividad",
+        "definition": "Capacidad de una empresa o país para ofrecer bienes y servicios y competir en el mercado."
+      },
+      {
+        "term": "Capitales internacionales",
+        "definition": "Recursos financieros que ingresan desde otros países para invertir, prestar o realizar negocios."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "El fortalecimiento del guaraní se produce en un contexto regional donde los países del Mercosur buscan mayor integración productiva y atraer inversión extranjera; la estabilidad cambiaria de Paraguay puede influir en la balanza comercial del bloque y en la competitividad frente a economías como Brasil y Argentina.",
+      "strategic_recommendations": [
+        "Implementar políticas de monitoreo cambiario que coordinen el sector público y privado para mitigar la presión sobre exportadores.",
+        "Fomentar programas de capacitación técnica y tecnológica orientados a los sectores exportadores emergentes para diversificar la base productiva y reducir la vulnerabilidad ante fluctuaciones cambiarias."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Aylen.docx"
+  },
+  {
+    "id": "paraguay-estabilidad-wall-street",
+    "title": "Paraguay ante los ojos de Wall Street: estabilidad que empieza a pesar",
+    "topic": "Política Monetaria",
+    "region": "América Latina",
+    "date": "2026-09-06",
+    "authors": [
+      "Dahiana Paiva"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/dahiana-paiva.jpg",
+    "summary_bullets": [
+      "La inflación interanual de Paraguay cayó al 1,5% en septiembre 2026, el nivel más bajo desde mayo 2013, mientras la inflación núcleo se situó en 0,9%, mínima desde 2009.",
+      "El informe de JP Morgan señala que la combinación de inflación bajo objetivo y crecimiento del PIB sólido brinda una oportunidad para posicionar a Paraguay como una economía previsible y atractiva para inversores internacionales.",
+      "Sin embargo, se proyecta una aceleración inflacionaria hasta 3,3% a fin de 2026 por factores estacionales y climáticos, lo que plantea el desafío de traducir la estabilidad macroeconómica en inversión productiva y empleo de calidad."
+    ],
+    "full_text": [
+      "En la columna de opinión publicada el 6 de septiembre de 2026 en Última Hora, Ricardo Sasiain resume un informe de JP Morgan que destaca una inflación interanual del 1,5 % en Paraguay, la más baja desde 2013, y una inflación núcleo del 0,9 %, mínima desde 2009, en un contexto de crecimiento económico firme.",
+      "El análisis muestra que la caída de precios en alimentos (‑0,8 % mensual) y el aumento moderado de los combustibles (+4,6 %) fueron los principales motores de la variación, mientras que las expectativas inflacionarias ancladas y la estabilidad del tipo de cambio favorecieron la previsibilidad macroeconómica; sin embargo, el propio informe advierte una posible aceleración de la inflación hasta 3,3 % a finales de 2026 por efectos estacionales y el fenómeno de El Niño.",
+      "Desde la perspectiva internacional, la estabilidad de precios y el crecimiento sostenido posicionan a Paraguay como un caso raro en América Latina, ofreciendo una reputación de previsibilidad que puede atraer inversión extranjera de largo plazo, siempre que el país convierta esa ventana de estabilidad en capital productivo, reformas institucionales y empleo de calidad."
+    ],
+    "glossary": [
+      {
+        "term": "Deflación",
+        "definition": "Caída generalizada y sostenida del nivel de precios de una economía, en sentido contrario a la inflación."
+      }
+    ],
+    "source_file": "Dahiana.pdf"
+  },
+  {
+    "id": "renegociacion-tarifa-itaipu-paraguay",
+    "title": "Renegociación de la tarifa plurianual de la Binacional Itaipú y su impacto en la estabilidad fiscal de Paraguay",
+    "topic": "Energía",
+    "region": "América Latina",
+    "date": "2026-09-05",
+    "authors": [
+      "Héctor Ramirez"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/hector-ramirez.jpg",
+    "summary_bullets": [
+      "Paraguay busca asegurar USD 1.250 millones anuales de ingresos de Itaipú mediante una tarifa plurianual de 3‑5 años a partir de 2027.",
+      "La negociación se complica por la presión brasileña de reducir la tarifa al costo técnico establecido en el Anexo C.",
+      "Un acuerdo de mediano plazo garantizaría previsibilidad presupuestaria para obras de infraestructura y programas sociales."
+    ],
+    "full_text": [
+      "Paraguay pretende blindar los ingresos de la binacional Itaipú durante los próximos cinco años, negociando con Brasil una tarifa plurianual que garantice alrededor de USD 1.250 millones anuales, equivalentes a USD 19,28 kW/mes bajo el esquema actual.",
+      "El gobierno paraguayo enfrenta una negociación compleja porque Brasil busca bajar la tarifa al costo técnico definido en el Anexo C, lo que genera tensiones entre la necesidad de ingresos elevados y la presión de reducir costos energéticos para su mercado interno; las conversaciones formales se intensificarán a finales de año para cerrar un acuerdo antes de 2027.",
+      "La conclusión subraya que una tarifa de largo plazo es clave para la estabilidad fiscal y el desarrollo socio‑económico de Paraguay, pero el desafío diplomático radica en equilibrar las pretensiones de altos ingresos paraguayos con la postura brasileña de menores costos energéticos."
+    ],
+    "glossary": [
+      {
+        "term": "Acuerdo plurianual",
+        "definition": "Pacto bilateral que fija condiciones o precios por varios años, evitando negociaciones anuales y proporcionando estabilidad presupuestaria."
+      },
+      {
+        "term": "Royalties",
+        "definition": "Compensación financiera que la hidroeléctrica paga a los Estados contratantes por la utilización del recurso hídrico para generar energía."
+      },
+      {
+        "term": "Anexo C",
+        "definition": "Sección del Tratado de Itaipú que establece las bases financieras y la prestación de los servicios de electricidad de la binacional."
+      },
+      {
+        "term": "Costo técnico",
+        "definition": "Valor financiero base necesario únicamente para cubrir la operación, mantenimiento y administración de la represa, sin incluir márgenes ni fondos sociales adicionales."
+      },
+      {
+        "term": "Energía excedente",
+        "definition": "Cantidad de electricidad producida por la central que una de las partes no consume internamente y cede o vende a la otra."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La renegociación de la tarifa de Itaipú se inserta en un contexto de creciente competencia energética en el Mercosur, donde Brasil busca reducir sus costos de generación para fortalecer su competitividad exportadora, mientras Paraguay depende de los ingresos de la binacional para financiar su desarrollo interno, generando una dinámica de poder asimétrica que requiere una diplomacia equilibrada.",
+      "strategic_recommendations": [
+        "Establecer un marco tarifario de mediano plazo que incluya cláusulas de revisión vinculadas a indicadores macroeconómicos y de precios internacionales de energía.",
+        "Crear un mecanismo bilateral de gestión de energía excedente que permita a Paraguay vender el excedente a terceros mercados, diversificando sus fuentes de ingreso y reduciendo la dependencia de Brasil."
+      ]
+    },
+    "sources": [
+      "El Nacional"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Hector.pdf"
+  },
+  {
+    "id": "itaipu-aumento-suministro-ande-2026",
+    "title": "Incremento del 19% en el suministro de energía de Itaipú a la ANDE (enero‑agosto 2026): análisis de desempeño operativo y perspectivas estratégicas",
+    "topic": "Energía",
+    "region": "Cono Sur",
+    "date": "2026-09-09",
+    "authors": [
+      "Liz Rocio Peña Bloy"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Itaipú entregó 19.276 GWh a la ANDE entre enero y agosto de 2026, un aumento del 19 % respecto al mismo período de 2025.",
+      "La disponibilidad operativa de las unidades alcanzó 96,35 %, superando la meta del 94 % gracias a mantenimiento, capacitación y coordinación binacional.",
+      "El exceso de energía posiciona a Paraguay como atractivo para industrias electrointensivas y refuerza la necesidad de acuerdos de integración energética y modernización de infraestructura."
+    ],
+    "full_text": [
+      "La Central Hidroeléctrica Itaipú, como principal fuente de generación eléctrica para Paraguay, incrementó notablemente su suministro a la Administración Nacional de Electricidad (ANDE) durante los primeros ocho meses de 2026, lo que plantea interrogantes sobre la capacidad del país para aprovechar este recurso en su política energética y de desarrollo industrial.",
+      "Según datos publicados por ABC Color el 9 de septiembre de 2026, Itaipú proveyó 19.276 GWh a la ANDE, lo que representa un crecimiento del 19 % frente a los 16.189 GWh del mismo período del año anterior. La generación acumulada entre enero y agosto alcanzó 51.144 GWh, superando los 47.392 GWh de 2025, y la disponibilidad operativa de las unidades se situó en 96,35 %, por encima del objetivo empresarial del 94 %. La entidad binacional atribuye estos resultados a un mantenimiento constante, a la capacitación del personal técnico y a la coordinación eficaz entre los sistemas eléctricos de Paraguay y Brasil.",
+      "Este desempeño refuerza la posición estratégica de Paraguay en la región, al contar con energía limpia, abundante y confiable, lo que abre oportunidades para atraer inversiones en sectores electrointensivos y para profundizar la integración energética con Brasil y otros países del Cono Sur. Sin embargo, para capitalizar plenamente este recurso es necesario consolidar la infraestructura de transmisión y diseñar políticas públicas que fomenten la industrialización y la diversificación de la matriz productiva."
+    ],
+    "glossary": [
+      {
+        "term": "Suministro de energía",
+        "definition": "Cantidad de energía eléctrica generada y entregada de manera continua por una central hidroeléctrica a la red de distribución (en este caso, la ANDE) para satisfacer la demanda de los usuarios."
+      },
+      {
+        "term": "Disponibilidad operativa",
+        "definition": "Porcentaje del tiempo en que las unidades generadoras de una planta hidroeléctrica están en condiciones técnicas óptimas para producir energía, sin estar fuera de servicio por fallas o mantenimientos no programados."
+      },
+      {
+        "term": "Gigavatio-hora (GWh)",
+        "definition": "Unidad de medida de energía que equivale a un millón de kilovatios‑hora (kWh), utilizada para cuantificar grandes volúmenes de producción y consumo eléctrico."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "El aumento del suministro de Itaipú fortalece la posición de Paraguay como proveedor de energía renovable en el Cono Sur, reduciendo su dependencia de combustibles fósiles y aumentando su influencia en la agenda energética regional. La cooperación binacional con Brasil se vuelve un eje estratégico que puede equilibrar relaciones con otros actores como Argentina y Chile, quienes también buscan diversificar sus fuentes de energía.",
+      "strategic_recommendations": [
+        "Fortalecer la cooperación binacional e integración energética mediante acuerdos de modernización conjunta entre Paraguay y Brasil para actualizar la infraestructura de Itaipú y optimizar la coordinación de despacho de energía.",
+        "Impulsar la atracción de inversiones internacionales aprovechando la alta disponibilidad de energía limpia como ventaja competitiva para industrias electrointensivas y proyectos de alto valor agregado."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Liz.pdf"
+  },
+  {
+    "id": "transparencia-banca-paraguay-mayara-garay",
+    "title": "Transparencia y supervisión bancaria en Paraguay: el rol de Asoban y el BCP",
+    "topic": "Finanzas",
+    "region": "América Latina",
+    "date": "2026-09-09",
+    "authors": [
+      "Mayara Garay"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/mayara-garay.jpg",
+    "summary_bullets": [
+      "Asoban solicita al BCP la publicación de todas las medidas excepcionales en fusiones y absorciones bancarias, reforzando la transparencia del sistema financiero paraguayo.",
+      "La transparencia es vista como un mecanismo para reducir rumores, proteger a los ahorristas y fortalecer la confianza institucional.",
+      "Se recomienda mantener la apertura informativa y fortalecer la supervisión regulatoria para consolidar la estabilidad del sector bancario."
+    ],
+    "full_text": [
+      "El 9 de septiembre de 2026, la Asociación de Bancos del Paraguay (Asoban) manifestó su apoyo al pedido de informe que el Senado realizó al Banco Central del Paraguay (BCP) sobre operaciones vinculadas a Ueno Bank, subrayando el derecho del Congreso a solicitar información a instituciones públicas.",
+      "Asoban, a través de su presidenta ejecutiva Liz Cramer, pidió que el BCP publique todas las medidas excepcionales aplicadas en procesos de fusiones y absorciones bancarias, no solo las relacionadas con una entidad específica, argumentando que mayor transparencia brinda seguridad a los ahorristas, reduce rumores y fortalece la institucionalidad del sistema financiero.",
+      "La conclusión destaca que la transparencia y la respuesta a los requerimientos de los organismos de control son esenciales para consolidar la confianza de la ciudadanía y de los ahorristas, mientras que las recomendaciones apuntan a mantener la claridad informativa, fortalecer la supervisión y promover una comunicación abierta y oportuna."
+    ],
+    "glossary": [
+      {
+        "term": "Institucionalidad",
+        "definition": "Fortalecimiento y respeto de las instituciones públicas y sus normas."
+      },
+      {
+        "term": "Transparencia",
+        "definition": "Actuar de manera abierta y permitir el acceso a la información."
+      },
+      {
+        "term": "Fusión",
+        "definition": "Unión de dos empresas o bancos para formar una sola entidad."
+      },
+      {
+        "term": "Absorción",
+        "definition": "Cuando una empresa incorpora a otra, que deja de existir como entidad independiente."
+      },
+      {
+        "term": "Ahorrista",
+        "definition": "Persona que deposita su dinero en una entidad financiera."
+      },
+      {
+        "term": "Superintendencia",
+        "definition": "Organismo encargado de supervisar y controlar el cumplimiento de las normas."
+      },
+      {
+        "term": "Regulador",
+        "definition": "Institución que establece y controla el cumplimiento de las reglas de un sector."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "En el contexto sudamericano, la estabilidad del sector bancario paraguayo influye en la confianza de inversionistas regionales y en la integración financiera del Mercosur; la transparencia del BCP refuerza la posición de Paraguay como un hub financiero confiable frente a sus vecinos.",
+      "strategic_recommendations": [
+        "Implementar un portal de datos abiertos del BCP que publique de forma periódica todas las medidas excepcionales y resultados de fusiones bancarias.",
+        "Fortalecer la coordinación entre la Superintendencia de Bancos y el Congreso para establecer protocolos de información anticipada y evitar incertidumbre en los mercados."
+      ]
+    },
+    "sources": [
+      "Asoban",
+      "Banco Central del Paraguay",
+      "Senado de Paraguay"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Mayara.pdf"
+  },
+  {
+    "id": "transparencia-banco-central-paraguay",
+    "title": "Transparencia y autonomía del Banco Central del Paraguay ante la solicitud del Senado",
+    "topic": "Política Monetaria",
+    "region": "Cono Sur",
+    "date": "2026-09-16",
+    "authors": [
+      "Arianne Saray Ríos Flor"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/arianne-saray-rios-flor.jpg",
+    "summary_bullets": [
+      "El Senado paraguayo solicitó al Banco Central información sobre operaciones vinculadas a la entidad Ueno Bank, generando un debate sobre la transparencia institucional.",
+      "El Banco Central afirmó respetar los límites legales y regulatorios, pero la situación evidencia riesgos para los recursos del Estado y la credibilidad del BCP.",
+      "Se destacan la necesidad de fortalecer la independencia del regulador y de mejorar la transparencia para mantener la confianza internacional en el sistema financiero paraguayo."
+    ],
+    "full_text": [
+      "El Senado de Paraguay requirió al Banco Central del Paraguay (BCP) datos sobre operaciones bancarias vinculadas a la entidad Ueno Bank, lo que desencadenó un debate institucional sobre la transparencia y la independencia de los organismos reguladores.",
+      "El BCP respondió que cumple con los requisitos legales y está dispuesto a proporcionar la información solicitada, subrayando su compromiso con los mecanismos de control establecidos, mientras el senador Rafael Filizzola advirtió sobre posibles riesgos para los recursos del Estado y la reputación del banco central.",
+      "Desde la perspectiva de Relaciones Internacionales, la estabilidad y credibilidad del BCP son esenciales para la confianza de otros Estados, organismos internacionales e inversionistas extranjeros, y para mantener la posición de Paraguay en el contexto económico regional."
+    ],
+    "glossary": [
+      {
+        "term": "Entidad sistémica",
+        "definition": "Institución financiera cuya importancia puede afectar al funcionamiento general del sistema financiero."
+      },
+      {
+        "term": "Operaciones vinculadas",
+        "definition": "Operaciones realizadas entre una entidad y personas o empresas relacionadas con ella."
+      },
+      {
+        "term": "Gobierno corporativo",
+        "definition": "Sistema mediante el cual una organización es dirigida, administrada y controlada."
+      },
+      {
+        "term": "Organismo regulador",
+        "definition": "Institución encargada de establecer y hacer cumplir normas en un sector determinado."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La capacidad del Banco Central de Paraguay para operar con independencia y transparencia influye directamente en la percepción de estabilidad financiera del país en la región del Cono Sur, afectando flujos de inversión extranjera y la relación con organismos multilaterales como el FMI y la CEPAL.",
+      "strategic_recommendations": [
+        "Fortalecer la independencia del Banco Central garantizando que sus decisiones técnicas estén protegidas de presiones políticas.",
+        "Promover la cooperación internacional en materia de transparencia financiera y supervisión bancaria para alinearse con estándares internacionales."
+      ]
+    },
+    "sources": [
+      "Banco Central del Paraguay",
+      "Senado paraguayo",
+      "Declaraciones del senador Rafael Filizzola"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Saray.pdf"
+  },
+  {
+    "id": "paraguay-industrializacion-biocombustibles",
+    "title": "Industrialización de biocombustibles en Paraguay: impulso a la soberanía energética y oportunidades internacionales",
+    "topic": "Energía",
+    "region": "América Latina",
+    "date": "2026-09-01",
+    "authors": [
+      "Sofía Valenzuela"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Paraguay avanza en la industrialización de biocombustibles transformando soja, maíz y caña de azúcar en bioetanol y biodiésel, incrementando la capacidad instalada y las mezclas obligatorias en el mercado nacional.",
+      "La estrategia refuerza la seguridad energética al reducir la dependencia de importaciones de hidrocarburos y diversifica la oferta exportable, generando empleo directo e indirecto en zonas rurales e industriales.",
+      "Se abren oportunidades de inserción en mercados exigentes como la Unión Europea y América Latina, aunque se requiere un marco regulatorio estable, incentivos fiscales claros e inversión continua en tecnología."
+    ],
+    "full_text": [
+      "Paraguay consolida su posición estratégica en la región mediante el avance hacia una mayor industrialización del sector de los biocombustibles, impulsando la transformación local de materias primas agrícolas como la soja, el maíz y la caña de azúcar en bioetanol y biodiésel con alto valor agregado.",
+      "El fortalecimiento de esta industria responde a una política de desarrollo productivo orientada a reducir la dependencia histórica de la importación de derivados del petróleo, promoviendo al mismo tiempo una matriz energética más limpia y sostenible, y elevando progresivamente las mezclas obligatorias de biocombustibles en los carburantes fósiles comercializados en el mercado nacional.",
+      "El impulso a esta cadena agroindustrial no solo genera empleo directo e indirecto en áreas rurales e industriales, sino que también diversifica la oferta exportable del país, disminuyendo la vulnerabilidad de la economía ante la volatilidad de los precios de las materias primas sin procesar en los mercados globales."
+    ],
+    "glossary": [
+      {
+        "term": "Biocombustibles",
+        "definition": "Combustibles líquidos o gaseosos producidos a partir de biomasa o materia orgánica renovable (cultivos agrícolas o residuos orgánicos) que se utilizan como alternativas sostenibles a los carburantes fósiles."
+      },
+      {
+        "term": "Valor agregado",
+        "definition": "Valor económico adicional que adquieren los bienes y servicios al ser transformados durante el proceso de producción, superando el valor de la materia prima en su estado original."
+      },
+      {
+        "term": "Matriz energética",
+        "definition": "Representación cuantitativa de la totalidad de fuentes de energía (fósiles, hidráulicas, solares, biomasa, etc.) que utiliza un país o región para cubrir sus necesidades energéticas."
+      },
+      {
+        "term": "Transición energética",
+        "definition": "Proceso estructural de transformación de los sistemas globales de producción y consumo de energía hacia modelos descarbonizados, basados en fuentes renovables y sustentables."
+      },
+      {
+        "term": "Sustitución de importaciones",
+        "definition": "Estrategia económica orientada a reemplazar la compra de productos importados por bienes producidos localmente, protegiendo las reservas de divisas y fomentando la industria nacional."
+      }
+    ],
+    "source_file": "Sofi.pdf"
+  },
+  {
+    "id": "viceministro-plan-energetico-ande",
+    "title": "Viceministro justifica plan energético y descarta privatización de la ANDE",
+    "topic": "Energía",
+    "region": "Cono Sur",
+    "date": "2026-09-09",
+    "authors": [
+      "Tamara Benítez"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El viceministro de Minas y Energía defiende un plan energético que busca cubrir la demanda creciente y mejorar el aprovechamiento de recursos nacionales.",
+      "Se descarta la privatización de la ANDE, manteniendo el control estatal para garantizar acceso universal y precios estables.",
+      "El desafío es lograr un suministro energético suficiente, eficiente y sostenible que impulse el desarrollo industrial y económico de Paraguay."
+    ],
+    "full_text": [
+      "El gobierno paraguayo ha puesto en marcha un ambicioso plan energético que pretende responder a las crecientes necesidades de consumo y a la necesidad de diversificar la matriz energética del país.",
+      "Según declaraciones del viceministro de Minas y Energía, el plan incluye inversiones en infraestructura eléctrica, mejoras en la eficiencia operativa de la ANDE y la incorporación de nuevas fuentes de energía, sin contemplar la privatización del ente estatal.",
+      "Este enfoque busca garantizar un suministro confiable y accesible, elemento clave para la competitividad de las industrias y el bienestar de la población, al tiempo que se promueve la sostenibilidad a largo plazo del sector energético."
+    ],
+    "glossary": [
+      {
+        "term": "Plan energético",
+        "definition": "Conjunto de medidas y políticas destinadas a organizar, desarrollar y gestionar el uso de la energía en un país."
+      },
+      {
+        "term": "Privatización",
+        "definition": "Transferencia de la propiedad y gestión de una empresa o servicio público al sector privado."
+      },
+      {
+        "term": "Sostenible",
+        "definition": "Capacidad de mantenerse a largo plazo sin agotar los recursos ni generar deterioro ambiental significativo."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, como país sin salida al mar, depende de la energía eléctrica para su integración regional y para atraer inversiones extranjeras; un sector energético robusto refuerza su posición en la Cuenca del Plata y reduce vulnerabilidades frente a fluctuaciones de precios internacionales de combustibles.",
+      "strategic_recommendations": [
+        "Fomentar alianzas público‑privadas bajo control estatal para financiar la expansión de la red eléctrica y proyectos de energía renovable.",
+        "Desarrollar un marco regulatorio que incentive la generación distribuida y la integración de energías limpias, garantizando precios competitivos para la industria y los hogares."
+      ]
+    },
+    "sources": [
+      "Última Hora"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Tamara.pdf"
+  },
+  {
+    "id": "industria-manufacturera-empleos-paraguay",
+    "title": "Industria manufacturera genera más de 353.000 empleos en Paraguay",
+    "topic": "Industria",
+    "region": "América Latina",
+    "date": "2026-09-08",
+    "authors": [
+      "Kito (Alumno RI - UNI)"
+    ],
+    "author_role": "Investigación académica • Alumno de Relaciones Internacionales (UNI)",
+    "author_image": "/authors/default.jpg",
+    "summary_bullets": [
+      "La industria manufacturera emplea más de 353.000 personas, equivalentes al 10,8 % de la población ocupada en Paraguay (segundo trimestre de 2026).",
+      "El empleo industrial se concentra en los departamentos Central, Alto Paraná, Asunción y Caaguazú, que concentran cerca del 68 % de los trabajadores del sector.",
+      "El sector es considerado estratégico por su rol en la incorporación tecnológica, generación de valor agregado y diversificación productiva de la economía nacional."
+    ],
+    "full_text": [
+      "El análisis parte de la necesidad de comprender cómo la industria manufacturera paraguaya se ha convertido en uno de los principales motores de empleo formal, en un contexto donde la diversificación productiva es una prioridad para el desarrollo económico del país.",
+      "Según datos del Observatorio Laboral del MTESS basados en la Encuesta Permanente de Hogares Continua del INE, en el segundo trimestre de 2026 la manufactura generó más de 353.000 puestos, representando el 10,8 % de la población ocupada, con una fuerte concentración geográfica en Central, Alto Paraná, Asunción y Caaguazú, que albergan el 68 % de los trabajadores industriales.",
+      "Este desempeño posiciona a la manufactura como un pilar estratégico para la incorporación de tecnología, la generación de valor agregado y la reducción de la dependencia de sectores tradicionales, abriendo oportunidades para la cooperación internacional y la atracción de inversión extranjera que favorezca una mayor equidad territorial."
+    ],
+    "glossary": [
+      {
+        "term": "Población ocupada",
+        "definition": "Conjunto de personas en edad de trabajar que cuentan con un empleo remunerado o actividad económica."
+      },
+      {
+        "term": "Empleo asalariado",
+        "definition": "Relación laboral en la que una persona trabaja bajo dependencia de un empleador a cambio de un salario."
+      },
+      {
+        "term": "Valor agregado",
+        "definition": "Incremento de valor que un producto adquiere en cada etapa del proceso productivo."
+      },
+      {
+        "term": "Diversificación productiva",
+        "definition": "Ampliación de los sectores y actividades económicas de un país para reducir la dependencia de pocos rubros."
+      },
+      {
+        "term": "Formalización laboral",
+        "definition": "Proceso mediante el cual se regularizan los empleos bajo el marco legal vigente, con acceso a seguridad social."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, como país sin salida al mar en el corazón del Mercosur, busca fortalecer su competitividad industrial para mejorar su posición en la cadena de valor regional. La concentración del empleo manufacturero en zonas cercanas a la frontera con Brasil y Argentina facilita la integración productiva, pero también genera vulnerabilidades ante choques externos. La diversificación del sector puede reducir la dependencia de mercados tradicionales y potenciar la inserción en acuerdos de cooperación tecnológica con socios regionales e internacionales.",
+      "strategic_recommendations": [
+        "Fomentar acuerdos bilaterales de cooperación técnica con Brasil y Argentina para la transferencia de tecnologías de automatización y gestión de la cadena de suministro.",
+        "Crear incentivos fiscales y programas de capacitación dirigidos a los departamentos con menor participación industrial (por ejemplo, Itapúa y Ñeembucú) para atraer inversión extranjera directa y equilibrar el desarrollo territorial."
+      ]
+    },
+    "sources": [
+      "Última Hora — Economía"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "kito.docx"
+  },
+  {
+    "id": "tasas-interes-julio-bcp-paraguay",
+    "title": "Reducción de tasas de interés en julio 2026: análisis del informe del Banco Central del Paraguay",
+    "topic": "Política Monetaria",
+    "region": "Paraguay",
+    "date": "2026-09-16",
+    "authors": [
+      "Nelson"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "En julio 2026 el promedio ponderado de tasas de interés en moneda local cayó a 15,61 % (‑0,36 pp) y en dólares a 7,57 %, marcando la mayor reducción interanual del periodo.",
+      "Los créditos de consumo registraron la mayor caída mensual (‑0,98 pp) mientras que las tarjetas de crédito subieron a 19,07 % (+0,41 pp), evidenciando divergencias sectoriales relevantes para la política comercial.",
+      "El abaratamiento del crédito interno y en divisas abre una ventana para atraer IED y reforzar la posición geopolítica de Paraguay dentro del Mercosur y frente a la UE y Asia‑Pacífico."
+    ],
+    "full_text": [
+      "El informe de Indicadores Financieros del Banco Central del Paraguay (BCP) publicado en julio muestra una reducción generalizada de las tasas de interés bancarias tanto en comparación mensual como interanual, con un promedio ponderado en moneda local de 15,61 % y en moneda extranjera de 7,57 %.",
+      "Desglosando por segmentos, los créditos de consumo experimentaron la mayor caída mensual (‑0,98 pp, 21,93 %), seguidos por las carteras comercial (12,53 %), desarrollo (11,12 %) y vivienda (9,60 %). La única excepción fueron las tarjetas de crédito, que subieron a 19,07 % (+0,41 pp mensual y +2,62 pp interanual). En dólares, la mayor reducción se dio en la cartera de vivienda, que alcanzó 6,32 % tras un descenso de 1,65 pp.",
+      "Desde la óptica de las Relaciones Internacionales, este entorno de menores costos de crédito constituye una señal de estabilidad macroeconómica que puede ser utilizada por la cancillería y los ministerios de comercio para promover a Paraguay como un hub atractivo para inversión extranjera directa, especialmente ante socios del Mercosur, la Unión Europea y la región Asia‑Pacífico."
+    ],
+    "glossary": [
+      {
+        "term": "Tasa de interés",
+        "definition": "Costo de pedir dinero prestado o recompensa por ahorrarlo, expresado como porcentaje anual sobre el capital."
+      },
+      {
+        "term": "Promedio ponderado",
+        "definition": "Cálculo del promedio que asigna un peso específico a cada elemento según su volumen o importancia relativa."
+      },
+      {
+        "term": "Puntos porcentuales (pp)",
+        "definition": "Unidad que mide la diferencia directa entre dos porcentajes, distinta a la variación porcentual."
+      },
+      {
+        "term": "Variación interanual",
+        "definition": "Comparación de una variable en un mes específico respecto al mismo mes del año anterior."
+      },
+      {
+        "term": "Cartera de crédito",
+        "definition": "Conjunto de préstamos otorgados por una entidad financiera, clasificados según su destino (consumo, comercial, desarrollo, vivienda, etc.)."
+      }
+    ],
+    "source_file": "nelson.docx"
+  },
+  {
+    "id": "fmi-resiliencia-economia-paraguaya-2026",
+    "title": "El FMI destaca resiliencia de la economía paraguaya y proyecta un crecimiento de 4,4% para 2026",
+    "topic": "Política Monetaria",
+    "region": "Cono Sur",
+    "date": "2026-09-09",
+    "authors": [
+      "Andrea Belén Peña Bloy"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/andrea-pena.jpg",
+    "summary_bullets": [
+      "El FMI proyecta un crecimiento del 4,4% para Paraguay en 2026, tras una expansión del 6,6% en 2025.",
+      "La inflación mostró una evolución favorable y la actividad económica mantiene buen dinamismo, reforzando la estabilidad macroeconómica.",
+      "Una economía robusta favorece el comercio internacional, la atracción de inversión extranjera y la integración de Paraguay en el Mercosur."
+    ],
+    "full_text": [
+      "El Fondo Monetario Internacional (FMI) resaltó la resiliencia de la economía paraguaya, subrayando la solidez de sus fundamentos macroeconómicos y la capacidad del país para mantener un crecimiento sostenido.",
+      "Según el informe del Ministerio de Economía y Finanzas de Paraguay, el FMI proyecta un crecimiento del 4,4% para 2026, después de una expansión del 6,6% en 2025; la inflación ha evolucionado de forma favorable y la actividad económica mantiene un buen dinamismo, lo que indica estabilidad y potencial de desarrollo.",
+      "Desde la perspectiva de las Relaciones Internacionales, este desempeño económico fortalece la posición de Paraguay en el Mercosur, facilita la atracción de inversión extranjera y amplía las oportunidades de cooperación económica y comercial con otros Estados."
+    ],
+    "glossary": [
+      {
+        "term": "Crecimiento económico",
+        "definition": "Aumento sostenido de la producción de bienes y servicios de un país, medido habitualmente mediante el PIB real."
+      },
+      {
+        "term": "Fundamentos macroeconómicos",
+        "definition": "Conjunto de variables estructurales que reflejan la estabilidad y el funcionamiento de una economía, como inflación, tipo de cambio, déficit fiscal y reservas internacionales."
+      },
+      {
+        "term": "Comercio internacional",
+        "definition": "Intercambio de bienes y servicios entre diferentes Estados, regulado por acuerdos bilaterales o multilaterales."
+      },
+      {
+        "term": "Inversión extranjera",
+        "definition": "Capital proveniente de agentes residentes en otro país destinado a actividades productivas o de servicios en la economía receptora."
+      },
+      {
+        "term": "Cooperación económica",
+        "definition": "Colaboración entre Estados u organismos internacionales para alcanzar objetivos comunes, como desarrollo sostenible o estabilidad financiera."
+      },
+      {
+        "term": "Integración regional",
+        "definition": "Proceso mediante el cual varios países coordinan sus políticas económicas y comerciales para crear bloques como el Mercosur."
+      },
+      {
+        "term": "Interdependencia económica",
+        "definition": "Relación de dependencia mutua entre economías que se traduce en flujos de comercio, inversión y finanzas transfronterizas."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, como miembro del Mercosur y país sin salida al mar, depende de la estabilidad macroeconómica para consolidar su papel como corredor de integración sudamericana; el crecimiento proyectado por el FMI refuerza su capacidad de negociación en acuerdos comerciales y de infraestructura regional, reduciendo vulnerabilidades frente a tensiones comerciales en la zona.",
+      "strategic_recommendations": [
+        "Promover políticas de diversificación exportadora que aprovechen la estabilidad macroeconómica para ampliar la presencia de productos paraguayos en mercados del Mercosur y la Unión Europea.",
+        "Fortalecer la atracción de inversión extranjera directa mediante marcos regulatorios transparentes y garantías de estabilidad cambiaria, facilitando proyectos de infraestructura que conecten al país con puertos vecinos."
+      ]
+    },
+    "sources": [
+      "Ministerio de Economía y Finanzas de Paraguay (MEF)",
+      "Fondo Monetario Internacional (FMI)"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Andrea.pdf"
+  },
+  {
+    "id": "precios-alimentos-agosto-2026",
+    "title": "Precios mundiales de alimentos aumentaron 1,9% en agosto, según la FAO",
+    "topic": "Alimentos",
+    "region": "Global",
+    "date": "2026-09-16",
+    "authors": [
+      "Micaela (Alumna RI)"
+    ],
+    "author_role": "Investigación académica • Alumna de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Los precios globales de los alimentos subieron 1,9% en agosto de 2026, impulsados por fenómenos climáticos extremos y tensiones geopolíticas.",
+      "El azúcar registró el mayor aumento (11,9%) y el trigo creció 15% interanual por dificultades de exportación vinculadas a la guerra Rusia‑Ucrania.",
+      "La FAO redujo su proyección de producción mundial de cereales en 2%, lo que plantea riesgos para la seguridad alimentaria internacional."
+    ],
+    "full_text": [
+      "En agosto de 2026, la FAO informó que los precios mundiales de los alimentos experimentaron un incremento del 1,9%, una tendencia atribuida a las altas temperaturas, eventos climáticos adversos y la persistencia de conflictos geopolíticos que perturban las cadenas de suministro.",
+      "El análisis de los datos muestra que el azúcar lideró el aumento con un 11,9%, mientras que el trigo alcanzó un 15% de alza interanual, reflejando las dificultades de exportación derivadas de la guerra entre Rusia y Ucrania; el maíz también registró incrementos por menores rendimientos y costos elevados de fertilizantes, y la FAO ajustó a la baja su previsión de producción de cereales en un 2% para 2026.",
+      "Este escenario evidencia cómo el cambio climático y los conflictos internacionales pueden desestabilizar los mercados alimentarios, subrayando la necesidad de fortalecer la cooperación internacional para garantizar la seguridad alimentaria y mantener la estabilidad del comercio global."
+    ],
+    "glossary": [
+      {
+        "term": "Índice de precios",
+        "definition": "Indicador que muestra la variación de los precios de un conjunto de productos a lo largo del tiempo."
+      },
+      {
+        "term": "Biocarburantes",
+        "definition": "Combustibles obtenidos a partir de materias primas de origen vegetal o animal, utilizados como alternativa a los combustibles fósiles."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "El aumento de los precios alimentarios se produce en un contexto de rivalidad entre potencias por el control de recursos agrícolas, donde la guerra en Ucrania y las sanciones económicas generan incertidumbre en los flujos de granos, mientras que el cambio climático intensifica la vulnerabilidad de los principales productores.",
+      "strategic_recommendations": [
+        "Fomentar alianzas multilaterales para crear reservas estratégicas de alimentos y estabilizar los precios ante choques externos.",
+        "Negociar acuerdos de libre comercio que incluyan cláusulas de seguridad alimentaria y faciliten el tránsito de insumos críticos como fertilizantes."
+      ]
+    },
+    "sources": [
+      "El Nacional",
+      "FAO"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Mica.docx"
+  },
+  {
+    "id": "paraguay-morosidad-2-3",
+    "title": "Paraguay contiene morosidad en 2,3%: análisis comparativo regional",
+    "topic": "Política Monetaria",
+    "region": "Cono Sur",
+    "date": "2026-09-02",
+    "authors": [
+      "Araceli Alejandra Paredes Sugastti"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Paraguay mantiene una morosidad bancaria del 2,3%, 0,48 p.p. por debajo del promedio regional (2,78%).",
+      "El indicador sitúa al país al mismo nivel que Guatemala y por encima de México y Costa Rica, evidenciando mayor solidez crediticia.",
+      "La baja morosidad favorece la estabilidad del crédito interno y reduce riesgos de insolvencia en el contexto macroeconómico latinoamericano."
+    ],
+    "full_text": [
+      "El informe trimestral de la Federación Latinoamericana de Bancos (Felaban) muestra una tendencia al alza de la morosidad en la región durante el inicio de 2026, pero Paraguay logra contener su cartera vencida en 2,3%, posicionándose ligeramente bajo la media regional.",
+      "Este desempeño se compara favorablemente con Guatemala (2,3%) y supera a economías con mayores niveles de mora como México y Costa Rica, lo que sugiere una gestión prudente del riesgo crediticio y una mayor resiliencia del sistema financiero paraguayo.",
+      "Mantener la morosidad por debajo del promedio regional refuerza la estabilidad del crédito interno, minimiza riesgos de insolvencia y aporta confianza a inversores y reguladores en un entorno de volatilidad macroeconómica."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad bancaria (cartera vencida)",
+        "definition": "Porcentaje del total de la cartera de créditos que presenta retrasos o falta de pago en las fechas pactadas por los deudores."
+      },
+      {
+        "term": "Sistema bancario",
+        "definition": "Conjunto de instituciones públicas y privadas autorizadas para intermediar recursos financieros, captar depósitos y otorgar préstamos."
+      },
+      {
+        "term": "Puntos porcentuales",
+        "definition": "Unidad de medida que cuantifica la diferencia aritmética entre dos porcentajes o tasas."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La capacidad de Paraguay para mantener una morosidad inferior al promedio regional refuerza su posición como actor financiero estable en el Cono Sur, lo que puede traducirse en mayor atractivo para flujos de capital externo y fortalecer su influencia en foros regionales como el MERCOSUR.",
+      "strategic_recommendations": [
+        "Fortalecer los criterios de evaluación de riesgo crediticio en el Banco Central del Paraguay y promover normas prudenciales alineadas con estándares internacionales.",
+        "Implementar programas de educación financiera dirigidos a prestatarios para reducir la probabilidad de incumplimientos y sostener el crecimiento crediticio sostenible."
+      ]
+    },
+    "sources": [
+      "ABC Color",
+      "Felaban",
+      "MF Economía e Inversiones",
+      "Banco Central del Paraguay"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Araceli Sugastti.pdf"
+  },
+  {
+    "id": "camara-comercio-paraguayo-americana-caida-dolar-inversiones",
+    "title": "Impacto de la caída del dólar en la inversión paraguaya: análisis de la advertencia de AmCham",
+    "topic": "Comercio",
+    "region": "Cono Sur",
+    "date": "2026-09-01",
+    "authors": [
+      "Dahiana Paiva"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El dólar cayó cerca del 20 % en el último año, generando una volatilidad que afecta a exportadores, construcción y real estate con contratos en dólares.",
+      "AmCham señala que la falta de previsibilidad del tipo de cambio reduce márgenes y dificulta la planificación de inversiones a mediano y largo plazo.",
+      "Se propone una intervención cambiaria simétrica del BCP y cláusulas de ajuste cambiario en los contratos para mitigar la exposición a la volatilidad."
+    ],
+    "full_text": [
+      "La nota de ABC Color informa que el dólar sigue cayendo en Paraguay, acumulando una baja cercana al 20 % en el último año, lo que ha llevado a distintos gremios a reclamar acciones del Banco Central del Paraguay (BCP). El presidente de la Cámara de Comercio Paraguayo‑Americana, Elías Saba, advierte que esta volatilidad afecta especialmente a los inversionistas y a sectores que operan con contratos en dólares, como el exportador, la construcción y el real estate, pues deben cumplir compromisos pactados a un tipo de cambio más alto que el actual.",
+      "Según Saba, el problema central no es únicamente el nivel del tipo de cambio, sino la falta de previsibilidad: empresas del agro y otros rubros que trabajan con precios cerrados a tres o seis meses ven reducidos sus márgenes cuando el dólar cae de forma abrupta. Los sectores piden que el BCP intervenga también cuando la moneda se deprecia, del mismo modo que lo hace cuando se fortalece, para suavizar la curva. Además, la baja del dólar no se traslada automáticamente a menores precios para el consumidor, porque el sector importador enfrenta simultáneamente inflación en los países de origen y mayores costos logísticos.",
+      "La caída sostenida del dólar frente al guaraní muestra que la apreciación cambiaria no beneficia por igual a todos los sectores de la economía paraguaya: mientras algunos importadores podrían verse favorecidos, los exportadores, la construcción y el real estate enfrentan pérdidas de competitividad y de margen al operar con contratos fijados en dólares. El planteo de AmCham evidencia que el problema de fondo es la volatilidad y la falta de previsibilidad, lo que dificulta la planificación de inversiones a mediano y largo plazo y demanda respuestas de política cambiaria más equilibradas."
+    ],
+    "glossary": [
+      {
+        "term": "AmCham",
+        "definition": "Cámara de Comercio Paraguayo‑Americana; entidad gremial que agrupa a empresas paraguayas y estadounidenses y representa sus intereses ante el sector público y privado."
+      },
+      {
+        "term": "Tipo de cambio",
+        "definition": "Precio de una moneda expresado en términos de otra; en este caso, cuántos guaraníes se necesitan para comprar un dólar estadounidense."
+      },
+      {
+        "term": "Previsibilidad",
+        "definition": "Grado de certeza con que una empresa o inversor puede anticipar el comportamiento futuro de una variable económica (como el tipo de cambio) para planificar sus decisiones."
+      },
+      {
+        "term": "Margen (comercial)",
+        "definition": "Diferencia entre el costo de producción o compra de un bien y su precio de venta; se reduce cuando cambian los costos o el tipo de cambio sin que el precio de venta se ajuste."
+      },
+      {
+        "term": "Intervención cambiaria",
+        "definition": "Acción del Banco Central de comprar o vender divisas en el mercado con el objetivo de influir sobre el nivel o la volatilidad del tipo de cambio."
+      },
+      {
+        "term": "Inflación industrial",
+        "definition": "Aumento generalizado de los costos de producción en la industria de un país (insumos, energía, mano de obra), que se traslada al precio final de los bienes exportados."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, como economía sin litoral y dependiente de la exportación de materias primas, mantiene estrechos vínculos comerciales con Estados Unidos y la región del Mercosur. La apreciación del dólar reduce la competitividad de sus exportaciones y afecta la balanza comercial, lo que puede generar tensiones en la relación con socios regionales que también dependen de la divisa norteamericana. La volatilidad cambiaria incrementa la incertidumbre para la inversión extranjera directa, limitando la capacidad del país para atraer capitales en un entorno geopolítico donde la estabilidad macroeconómica es un criterio clave para los inversionistas internacionales.",
+      "strategic_recommendations": [
+        "Implementar un marco de intervención cambiaria simétrico que permita al BCP actuar tanto ante la apreciación como ante la depreciación abrupta del dólar, reduciendo la volatilidad y mejorando la previsibilidad para los agentes económicos.",
+        "Fomentar la inclusión de cláusulas de ajuste cambiario en los contratos de exportación, construcción y real estate, de modo que los precios se actualicen automáticamente frente a variaciones significativas del tipo de cambio."
+      ]
+    },
+    "sources": [
+      "ABC Color",
+      "Banco Central del Paraguay"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Dahiana Paiva.docx"
+  },
+  {
+    "id": "paraguay-morosidad-2026",
+    "title": "Paraguay contiene la morosidad en 2,3%, levemente debajo del promedio regional",
+    "topic": "Política Monetaria",
+    "region": "Cono Sur",
+    "date": "2026-09-02",
+    "authors": [
+      "Estudiante"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Paraguay registra una morosidad bancaria del 2,3%, por debajo del promedio de América Latina, indicando estabilidad del sistema financiero.",
+      "El bajo nivel de morosidad refuerza la confianza de inversionistas y favorece la cooperación económica regional.",
+      "Se recomienda fortalecer la regulación financiera y promover la educación financiera para mantener este desempeño."
+    ],
+    "full_text": [
+      "El informe de ABC Color del 2 de septiembre de 2026 señala que la tasa de morosidad bancaria en Paraguay se sitúa en 2,3%, ligeramente inferior al promedio regional, lo que evidencia la solidez del sistema financiero nacional.",
+      "Este indicador refleja una gestión adecuada del crédito y un control de riesgos efectivo, aunque expertos advierten la necesidad de seguir reforzando los mecanismos de supervisión y de ampliar el acceso responsable al financiamiento.",
+      "Desde la perspectiva de Relaciones Internacionales, la baja morosidad mejora la imagen de Paraguay como destino seguro para la inversión y facilita la cooperación económica con socios regionales."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad",
+        "definition": "Atraso o incumplimiento en el pago de préstamos."
+      },
+      {
+        "term": "Sistema financiero",
+        "definition": "Conjunto de bancos y entidades que administran el crédito y el dinero."
+      },
+      {
+        "term": "Crédito",
+        "definition": "Préstamo otorgado con compromiso de devolución."
+      },
+      {
+        "term": "Riesgo financiero",
+        "definition": "Posibilidad de pérdidas por falta de pago."
+      },
+      {
+        "term": "Estabilidad económica",
+        "definition": "Equilibrio en el funcionamiento de la economía."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La estabilidad financiera de Paraguay, evidenciada por su baja morosidad, fortalece su posición en el contexto regional, generando mayor confianza entre socios del Mercosur y otros organismos internacionales.",
+      "strategic_recommendations": [
+        "Fortalecer la cooperación con organismos internacionales para mejorar la regulación financiera.",
+        "Impulsar programas de educación financiera que promuevan el uso responsable del crédito."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Kito.docx"
+  },
+  {
+    "id": "analisis-economia-paraguaya-internacional-1",
+    "title": "Análisis de la Economía paraguaya e internacional",
+    "topic": "Finanzas Públicas",
+    "region": "América Latina",
+    "date": "2026-09-16",
+    "authors": [
+      "Mayara Saribel Garay Acosta"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El Presupuesto General de la Nación 2027 proyecta que la presión tributaria se mantenga en 11,2 % del PIB paraguayo.",
+      "Se anticipa un aumento del 8,6 % en la recaudación tributaria, pero la caída de ingresos por regalías de Itaipú y Yacyretá impide que el porcentaje sobre el PIB crezca.",
+      "Los analistas advierten que la estabilidad de la presión tributaria representa un reto para financiar servicios públicos sin elevar la carga impositiva."
+    ],
+    "full_text": [
+      "El proyecto del Presupuesto General de la Nación (PGN) 2027 establece que la presión tributaria en Paraguay se mantendrá en 11,2 % del Producto Interno Bruto (PIB), una cifra que refleja la política fiscal del gobierno para el próximo año fiscal.",
+      "Aunque se espera un incremento del 8,6 % en la recaudación de impuestos, la disminución de los ingresos corrientes provenientes de las regalías de los embalses hidroeléctricos de Itaipú y Yacyretá contrarresta el efecto de mayor captación, manteniendo estable el ratio tributario respecto al PIB.",
+      "Esta situación plantea desafíos para la sostenibilidad de las finanzas públicas, pues el Estado necesita mayores recursos para financiar servicios esenciales sin recurrir a aumentos de impuestos, lo que obliga a fortalecer la administración tributaria y a impulsar el crecimiento económico."
+    ],
+    "glossary": [
+      {
+        "term": "Presión tributaria",
+        "definition": "Porcentaje del PIB que el Estado recauda mediante impuestos."
+      },
+      {
+        "term": "Recaudación tributaria",
+        "definition": "Dinero que el Estado obtiene a través del cobro de impuestos."
+      },
+      {
+        "term": "Ingresos corrientes",
+        "definition": "Recursos que recibe el Estado de forma habitual, como impuestos, tasas y contribuciones."
+      },
+      {
+        "term": "Regalías",
+        "definition": "Pagos que recibe el Estado por la explotación de recursos o por acuerdos con entidades como Itaipú y Yacyretá."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay depende de la generación hidroeléctrica compartida con Brasil y Argentina; la reducción de regalías de Itaipú y Yacyretá afecta no solo sus finanzas, sino también su posición negociadora en el Mercosur y su capacidad de inversión en infraestructura regional.",
+      "strategic_recommendations": [
+        "Fortalecer la administración tributaria y combatir la evasión fiscal para ampliar la base recaudatoria sin elevar tasas.",
+        "Diversificar fuentes de ingreso público mediante la promoción de sectores exportadores y la renegociación de acuerdos de regalías con los socios binacionales."
+      ]
+    },
+    "sources": [
+      "Presupuesto General de la Nación 2027"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Mayara Garay.pdf"
+  },
+  {
+    "id": "paraguay-morosidad-2-3-1",
+    "title": "Paraguay contiene morosidad en 2,3%, levemente debajo de promedio regional",
+    "topic": "Finanzas",
+    "region": "América Latina",
+    "date": "2026-09-02",
+    "authors": [
+      "Nelson Coronel"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Paraguay mantiene una tasa de morosidad bancaria del 2,3% al cierre de marzo de 2026, por debajo del promedio regional de América Latina (2,78%).",
+      "El indicador mejoró respecto a diciembre de 2023 (2,9%) y se sitúa ligeramente bajo el nivel de 2019 (2,4%), mientras la cartera vencida regional tiende a incrementarse.",
+      "En comparación con otros países latinoamericanos, la morosidad de Paraguay es menor que la de Argentina, Brasil, Colombia y Perú, pero superior a la de Uruguay y República Dominicana, lo que refuerza su posición como un mercado financiero relativamente estable."
+    ],
+    "full_text": [
+      "Paraguay mantiene un nivel de morosidad bancaria relativamente bajo, ubicándose en 2,3% al cierre de marzo de 2026, por debajo del promedio de América Latina, que alcanzó 2,78%.",
+      "Mientras que a nivel regional aumentó la cartera vencida —es decir, los créditos que presentan atrasos importantes en sus pagos— Paraguay mostró una evolución más favorable. El indicador nacional mejoró respecto a diciembre de 2023, cuando la morosidad era del 2,9%, e incluso se encuentra ligeramente por debajo del nivel registrado en 2019 (2,4%). En comparación con otros países latinoamericanos, Paraguay se encuentra en una posición intermedia, con morosidad menor que Argentina (7,3%), Brasil (4,3%), Colombia (3,7%) y Perú (3,0%), aunque superior a Uruguay (1,7%) y República Dominicana (1,1%).",
+      "El bajo nivel de morosidad puede ser utilizado como un indicador positivo para proyectar a Paraguay como un país con un sistema financiero relativamente estable, fortaleciendo la confianza de inversionistas extranjeros. Una diplomacia económica activa debería comunicar estos indicadores a potenciales socios comerciales e inversores internacionales, contribuyendo a mejorar la imagen internacional y a atraer flujos de capital."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad (Tasa o Ratio de morosidad)",
+        "definition": "Porcentaje de créditos que han caído en retraso de pago respecto al total de préstamos otorgados por los bancos."
+      },
+      {
+        "term": "Cartera vencida",
+        "definition": "Volumen total de dinero que los prestatarios no devolvieron en las fechas pactadas y que ya entró en mora técnica o legal."
+      },
+      {
+        "term": "Punto porcentual (p.p.)",
+        "definition": "Diferencia aritmética entre dos porcentajes; por ejemplo, pasar de 2,9% a 2,3% implica una variación de 0,6 puntos porcentuales."
+      },
+      {
+        "term": "Salud del sistema bancario / Solvencia",
+        "definition": "Capacidad de las entidades financieras para absorber pérdidas y honrar sus compromisos con los ahorristas sin entrar en pánico ni requerir rescates estatales."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "El bajo nivel de morosidad posiciona a Paraguay como una economía financiera estable dentro de América Latina, lo que puede traducirse en mayor atractivo para inversiones extranjeras y fortalecer su peso en negociaciones comerciales regionales, especialmente frente a vecinos con mayores riesgos crediticios.",
+      "strategic_recommendations": [
+        "Fortalecer la imagen internacional de Paraguay mediante la difusión de indicadores de estabilidad financiera en foros multilaterales y bilaterales.",
+        "Implementar una diplomacia económica activa que comunique estos resultados a potenciales socios comerciales e inversores, facilitando acuerdos de inversión y acceso a financiamiento externo."
+      ]
+    },
+    "sources": [
+      "Banco Central del Paraguay"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Nelson Coronel.pdf"
+  },
+  {
+    "id": "paraguay-morosidad-2-3-2",
+    "title": "Paraguay contiene morosidad en 2,3%, levemente debajo del promedio regional",
+    "topic": "Finanzas",
+    "region": "Cono Sur",
+    "date": "2026-09-02",
+    "authors": [
+      "Tamara Benítez"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "La morosidad del sistema financiero paraguayo alcanzó 2,3% en marzo de 2026, por debajo del promedio regional de 2,78%.",
+      "Esta reducción indica un mayor cumplimiento de obligaciones y refuerza la estabilidad macroeconómica del país.",
+      "Se subraya la necesidad de políticas de educación financiera y control de crédito para evitar el sobreendeudamiento de familias y empresas."
+    ],
+    "full_text": [
+      "En el marco de la recuperación económica post‑pandemia, Paraguay ha registrado una morosidad del 2,3% en su sistema financiero durante el mes de marzo de 2026, cifra que se sitúa ligeramente por debajo del promedio de América Latina (2,78%). Este indicador, que mide el retraso en el pago de deudas, es clave para evaluar la salud del crédito y la confianza de los agentes económicos.",
+      "El descenso de la morosidad refleja una mejora en el cumplimiento de los compromisos financieros por parte de los deudores, lo que contribuye a la estabilidad del sistema bancario y a la reducción de riesgos de sobreendeudamiento. Sin embargo, el contexto regional muestra que la diferencia es marginal, por lo que las instituciones financieras deben seguir monitoreando la evolución de los créditos y aplicar criterios prudentes en la concesión de nuevos préstamos.",
+      "Desde una perspectiva internacional, la contención de la morosidad fortalece la posición de Paraguay en la integración regional, facilitando flujos de capital y comercio con sus vecinos del Cono Sur. La conclusión es que, aunque la tendencia es positiva, es imprescindible mantener políticas que promuevan el acceso responsable al crédito y la educación financiera para consolidar estos avances a largo plazo."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad",
+        "definition": "Retraso o incumplimiento en el pago de una deuda."
+      },
+      {
+        "term": "Sistema financiero",
+        "definition": "Conjunto de bancos y otras instituciones que manejan el dinero y el crédito."
+      },
+      {
+        "term": "Indicador",
+        "definition": "Dato utilizado para medir o evaluar una situación económica."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La estabilidad del sistema financiero paraguayo influye en la confianza de inversionistas extranjeros y en la capacidad del país para participar en proyectos de integración regional como el MERCOSUR, donde la salud crediticia es un factor determinante para la negociación de acuerdos comerciales y de inversión.",
+      "strategic_recommendations": [
+        "Fortalecer programas de educación financiera dirigidos a hogares y pequeñas empresas para mejorar la gestión del crédito.",
+        "Implementar mecanismos de supervisión más rigurosos que permitan detectar tempranamente señales de sobreendeudamiento y ajustar las condiciones de préstamo en consecuencia."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Tamara.docx"
+  },
+  {
+    "id": "impacto-apreciacion-guarani-dolar-sector-ganadero-paraguayo-20260916",
+    "title": "Impacto de la apreciación del guaraní frente al dólar en el sector ganadero paraguayo",
+    "topic": "Comercio",
+    "region": "América Latina",
+    "date": "2026-09-16",
+    "authors": [
+      "Andrea Belén Peña Bloy"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "La fuerte apreciación del guaraní reduce la rentabilidad de los productores ganaderos al convertir ingresos en dólares a moneda local.",
+      "A pesar del aumento de precios internacionales de la carne, los costos de producción siguen elevados, limitando la inversión del sector.",
+      "El desequilibrio cambiario afecta la balanza de pagos, pues el sector agropecuario aporta el 72% de las divisas que ingresan a Paraguay."
+    ],
+    "full_text": [
+      "La noticia semanal analiza la reciente apreciación del guaraní frente al dólar estadounidense y sus repercusiones en la economía paraguaya, con especial énfasis en el sector ganadero, cuyo modelo de ingresos depende mayormente de exportaciones cotizadas en dólares.",
+      "Representantes de la Asociación Rural del Paraguay (ARP) alertan que, aunque los precios internacionales de la carne han subido, la conversión a guaraníes disminuye los ingresos netos de los productores, generando preocupación ante el Banco Central del Paraguay (BCP) por la caída del dólar y la consecuente pérdida de rentabilidad.",
+      "Este fenómeno tiene implicancias internacionales, ya que el sector primario y las manufacturas agropecuarias representan aproximadamente el 72 % de las divisas que ingresan al país, afectando a más de 300 000 personas y resaltando la importancia de la política cambiaria en la competitividad exportadora de Paraguay."
+    ],
+    "glossary": [
+      {
+        "term": "Apreciación",
+        "definition": "Aumento del valor de una moneda respecto a otra; en este caso, el guaraní gana valor frente al dólar."
+      },
+      {
+        "term": "Rentabilidad",
+        "definition": "Capacidad de una actividad económica para generar beneficios en relación con los recursos empleados."
+      },
+      {
+        "term": "Poder adquisitivo",
+        "definition": "Capacidad de una persona o sector para comprar bienes y servicios con sus ingresos disponibles."
+      },
+      {
+        "term": "Divisas",
+        "definition": "Monedas extranjeras utilizadas en transacciones comerciales y financieras internacionales."
+      },
+      {
+        "term": "Sector primario",
+        "definition": "Parte de la economía dedicada a actividades como agricultura, ganadería, pesca y extracción de recursos naturales."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La apreciación del guaraní se inserta en un contexto de volatilidad cambiaria global y de tensiones comerciales en la región del Mercosur, donde la dependencia de exportaciones agropecuarias hace que Paraguay sea vulnerable a fluctuaciones de divisas y a decisiones de política monetaria de sus socios.",
+      "strategic_recommendations": [
+        "Diversificar los destinos de exportación mediante acuerdos bilaterales con mercados fuera del Mercosur para reducir la exposición al tipo de cambio regional.",
+        "Coordinar con el Banco Central del Paraguay y los gobiernos vecinos políticas cambiarias que estabilicen la moneda y favorezcan la competitividad de los productos agropecuarios."
+      ]
+    },
+    "sources": [
+      "Banco Central del Paraguay (BCP)",
+      "Asociación Rural del Paraguay (ARP)"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Andrea.pdf",
+    "status": "published"
+  },
+  {
+    "id": "paraguay-morosidad-2-3-20260902",
+    "title": "Paraguay contiene morosidad bancaria en 2,3 %: análisis comparativo regional",
+    "topic": "Política Monetaria",
+    "region": "América Latina",
+    "date": "2026-09-02",
+    "authors": [
+      "Araceli Alejandra Paredes Sugastti"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Paraguay mantiene la morosidad bancaria en 2,3 %, 0,48 pp por debajo del promedio regional de 2,78 % según el informe de Felaban.",
+      "El indicador sitúa al país al mismo nivel que Guatemala y por encima de economías con mayor morosidad como México y Costa Rica.",
+      "Una morosidad contenida refuerza la estabilidad del crédito interno y reduce riesgos de insolvencia en el contexto macroeconómico latinoamericano."
+    ],
+    "full_text": [
+      "El presente trabajo analiza la evolución de la morosidad bancaria en Paraguay durante el primer trimestre de 2026, a partir del Informe Trimestral Económico Bancario Regional elaborado por la Federación Latinoamericana de Bancos (Felaban) y revisado por MF Economía e Inversiones.",
+      "Los datos revelan que, a diferencia de la tendencia al alza observada en la mayor parte de la región, Paraguay logró contener su cartera vencida en 2,3 %, situándose 0,48 puntos porcentuales por debajo del promedio regional de 2,78 %. Este desempeño lo coloca al mismo nivel que Guatemala (2,3 %) y por debajo de países con mayores niveles de mora como México y Costa Rica.",
+      "Desde una perspectiva internacional, la baja morosidad indica una mayor resiliencia del sistema financiero paraguayo frente a choques externos, lo que favorece la confianza de inversionistas y la continuidad del flujo crediticio interno, contribuyendo a la estabilidad macroeconómica de la región."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad bancaria (cartera vencida)",
+        "definition": "Porcentaje del total de la cartera de créditos de las instituciones financieras que presenta retrasos o falta de pago en las fechas de vencimiento pactadas por los deudores."
+      },
+      {
+        "term": "Sistema bancario",
+        "definition": "Conjunto de instituciones públicas y privadas (bancos, financieras) autorizadas por las autoridades reguladoras para intermediar recursos financieros, captando depósitos del público y otorgando préstamos o créditos."
+      },
+      {
+        "term": "Puntos porcentuales",
+        "definition": "Unidad de medida utilizada para cuantificar la diferencia aritmética entre dos porcentajes o tasas."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La contención de la morosidad en Paraguay refuerza su posición como un actor financiero estable dentro del Cono Sur, lo que puede traducirse en mayor atractivo para flujos de capitales externos y en una mayor capacidad de negociación en foros regionales como el MERCOSUR, especialmente en un entorno donde la volatilidad macroeconómica afecta a varios países latinoamericanos.",
+      "strategic_recommendations": [
+        "Fortalecer los marcos regulatorios de evaluación de riesgo crediticio mediante la adopción de estándares internacionales de supervisión bancaria.",
+        "Implementar programas de educación financiera dirigidos a prestatarios para reducir la probabilidad de incumplimientos y sostener el crecimiento crediticio a largo plazo."
+      ]
+    },
+    "sources": [
+      "ABC Color",
+      "Felaban",
+      "MF Economía e Inversiones"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Araceli Sugastti.pdf",
+    "status": "published"
+  },
+  {
+    "id": "deuda-publica-paraguay-2026-20260902",
+    "title": "Deuda pública paraguaya: desafíos fiscales y plan de convergencia 2026‑2028",
+    "topic": "Finanzas Públicas",
+    "region": "Cono Sur",
+    "date": "2026-09-02",
+    "authors": [
+      "Héctor Ramirez"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/hector-ramirez.jpg",
+    "summary_bullets": [
+      "Paraguay cerró el primer semestre con una deuda pública histórica de USD 21.947 millones, equivalente al 34,4 % del PIB y con un aumento interanual del 15 %.",
+      "El costo del servicio de la deuda alcanzó USD 1.551 millones, de los cuales el 36 % se destinó exclusivamente al pago de intereses, reduciendo el espacio presupuestario para inversión pública.",
+      "El Ministerio de Economía presentará un Plan de Convergencia Fiscal que busca reducir el déficit al 3,2 % en 2026 y volver al límite legal del 1,5 % del PIB para 2028."
+    ],
+    "full_text": [
+      "Paraguay concluyó el primer semestre de 2026 con un saldo histórico de deuda pública de USD 21.947 millones, lo que representa el 34,4 % del PIB y marca un incremento del 15 % respecto al mismo período del año anterior; la mayor parte de la deuda es externa (83,5 %).",
+      "El servicio de la deuda ascendió a USD 1.551 millones, de los cuales el 36 % se destinó al pago de intereses, limitando la capacidad del Estado para financiar obras de infraestructura y elevando la deuda per cápita a USD 3.397, un aumento del 14,2 %.",
+      "Ante este escenario, el Ministerio de Economía propone un nuevo Plan de Convergencia Fiscal que proyecta un déficit del 3,2 % para 2026 y persigue volver al límite legal del 1,5 % del PIB en 2028, con énfasis en la disciplina fiscal y la emisión de deuda en moneda local para mitigar riesgos cambiarios."
+    ],
+    "glossary": [
+      {
+        "term": "Plan de Convergencia Fiscal",
+        "definition": "Estrategia gubernamental orientada a reducir gradualmente el déficit público hasta volver a los límites legales establecidos, garantizando la estabilidad económica."
+      },
+      {
+        "term": "Servicio de la deuda",
+        "definition": "Monto total destinado a cumplir con los compromisos financieros en un periodo determinado, incluyendo tanto el pago de intereses como la devolución del capital contratado."
+      },
+      {
+        "term": "Amortización de capital",
+        "definition": "Pago orientado a cancelar la suma de dinero prestada originalmente, reduciendo de forma directa el saldo total adeudado."
+      },
+      {
+        "term": "Deuda per cápita",
+        "definition": "Indicador económico que resulta de dividir la deuda pública total entre el número de habitantes de un país."
+      },
+      {
+        "term": "Ley de Responsabilidad Fiscal (LRF)",
+        "definition": "Marco normativo paraguayo que fija reglas financieras al Estado, imponiendo un límite máximo al déficit fiscal anual del 1,5 % del PIB."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "El elevado nivel de endeudamiento de Paraguay, con predominio de deuda externa, aumenta su vulnerabilidad a variaciones de los tipos de interés internacionales y a la volatilidad del tipo de cambio, lo que puede afectar la confianza de inversionistas regionales y la posición del país en la integración del Mercosur.",
+      "strategic_recommendations": [
+        "Priorizar la calidad del gasto público antes de recurrir a nuevo endeudamiento, enfocándose en la eficiencia presupuestaria para financiar obras con recursos propios.",
+        "Mantener la disciplina fiscal mediante la estricta ejecución del Plan de Convergencia Fiscal y estructurar la emisión de deuda en moneda local para reducir riesgos cambiarios."
+      ]
+    },
+    "sources": [
+      "Ministerio de Economía de Paraguay"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Hector.pdf",
+    "status": "published"
+  },
+  {
+    "id": "analisis-economia-paraguaya-internacional-20260916",
+    "title": "Análisis de la Economía paraguaya e internacional",
+    "topic": "Economía",
+    "region": "América Latina",
+    "date": "2026-09-16",
+    "authors": [
+      "Mayara Saribel Garay Acosta"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El Presupuesto General de la Nación 2027 proyecta que la presión tributaria se mantenga en 11,2% del PIB paraguayo.",
+      "Se anticipa un aumento del 8,6% en la recaudación de impuestos, pero la caída de ingresos por regalías de Itaipú y Yacyretá limitará el crecimiento fiscal.",
+      "Los analistas advierten la necesidad de fortalecer la capacidad recaudatoria y reducir la evasión para financiar los servicios públicos sin elevar la carga tributaria."
+    ],
+    "full_text": [
+      "El proyecto del Presupuesto General de la Nación 2027 plantea mantener la presión tributaria en 11,2% del Producto Interno Bruto, una cifra que refleja la estabilidad fiscal buscada por el gobierno paraguayo en medio de un contexto económico regional incierto.",
+      "Aunque la recaudación tributaria se espera que crezca un 8,6% gracias a la mejora en la administración y a la ampliación de la base imponible, la disminución de los ingresos corrientes provenientes de las regalías de los embalses de Itaipú y Yacyretá contrarresta este avance, generando un desafío para equilibrar las finanzas públicas.",
+      "En el plano internacional, la estabilidad de la presión tributaria posiciona a Paraguay como un país con una carga fiscal comparable a sus vecinos del Cono Sur, pero la dependencia de ingresos por regalías subraya la vulnerabilidad ante decisiones bilaterales y fluctuaciones en la demanda energética, lo que sugiere la necesidad de diversificar la base fiscal y promover un crecimiento económico sostenible."
+    ],
+    "glossary": [
+      {
+        "term": "Presión tributaria",
+        "definition": "Porcentaje del PIB que el Estado recauda mediante impuestos."
+      },
+      {
+        "term": "Recaudación tributaria",
+        "definition": "Dinero que el Estado obtiene a través del cobro de impuestos."
+      },
+      {
+        "term": "Ingresos corrientes",
+        "definition": "Recursos que recibe el Estado de forma habitual, como impuestos, tasas y contribuciones."
+      },
+      {
+        "term": "Regalías",
+        "definition": "Pagos que recibe el Estado por la explotación de recursos o por acuerdos con entidades como Itaipú y Yacyretá."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La política fiscal paraguaya se inserta en un escenario regional donde la competencia por inversiones y la cooperación energética con Brasil y Argentina influyen en la capacidad del Estado para mantener la estabilidad macroeconómica sin depender excesivamente de ingresos externos.",
+      "strategic_recommendations": [
+        "Fortalecer la administración tributaria y combatir la evasión fiscal mediante tecnologías de información y auditorías focalizadas.",
+        "Diversificar la base de ingresos mediante la promoción de sectores productivos de alto valor agregado y la renegociación de los acuerdos de regalías para reducir la vulnerabilidad externa."
+      ]
+    },
+    "sources": [
+      "Noticia de prensa local sobre el Presupuesto General de la Nación 2027"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Mayara Garay.pdf",
+    "status": "published"
+  },
+  {
+    "id": "paraguay-contiene-morosidad-2-3-20260902",
+    "title": "Paraguay contiene morosidad en 2,3%, levemente debajo de promedio regional",
+    "topic": "Finanzas",
+    "region": "Cono Sur",
+    "date": "2026-09-02",
+    "authors": [
+      "Nelson Coronel"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/nelson-coronel.jpg",
+    "summary_bullets": [
+      "Paraguay registra una morosidad bancaria del 2,3% al cierre de marzo de 2026, por debajo del promedio latinoamericano de 2,78%.",
+      "El indicador mejora respecto a diciembre de 2023 (2,9%) y se sitúa ligeramente bajo el nivel de 2019 (2,4%).",
+      "En comparación regional, la morosidad es menor que en Argentina, Brasil, Colombia y Perú, pero superior a Uruguay y República Dominicana, lo que refuerza la percepción de estabilidad financiera."
+    ],
+    "full_text": [
+      "Paraguay mantiene un nivel de morosidad bancaria relativamente bajo, ubicándose en 2,3% al cierre de marzo de 2026, lo que lo coloca por debajo del promedio de América Latina (2,78%).",
+      "Este indicador muestra una evolución favorable frente a diciembre de 2023, cuando la morosidad era del 2,9%, y se sitúa ligeramente bajo el nivel registrado en 2019 (2,4%). En el contexto latinoamericano, Paraguay supera a Uruguay (1,7%) y República Dominicana (1,1%) pero se mantiene por debajo de Argentina (7,3%), Brasil (4,3%), Colombia (3,7%) y Perú (3,0%).",
+      "El bajo nivel de morosidad puede ser utilizado como una señal de solidez del sistema financiero paraguayo, fortaleciendo la confianza de inversionistas extranjeros y ofreciendo una base para una diplomacia económica más activa que comunique estos resultados a socios comerciales potenciales."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad (Tasa o Ratio de morosidad)",
+        "definition": "Porcentaje de créditos que han caído en retraso de pago respecto al total de préstamos otorgados por los bancos."
+      },
+      {
+        "term": "Cartera vencida",
+        "definition": "Volumen total de dinero que los prestatarios no devolvieron en las fechas pactadas y que ya entró en mora técnica o legal."
+      },
+      {
+        "term": "Punto porcentual (p.p.)",
+        "definition": "Diferencia aritmética entre dos porcentajes; por ejemplo, pasar de 2,9% a 2,3% implica una variación de 0,6 puntos porcentuales."
+      },
+      {
+        "term": "Salud del sistema bancario / Solvencia",
+        "definition": "Capacidad de las entidades financieras para absorber pérdidas y honrar sus compromisos con los ahorristas sin entrar en pánico ni requerir rescates estatales."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "El bajo nivel de morosidad posiciona a Paraguay como un actor financiero estable dentro del Cono Sur, lo que puede traducirse en mayor atractivo para flujos de inversión extranjera y fortalecer su peso en negociaciones regionales sobre integración financiera.",
+      "strategic_recommendations": [
+        "Fortalecer la imagen internacional de Paraguay mediante la difusión de indicadores de estabilidad bancaria en foros multilaterales y campañas de promoción.",
+        "Implementar una diplomacia económica activa que comunique estos resultados a potenciales socios comerciales e inversores internacionales, facilitando acuerdos de crédito y financiamiento."
+      ]
+    },
+    "sources": [
+      "Banco Central del Paraguay"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Nelson Coronel.pdf",
+    "status": "published"
+  },
+  {
+    "id": "impacto-precio-diesel-paraguay-20260916",
+    "title": "Impacto del aumento del precio internacional del diésel en Paraguay y recomendaciones de política energética",
+    "topic": "Energía",
+    "region": "Cono Sur",
+    "date": "2026-09-16",
+    "authors": [
+      "Arianne Saray Ríos Flor"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El precio internacional del diésel alcanzó US$4,72 por galón, provocando un incremento de hasta 39 % en el precio al consumidor en estaciones privadas de Paraguay.",
+      "El alza eleva los costos de reposición de los importadores y amenaza con trasladar mayores costos al transporte público, al sector productivo y a los precios de bienes y servicios.",
+      "Se recomiendan medidas de diversificación energética, cooperación internacional y estabilización del mercado para mitigar la vulnerabilidad de Paraguay ante la volatilidad del petróleo."
+    ],
+    "full_text": [
+      "El reciente repunte del precio internacional del diésel, que volvió a subir hasta US$4,72 por galón, generó una profunda preocupación en Paraguay, un país altamente dependiente de la importación de combustibles y que ha visto incrementos significativos en los precios internos desde febrero.",
+      "En el mercado interno, el diésel común registró aumentos de hasta un 39 % en estaciones privadas, mientras que la empresa estatal Petropar también elevó sus tarifas, aunque en menor medida; este fenómeno está ligado a la tensión geopolítica en Medio Oriente y a la volatilidad de los mercados petroleros internacionales, factores que reducen la oferta y encarecen los precios de referencia como el heating oil.",
+      "El impacto se extiende más allá del consumidor final: mayores costos de reposición afectan a las empresas importadoras, encarecen el transporte público, elevan los costos de producción y distribución de bienes, y pueden desencadenar una espiral inflacionaria que compromete la competitividad del país."
+    ],
+    "glossary": [
+      {
+        "term": "Cotización internacional",
+        "definition": "Precio de un producto establecido en los mercados internacionales, utilizado como referencia para la negociación global."
+      },
+      {
+        "term": "Costo de reposición",
+        "definition": "Monto que una empresa debe pagar para volver a adquirir y reabastecer el producto que ha vendido."
+      },
+      {
+        "term": "Volatilidad",
+        "definition": "Variaciones rápidas y frecuentes en el precio de un bien, típicas de los mercados de materias primas."
+      },
+      {
+        "term": "Heating oil",
+        "definition": "Combustible derivado del petróleo cuya cotización sirve de referencia para analizar el precio del diésel."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La escalada de conflictos en Medio Oriente ha restringido la oferta de crudo y ha incrementado la incertidumbre en los mercados energéticos globales, lo que se traduce en precios más altos para el diésel. Paraguay, al depender de importaciones, se ve expuesto a estos choques externos, lo que subraya la necesidad de una política energética que reduzca la vulnerabilidad frente a tensiones geopolíticas.",
+      "strategic_recommendations": [
+        "Fortalecer la cooperación regional en energía mediante acuerdos de suministro y reservas estratégicas que permitan mitigar los efectos de la volatilidad del petróleo.",
+        "Impulsar la diversificación de la matriz energética nacional, priorizando fuentes renovables como la solar e hidroeléctrica, y fomentar la inversión en infraestructura de biocombustibles."
+      ]
+    },
+    "sources": [
+      "Reuters"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Saray.pdf",
+    "status": "published"
+  },
+  {
+    "id": "caida-recaudacion-aduanera-paraguay-2026-20260901",
+    "title": "Caída de la recaudación aduanera en Paraguay 2026 y su impacto en la convergencia fiscal",
+    "topic": "Comercio",
+    "region": "Cono Sur",
+    "date": "2026-09-01",
+    "authors": [
+      "Sofía Valenzuela"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Recaudación aduanera cayó 9,8 % acumulada en lo que va de 2026, frenando la meta de ingresos fiscales del Estado paraguayo.",
+      "La disminución se debe principalmente a la caída de importaciones, provocada por problemas logísticos fluviales y la volatilidad de precios internacionales de commodities y combustibles.",
+      "Este retroceso genera desafíos para mantener la convergencia fiscal y financiar el gasto público proyectado."
+    ],
+    "full_text": [
+      "La Dirección Nacional de Ingresos Tributarios (DNIT) informó una contracción acumulada del 9,8 % en los ingresos aduaneros en lo que va del año 2026, lo que representa un freno significativo a la meta global de recaudación fiscal del Estado paraguayo.",
+      "Según los datos de la DNIT, la menor dinámica de los tributos vinculados al comercio exterior responde a la reducción del volumen de importaciones de bienes de consumo e insumos clave, afectada por factores climáticos que alteraron la navegabilidad de los ríos y por la fluctuación de los precios internacionales de commodities y combustibles; al mismo tiempo, los impuestos internos como el IVA y el Impuesto a la Renta continúan mostrando resultados positivos.",
+      "El debilitamiento de la recaudación aduanera evidencia la vulnerabilidad de las finanzas públicas paraguayas ante contingencias logísticas e internacionales; a pesar de los avances institucionales de la DNIT, la alta dependencia de los ingresos aduaneros exige fortalecer la resiliencia estructural de la economía y equilibrar la contención del gasto con la intensificación de medidas de facilitación del comercio."
+    ],
+    "glossary": [
+      {
+        "term": "Recaudación aduanera",
+        "definition": "Captación de recursos económicos que realiza el Estado a través del cobro de tributos, aranceles e impuestos aplicados a la entrada y salida de mercancías (importación y exportación) por las fronteras nacionales."
+      },
+      {
+        "term": "Dirección Nacional de Ingresos Tributarios (DNIT)",
+        "definition": "Organismo estatal autárquico creado para unificar la administración de los impuestos internos y la administración de aduanas en Paraguay, con el objetivo de optimizar la eficiencia fiscal y combatir la evasión."
+      },
+      {
+        "term": "Convergencia fiscal",
+        "definition": "Proceso de ajuste de las finanzas públicas orientado a reducir gradualmente el déficit fiscal del Estado hasta situarlo dentro de los límites legales sostenibles, como el techo del 1,5 % del PIB fijado en la Ley de Responsabilidad Fiscal de Paraguay."
+      },
+      {
+        "term": "Arancel aduanero",
+        "definition": "Impuesto o tarifa que se aplica a los bienes y servicios objeto de importación para proteger la producción nacional o generar ingresos fiscales para el Tesoro."
+      },
+      {
+        "term": "Shock externo",
+        "definition": "Evento imprevisto originado fuera de las fronteras de un país —como fluctuaciones drásticas en precios de commodities o crisis económicas internacionales— que impacta de forma negativa o positiva en su economía nacional."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay depende en gran medida del sistema fluvial para su comercio exterior, lo que lo hace vulnerable a variaciones climáticas y a la capacidad de los países vecinos para mantener rutas navegables. La caída de la recaudación aduanera refleja, además, la exposición del país a choques externos de precios de commodities que afectan tanto a exportadores como a importadores, generando un desequilibrio en la balanza comercial regional.",
+      "strategic_recommendations": [
+        "Fortalecer la infraestructura fluvial y diversificar rutas comerciales hacia puertos terrestres y ferroviarios para reducir la dependencia de los ríos.",
+        "Implementar medidas de facilitación del comercio transfronterizo y diversificar la canasta de importaciones, incentivando la producción local de insumos críticos."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Sofi.pdf",
+    "status": "published"
+  },
+  {
+    "id": "analisis-economia-paraguaya-2027-20260902",
+    "title": "Análisis del Presupuesto General de la Nación 2027 y sus Implicancias Económicas y de Relaciones Internacionales en Paraguay",
+    "topic": "Política Fiscal",
+    "region": "Cono Sur",
+    "date": "2026-09-02",
+    "authors": [
+      "Aracely Villalba Russi"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El Ministerio de Economía proyecta un crecimiento del PIB del 4,2 % para 2027 y una inflación del 3,5 %, con un tipo de cambio estimado de G 6,458 por dólar.",
+      "El presupuesto contempla un mayor déficit fiscal que requerirá financiamiento externo, lo que eleva el riesgo de endeudamiento y presiona la estabilidad macroeconómica.",
+      "Una apreciación del guaraní podría reducir la competitividad de las exportaciones paraguayas, demandando una política cambiaria y comercial coordinada."
+    ],
+    "full_text": [
+      "El Gobierno paraguayo presentó el Presupuesto General de la Nación 2027, definiendo las previsiones de ingresos, gastos y financiamiento para el próximo ejercicio, con el objetivo de sostener el crecimiento económico y la estabilidad de precios.",
+      "Según el Ministerio de Economía y Finanzas, se espera que la economía crezca un 4,2 % y que la inflación se mantenga en 3,5 %, mientras que el tipo de cambio proyectado es de G 6,458 por dólar; sin embargo, el déficit fiscal ampliado obligará al Estado a recurrir a endeudamiento, lo que plantea desafíos de sostenibilidad de la deuda pública.",
+      "Desde la perspectiva internacional, la apreciación del guaraní afecta la competitividad de los exportadores que reciben ingresos en dólares y pagan costos en guaraníes, por lo que Paraguay debe equilibrar su política fiscal con estrategias de diversificación de mercados y cooperación económica regional para evitar que el endeudamiento limite su desarrollo futuro."
+    ],
+    "glossary": [
+      {
+        "term": "PGN",
+        "definition": "Presupuesto General de la Nación, instrumento mediante el cual el Estado planifica sus ingresos y gastos anuales."
+      },
+      {
+        "term": "Déficit fiscal",
+        "definition": "Situación en la que los gastos del Estado superan sus ingresos, requiriendo financiamiento externo o interno."
+      },
+      {
+        "term": "Inflación",
+        "definition": "Aumento generalizado y sostenido de los precios de bienes y servicios en una economía."
+      },
+      {
+        "term": "Recaudación tributaria",
+        "definition": "Conjunto de ingresos que el Estado obtiene mediante el cobro de impuestos y otros tributos."
+      },
+      {
+        "term": "PIB",
+        "definition": "Producto Interno Bruto, valor total de los bienes y servicios producidos dentro de un país en un período determinado."
+      },
+      {
+        "term": "Política fiscal",
+        "definition": "Conjunto de decisiones del Estado relacionadas con ingresos, gastos e impuestos para influir en la actividad económica."
+      },
+      {
+        "term": "Apreciación",
+        "definition": "Incremento del valor de una moneda frente a otras monedas, lo que encarece las exportaciones y abarata las importaciones."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, como país sin salida al mar y miembro del MERCOSUR, depende de la estabilidad macroeconómica para mantener su posición en la cadena de suministro regional; el aumento del déficit fiscal y la posible apreciación del guaraní pueden afectar su competitividad frente a Brasil y Argentina, mientras que la búsqueda de financiamiento externo implica una mayor interacción con organismos multilaterales y socios estratégicos.",
+      "strategic_recommendations": [
+        "Diversificar los destinos de exportación mediante acuerdos bilaterales y la participación activa en iniciativas de integración regional para reducir la vulnerabilidad ante fluctuaciones cambiarias.",
+        "Fortalecer la cooperación con organismos internacionales (Banco Interamericano de Desarrollo, CEPAL) para obtener financiamiento de proyectos de infraestructura que impulsen la productividad sin incrementar excesivamente la deuda pública."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Ara Villalba.docx",
+    "status": "published"
+  },
+  {
+    "id": "rechazo-creditos-habitacionales-paraguay-20260902",
+    "title": "Rechazo de Créditos Habitacionales en Paraguay: Causas, Impacto Financiero y Perspectivas de Política Internacional",
+    "topic": "Finanzas",
+    "region": "América Latina",
+    "date": "2026-09-02",
+    "authors": [
+      "Estudiante"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El 60 % de las solicitudes de crédito habitacional son rechazadas, siendo el elevado nivel de endeudamiento la causa principal (35 %).",
+      "Los motivos de rechazo incluyen endeudamiento excesivo, incumplimiento de políticas de IFIs, historial crediticio deficiente, documentación incompleta, informalidad laboral y falta de respuesta del cliente.",
+      "Los umbrales prudenciales (relación cuota/ingreso ≤ 40 % y compromisos totales ≤ 50‑60 % de los ingresos) y la escasa educación financiera subrayan la necesidad de políticas de inclusión y cooperación internacional."
+    ],
+    "full_text": [
+      "En Paraguay, los programas del Ministerio de Urbanismo, Vivienda y Hábitat (MUVH) como “Che Róga Porã” buscan facilitar el acceso a la vivienda, pero el 60 % de las solicitudes de crédito son rechazadas, revelando una brecha estructural de educación financiera y sobreendeudamiento entre la población de ingresos medios y bajos.",
+      "Según la Agencia Financiera de Desarrollo (AFD), la principal causa de rechazo es el elevado nivel de endeudamiento (35 %), seguido por incumplimientos de políticas de las Instituciones Financieras Intermediarias (IFIs) y antecedentes de mora (25 %). Otros factores incluyen la falta de criterios de elegibilidad (15 %), documentación incompleta (10 %), falta de respuesta del cliente (10 %) e informalidad laboral (5 %). La AFD recomienda que la relación cuota/ingreso no supere el 40 % y que el total de compromisos no exceda el 50‑60 % de los ingresos, enfatizando la importancia de un historial crediticio sólido registrado en el Banco Central del Paraguay (BCP) y en burós privados.",
+      "La alta tasa de rechazo evidencia la necesidad de fortalecer la salud financiera de las familias, promover la formalización laboral y diseñar políticas públicas de reordenamiento de deudas. La cooperación internacional y la atracción de fondos de impacto pueden mejorar la sostenibilidad del crédito habitacional y contribuir al cumplimiento de los Objetivos de Desarrollo Sostenible, particularmente el ODS 11 de ciudades y comunidades sostenibles."
+    ],
+    "glossary": [
+      {
+        "term": "IFI (Institución Financiera Intermediaria)",
+        "definition": "Entidad bancaria, financiera o cooperativa habilitada para canalizar recursos y otorgar créditos a los beneficiarios finales."
+      },
+      {
+        "term": "Nivel de Endeudamiento",
+        "definition": "Ratio o porcentaje que mide la proporción de los ingresos de una persona asignada al pago de deudas y compromisos financieros."
+      },
+      {
+        "term": "AFD (Agencia Financiera de Desarrollo)",
+        "definition": "Banca pública de segundo piso en Paraguay encargada de impulsar el desarrollo económico mediante el financiamiento a través de IFIs."
+      },
+      {
+        "term": "Historial Crediticio",
+        "definition": "Registro detallado del comportamiento de pago de un individuo, almacenado en centrales de riesgo para evaluar la solvencia y riesgo financiero."
+      },
+      {
+        "term": "Relación Cuota/Ingreso",
+        "definition": "Indicador prudencial que limita el monto máximo de la cuota mensual de un préstamo en función de los ingresos netos del solicitante."
+      },
+      {
+        "term": "Informalidad Laboral",
+        "definition": "Condición del trabajador cuyos ingresos no están debidamente documentados, facturados o registrados ante el sistema tributario y de seguridad social."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, como país sin salida al mar y miembro del MERCOSUR, depende de la estabilidad macro‑financiera y de la cooperación internacional para financiar su desarrollo urbano. La alta tasa de rechazo de créditos habitacionales limita la inclusión social y genera vulnerabilidades que pueden afectar la cohesión regional, mientras que la alineación con organismos multilaterales (BID, CAF) permite acceder a recursos de financiamiento verde y a buenas prácticas de inclusión financiera en América Latina.",
+      "strategic_recommendations": [
+        "Fomentar programas de cooperación internacional en educación financiera mediante alianzas con el BID y la CAF para mejorar la alfabetización y la gestión de deudas de los hogares.",
+        "Vincular la política de vivienda social con los ODS, especialmente el ODS 11, y promover instrumentos de financiamiento verde que atraigan inversión internacional de impacto.",
+        "Implementar estrategias de formalización e inclusión financiera que faciliten la transición de trabajadores informales al sistema bancario formal mediante incentivos tributarios y crediticios.",
+        "Fortalecer la transparencia y solvencia de los programas estatales para atraer fondos financieros internacionales concesionales que reduzcan el costo del crédito habitacional."
+      ]
+    },
+    "sources": [
+      "AFD",
+      "BCP",
+      "Ministerio de Urbanismo, Vivienda y Hábitat",
+      "BID",
+      "CAF"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Avis.docx",
+    "status": "published"
+  },
+  {
+    "id": "inflacion-cero-agosto-paraguay-20260917",
+    "title": "Inflación cero en agosto 2026 en Paraguay: análisis de la economía nacional e internacional",
+    "topic": "Economía",
+    "region": "Cono Sur",
+    "date": "2026-09-17",
+    "authors": [
+      "Aylén Janeth Benítez Closs"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "El Banco Central del Paraguay reportó inflación mensual de 0 % en agosto 2026, con una inflación acumulada del 1,8 % y una interanual del 1,5 %.",
+      "La caída de precios en alimentos como la carne vacuna y hortalizas, junto a la reducción de algunos bienes importados, compensó los aumentos en combustibles y servicios.",
+      "Solo el 32,7 % de los productos de la canasta básica mostró subas, cifra inferior al promedio histórico, lo que indica una moderación general de precios."
+    ],
+    "full_text": [
+      "En el contexto de una economía paraguaya que ha enfrentado presiones inflacionarias en los últimos años, el Banco Central del Paraguay (BCP) anunció que la inflación de agosto de 2026 se mantuvo en 0 %, marcando una pausa en la tendencia alcista de precios.",
+      "El informe del BCP señala que la inflación acumulada del año alcanzó el 1,8 % y la tasa interanual se ubicó en 1,5 %; estos resultados se deben principalmente a la disminución de precios en alimentos esenciales, como la carne vacuna y las hortalizas, y a la caída de ciertos bienes importados, que contrarrestaron los incrementos observados en combustibles y servicios. Además, solo el 32,7 % de los productos de la canasta básica registró subas, un porcentaje por debajo del promedio histórico.",
+      "Aunque la cifra de 0 % sugiere estabilidad, la noticia advierte que no todos los productos experimentaron precios estables y que la percepción de los consumidores puede diferir del índice general, lo que implica la necesidad de un monitoreo continuo y de una comunicación clara por parte de las autoridades."
+    ],
+    "glossary": [
+      {
+        "term": "Inflación",
+        "definition": "Aumento general y sostenido de los precios de bienes y servicios en una economía durante un período de tiempo."
+      },
+      {
+        "term": "IPC",
+        "definition": "Índice de Precios al Consumidor, que mide la variación de precios de una canasta de bienes y servicios representativa del consumo de los hogares."
+      },
+      {
+        "term": "Inflación interanual",
+        "definition": "Variación porcentual de los precios comparando un mes con el mismo mes del año anterior."
+      },
+      {
+        "term": "Inflación acumulada",
+        "definition": "Aumento total de precios desde el inicio del año hasta una fecha determinada."
+      },
+      {
+        "term": "Canasta básica",
+        "definition": "Conjunto de bienes y servicios necesarios para el consumo de los hogares, utilizado como referencia para el cálculo del IPC."
+      },
+      {
+        "term": "Apreciación cambiaria",
+        "definition": "Aumento del valor de una moneda nacional frente a una moneda extranjera."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La estabilización de la inflación en Paraguay reduce la vulnerabilidad macroeconómica del país, lo que favorece la confianza de inversionistas extranjeros y fortalece su posición en la integración regional del Mercosur. Un entorno de precios estables permite al gobierno paraguayo negociar acuerdos comerciales con mayor margen de maniobra y contribuye a la estabilidad política interna, elemento clave para la seguridad energética y alimentaria en la región del Cono Sur.",
+      "strategic_recommendations": [
+        "Mantener y reforzar la política de monitoreo de precios de alimentos, combustibles y servicios, garantizando transparencia en la metodología de cálculo del IPC.",
+        "Implementar campañas de educación financiera dirigidas a familias para fomentar la comparación de precios y la planificación de gastos, reduciendo la vulnerabilidad de los hogares ante posibles shocks inflacionarios futuros."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Aylen.docx",
+    "status": "published"
+  },
+  {
+    "id": "camaracomercio-paraguayo-americana-caida-dolar-inversiones-20260901",
+    "title": "Impacto de la caída del dólar en la inversión paraguaya: análisis de la advertencia de AmCham",
+    "topic": "Comercio",
+    "region": "América Latina",
+    "date": "2026-09-01",
+    "authors": [
+      "Dahiana Paiva"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/dahiana-paiva.jpg",
+    "summary_bullets": [
+      "El dólar cayó cerca del 20% en el último año, generando volatilidad que afecta a exportadores, construcción y real estate que operan con contratos en dólares.",
+      "La falta de previsibilidad cambiaria reduce márgenes de empresas agropecuarias y otros sectores con precios cerrados a 3‑6 meses, limitando la competitividad.",
+      "Se propone una intervención cambiaria simétrica del BCP y cláusulas de ajuste cambiario para mitigar riesgos de depreciación abrupta."
+    ],
+    "full_text": [
+      "El artículo de ABC Color, fechado el 1 de septiembre de 2026, señala que la caída sostenida del dólar frente al guaraní ha generado una fuerte volatilidad que preocupa a los gremios empresariales paraguayos, en particular a la Cámara de Comercio Paraguayo‑Americana (AmCham).",
+      "Según Elías Saba, presidente de AmCham, la caída del tipo de cambio no solo afecta la rentabilidad de exportadores, constructoras y el sector inmobiliario, sino que la falta de previsibilidad impide a empresas del agro y otros rubros planificar sus márgenes cuando los precios están fijados a tres o seis meses, lo que se traduce en pérdidas de competitividad.",
+      "El análisis concluye que la apreciación del dólar no beneficia uniformemente a la economía paraguaya; por ello se recomienda al Banco Central del Paraguay adoptar mecanismos de intervención cambiaria más simétricos y que las empresas incorporen cláusulas de ajuste cambiario en sus contratos para reducir la exposición a la volatilidad."
+    ],
+    "glossary": [
+      {
+        "term": "AmCham",
+        "definition": "Cámara de Comercio Paraguayo‑Americana; entidad gremial que agrupa a empresas paraguayas y estadounidenses y representa sus intereses ante el sector público y privado."
+      },
+      {
+        "term": "Tipo de cambio",
+        "definition": "Precio de una moneda expresado en términos de otra; en este caso, cuántos guaraníes se necesitan para comprar un dólar estadounidense."
+      },
+      {
+        "term": "Previsibilidad",
+        "definition": "Grado de certeza con que una empresa o inversor puede anticipar el comportamiento futuro de una variable económica, como el tipo de cambio, para planificar sus decisiones."
+      },
+      {
+        "term": "Margen (comercial)",
+        "definition": "Diferencia entre el costo de producción o compra de un bien y su precio de venta; se reduce cuando cambian los costos o el tipo de cambio sin que el precio de venta se ajuste."
+      },
+      {
+        "term": "Intervención cambiaria",
+        "definition": "Acción del Banco Central de comprar o vender divisas en el mercado con el objetivo de influir sobre el nivel o la volatilidad del tipo de cambio."
+      },
+      {
+        "term": "Inflación industrial",
+        "definition": "Aumento generalizado de los costos de producción en la industria de un país (insumos, energía, mano de obra), que se traslada al precio final de los bienes exportados."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Paraguay, como país sin salida al mar y miembro del MERCOSUR, depende de flujos de inversión extranjera y de la estabilidad cambiaria para mantener su competitividad regional; la apreciación del dólar afecta tanto a los exportadores agrícolas que compiten en mercados internacionales como a la percepción de riesgo de inversores estadounidenses, lo que tiene implicancias para la relación bilateral con EE. UU. y la política monetaria del BCP.",
+      "strategic_recommendations": [
+        "Implementar una política de intervención cambiaria simétrica que actúe tanto ante la apreciación como ante la depreciación abrupta del dólar para reducir la volatilidad y mejorar la previsibilidad del mercado.",
+        "Fomentar la inclusión de cláusulas de ajuste cambiario en los contratos de exportación, construcción y real estate, de modo que las empresas puedan recalibrar precios y márgenes frente a variaciones bruscas del tipo de cambio."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Dahiana Paiva.docx",
+    "status": "published"
+  },
+  {
+    "id": "paraguay-morosidad-2026-20260902",
+    "title": "Análisis de la morosidad bancaria en Paraguay: estabilidad financiera y perspectivas internacionales",
+    "topic": "Política Monetaria",
+    "region": "América Latina",
+    "date": "2026-09-02",
+    "authors": [
+      "Estudiante"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/estudiante.jpg",
+    "summary_bullets": [
+      "Paraguay mantiene una tasa de morosidad bancaria del 2,3%, por debajo del promedio regional, indicando solidez del sistema financiero.",
+      "El bajo nivel de morosidad favorece la confianza de inversionistas y facilita la cooperación económica regional.",
+      "Se requieren políticas de regulación y educación financiera para consolidar la estabilidad y mitigar riesgos futuros."
+    ],
+    "full_text": [
+      "El informe de ABC Color del 2 de septiembre de 2026 señala que la morosidad bancaria en Paraguay se sitúa en 2,3%, ligeramente inferior al promedio de América Latina, lo que refleja una gestión crediticia prudente y un entorno macroeconómico estable.",
+      "Este indicador, respaldado por datos del sector bancario, muestra que los mecanismos de control de riesgo y la disciplina en el otorgamiento de crédito están funcionando, aunque expertos advierten la necesidad de reforzar la supervisión y ampliar el acceso responsable al financiamiento para evitar desequilibrios.",
+      "Desde la perspectiva de Relaciones Internacionales, la baja morosidad refuerza la imagen de Paraguay como un destino atractivo para la inversión extranjera y la cooperación regional, generando mayores oportunidades de integración económica y diplomática."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad",
+        "definition": "Atraso o incumplimiento en el pago de préstamos o créditos."
+      },
+      {
+        "term": "Sistema financiero",
+        "definition": "Conjunto de instituciones, como bancos y entidades de crédito, que administran el dinero y facilitan la intermediación financiera."
+      },
+      {
+        "term": "Crédito",
+        "definition": "Préstamo otorgado a un deudor con el compromiso de devolución bajo condiciones pactadas."
+      },
+      {
+        "term": "Riesgo financiero",
+        "definition": "Posibilidad de que un prestatario no cumpla con sus obligaciones, generando pérdidas para el acreedor."
+      },
+      {
+        "term": "Estabilidad económica",
+        "definition": "Equilibrio sostenido en la actividad económica que permite un crecimiento predecible y bajo nivel de volatilidad."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La estabilidad del sistema financiero paraguayo fortalece su posición en el bloque latinoamericano, facilitando acuerdos de inversión y cooperación con organismos internacionales y vecinos, y reduciendo la percepción de riesgo que suele limitar el flujo de capitales externos.",
+      "strategic_recommendations": [
+        "Fortalecer la cooperación con organismos internacionales (FMI, Banco Interamericano de Desarrollo) para mejorar la regulación y supervisión financiera.",
+        "Implementar programas de educación financiera a nivel nacional que promuevan el uso responsable del crédito y amplíen la inclusión financiera."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Kito.docx",
+    "status": "published"
+  },
+  {
+    "id": "paraguay-yerba-mate-turquia-azerbayan-20260902",
+    "title": "Paraguay busca abrir nuevos mercados para la yerba mate en Turquía y Azerbaiyán",
+    "topic": "Alimentos",
+    "region": "Global",
+    "date": "2026-09-02",
+    "authors": [
+      "Autor Desconocido"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/sofia-valenzuela.jpg",
+    "summary_bullets": [
+      "Paraguay lanza una campaña de diplomacia económica y gastronómica para introducir la yerba mate en Turquía, el Cáucaso y el Medio Oriente.",
+      "Se participará en ferias internacionales (Food Is en Estambul y World Foods en diciembre) para promover la yerba mate y otros productos como chía, sésamo, stevia y salsa de soja.",
+      "La industrialización de los productos y la diversificación de mercados son clave para aumentar exportaciones y generar empleo en Paraguay."
+    ],
+    "full_text": [
+      "El gobierno paraguayo, a través de la Embajada en Turquía, ha puesto en marcha una estrategia de promoción de la yerba mate y otros productos agroalimentarios en Turquía, el Medio Oriente y el Cáucaso, con el objetivo de abrir nuevos canales de exportación y reducir la dependencia de los mercados tradicionales.",
+      "Durante la feria Food Is (1‑4 de septiembre) en Estambul y la futura World Foods en diciembre, se llevarán a cabo degustaciones, presentaciones de mate, tereré y cocido, y se destacará la capacidad de industrializar la yerba mate para crear productos de mayor valor agregado, lo que podría impulsar las exportaciones y crear empleo en el país.",
+      "Los estudiantes concluyen que la diplomacia gastronómica y la diversificación de destinos, especialmente hacia Turquía (85 millones de habitantes) y Azerbaiyán, representan una oportunidad estratégica para fortalecer la presencia comercial de Paraguay a nivel internacional."
+    ],
+    "glossary": [
+      {
+        "term": "Criptominería",
+        "definition": "Proceso informático que utiliza recursos computacionales para crear criptomonedas y validar transacciones en una cadena de bloques."
+      },
+      {
+        "term": "Blockchain",
+        "definition": "Tecnología de registro distribuido que permite almacenar de forma segura y transparente todas las transacciones de criptomonedas."
+      },
+      {
+        "term": "Activos digitales",
+        "definition": "Bienes con valor económico que existen exclusivamente en formato virtual, como criptomonedas, tokens y otros derechos digitales."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "La expansión de la yerba mate paraguaya hacia Turquía y Azerbaiyán se inserta en un contexto geopolítico donde la región del Cáucaso y el Medio Oriente buscan diversificar sus fuentes de alimentos y fortalecer relaciones con América Latina, creando un nuevo eje de cooperación económica que puede equilibrar la influencia de actores tradicionales como la UE y China.",
+      "strategic_recommendations": [
+        "Fortalecer la diplomacia económica mediante acuerdos bilaterales de cooperación agroalimentaria y certificaciones de calidad para facilitar el acceso a los mercados turco‑azerbaiyanos.",
+        "Incentivar la inversión en procesos de industrialización de la yerba mate y productos derivados para generar valor agregado y reducir la vulnerabilidad ante fluctuaciones de precios internacionales."
+      ]
+    },
+    "sources": [
+      "El Nacional"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Mica.docx",
+    "status": "published"
+  },
+  {
+    "id": "paraguay-contiene-morosidad-2-3-20260902-1",
+    "title": "Paraguay contiene morosidad en 2,3%, levemente debajo del promedio regional",
+    "topic": "Finanzas",
+    "region": "América Latina",
+    "date": "2026-09-02",
+    "authors": [
+      "Tamara Benítez"
+    ],
+    "author_role": "Investigación académica • Estudiantes de Relaciones Internacionales",
+    "author_image": "/authors/tamara-benitez.jpg",
+    "summary_bullets": [
+      "En marzo de 2026 la morosidad del sistema financiero paraguayo se ubicó en 2,3%, por debajo del promedio regional de 2,78%.",
+      "La reducción de la morosidad indica un mejor cumplimiento de obligaciones y refuerza la estabilidad macroeconómica del país.",
+      "Se recomienda fortalecer la educación financiera y mantener políticas de crédito responsable para evitar sobreendeudamiento."
+    ],
+    "full_text": [
+      "La noticia analiza la situación de la morosidad en el sistema financiero paraguayo, que en marzo de 2026 alcanzó el 2,3%, cifra ligeramente inferior al promedio registrado en América Latina (2,78%).",
+      "Esta disminución representa una señal positiva para la economía nacional, pues indica un mejor cumplimiento de las obligaciones financieras; sin embargo, las instituciones deben continuar monitoreando el comportamiento de los créditos y las deudas para evitar riesgos de sobreendeudamiento.",
+      "La conclusión subraya que, aunque la reducción de la morosidad es favorable, es esencial mantener políticas que permitan un acceso responsable al crédito, reforzando la educación financiera y estableciendo controles adecuados."
+    ],
+    "glossary": [
+      {
+        "term": "Morosidad",
+        "definition": "Retraso o incumplimiento en el pago de una deuda."
+      },
+      {
+        "term": "Sistema financiero",
+        "definition": "Conjunto de bancos y otras instituciones que manejan el dinero y el crédito."
+      },
+      {
+        "term": "Indicador",
+        "definition": "Dato utilizado para medir o evaluar una situación económica."
+      }
+    ],
+    "ir_perspective": {
+      "geopolitical_context": "Una morosidad controlada en Paraguay refuerza la confianza de inversionistas extranjeros y contribuye a la estabilidad financiera de la región del Cono Sur, reduciendo vulnerabilidades que podrían ser explotadas por actores externos en contextos de incertidumbre macroeconómica.",
+      "strategic_recommendations": [
+        "Implementar programas de educación financiera a nivel nacional para mejorar la cultura del crédito responsable.",
+        "Diseñar instrumentos de crédito con condiciones flexibles que favorezcan a micro‑empresas y familias, manteniendo criterios de riesgo prudentes."
+      ]
+    },
+    "sources": [
+      "ABC Color"
+    ],
+    "read_time_minutes": 4,
+    "source_file": "Tamara.docx",
+    "status": "published"
+  }
+]

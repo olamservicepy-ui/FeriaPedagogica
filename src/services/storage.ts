@@ -2,7 +2,14 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import newsSeedData from '../data/news.json';
 import type { NewsArticle } from '../types/news';
 
-const STORAGE_KEY = 'observatorio_articles_v1';
+const STORAGE_KEY = 'observatorio_articles_v2';
+try {
+  if (typeof window !== 'undefined' && localStorage.getItem('observatorio_articles_v1')) {
+    localStorage.removeItem('observatorio_articles_v1');
+  }
+} catch {
+  // Ignore localStorage access errors
+}
 const SUPABASE_CONFIG_KEY = 'observatorio_supabase_custom_config_v1';
 
 // Check environment variables first, then fallback to local configuration if any
@@ -151,6 +158,8 @@ export async function loadAllArticles(): Promise<{
           read_time_minutes: item.read_time_minutes,
           author_image: item.author_image,
           author_role: item.author_role,
+          status: item.status || 'published',
+          source_file: item.source_file,
         }));
 
         // Merge: remote custom articles first, then local, then seed articles (avoiding duplicate IDs)
@@ -207,6 +216,8 @@ export async function saveArticle(article: NewsArticle): Promise<{
           ir_perspective: article.ir_perspective,
           sources: article.sources,
           read_time_minutes: article.read_time_minutes,
+          status: article.status || 'published',
+          source_file: article.source_file,
         },
       ]);
 
@@ -248,6 +259,30 @@ export async function deleteArticle(id: string): Promise<boolean> {
       await client.from('articles').delete().eq('id', id);
     } catch (err) {
       console.warn('Supabase delete error:', err);
+    }
+  }
+
+  return true;
+}
+
+/**
+ * Remove all articles from local storage and remote if configured
+ */
+export async function clearAllArticles(): Promise<boolean> {
+  setLocalArticles([]);
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('observatorio_articles_v1');
+  } catch (err) {
+    console.error('Error clearing local storage:', err);
+  }
+
+  const client = initSupabase();
+  if (client) {
+    try {
+      await client.from('articles').delete().neq('id', '');
+    } catch (err) {
+      console.warn('Supabase delete all error:', err);
     }
   }
 
