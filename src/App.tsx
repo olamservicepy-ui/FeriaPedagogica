@@ -14,7 +14,7 @@ import { AIAssistantModal } from './components/AIAssistantModal';
 import { LoginView } from './components/LoginView';
 import { AdminDashboard } from './components/AdminDashboard';
 import { ToastNotification, type ToastMessage } from './components/ToastNotification';
-import { loadAllArticles, saveArticle, deleteArticle, clearAllArticles, syncNewsToDisk } from './services/storage';
+import { loadAllArticles, saveArticle, deleteArticle, clearAllArticles, syncNewsToDisk, setLocalArticles } from './services/storage';
 import { isAuthenticated } from './services/auth';
 import { Newspaper } from 'lucide-react';
 
@@ -206,6 +206,13 @@ export function App() {
     });
   };
 
+  // Update all articles at once (e.g. author unification across the entire catalog)
+  const handleUpdateAllArticles = async (updatedArticles: NewsArticle[]) => {
+    setArticles(updatedArticles);
+    setLocalArticles(updatedArticles);
+    await syncNewsToDisk(updatedArticles);
+  };
+
   // Delete article
   const handleDeleteArticle = async (id: string) => {
     await deleteArticle(id);
@@ -377,6 +384,7 @@ export function App() {
           <AdminDashboard
             articles={articles}
             onUpdateArticle={handleUpdateArticle}
+            onUpdateAllArticles={handleUpdateAllArticles}
             onDeleteArticle={handleDeleteArticle}
             onClearAllArticles={handleClearAllArticles}
             onOpenCreateNew={() => setActiveTab('create')}

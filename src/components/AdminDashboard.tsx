@@ -27,6 +27,7 @@ import { EditArticleModal } from './EditArticleModal';
 interface AdminDashboardProps {
   articles: NewsArticle[];
   onUpdateArticle: (article: NewsArticle) => Promise<void>;
+  onUpdateAllArticles?: (articles: NewsArticle[]) => Promise<void>;
   onDeleteArticle: (id: string) => Promise<void>;
   onClearAllArticles?: () => Promise<void>;
   onOpenCreateNew: () => void;
@@ -39,6 +40,7 @@ interface AdminDashboardProps {
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   articles,
   onUpdateArticle,
+  onUpdateAllArticles,
   onDeleteArticle,
   onClearAllArticles,
   onOpenCreateNew,
@@ -172,6 +174,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       showToast(`Cambios guardados con éxito para "${updated.title.slice(0, 45)}..."`, 'success');
     } catch {
       showToast('Error al guardar los cambios del artículo.', 'error');
+    }
+  };
+
+  // Action: Save and propagate edits to all articles
+  const handleSaveAll = async (updatedList: NewsArticle[]) => {
+    try {
+      if (onUpdateAllArticles) {
+        await onUpdateAllArticles(updatedList);
+      } else {
+        await syncNewsToDisk(updatedList);
+      }
+      setEditingArticle(null);
+      showToast(`¡Artículos guardados y unificados exitosamente (${updatedList.length} en catálogo)!`, 'success');
+    } catch {
+      showToast('Error al guardar y unificar las noticias.', 'error');
     }
   };
 
@@ -559,8 +576,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {editingArticle && (
         <EditArticleModal
           article={editingArticle}
+          allNews={articles}
           onClose={() => setEditingArticle(null)}
           onSave={handleSaveModal}
+          onSaveAll={handleSaveAll}
         />
       )}
 

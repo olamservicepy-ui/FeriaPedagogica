@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   X,
   Save,
   Plus,
   Trash2,
-  User,
-  FileText
+  FileText,
+  Upload,
+  Users
 } from 'lucide-react';
 import type { NewsArticle, GlossaryItem } from '../types/news';
 
 interface EditArticleModalProps {
   article: NewsArticle;
+  allNews?: NewsArticle[];
   onClose: () => void;
   onSave: (updatedArticle: NewsArticle) => void;
+  onSaveAll?: (updatedNews: NewsArticle[]) => void;
 }
 
 const REGIONS = [
@@ -38,22 +41,81 @@ const TOPICS = [
 
 export const EditArticleModal: React.FC<EditArticleModalProps> = ({
   article,
+  allNews = [],
   onClose,
   onSave,
+  onSaveAll,
 }) => {
   const [title, setTitle] = useState(article.title || '');
-  const [region, setRegion] = useState(article.region || 'Cono Sur');
+  const [region, setRegion] = useState(article.region || 'América Latina');
   const [topic, setTopic] = useState(article.topic || 'Comercio');
   const [date, setDate] = useState(article.date || new Date().toISOString().slice(0, 10));
   const [status, setStatus] = useState<'draft' | 'published'>(article.status || 'published');
-  
-  // Authors
-  const [authors, setAuthors] = useState<string[]>(
-    article.authors && article.authors.length > 0 ? [...article.authors] : ['Estudiante de Relaciones Internacionales']
+
+  // 1. Extraer los autores únicos existentes y su foto actual de todas las noticias
+  const existingAuthorsMap = useMemo(() => {
+    const map = new Map<string, string>();
+    allNews.forEach((item) => {
+      const authList = Array.isArray(item.authors) ? item.authors : [item.authors || ''];
+      authList.forEach((auth: any) => {
+        const cleanName = (typeof auth === 'string' ? auth : auth?.name || '').trim();
+        if (cleanName && !map.has(cleanName)) {
+          const avatar = item.author_image || (typeof auth === 'object' ? auth?.avatar : '') || '';
+          map.set(cleanName, avatar);
+        }
+      });
+    });
+    return map;
+  }, [allNews]);
+
+  const authorsList = useMemo(
+    () => Array.from(existingAuthorsMap.keys()).sort((a, b) => a.localeCompare(b)),
+    [existingAuthorsMap]
   );
-  const [newAuthorInput, setNewAuthorInput] = useState('');
-  const [authorRole, setAuthorRole] = useState(article.author_role || 'Investigación académica • Estudiantes de Relaciones Internacionales');
-  const [authorImage, setAuthorImage] = useState(article.author_image || '/authors/sofia-valenzuela.jpg');
+
+  const initialAuthorName = (article.authors && article.authors.length > 0)
+    ? (typeof article.authors[0] === 'string' ? article.authors[0] : (article.authors[0] as any)?.name || '')
+    : '';
+
+  const [selectedAuthorName, setSelectedAuthorName] = useState<string>(initialAuthorName);
+  const [customAuthorName, setCustomAuthorName] = useState<string>('');
+  const [isCreatingNew, setIsCreatingNew] = useState<boolean>(false);
+  const [authorAvatar, setAuthorAvatar] = useState<string>(
+    article.author_image || existingAuthorsMap.get(initialAuthorName) || ''
+  );
+  const [authorRole, setAuthorRole] = useState(
+    article.author_role || 'Estudiante Investigador • Relaciones Internacionales'
+  );
+  const [propagateToAll, setPropagateToAll] = useState<boolean>(true);
+
+  // Manejar cambio en el selector de autor
+  const handleSelectAuthor = (name: string) => {
+    if (name === '__new__') {
+      setIsCreatingNew(true);
+      setSelectedAuthorName('');
+    } else {
+      setIsCreatingNew(false);
+      setSelectedAuthorName(name);
+      const existingAvatar = existingAuthorsMap.get(name);
+      if (existingAvatar) {
+        setAuthorAvatar(existingAvatar);
+      }
+    }
+  };
+
+  // Subida de imagen en base64 para vista previa inmediata
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setAuthorAvatar(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // Summary bullets
   const [summaryBullets, setSummaryBullets] = useState<string[]>(
@@ -89,18 +151,6 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
 
   const [activeTab, setActiveTab] = useState<'general' | 'content' | 'glossary' | 'ir'>('general');
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Handlers for authors
-  const handleAddAuthor = () => {
-    if (newAuthorInput.trim()) {
-      setAuthors([...authors, newAuthorInput.trim()]);
-      setNewAuthorInput('');
-    }
-  };
-
-  const handleRemoveAuthor = (index: number) => {
-    setAuthors(authors.filter((_, i) => i !== index));
-  };
 
   // Handlers for summary bullets
   const handleBulletChange = (idx: number, value: string) => {
@@ -152,6 +202,16 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
 
+    const finalAuthorName = (isCreatingNew ? customAuthorName : selectedAuthorName).trim();
+    if (!finalAuthorName) {
+      alert('Por favor selecciona o escribe el nombre del autor.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const previousAuthorName = initialAuthorName.trim();
+    const finalAvatar = authorAvatar.trim() || article.author_image || '/authors/sofia-valenzuela.jpg';
+
     const paragraphs = fullText
       .split('\n\n')
       .map((p) => p.trim())
@@ -164,9 +224,9 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
       topic,
       date,
       status,
-      authors: authors.filter((a) => a.trim().length > 0),
+      authors: [finalAuthorName],
       author_role: authorRole.trim(),
-      author_image: authorImage.trim(),
+      author_image: finalAvatar,
       summary_bullets: summaryBullets.map((b) => b.trim()).filter((b) => b.length > 0),
       full_text: paragraphs.length > 0 ? paragraphs : [title],
       glossary: glossary.filter((g) => g.term.trim().length > 0 && g.definition.trim().length > 0),
@@ -179,8 +239,49 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
       sources: sources.map((s) => s.trim()).filter((s) => s.length > 0),
     };
 
-    onSave(updatedArticle);
+    // Propagar unificación a todas las noticias de este autor si está activado
+    if (propagateToAll && allNews && allNews.length > 0 && onSaveAll) {
+      const updatedArticles = allNews.map((item) => {
+        if (item.id === updatedArticle.id) {
+          return updatedArticle;
+        }
+
+        const matchesPrevious = previousAuthorName && (item.authors || []).some(
+          (a) => (typeof a === 'string' ? a : (a as any)?.name || '').trim().toLowerCase() === previousAuthorName.toLowerCase()
+        );
+        const matchesTarget = finalAuthorName && (item.authors || []).some(
+          (a) => (typeof a === 'string' ? a : (a as any)?.name || '').trim().toLowerCase() === finalAuthorName.toLowerCase()
+        );
+
+        if (matchesPrevious || matchesTarget) {
+          return {
+            ...item,
+            authors: (item.authors || []).map((a) => {
+              const nameStr = typeof a === 'string' ? a : (a as any)?.name || '';
+              if (
+                (previousAuthorName && nameStr.trim().toLowerCase() === previousAuthorName.toLowerCase()) ||
+                (finalAuthorName && nameStr.trim().toLowerCase() === finalAuthorName.toLowerCase())
+              ) {
+                return finalAuthorName;
+              }
+              return nameStr;
+            }),
+            author_image: finalAvatar || item.author_image,
+          };
+        }
+
+        return item;
+      });
+
+      onSaveAll(updatedArticles);
+    } else {
+      onSave(updatedArticle);
+    }
+
+    onClose();
   };
+
+  const currentDisplayAuthor = isCreatingNew ? customAuthorName : selectedAuthorName;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/40 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200">
@@ -232,7 +333,7 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
                 : 'border-transparent text-slate-500 hover:text-slate-800'
             }`}
           >
-            Metadatos & Autores
+            Metadatos & Autor
           </button>
           <button
             type="button"
@@ -271,7 +372,7 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
 
         {/* Modal Form Body */}
         <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
-          {/* TAB 1: METADATOS & AUTORES */}
+          {/* TAB 1: METADATOS & AUTOR */}
           {activeTab === 'general' && (
             <div className="space-y-6">
               {/* Título Principal */}
@@ -284,7 +385,7 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
                   rows={2}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Título analítico y riguroso..."
+                  placeholder="Título analítico y periodístico..."
                   className="w-full px-4 py-2.5 rounded-2xl bg-white border border-slate-200 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all"
                 />
               </div>
@@ -348,81 +449,131 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
                 </div>
               </div>
 
-              {/* Autores */}
-              <div className="space-y-3 p-5 rounded-2xl bg-white border border-slate-200/80">
-                <div className="flex items-center justify-between">
-                  <label className="block text-xs font-semibold text-slate-800">
-                    Estudiantes Investigadores / Autores
-                  </label>
-                  <span className="text-xs text-slate-400 font-mono">{authors.length} autor(es)</span>
+              {/* SECCIÓN AVANZADA: ASIGNACIÓN Y UNIFICACIÓN DE AUTOR Y FOTO */}
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-5">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-emerald-700" />
+                    <h3 className="text-sm font-semibold text-slate-900">
+                      Autoría, Foto y Unificación de Catálogo
+                    </h3>
+                  </div>
+                  <span className="text-xs text-slate-400 font-mono">
+                    {authorsList.length} autores registrados
+                  </span>
                 </div>
 
-                {/* Pills de autores */}
-                <div className="flex flex-wrap gap-2">
-                  {authors.map((auth, idx) => (
-                    <span
-                      key={idx}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-medium border border-slate-200"
+                {/* Foto y Avatar */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-2xl bg-slate-50/80 border border-slate-200/60">
+                  <div className="relative shrink-0">
+                    {authorAvatar ? (
+                      <img
+                        src={authorAvatar}
+                        alt="Foto del autor"
+                        className="w-16 h-16 rounded-full object-cover border-2 border-emerald-500 shadow-sm"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xl border-2 border-emerald-300">
+                        {currentDisplayAuthor ? currentDisplayAuthor[0]?.toUpperCase() : '?'}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex-1 space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
+                      Foto del Autor / Investigador
+                    </label>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer shadow-2xs">
+                        <Upload className="w-3.5 h-3.5 text-emerald-700" />
+                        <span>Subir foto desde PC</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                      </label>
+                      <input
+                        type="text"
+                        value={authorAvatar}
+                        onChange={(e) => setAuthorAvatar(e.target.value)}
+                        placeholder="O pega una URL de foto..."
+                        className="flex-1 min-w-[200px] px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-mono"
+                      />
+                    </div>
+                    <p className="text-[11px] text-slate-400">
+                      Puedes subir un archivo de imagen directo (JPG, PNG) o ingresar una ruta/URL.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Selectores de Autor */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs font-semibold text-slate-700">
+                      Etiquetar de la lista de autores existentes
+                    </label>
+                    <select
+                      value={isCreatingNew ? '__new__' : selectedAuthorName}
+                      onChange={(e) => handleSelectAuthor(e.target.value)}
+                      className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 font-medium"
                     >
-                      <User className="w-3.5 h-3.5 text-slate-400" />
-                      <span>{auth}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveAuthor(idx)}
-                        className="text-slate-400 hover:text-rose-600 transition-colors cursor-pointer ml-0.5"
-                      >
-                        <X className="w-3.5 h-3.5" />
-                      </button>
-                    </span>
-                  ))}
+                      <option value="" disabled>Seleccionar estudiante...</option>
+                      {authorsList.map((name) => (
+                        <option key={name} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                      <option value="__new__">+ Escribir nombre nuevo / corregir...</option>
+                    </select>
+                  </div>
+
+                  {isCreatingNew ? (
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold text-emerald-700">
+                        Nuevo Nombre Oficial del Alumno
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Ej: Araceli Alejandra Paredes Sugastti"
+                        value={customAuthorName}
+                        onChange={(e) => setCustomAuthorName(e.target.value)}
+                        className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-emerald-400 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 font-medium"
+                      />
+                    </div>
+                  ) : (
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-semibold text-slate-700">
+                        Filiación o Rol Institucional
+                      </label>
+                      <input
+                        type="text"
+                        value={authorRole}
+                        onChange={(e) => setAuthorRole(e.target.value)}
+                        placeholder="Estudiante Investigador • Relaciones Internacionales"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-800"
+                      />
+                    </div>
+                  )}
                 </div>
 
-                {/* Añadir nuevo autor */}
-                <div className="flex gap-2 pt-1">
+                {/* Checkbox de Unificación Automática */}
+                <div className="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 flex items-start gap-3">
                   <input
-                    type="text"
-                    value={newAuthorInput}
-                    onChange={(e) => setNewAuthorInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        handleAddAuthor();
-                      }
-                    }}
-                    placeholder="Agregar nombre del estudiante..."
-                    className="flex-1 px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
+                    type="checkbox"
+                    id="propagateToAll"
+                    checked={propagateToAll}
+                    onChange={(e) => setPropagateToAll(e.target.checked)}
+                    className="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 h-4 w-4 border-slate-300 cursor-pointer"
                   />
-                  <button
-                    type="button"
-                    onClick={handleAddAuthor}
-                    className="px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
-                  >
-                    Agregar
-                  </button>
-                </div>
-
-                {/* Rol de autor & Imagen */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-semibold text-slate-600">Filiación o Rol</label>
-                    <input
-                      type="text"
-                      value={authorRole}
-                      onChange={(e) => setAuthorRole(e.target.value)}
-                      placeholder="Investigación académica • Alumna RI"
-                      className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[11px] font-semibold text-slate-600">URL / Ruta Foto de Autor</label>
-                    <input
-                      type="text"
-                      value={authorImage}
-                      onChange={(e) => setAuthorImage(e.target.value)}
-                      placeholder="/authors/sofia-valenzuela.jpg"
-                      className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 font-mono"
-                    />
-                  </div>
+                  <label htmlFor="propagateToAll" className="text-xs text-slate-700 cursor-pointer leading-relaxed">
+                    <strong>Unificar automáticamente:</strong> Aplicar este nombre oficial y foto a{' '}
+                    <span className="text-emerald-800 font-semibold underline decoration-emerald-300">
+                      todas las noticias del catálogo
+                    </span>{' '}
+                    que pertenezcan a <strong>{initialAuthorName || 'este autor'}</strong>.
+                  </label>
                 </div>
               </div>
 
@@ -448,12 +599,8 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
               <div className="space-y-3 p-5 rounded-2xl bg-white border border-slate-200/80">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wide">
-                      Puntos Clave del Resumen Ejecutivo
-                    </h3>
-                    <p className="text-[11px] text-slate-400">
-                      Sintetizan los hallazgos esenciales del informe de los alumnos.
-                    </p>
+                    <label className="block text-xs font-semibold text-slate-800">Puntos Clave del Resumen</label>
+                    <span className="text-[11px] text-slate-400">Balas sintéticas que explican la noticia en portada</span>
                   </div>
                   <button
                     type="button"
@@ -461,28 +608,26 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
                     className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 hover:bg-emerald-100 text-xs font-semibold border border-emerald-200/60 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    <span>Añadir Punto</span>
+                    <span>Añadir</span>
                   </button>
                 </div>
 
                 <div className="space-y-2.5">
                   {summaryBullets.map((bullet, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <span className="w-5 h-5 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-[10px] font-mono shrink-0 mt-2">
-                        {idx + 1}
-                      </span>
-                      <textarea
-                        rows={2}
+                    <div key={idx} className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 ml-1" />
+                      <input
+                        type="text"
                         value={bullet}
                         onChange={(e) => handleBulletChange(idx, e.target.value)}
-                        placeholder="Escribe el punto clave..."
+                        placeholder="Punto analítico clave..."
                         className="flex-1 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
                       />
                       {summaryBullets.length > 1 && (
                         <button
                           type="button"
                           onClick={() => handleRemoveBullet(idx)}
-                          className="p-2 text-slate-400 hover:text-rose-600 transition-colors cursor-pointer mt-1"
+                          className="p-2 text-slate-400 hover:text-rose-600 transition-colors cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -492,11 +637,11 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
                 </div>
               </div>
 
-              {/* Cuerpo del Artículo */}
+              {/* Desarrollo Completo (Párrafos) */}
               <div className="space-y-2 p-5 rounded-2xl bg-white border border-slate-200/80">
                 <div className="flex items-center justify-between">
                   <label className="block text-xs font-semibold text-slate-800">
-                    Cuerpo del Artículo (Párrafos)
+                    Cuerpo Analítico de la Noticia
                   </label>
                   <span className="text-[11px] text-slate-400">Separa párrafos con doble salto de línea</span>
                 </div>
@@ -504,78 +649,80 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
                   rows={10}
                   value={fullText}
                   onChange={(e) => setFullText(e.target.value)}
-                  placeholder="Redacta el análisis completo o pega el desarrollo del informe de los alumnos..."
-                  className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 leading-relaxed focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 font-sans"
+                  placeholder="Redacta el análisis en profundidad con datos, contexto y conclusiones..."
+                  className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 leading-relaxed font-sans focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
                 />
               </div>
             </div>
           )}
 
-          {/* TAB 3: GLOSARIO DINÁMICO */}
+          {/* TAB 3: GLOSARIO PEDAGÓGICO */}
           {activeTab === 'glossary' && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-200/80">
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-900">Conceptos y Glosario Pedagógico</h3>
-                  <p className="text-xs text-slate-500">
-                    Definiciones que se integrarán en el glosario interactivo del portal.
+                  <h3 className="text-xs sm:text-sm font-semibold text-slate-900">
+                    Términos Económicos y Conceptos
+                  </h3>
+                  <p className="text-[11px] text-slate-500">
+                    Aparecerán resaltados interactivamente para los lectores en el texto del artículo.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={handleAddGlossaryItem}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 hover:bg-emerald-100 text-xs font-semibold border border-emerald-200/60 cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Añadir Concepto</span>
+                  <span>Nuevo Término</span>
                 </button>
               </div>
 
               {glossary.length === 0 ? (
-                <div className="p-8 text-center rounded-2xl bg-white border border-dashed border-slate-200 text-slate-400 text-xs">
-                  No hay términos de glosario definidos para este artículo. Haz clic en "Añadir Concepto" para crear uno.
+                <div className="p-8 text-center rounded-2xl bg-white border border-slate-200/80 text-slate-500 text-xs">
+                  No hay términos en el glosario para este artículo. Haz clic en "Nuevo Término" para añadir uno.
                 </div>
               ) : (
                 <div className="space-y-3">
                   {glossary.map((item, idx) => (
                     <div
                       key={idx}
-                      className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-2.5 relative group"
+                      className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-3 relative group"
                     >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex-1">
-                          <label className="text-[10px] font-mono uppercase font-semibold text-slate-400 block mb-1">
-                            Término / Concepto
-                          </label>
-                          <input
-                            type="text"
-                            value={item.term}
-                            onChange={(e) => handleGlossaryChange(idx, 'term', e.target.value)}
-                            placeholder="ej: EMBI, Tasa de Política Monetaria, Trato Especial..."
-                            className="w-full px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-semibold text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
-                          />
-                        </div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">
+                          Concepto #{idx + 1}
+                        </span>
                         <button
                           type="button"
                           onClick={() => handleRemoveGlossaryItem(idx)}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer mt-4"
-                          title="Eliminar término"
+                          className="text-slate-400 hover:text-rose-600 transition-colors cursor-pointer p-1"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
 
-                      <div>
-                        <label className="text-[10px] font-mono uppercase font-semibold text-slate-400 block mb-1">
-                          Definición Pedagógica
-                        </label>
-                        <textarea
-                          rows={2}
-                          value={item.definition}
-                          onChange={(e) => handleGlossaryChange(idx, 'definition', e.target.value)}
-                          placeholder="Definición clara, académica y rigurosa..."
-                          className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
-                        />
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-semibold text-slate-600">Término / Sigla</label>
+                          <input
+                            type="text"
+                            value={item.term}
+                            onChange={(e) => handleGlossaryChange(idx, 'term', e.target.value)}
+                            placeholder="Ej: Tasa de Política Monetaria (TPM)"
+                            className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                          />
+                        </div>
+                        <div className="sm:col-span-2 space-y-1">
+                          <label className="text-[11px] font-semibold text-slate-600">Definición Pedagógica</label>
+                          <textarea
+                            rows={2}
+                            value={item.definition}
+                            onChange={(e) => handleGlossaryChange(idx, 'definition', e.target.value)}
+                            placeholder="Definición clara y accesible para estudiantes..."
+                            className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                          />
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -587,33 +734,28 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
           {/* TAB 4: PERSPECTIVA RR.II. */}
           {activeTab === 'ir' && (
             <div className="space-y-6">
-              {/* Contexto Geopolítico */}
+              {/* Contexto geopolítico */}
               <div className="space-y-2 p-5 rounded-2xl bg-white border border-slate-200/80">
                 <label className="block text-xs font-semibold text-slate-800">
-                  Contexto Geopolítico & Equilibrio de Poder
+                  Impacto Geopolítico y Dinámicas de Poder
                 </label>
-                <p className="text-[11px] text-slate-400">
-                  Análisis de interdependencia, diplomacia económica o impacto sistémico redactado por el alumno.
-                </p>
                 <textarea
                   rows={4}
                   value={geopoliticalContext}
                   onChange={(e) => setGeopoliticalContext(e.target.value)}
-                  placeholder="Explica las dinámicas de poder, tratados internacionales o vulnerabilidades..."
+                  placeholder="Explica cómo esta noticia influye en las relaciones internacionales, alianzas o soberanía..."
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
                 />
               </div>
 
-              {/* Recomendaciones Estratégicas */}
+              {/* Recomendaciones estratégicas */}
               <div className="space-y-3 p-5 rounded-2xl bg-white border border-slate-200/80">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-xs font-semibold text-slate-800 uppercase tracking-wide">
-                      Recomendaciones Estratégicas
-                    </h3>
-                    <p className="text-[11px] text-slate-400">
-                      Propuestas formuladas para la política exterior o actores multilaterales.
-                    </p>
+                    <label className="block text-xs font-semibold text-slate-800">
+                      Recomendaciones Estratégicas de Política Exterior
+                    </label>
+                    <span className="text-[11px] text-slate-400">Propuestas de acción para Cancillería o Comercio Exterior</span>
                   </div>
                   <button
                     type="button"
@@ -674,7 +816,7 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-emerald-700 text-white hover:bg-emerald-800 text-xs sm:text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-300 ease-out cursor-pointer disabled:opacity-50"
               >
                 <Save className="w-4 h-4" />
-                <span>Guardar Cambios</span>
+                <span>{propagateToAll ? 'Guardar y Unificar' : 'Guardar Cambios'}</span>
               </button>
             </div>
           </div>
