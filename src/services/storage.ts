@@ -245,6 +245,34 @@ export async function saveArticle(article: NewsArticle): Promise<{
 }
 
 /**
+ * Persist the full articles array to src/data/news.json via /api/update-news
+ */
+export async function syncNewsToDisk(articles: NewsArticle[]): Promise<{
+  success: boolean;
+  count?: number;
+  error?: string;
+}> {
+  try {
+    const res = await fetch('/api/update-news', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(articles),
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      return { success: false, error: data.error || `HTTP ${res.status}` };
+    }
+    const data = await res.json();
+    return { success: true, count: data.count };
+  } catch (err: any) {
+    console.warn('syncNewsToDisk error:', err);
+    return { success: false, error: err?.message || String(err) };
+  }
+}
+
+/**
  * Remove an article by ID
  */
 export async function deleteArticle(id: string): Promise<boolean> {

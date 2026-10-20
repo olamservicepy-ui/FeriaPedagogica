@@ -14,7 +14,7 @@ import { AIAssistantModal } from './components/AIAssistantModal';
 import { LoginView } from './components/LoginView';
 import { AdminDashboard } from './components/AdminDashboard';
 import { ToastNotification, type ToastMessage } from './components/ToastNotification';
-import { loadAllArticles, saveArticle, deleteArticle, clearAllArticles } from './services/storage';
+import { loadAllArticles, saveArticle, deleteArticle, clearAllArticles, syncNewsToDisk } from './services/storage';
 import { isAuthenticated } from './services/auth';
 import { Newspaper } from 'lucide-react';
 
@@ -198,23 +198,29 @@ export function App() {
     await saveArticle(updatedArticle);
     setArticles((prev) => {
       const exists = prev.some((a) => a.id === updatedArticle.id);
-      if (exists) {
-        return prev.map((a) => (a.id === updatedArticle.id ? updatedArticle : a));
-      }
-      return [updatedArticle, ...prev];
+      const nextList = exists
+        ? prev.map((a) => (a.id === updatedArticle.id ? updatedArticle : a))
+        : [updatedArticle, ...prev];
+      syncNewsToDisk(nextList);
+      return nextList;
     });
   };
 
   // Delete article
   const handleDeleteArticle = async (id: string) => {
     await deleteArticle(id);
-    setArticles((prev) => prev.filter((a) => a.id !== id));
+    setArticles((prev) => {
+      const nextList = prev.filter((a) => a.id !== id);
+      syncNewsToDisk(nextList);
+      return nextList;
+    });
   };
 
   // Clear all articles
   const handleClearAllArticles = async () => {
     await clearAllArticles();
     setArticles([]);
+    syncNewsToDisk([]);
   };
 
   // Handle successful publication from admin create form
@@ -224,7 +230,11 @@ export function App() {
       status: 'published',
     };
     await saveArticle(publishedArticle);
-    setArticles((prev) => [publishedArticle, ...prev.filter((a) => a.id !== publishedArticle.id)]);
+    setArticles((prev) => {
+      const nextList = [publishedArticle, ...prev.filter((a) => a.id !== publishedArticle.id)];
+      syncNewsToDisk(nextList);
+      return nextList;
+    });
     setActiveTab('admin');
     if (typeof window !== 'undefined') {
       window.history.pushState(null, '', '/admin');

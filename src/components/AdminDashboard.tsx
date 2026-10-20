@@ -16,10 +16,12 @@ import {
   FileText,
   AlertTriangle,
   ExternalLink,
-  BookOpen
+  BookOpen,
+  Save,
 } from 'lucide-react';
 import type { NewsArticle } from '../types/news';
 import { getAdminUser, logout } from '../services/auth';
+import { syncNewsToDisk } from '../services/storage';
 import { EditArticleModal } from './EditArticleModal';
 
 interface AdminDashboardProps {
@@ -52,6 +54,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [confirmDeleteArticle, setConfirmDeleteArticle] = useState<NewsArticle | null>(null);
   const [confirmClearAll, setConfirmClearAll] = useState(false);
   const [processingId, setProcessingId] = useState<string | null>(null);
+  const [isSyncing, setIsSyncing] = useState(false);
+
+  const handleSyncDisk = async () => {
+    setIsSyncing(true);
+    try {
+      const res = await syncNewsToDisk(articles);
+      if (res.success) {
+        showToast(`Catálogo guardado en news.json exitosamente (${res.count || articles.length} artículos).`, 'success');
+      } else {
+        showToast(`Error al sincronizar: ${res.error || 'Intenta nuevamente'}`, 'error');
+      }
+    } catch {
+      showToast('Error de conexión al sincronizar news.json', 'error');
+    } finally {
+      setIsSyncing(false);
+    }
+  };
 
   // Categorize articles by status (defaulting undefined to 'published' for legacy articles)
   const pendingArticles = useMemo(() => {
@@ -198,6 +217,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <span className="hidden sm:inline">Vaciar Noticias</span>
               </button>
             )}
+
+            <button
+              onClick={handleSyncDisk}
+              disabled={isSyncing}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200/90 text-xs sm:text-sm font-semibold transition-colors cursor-pointer disabled:opacity-50"
+              title="Guardar todos los cambios directamente en src/data/news.json"
+            >
+              <Save className="w-4 h-4 text-sky-600" />
+              <span>{isSyncing ? 'Guardando...' : 'Guardar en news.json'}</span>
+            </button>
 
             <button
               onClick={onOpenCreateNew}

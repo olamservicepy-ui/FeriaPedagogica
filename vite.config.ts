@@ -173,6 +173,49 @@ Analiza la noticia y responde EXCLUSIVAMENTE con un objeto JSON válido con la s
               }
             })
           })
+
+          server.middlewares.use('/api/update-news', async (req, res) => {
+            if (req.method !== 'POST') {
+              res.statusCode = 405
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify({ error: 'Método no permitido' }))
+              return
+            }
+
+            let body = ''
+            req.on('data', (chunk) => {
+              body += chunk
+            })
+
+            req.on('end', async () => {
+              try {
+                const fs = await import('node:fs')
+                const path = await import('node:path')
+                const filePath = path.resolve(process.cwd(), 'src/data/news.json')
+
+                const parsed = body ? JSON.parse(body) : []
+                if (!Array.isArray(parsed)) {
+                  res.statusCode = 400
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({ error: 'El contenido debe ser un arreglo de noticias.' }))
+                  return
+                }
+
+                fs.writeFileSync(filePath, JSON.stringify(parsed, null, 2), 'utf-8')
+                res.statusCode = 200
+                res.setHeader('Content-Type', 'application/json')
+                res.end(JSON.stringify({ success: true, count: parsed.length }))
+              } catch (error: any) {
+                console.error('Error al actualizar news.json en Vite dev server:', error)
+                res.statusCode = 500
+                res.setHeader('Content-Type', 'application/json')
+                res.end(JSON.stringify({
+                  error: 'Error al escribir el archivo',
+                  details: error?.message || String(error)
+                }))
+              }
+            })
+          })
         }
       }
     ],
