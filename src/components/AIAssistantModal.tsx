@@ -154,7 +154,7 @@ export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
                   Asistente Académico IA
                 </h3>
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  <Sparkles className="w-2.5 h-2.5" /> Groq • Llama-3.3
+                  <Sparkles className="w-2.5 h-2.5" /> Groq • Mixtral 8x7B
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 font-sans">
@@ -274,7 +274,7 @@ export const AIAssistantModal: React.FC<AIAssistantModalProps> = ({
                 <RefreshCw className="w-4 h-4 animate-spin text-emerald-600" />
               </div>
               <div className="p-3 bg-white border border-slate-200 rounded-2xl text-xs text-slate-600">
-                Consultando análisis estudiantiles y glosarios con Llama-3.3...
+                Consultando análisis estudiantiles y glosarios con Mixtral 8x7B...
               </div>
             </div>
           )}

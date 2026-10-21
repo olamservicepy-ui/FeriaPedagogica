@@ -496,7 +496,7 @@ export const AdminPublishForm: React.FC<AdminPublishFormProps> = ({
               onClick={handleAnalyzeWithAI}
               disabled={isAnalyzing}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-emerald-700 to-teal-700 text-white hover:from-emerald-800 hover:to-teal-800 shadow-xs transition-all cursor-pointer disabled:opacity-50"
-              title="Analizar título y texto con Groq (Llama-3.3-70b) para sugerir categorías, resumen y glosario"
+              title="Analizar título y texto con Groq (Mixtral 8x7B) para sugerir categorías, resumen y glosario"
             >
               {isAnalyzing ? (
                 <>
@@ -676,7 +676,7 @@ export const AdminPublishForm: React.FC<AdminPublishFormProps> = ({
                     Copiloto Editorial Académico • Sugerencias de Groq
                   </h3>
                   <p className="text-[11px] text-slate-600">
-                    Propuestas generadas con IA (Llama-3.3-70b) para enriquecer y optimizar tu publicación
+                    Propuestas generadas con IA (Mixtral 8x7B) para enriquecer y optimizar tu publicación
                   </p>
                 </div>
               </div>

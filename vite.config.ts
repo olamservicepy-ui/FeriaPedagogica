@@ -182,7 +182,7 @@ export default defineConfig(({ mode }) => {
                 )).join('\n\n')
 
                 const completion = await groq.chat.completions.create({
-                  model: 'llama-3.3-70b-versatile',
+                  model: 'mixtral-8x7b-32768',
                   messages: [
                     {
                       role: 'system',
@@ -255,7 +255,7 @@ Instrucciones:
                 const groq = new Groq({ apiKey })
 
                 const completion = await groq.chat.completions.create({
-                  model: 'llama-3.3-70b-versatile',
+                  model: 'mixtral-8x7b-32768',
                   messages: [
                     {
                       role: 'system',

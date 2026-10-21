@@ -45,8 +45,8 @@ client = Groq(api_key=api_key)
 
 RAW_FOLDER = "entradas_crudos"
 OUTPUT_FILE = os.path.join("src", "data", "news.json")
-MODEL_NAME = "llama-3.3-70b-versatile"
-FALLBACK_MODEL = "llama-3.3-70b-versatile"
+MODEL_NAME = "mixtral-8x7b-32768"
+FALLBACK_MODEL = "mixtral-8x7b-32768"
 
 def slugify(text: str) -> str:
     """Convierte texto en un slug kebab-case limpio."""
