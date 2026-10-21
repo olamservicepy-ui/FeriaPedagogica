@@ -1,5 +1,9 @@
 import Groq from "groq-sdk";
-import newsData from "../src/data/news.json";
+import fs from 'fs';
+import path from 'path';
+
+const newsFilePath = path.join(process.cwd(), 'src/data/news.json');
+const newsData = JSON.parse(fs.readFileSync(newsFilePath, 'utf8'));
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY || "",
