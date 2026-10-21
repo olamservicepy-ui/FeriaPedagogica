@@ -1,6 +1,6 @@
-import React from 'react';
-import { Filter, RotateCcw, GraduationCap } from 'lucide-react';
-import { getAuthorImage } from '../data/authors';
+// src/components/FilterBar.tsx
+import React, { useState, useRef, useEffect } from 'react';
+import { Filter, ChevronDown, RotateCcw, Check, User, Globe, Tag } from 'lucide-react';
 
 interface FilterBarProps {
   regions: string[];
@@ -31,143 +31,150 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   totalCount,
   onReset,
 }) => {
-  const hasActiveFilters =
-    selectedRegion !== 'TODAS' || selectedTopic !== 'TODOS' || selectedAuthor !== 'TODOS';
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Cantidad de filtros aplicados
+  const activeFiltersCount =
+    (selectedRegion !== 'TODAS' ? 1 : 0) +
+    (selectedTopic !== 'TODOS' ? 1 : 0) +
+    (selectedAuthor !== 'TODOS' ? 1 : 0);
+
+  // Cerrar al hacer clic afuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
-    <div className="space-y-4 py-4 font-sans">
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2 uppercase tracking-wider text-slate-600 font-semibold font-mono">
-          <Filter className="w-3.5 h-3.5 text-emerald-600" />
+    <div className="w-full flex items-center justify-between py-3 border-y border-slate-200 bg-white" ref={dropdownRef}>
+      
+      {/* Botón Principal del Desplegable */}
+      <div className="relative">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`flex items-center gap-2.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded border transition-colors ${
+            isOpen || activeFiltersCount > 0
+              ? 'bg-[#004F8A] text-white border-[#004F8A]'
+              : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+          }`}
+        >
+          <Filter className="w-3.5 h-3.5" />
           <span>Filtros Editoriales</span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <span className="text-slate-600">
-            Mostrando <strong className="text-emerald-700 font-semibold">{filteredCount}</strong> de{' '}
-            {totalCount} análisis
-          </span>
-          {hasActiveFilters && (
-            <button
-              onClick={onReset}
-              className="inline-flex items-center gap-1 text-slate-500 hover:text-rose-600 transition-colors duration-700 ease-out font-medium cursor-pointer"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Restablecer</span>
-            </button>
+          {activeFiltersCount > 0 && (
+            <span className="bg-[#009EDB] text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">
+              {activeFiltersCount}
+            </span>
           )}
-        </div>
-      </div>
+          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
 
-      {/* Region Pills */}
-      <div className="space-y-2">
-        <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-          Por Región Geoeconómica:
-        </div>
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-          {['TODAS', ...regions].map((reg) => {
-            const isSelected = selectedRegion === reg;
-            return (
-              <button
-                key={reg}
-                type="button"
-                onClick={() => setSelectedRegion(reg)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-700 ease-out cursor-pointer ${
-                  isSelected
-                    ? 'bg-emerald-700 text-white font-semibold shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)]'
-                    : 'bg-white/80 backdrop-blur-md hover:bg-slate-200/80 border border-slate-200/50 text-slate-700 hover:text-slate-900 shadow-[0_2px_8px_rgba(0,0,0,0.02)]'
-                }`}
+        {/* Panel Desplegable Flotante */}
+        {isOpen && (
+          <div className="absolute left-0 top-full mt-2 w-[340px] sm:w-[440px] bg-white border border-slate-200 shadow-xl rounded-lg p-5 z-50 space-y-5 text-slate-800">
+            
+            {/* 1. Región Geoeconómica */}
+            <div>
+              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#002A54] mb-2">
+                <Globe className="w-3.5 h-3.5 text-[#009EDB]" />
+                Región Geoeconómica
+              </label>
+              <select
+                value={selectedRegion}
+                onChange={(e) => setSelectedRegion(e.target.value)}
+                className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-700 focus:outline-none focus:border-[#004F8A]"
               >
-                {reg}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+                <option value="TODAS">Todas las regiones</option>
+                {regions.map((reg) => (
+                  <option key={reg} value={reg}>
+                    {reg}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-      {/* Topic Pills */}
-      <div className="space-y-2 pt-1">
-        <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-          Por Eje Temático:
-        </div>
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-          {['TODOS', ...topics].map((top) => {
-            const isSelected = selectedTopic === top;
-            return (
-              <button
-                key={top}
-                type="button"
-                onClick={() => setSelectedTopic(top)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-700 ease-out cursor-pointer ${
-                  isSelected
-                    ? 'bg-slate-900 text-white font-semibold shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)]'
-                    : 'bg-white/80 backdrop-blur-md hover:bg-slate-200/80 border border-slate-200/50 text-slate-700 hover:text-slate-900 shadow-[0_2px_8px_rgba(0,0,0,0.02)]'
-                }`}
+            {/* 2. Eje Temático */}
+            <div>
+              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#002A54] mb-2">
+                <Tag className="w-3.5 h-3.5 text-[#009EDB]" />
+                Eje Temático
+              </label>
+              <select
+                value={selectedTopic}
+                onChange={(e) => setSelectedTopic(e.target.value)}
+                className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-700 focus:outline-none focus:border-[#004F8A]"
               >
-                {top}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+                <option value="TODOS">Todos los ejes temáticos</option>
+                {topics.map((top) => (
+                  <option key={top} value={top}>
+                    {top}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-      {/* Student Author Selector & Visual Portrait Pills */}
-      <div className="space-y-2 pt-1">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-            <GraduationCap className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Por Investigador / Alumno:</span>
+            {/* 3. Investigador / Alumno */}
+            <div>
+              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#002A54] mb-2">
+                <User className="w-3.5 h-3.5 text-[#009EDB]" />
+                Investigador / Alumno
+              </label>
+              <select
+                value={selectedAuthor}
+                onChange={(e) => setSelectedAuthor(e.target.value)}
+                className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-700 focus:outline-none focus:border-[#004F8A]"
+              >
+                <option value="TODOS">Todos los alumnos</option>
+                {authors.map((auth) => (
+                  <option key={auth} value={auth}>
+                    {auth}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Botones de acción dentro del panel */}
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <button
+                onClick={onReset}
+                className="text-xs text-slate-500 hover:text-rose-600 flex items-center gap-1 transition-colors cursor-pointer"
+              >
+                <RotateCcw className="w-3 h-3" />
+                Limpiar filtros
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-1.5 bg-[#002A54] hover:bg-[#004F8A] text-white text-xs font-semibold rounded flex items-center gap-1 transition-colors cursor-pointer"
+              >
+                <Check className="w-3 h-3" />
+                Aplicar
+              </button>
+            </div>
           </div>
-
-          {/* Quick Dropdown selector for rapid author selection */}
-          <div className="relative">
-            <select
-              value={selectedAuthor}
-              onChange={(e) => setSelectedAuthor(e.target.value)}
-              aria-label="Seleccionar autor o alumno"
-              className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-white/80 backdrop-blur-md border border-slate-200/60 text-slate-700 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-xs transition-all duration-700 ease-out cursor-pointer"
-            >
-              <option value="TODOS">Todos los alumnos ({authors.length})</option>
-              {authors.map((author) => (
-                <option key={author} value={author}>
-                  {author}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-          {['TODOS', ...authors].map((auth) => {
-            const isSelected = selectedAuthor === auth;
-            const authorImg = auth !== 'TODOS' ? getAuthorImage(auth) : null;
-
-            return (
-              <button
-                key={auth}
-                type="button"
-                onClick={() => setSelectedAuthor(auth)}
-                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-700 ease-out cursor-pointer border ${
-                  isSelected
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                    : 'bg-white/80 backdrop-blur-md text-slate-700 border-slate-200/80 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300'
-                }`}
-              >
-                {authorImg && (
-                  <img
-                    src={authorImg}
-                    alt={auth}
-                    className="w-4 h-4 rounded-full object-cover object-top border border-slate-300 shrink-0 group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                )}
-                <span className="whitespace-nowrap">
-                  {auth === 'TODOS' ? 'Todos los Alumnos' : auth}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        )}
       </div>
+
+      {/* Contadores y botón de Restablecer a la derecha */}
+      <div className="flex items-center gap-4 text-xs">
+        <span className="text-slate-500 font-medium">
+          Mostrando <strong className="text-[#002A54]">{filteredCount}</strong> de {totalCount} análisis
+        </span>
+        {activeFiltersCount > 0 && (
+          <button
+            onClick={onReset}
+            className="flex items-center gap-1 text-slate-500 hover:text-[#004F8A] font-semibold transition-colors cursor-pointer"
+          >
+            <RotateCcw className="w-3 h-3" />
+            Restablecer
+          </button>
+        )}
+      </div>
+
     </div>
   );
 };

@@ -10,6 +10,13 @@ import {
   Printer,
   X
 } from 'lucide-react';
+import type { NewsArticle } from '../types/news';
+import { getAuthorImage } from '../data/authors';
+
+export interface AcademicPlatformEconomiaIVProps {
+  articles?: NewsArticle[];
+  onSelectArticle?: (article: NewsArticle) => void;
+}
 
 export interface Author {
   name: string;
@@ -208,14 +215,84 @@ export const INITIAL_ARTICLES: AcademicArticle[] = [
   }
 ];
 
-export function AcademicPlatformEconomiaIV() {
+export function AcademicPlatformEconomiaIV({
+  articles,
+  onSelectArticle
+}: AcademicPlatformEconomiaIVProps = {}) {
   const [selectedCategory, setSelectedCategory] = useState("TODAS");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeArticleModal, setActiveArticleModal] = useState<AcademicArticle | null>(null);
 
+  // Sync author photos with live dataset if available
+  const effectiveArticles = useMemo(() => {
+    return INITIAL_ARTICLES.map((art) => {
+      const matched = articles?.find(
+        (a) =>
+          a.id === art.id ||
+          a.title.toLowerCase().trim() === art.title.toLowerCase().trim() ||
+          a.authors?.some((auth) => auth.toLowerCase().includes(art.author.name.toLowerCase()))
+      );
+      if (matched && (matched.author_image || (matched.authors && matched.authors[0]))) {
+        const authorName = (matched.authors && matched.authors[0]) || art.author.name;
+        return {
+          ...art,
+          author: {
+            ...art.author,
+            name: authorName,
+            avatar: matched.author_image || getAuthorImage(authorName) || art.author.avatar
+          }
+        };
+      }
+      return {
+        ...art,
+        author: {
+          ...art.author,
+          avatar: getAuthorImage(art.author.name) || art.author.avatar
+        }
+      };
+    });
+  }, [articles]);
+
+  const handleArticleClick = (item: AcademicArticle) => {
+    if (onSelectArticle) {
+      const matched = articles?.find(
+        (a) =>
+          a.id === item.id ||
+          a.title.toLowerCase().trim() === item.title.toLowerCase().trim() ||
+          a.authors?.some((auth) => auth.toLowerCase().includes(item.author.name.toLowerCase()))
+      );
+      if (matched) {
+        onSelectArticle(matched);
+        return;
+      }
+      const synthetic: NewsArticle = {
+        id: item.id,
+        title: item.title,
+        topic: item.category,
+        region: 'América Latina / Cono Sur',
+        date: item.date,
+        authors: [item.author.name],
+        author_role: item.author.role,
+        author_image: item.author.avatar,
+        lead: item.lead,
+        full_text: [item.lead, item.summary],
+        summary_bullets: [item.summary],
+        glossary: [],
+        ir_perspective: {
+          geopolitical_context: item.lead,
+          strategic_recommendations: [item.summary]
+        },
+        sources: ['Cátedra de Economía IV - Feria Pedagógica 2026']
+      };
+      onSelectArticle(synthetic);
+      return;
+    }
+    setActiveArticleModal(item);
+  };
+
   // Available filters
   const filterOptions = [
-    { id: "TODAS", label: "Todas las investigaciones", count: INITIAL_ARTICLES.length },
+    { id: "TODAS", label: "Todas las investigaciones", count: effectiveArticles.length },
     { id: "POLÍTICA FISCAL", label: "Política Fiscal", count: 1 },
     { id: "SUPERVISIÓN BANCARIA", label: "Supervisión Bancaria", count: 1 },
     { id: "MERCADO DE CAPITALES", label: "Mercado de Capitales", count: 1 },
@@ -230,8 +307,8 @@ export function AcademicPlatformEconomiaIV() {
   // Group filtered articles by their academic theme
   const groupedThematicArticles = useMemo(() => {
     const filtered = selectedCategory === "TODAS"
-      ? INITIAL_ARTICLES
-      : INITIAL_ARTICLES.filter(item => item.category === selectedCategory);
+      ? effectiveArticles
+      : effectiveArticles.filter(item => item.category === selectedCategory);
 
     const groups: Record<string, { themeId: string; thematicTitle: string; articles: AcademicArticle[] }> = {};
     filtered.forEach(art => {
@@ -246,7 +323,7 @@ export function AcademicPlatformEconomiaIV() {
     });
 
     return Object.values(groups);
-  }, [selectedCategory]);
+  }, [selectedCategory, effectiveArticles]);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#1A2530] font-sans antialiased selection:bg-[#E0F2FE] selection:text-[#002A54]">
@@ -401,7 +478,7 @@ export function AcademicPlatformEconomiaIV() {
                   {/* COLUMN 1: Lead Analysis with Large Student Photo (6 cols) */}
                   {lead && (
                     <article
-                      onClick={() => setActiveArticleModal(lead)}
+                      onClick={() => handleArticleClick(lead)}
                       className="group cursor-pointer lg:col-span-6 bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#009EDB] hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                     >
                       <div>
@@ -456,7 +533,7 @@ export function AcademicPlatformEconomiaIV() {
                   {/* COLUMN 2: Compact Split Layout with Small Photo (3 cols) */}
                   {compact && (
                     <article
-                      onClick={() => setActiveArticleModal(compact)}
+                      onClick={() => handleArticleClick(compact)}
                       className="group cursor-pointer lg:col-span-3 bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-[#009EDB] hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                     >
                       <div>
@@ -499,7 +576,7 @@ export function AcademicPlatformEconomiaIV() {
                   {/* COLUMN 3: 100% Text-Only Think Tank Card (3 cols) */}
                   {textOnly && (
                     <article
-                      onClick={() => setActiveArticleModal(textOnly)}
+                      onClick={() => handleArticleClick(textOnly)}
                       className="group cursor-pointer lg:col-span-3 bg-[#F0F9FF]/60 border border-[#BAE6FD] rounded-2xl p-5 hover:bg-[#F0F9FF] hover:border-[#009EDB] hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                     >
                       <div className="space-y-3">
@@ -546,7 +623,7 @@ export function AcademicPlatformEconomiaIV() {
                     {others.map((item) => (
                       <article
                         key={item.id}
-                        onClick={() => setActiveArticleModal(item)}
+                        onClick={() => handleArticleClick(item)}
                         className="group cursor-pointer bg-white border border-slate-200 rounded-xl p-4 hover:border-[#009EDB] transition-all flex flex-col justify-between"
                       >
                         <div className="space-y-2">

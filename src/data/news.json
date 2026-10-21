@@ -14,7 +14,7 @@
       "Araceli Alejandra Paredes Sugastti"
     ],
     "author_role": "Estudiante Investigadora",
-    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792533812424.png",
+    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792600403089.png",
     "read_time_minutes": 6,
     "executiveSummary": "El tendido vial bioceánico reposiciona al territorio chaqueño en el epicentro de la conectividad multimodal sudamericana, permitiendo ahorros estimados en 14 días de flete marítimo hacia los puertos chinos mediante el paso de Jama y los puertos chilenos de Antofagasta, Iquique y Mejillones.",
     "summary_bullets": [
@@ -86,8 +86,8 @@
     "status": "published",
     "photoCrop": {
       "zoom": 1,
-      "panX": 5,
-      "panY": -5
+      "panX": 0,
+      "panY": 0
     }
   },
   {
@@ -175,7 +175,12 @@
       "Administración Nacional de Electricidad (ANDE)",
       "Cancillería Nacional"
     ],
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1.4,
+      "panX": -1,
+      "panY": -83
+    }
   },
   {
     "id": "inflacion-cero-en-agosto-bcp-explica-motivos-20260917",
@@ -324,7 +329,7 @@
       "Dahiana Paiva"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/dahiana-paiva-1792534003309.png",
+    "author_image": "/authors/dahiana-paiva-1792600945847.png",
     "summary_bullets": [
       "El ICC de Paraguay cayó a 39,67 puntos en agosto 2026, marcando una caída interanual de 11,06 puntos.",
       "Tanto el Índice de Situación Económica como el de Expectativas Económicas retrocedieron, indicando deterioro de la percepción presente y futura.",
@@ -382,7 +387,7 @@
       "Avis Jhovanca Benitez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/avis-jhovanca-benitez-1792533958323.png",
+    "author_image": "/authors/avis-jhovanca-benitez-1792600936003.png",
     "summary_bullets": [
       "Paraguay atrae a 16 empresas argentinas que buscan invertir y producir para el Mercosur",
       "La misión comercial, organizada por la Cancillería argentina, destaca incentivos fiscales y estabilidad como principales atractivos",
@@ -459,7 +464,12 @@
       "Fuente no especificada"
     ],
     "source_file": "Nelson Coronel 16-09-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1.4,
+      "panX": -1,
+      "panY": -83
+    }
   },
   {
     "id": "marca-pais-paraguay-apuesta-por-sus-empresas-para-conquistar-nuevos-mercados-20260916",
@@ -523,7 +533,7 @@
       "Micaela Ayelén Quiñonez Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/micaela-ayelen-quinonez-ramirez-1792600956828.png",
     "summary_bullets": [
       "Las casas de cambio en Paraguay siguen con utilidades en caída a pesar de la mayor volatilidad del dólar.",
       "La competencia y los bajos márgenes de ganancia son los principales factores que reducen la rentabilidad.",
@@ -563,7 +573,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Micaela Ayelén Quiñonez Ramirez 16-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "inflacion-paraguay-septiembre-2026-20260916",
@@ -575,7 +590,7 @@
       "Sofía Moscarda"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-moscarda-1792533972677.png",
+    "author_image": "/authors/sofia-moscarda-1792600969939.png",
     "summary_bullets": [
       "La inflación mensual de Paraguay se redujo ligeramente en septiembre, gracias a la caída de precios de hortalizas, frutas y combustibles.",
       "La inflación subyacente se mantiene estable y alineada con la meta del 4% anual del Banco Central.",
@@ -632,7 +647,7 @@
       "Tamara Fiorella Benítez Maciel"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/tamara-fiorella-benitez-maciel-1792601289717.png",
     "summary_bullets": [
       "El Banco Central del Paraguay anticipa un crecimiento del PIB del 4,5 % para 2026, superior al 4,3 % proyectado anteriormente.",
       "Se espera que la inflación cierre 2026 en torno al 3 % y que el tipo de cambio alcance G. 6.100 al final del año.",
@@ -675,7 +690,12 @@
       "Banco Central del Paraguay (BCP)"
     ],
     "source_file": "Tamara Fiorella Benítez Maciel 16-09-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-marca-pais-43-licencias-20260915",
@@ -687,7 +707,7 @@
       "Araceli Alejandra Paredes Sugastti"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792533812424.png",
+    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792600403089.png",
     "summary_bullets": [
       "La Red de Inversiones y Exportaciones otorga 43 licencias de la Marca País Paraguay a empresas de sectores estratégicos.",
       "La iniciativa busca mejorar la competitividad y reducir barreras de entrada en mercados internacionales.",
@@ -728,8 +748,8 @@
     "status": "published",
     "photoCrop": {
       "zoom": 1,
-      "panX": 5,
-      "panY": -5
+      "panX": 0,
+      "panY": 0
     }
   },
   {
@@ -742,7 +762,7 @@
       "Liz Rocio Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/liz-rocio-pena-bloy-1792533991207.png",
+    "author_image": "/authors/liz-rocio-pena-bloy-1792600993214.png",
     "summary_bullets": [
       "El déficit fiscal acumulado de 1,7% del PIB se debió a un crecimiento moderado de ingresos frente a un gasto público que aumentó 10,7%.",
       "La inversión pública creció 19,3%, impulsada por el MOPC y programas prioritarios como Salud y Educación.",
@@ -799,7 +819,7 @@
       "Aracely Villalba Russi"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/aracely-villalba-russi-1792533947633.png",
+    "author_image": "/authors/aracely-villalba-russi-1792600927675.png",
     "summary_bullets": [
       "El IMAEP mostró un crecimiento interanual del 5,5 % en julio y un acumulado de 5,6 % en los primeros siete meses de 2026.",
       "La inflación interanual se mantuvo baja, a 1,5 % en agosto, mientras la política monetaria se mantuvo en 5,5 %.",
@@ -921,7 +941,7 @@
       "Andrea Belén Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/andrea-belen-pena-bloy-1792533935274.png",
+    "author_image": "/authors/andrea-belen-pena-bloy-1792600919884.png",
     "summary_bullets": [
       "El régimen de maquila paraguayo emplea a cerca de 39.000 personas y supera los US$1.010 millones en exportaciones acumuladas en 2026.",
       "Se aprobaron 49 nuevos proyectos, ampliando la oferta a software, servicios intangibles y confecciones, con un crecimiento del 26 % respecto al año anterior.",
@@ -981,7 +1001,7 @@
       "Héctor Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/hector-ramirez-1792601401922.png",
     "summary_bullets": [
       "La depreciación del dólar frente al guaraní reduce los ingresos reales de los desarrolladores inmobiliarios paraguayos.",
       "El aumento del 20 % en los costos de construcción medidos en dólares provoca una erosión de márgenes del 90 % de los costos en guaraníes.",
@@ -1029,7 +1049,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Héctor Ramirez 16-09-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "fmi-proyecta-crecimiento-paraguay-2026-20260909",
@@ -1041,7 +1066,7 @@
       "Andrea Belén Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/andrea-belen-pena-bloy-1792533935274.png",
+    "author_image": "/authors/andrea-belen-pena-bloy-1792600919884.png",
     "summary_bullets": [
       "El FMI prevé un crecimiento del 4,4 % para Paraguay en 2026, tras una expansión del 6,6 % en 2025.",
       "Los fundamentos macroeconómicos del país se consideran sólidos, con inflación bajo control y finanzas públicas equilibradas.",
@@ -1104,7 +1129,7 @@
       "Arianne Saray Ríos Flor"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/arianne-saray-rios-flor-1792533982514.png",
+    "author_image": "/authors/arianne-saray-rios-flor-1792600986467.png",
     "summary_bullets": [
       "El Senado de Paraguay pidió al Banco Central datos sobre operaciones bancarias relacionadas con Ueno Bank.",
       "El BCP respondió que respeta los mecanismos de control y está dispuesto a proporcionar la información requerida.",
@@ -1257,7 +1282,7 @@
       "Tamara Fiorella Benítez Maciel"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/tamara-fiorella-benitez-maciel-1792601289717.png",
     "summary_bullets": [
       "El viceministro de Minas y Energía defiende el nuevo plan energético sin privatizar la ANDE.",
       "El plan busca ampliar la capacidad de generación y mejorar la eficiencia para sostener el crecimiento industrial.",
@@ -1298,7 +1323,12 @@
       "Última Hora"
     ],
     "source_file": "Tamara Fiorella Benítez Maciel 09-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-busca-blindar-ingresos-itaipu-tarifa-plurianual-5-anos-20260909",
@@ -1310,7 +1340,7 @@
       "Héctor Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/hector-ramirez-1792601401922.png",
     "summary_bullets": [
       "Paraguay negocia con Brasil una tarifa plurianual de 3 a 5 años para la binacional Itaipú, buscando asegurar ingresos estables.",
       "El objetivo es financiar obras de infraestructura y programas sociales, generando alrededor de USD 1.250 millones anuales bajo el esquema actual.",
@@ -1353,7 +1383,12 @@
       "El Nacional"
     ],
     "source_file": "Héctor Ramirez 09-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "itaipu-19-energia-ande-2026-20260909",
@@ -1365,7 +1400,7 @@
       "Liz Rocio Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/liz-rocio-pena-bloy-1792533991207.png",
+    "author_image": "/authors/liz-rocio-pena-bloy-1792600993214.png",
     "summary_bullets": [
       "Itaipú suministró 19 276 GWh a la ANDE, un incremento del 19 % respecto al mismo periodo 2025.",
       "La disponibilidad operativa alcanzó 96,35 %, superando la meta del 94 %.",
@@ -1427,7 +1462,7 @@
       "Avis Jhovanca Benitez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/avis-jhovanca-benitez-1792533958323.png",
+    "author_image": "/authors/avis-jhovanca-benitez-1792600936003.png",
     "summary_bullets": [
       "Reunión interinstitucional en Paraguay para reforzar controles contra el contrabando de productos avícolas y porcinos",
       "Identificación de brechas en la coordinación entre autoridades sanitarias, de seguridad y de producción",
@@ -1518,7 +1553,7 @@
       "Micaela Ayelén Quiñonez Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/micaela-ayelen-quinonez-ramirez-1792600956828.png",
     "summary_bullets": [
       "Los precios globales de alimentos aumentaron 1,9% en agosto 2026, impulsados por el calor extremo, fenómenos climáticos y tensiones geopolíticas.",
       "El azúcar registró el mayor incremento (11,9%) y el trigo subió 15% interanual debido a la guerra entre Rusia y Ucrania.",
@@ -1555,7 +1590,12 @@
       "El Nacional"
     ],
     "source_file": "Micaela Ayelén Quiñonez Ramirez 09-09-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "reducion-tasas-interes-paraguay-julio-bcp-20260909",
@@ -1607,7 +1647,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Nelson Coronel 09-09-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1.4,
+      "panX": -1,
+      "panY": -83
+    }
   },
   {
     "id": "paraguay-con107-puntos-entre-los-de-menos-riesgo-pais-de-la-region-20260907",
@@ -1619,7 +1664,7 @@
       "Araceli Alejandra Paredes Sugastti"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792533812424.png",
+    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792600403089.png",
     "summary_bullets": [
       "Paraguay registra un EMBI de 107 puntos, posicionándose entre los países con menor riesgo financiero en Sudamérica.",
       "La inflación controlada al 1,5 % y una tasa política monetaria estable refuerzan la confianza de los inversionistas internacionales."
@@ -1658,8 +1703,8 @@
     "status": "published",
     "photoCrop": {
       "zoom": 1,
-      "panX": 5,
-      "panY": -5
+      "panX": 0,
+      "panY": 0
     }
   },
   {
@@ -1672,7 +1717,7 @@
       "Dahiana Paiva"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/dahiana-paiva-1792534003309.png",
+    "author_image": "/authors/dahiana-paiva-1792600945847.png",
     "summary_bullets": [
       "La inflación interanual de Paraguay cayó al 1,5%, el nivel más bajo desde 2013, mientras el PIB mantiene un crecimiento firme.",
       "JP Morgan proyecta una ligera aceleración inflacionaria hacia fin de 2026, pero mantiene la previsibilidad como activo clave para atraer inversión extranjera.",
@@ -1730,7 +1775,7 @@
       "Aracely Villalba Russi"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/aracely-villalba-russi-1792533947633.png",
+    "author_image": "/authors/aracely-villalba-russi-1792600927675.png",
     "summary_bullets": [
       "La apreciación del guaraní frente al dólar reduce los ingresos de los exportadores paraguayos en un 19 % de su valor exportado.",
       "El impacto es mayor en productos primarios, con pérdidas cercanas a US$ 869 millones.",
@@ -1784,7 +1829,7 @@
       "Andrea Belén Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/andrea-belen-pena-bloy-1792533935274.png",
+    "author_image": "/authors/andrea-belen-pena-bloy-1792600919884.png",
     "summary_bullets": [
       "El guaraní se ha apreciado frente al dólar, reduciendo los ingresos en moneda local de los exportadores ganaderos.",
       "A pesar del aumento de los precios internacionales de la carne, la conversión a guaraníes no genera mayores utilidades.",
@@ -1846,7 +1891,7 @@
       "Araceli Alejandra Paredes Sugastti"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792533812424.png",
+    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792600403089.png",
     "summary_bullets": [
       "Paraguay registra una morosidad del 2,3%, 0,48 p.p. por debajo del promedio latinoamericano (2,78%).",
       "El indicador sitúa al país al mismo nivel que Guatemala y por encima de México y Costa Rica.",
@@ -1893,8 +1938,8 @@
     "status": "published",
     "photoCrop": {
       "zoom": 1,
-      "panX": 5,
-      "panY": -5
+      "panX": 0,
+      "panY": 0
     }
   },
   {
@@ -1907,7 +1952,7 @@
       "Arianne Saray Ríos Flor"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/arianne-saray-rios-flor-1792533982514.png",
+    "author_image": "/authors/arianne-saray-rios-flor-1792600986467.png",
     "summary_bullets": [
       "El precio internacional del diésel sube a US$4,72 por galón, generando presión inflacionaria en Paraguay.",
       "El aumento afecta a importadores, transportistas y al costo de producción de bienes y servicios.",
@@ -1966,7 +2011,7 @@
       "Héctor Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/hector-ramirez-1792601401922.png",
     "summary_bullets": [
       "La deuda pública paraguaya alcanzó USD 21.947 millones, 34,4 % del PIB, con un incremento interanual del 15 %",
       "El 83,5 % de la deuda es externa, mientras la interna creció 52,1 % para mitigar riesgos cambiarios",
@@ -2012,7 +2057,12 @@
       "Ministerio de Economía de Paraguay"
     ],
     "source_file": "Héctor Ramirez 02-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-contiene-morosidad-en-23-levemente-debajo-de-promedio-regional-20260902",
@@ -2061,7 +2111,12 @@
       "Datos de la Comisión Nacional de Bancos y Seguros"
     ],
     "source_file": "Nelson Coronel 02-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1.4,
+      "panX": -1,
+      "panY": -83
+    }
   },
   {
     "id": "60-por-ciento-solicitudes-de-creditos-para-viviendas-son-rechazadas-un-analisis-de-la-brecha-financiera-en-paraguay-20260902",
@@ -2073,7 +2128,7 @@
       "Avis Jhovanca Benitez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/avis-jhovanca-benitez-1792533958323.png",
+    "author_image": "/authors/avis-jhovanca-benitez-1792600936003.png",
     "summary_bullets": [
       "El 60% de las solicitudes de crédito para vivienda en Paraguay son rechazadas, principalmente por sobreendeudamiento y falta de historial crediticio.",
       "La Agencia Financiera de Desarrollo (AFD) recomienda limitar la relación cuota/ingreso al 40% y los compromisos totales al 50-60% de ingresos para evitar el sobreendeudamiento.",
@@ -2192,7 +2247,7 @@
       "Micaela Ayelén Quiñonez Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/micaela-ayelen-quinonez-ramirez-1792600956828.png",
     "summary_bullets": [
       "Paraguay lanza campaña para introducir la yerba mate en Turquía y Azerbaiyán",
       "Participará en ferias internacionales como Food Is y World Foods",
@@ -2237,7 +2292,12 @@
       "El Nacional"
     ],
     "source_file": "Micaela Ayelén Quiñonez Ramirez 02-09-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "presion-tributaria-paraguaya-se-mantiene-en-11-2-segun-pgn-2027-20260902",
@@ -2305,7 +2365,7 @@
       "Tamara Fiorella Benítez Maciel"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/tamara-fiorella-benitez-maciel-1792601289717.png",
     "summary_bullets": [
       "La morosidad del sistema financiero paraguayo se ubicó en 2,3% en marzo de 2026, por debajo del promedio regional de 2,78%.",
       "Este descenso indica un mejor cumplimiento de obligaciones crediticias y refuerza la estabilidad macroeconómica del país.",
@@ -2343,7 +2403,12 @@
       "ABC Color"
     ],
     "source_file": "Tamara Fiorella Benítez Maciel 02-09-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "recaudacion-aduanera-cayo-98-en-paraguay-20260901",
@@ -2355,7 +2420,7 @@
       "Sofía Moscarda"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-moscarda-1792533972677.png",
+    "author_image": "/authors/sofia-moscarda-1792600969939.png",
     "summary_bullets": [
       "La recaudación aduanera del 1.º trimestre de 2026 se contrajo un 9,8 % respecto al mismo periodo del año anterior.",
       "La caída se debe principalmente a la reducción de importaciones de bienes de consumo e insumos clave, afectada por factores climáticos y fluctuaciones de precios internacionales.",
@@ -2412,7 +2477,7 @@
       "Sofía Moscarda"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-moscarda-1792533972677.png",
+    "author_image": "/authors/sofia-moscarda-1792600969939.png",
     "summary_bullets": [
       "Paraguay avanza en la industrialización de biocombustibles, transformando soja, maíz y caña de azúcar en bioetanol y biodiésel.",
       "La estrategia reduce la dependencia de combustibles fósiles importados y diversifica la oferta exportable del país.",
@@ -2478,7 +2543,7 @@
       "Aracely Villalba Russi"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/aracely-villalba-russi-1792533947633.png",
+    "author_image": "/authors/aracely-villalba-russi-1792600927675.png",
     "summary_bullets": [
       "El Gobierno paraguayo aumenta el tope fiscal para 2027 sin reajustar salarios médicos, lo que genera un mayor déficit fiscal.",
       "Se proyecta un crecimiento del 4,2 % y una inflación del 3,5 % con un tipo de cambio de G. 6 458 por dólar.",
@@ -2541,7 +2606,7 @@
       "Dahiana Paiva"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/dahiana-paiva-1792534003309.png",
+    "author_image": "/authors/dahiana-paiva-1792600945847.png",
     "summary_bullets": [
       "La caída del dólar ha generado pérdidas de competitividad para exportadores y sectores vinculados a contratos en dólares.",
       "Elías Saba destaca la falta de previsibilidad como el problema central, no solo el nivel del tipo de cambio.",
@@ -2600,7 +2665,7 @@
       "Andrea Belén Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/andrea-belen-pena-bloy-1792533935274.png",
+    "author_image": "/authors/andrea-belen-pena-bloy-1792600919884.png",
     "summary_bullets": [
       "El Gobierno paraguayo presentó la Estrategia Nacional de Inclusión Financiera 2026‑2031 para reducir el sobreendeudamiento de las familias.",
       "El acceso a cuentas bancarias y billeteras electrónicas ha pasado del 20 % en 2012 al 62 % en 2026, pero el mayor uso del crédito no ha sido acompañado de educación financiera.",
@@ -2658,7 +2723,7 @@
       "Arianne Saray Ríos Flor"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/arianne-saray-rios-flor-1792533982514.png",
+    "author_image": "/authors/arianne-saray-rios-flor-1792600986467.png",
     "summary_bullets": [
       "El déficit fiscal acumulado hasta julio alcanzó G. 4,71 billones, equivalente al 1,2 % del PIB.",
       "Los gastos públicos crecieron 9,7 % impulsados por salarios, prestaciones sociales y obras públicas.",
@@ -2722,7 +2787,7 @@
       "Micaela Ayelén Quiñonez Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/micaela-ayelen-quinonez-ramirez-1792600956828.png",
     "summary_bullets": [
       "La superficie sembrada de maíz en la zafriña 2026 alcanzó 1.182.726 ha, 83.528 ha más que en 2025.",
       "Los departamentos del Este paraguayo (Alto Paraná, Canindeyú, Caaguazú, Itapúa y San Pedro) lideran la expansión, mientras que la soja creció 39% hasta 434.478 ha.",
@@ -2764,7 +2829,12 @@
       "Instituto Nacional de Biotecnología (INBIO)"
     ],
     "source_file": "Micaela Ayelén Quiñonez Ramirez 19-08-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "ministerio-de-energia-sera-rector-de-binacionales-petropar-y-la-and-20260819",
@@ -2829,7 +2899,7 @@
       "Sofía Moscarda"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-moscarda-1792533972677.png",
+    "author_image": "/authors/sofia-moscarda-1792600969939.png",
     "summary_bullets": [
       "El Congreso paraguayo aprobó un préstamo multilateral de USD 286 millones del BID para financiar el Corredor Suroeste en Ñeembucú.",
       "El proyecto busca pavimentar y rehabilitar tramos clave, reduciendo costos logísticos y mejorando la conectividad con puertos fluviales.",
@@ -2889,7 +2959,7 @@
       "Avis Jhovanca Benitez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/avis-jhovanca-benitez-1792533958323.png",
+    "author_image": "/authors/avis-jhovanca-benitez-1792600936003.png",
     "summary_bullets": [
       "El DNIT y Asoban firman un convenio para compartir información bancaria mediante web services, agilizando la fiscalización tributaria.",
       "El acceso a datos se limita a funcionarios autorizados y requiere autorización expresa del contribuyente para consultas de declaraciones juradas.",
@@ -3016,7 +3086,12 @@
       "ABC Color"
     ],
     "source_file": "Nelson Coronel 19-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1.4,
+      "panX": -1,
+      "panY": -83
+    }
   },
   {
     "id": "adelanta-liquidez-mipymes-paraguay-20260818",
@@ -3028,7 +3103,7 @@
       "Araceli Alejandra Paredes Sugastti"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792533812424.png",
+    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792600403089.png",
     "summary_bullets": [
       "El Ministerio de Industria y Comercio lanza 'Adelanta', una subasta de facturas que entrega efectivo a mipymes en menos de 48 horas.",
       "El mecanismo fomenta la competencia entre bancos, financieras y cooperativas, reduciendo las tasas de interés para los solicitantes.",
@@ -3067,8 +3142,8 @@
     "status": "published",
     "photoCrop": {
       "zoom": 1,
-      "panX": 5,
-      "panY": -5
+      "panX": 0,
+      "panY": 0
     }
   },
   {
@@ -3081,7 +3156,7 @@
       "Dahiana Paiva"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/dahiana-paiva-1792534003309.png",
+    "author_image": "/authors/dahiana-paiva-1792600945847.png",
     "summary_bullets": [
       "El MEF revisa al alza su proyección de crecimiento 2026, pasando del 4,2 % al 4,5 % gracias al desempeño del IMAEP.",
       "El sector primario lidera con +9,4 % de crecimiento, mientras la inflación se mantiene en 1,6 % y la tasa de referencia del BCP en 5,5 %.",
@@ -3144,7 +3219,7 @@
       "Aracely Villalba Russi"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/aracely-villalba-russi-1792533947633.png",
+    "author_image": "/authors/aracely-villalba-russi-1792600927675.png",
     "summary_bullets": [
       "El MEF revisó al alza la proyección de crecimiento del PIB para 2026, impulsado por un desempeño destacado en el primer semestre.",
       "El aumento del crecimiento abre oportunidades para generar empleo, atraer inversión extranjera y fortalecer la balanza comercial.",
@@ -3198,7 +3273,7 @@
       "Tamara Fiorella Benítez Maciel"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/tamara-fiorella-benitez-maciel-1792601289717.png",
     "summary_bullets": [
       "Paraguay proyecta un crecimiento del 4,5 % para 2026, superando la estimación inicial del 4,2 %",
       "El impulso proviene de sectores productivos diversos, pero la distribución del beneficio sigue siendo desigual",
@@ -3248,7 +3323,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Tamara Fiorella Benítez Maciel 19-08-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-eleva-su-proyeccion-de-crecimiento-economico-para-el-cierre-de-2026-20260818",
@@ -3318,7 +3398,7 @@
       "Héctor Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/hector-ramirez-1792601401922.png",
     "summary_bullets": [
       "Paraguay alcanzó 12,29 millones de toneladas de soja, 97% de su producción en la Región Oriental, con 8 millones de toneladas destinadas a exportación.",
       "Argentina y Brasil también registraron récords agrícolas, consolidando a Sudamérica como motor alimentario global.",
@@ -3363,7 +3443,12 @@
       "El Nacional"
     ],
     "source_file": "Héctor Ramirez 19-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "mision-comercial-57-empresas-argentinas-paraguay-20260812",
@@ -3375,7 +3460,7 @@
       "Arianne Saray Ríos Flor"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/arianne-saray-rios-flor-1792533982514.png",
+    "author_image": "/authors/arianne-saray-rios-flor-1792600986467.png",
     "summary_bullets": [
       "57 empresas argentinas del sector alimentos y bebidas realizaron una misión comercial en Paraguay para explorar ventas, distribución y posibles inversiones productivas.",
       "El marco legal paraguayo (Ley N.º 7.548/2025 y régimen de maquila) ofrece incentivos fiscales que hacen atractivo el país para la inversión extranjera.",
@@ -3487,7 +3572,7 @@
       "Sofía Moscarda"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-moscarda-1792533972677.png",
+    "author_image": "/authors/sofia-moscarda-1792600969939.png",
     "summary_bullets": [
       "El crecimiento del PIB impulsado por agroexportación, energía e infraestructura no se traduce en mejoras sostenibles en calidad de vida.",
       "La brecha entre indicadores macroeconómicos y bienestar se debe a concentración de ingresos, informalidad y servicios públicos deficientes.",
@@ -3546,7 +3631,7 @@
       "Aracely Villalba Russi"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/aracely-villalba-russi-1792533947633.png",
+    "author_image": "/authors/aracely-villalba-russi-1792600927675.png",
     "summary_bullets": [
       "El foro bancario paraguayo destaca la inteligencia artificial como motor de cambio en el sector financiero.",
       "Se subraya la creciente amenaza de ciberataques y la necesidad de reforzar la ciberseguridad.",
@@ -3658,7 +3743,7 @@
       "Héctor Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/hector-ramirez-1792601401922.png",
     "summary_bullets": [
       "Los créditos en dólares crecieron al doble del ritmo de los guaraníes, reflejando la estabilidad cambiaria y la demanda de sectores dolarizados.",
       "El crédito en guaraníes sigue creciendo, orientado al consumo interno, vivienda y servicios.",
@@ -3704,7 +3789,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Héctor Ramirez 12-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-actividad-economica-primer-semestre-2026-20260812",
@@ -3759,7 +3849,12 @@
       "Indicador Mensual de la Actividad Económica (IMAEP)"
     ],
     "source_file": "Nelson Coronel 12-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1.4,
+      "panX": -1,
+      "panY": -83
+    }
   },
   {
     "id": "analisis-noticia-rio-pilcomayo-20260812",
@@ -3771,7 +3866,7 @@
       "Avis Jhovanca Benitez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/avis-jhovanca-benitez-1792533958323.png",
+    "author_image": "/authors/avis-jhovanca-benitez-1792600936003.png",
     "summary_bullets": [
       "Se intensifican los trabajos de limpieza, ampliación y profundización de canales en el río Pilcomayo para mejorar el flujo hídrico.",
       "El proyecto contempla la construcción de un embalse que garantice el abastecimiento de agua a largo plazo para el Chaco paraguayo.",
@@ -3830,7 +3925,7 @@
       "Araceli Alejandra Paredes Sugastti"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792533812424.png",
+    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792600403089.png",
     "summary_bullets": [
       "El Ministerio de Economía y Finanzas no ha transferido los fondos pendientes, provocando retrasos en los subsidios estudiantiles de Misiones.",
       "La falta de recursos amenaza la continuidad académica de cientos de jóvenes y puede aumentar la deserción escolar.",
@@ -3876,8 +3971,8 @@
     "status": "published",
     "photoCrop": {
       "zoom": 1,
-      "panX": 5,
-      "panY": -5
+      "panX": 0,
+      "panY": 0
     }
   },
   {
@@ -3890,7 +3985,7 @@
       "Dahiana Paiva"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/dahiana-paiva-1792534003309.png",
+    "author_image": "/authors/dahiana-paiva-1792600945847.png",
     "summary_bullets": [
       "El PIB paraguayo creció 5,6 % en junio de 2026 y mantuvo ese ritmo en el primer semestre.",
       "El impulso provino del sector agropecuario, la generación de energía eléctrica, la construcción privada y el dinamismo del comercio y servicios urbanos.",
@@ -4001,7 +4096,7 @@
       "Tamara Fiorella Benítez Maciel"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/tamara-fiorella-benitez-maciel-1792601289717.png",
     "summary_bullets": [
       "Paraguay y Bolivia aumentaron un 40 % sus entradas de inversión extranjera directa en 2025",
       "La diversificación de la economía paraguaya se consolida como estrategia clave para la sostenibilidad",
@@ -4043,7 +4138,12 @@
       "UNCTAD"
     ],
     "source_file": "Tamara Fiorella Benítez Maciel 12-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "prestamos-externos-paraguay-2026-20260810",
@@ -4055,7 +4155,7 @@
       "Andrea Belén Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/andrea-belen-pena-bloy-1792533935274.png",
+    "author_image": "/authors/andrea-belen-pena-bloy-1792600919884.png",
     "summary_bullets": [
       "La cartera de préstamos externos del sector público paraguayo alcanzó US$5.623 millones a junio de 2026, con un 50 % ya desembolsado.",
       "Los recursos se concentran en proyectos de infraestructura de transporte y energía eléctrica, sectores estratégicos para el crecimiento.",
@@ -4115,7 +4215,7 @@
       "Micaela Ayelén Quiñonez Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/micaela-ayelen-quinonez-ramirez-1792600956828.png",
     "summary_bullets": [
       "Paraguay se posiciona como cuarto productor mundial de criptomonedas, superado solo por Rusia, EE. UU. y EAU.",
       "La actividad de criptominería generó más de 250 millones de dólares en 2025, impulsando el crecimiento económico nacional.",
@@ -4157,7 +4257,12 @@
       "Universidad Autónoma de Asunción"
     ],
     "source_file": "Micaela Ayelén Quiñonez Ramirez 12-08-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "mipymes-paraguay-competitividad-20260805",
@@ -4169,7 +4274,7 @@
       "Andrea Belén Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/andrea-belen-pena-bloy-1792533935274.png",
+    "author_image": "/authors/andrea-belen-pena-bloy-1792600919884.png",
     "summary_bullets": [
       "Las mipymes generan cerca del 80 % del empleo formal en Paraguay.",
       "Enfrentan barreras de acceso al crédito, formalización y adopción tecnológica.",
@@ -4228,7 +4333,7 @@
       "Araceli Alejandra Paredes Sugastti"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792533812424.png",
+    "author_image": "/authors/araceli-alejandra-paredes-sugastti-1792600403089.png",
     "summary_bullets": [
       "Las mipymes generan cerca del 80 % del empleo total en Paraguay, consolidándose como motor del mercado laboral.",
       "A pesar de su relevancia, gran parte del empleo es informal, sin cobertura de seguridad social ni aportes jubilatorios.",
@@ -4273,8 +4378,8 @@
     "status": "published",
     "photoCrop": {
       "zoom": 1,
-      "panX": 5,
-      "panY": -5
+      "panX": 0,
+      "panY": 0
     }
   },
   {
@@ -4287,7 +4392,7 @@
       "Arianne Saray Ríos Flor"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/arianne-saray-rios-flor-1792533982514.png",
+    "author_image": "/authors/arianne-saray-rios-flor-1792600986467.png",
     "summary_bullets": [
       "El Ministerio Público imputó a la primera persona involucrada en presuntas irregularidades de los quirófanos modulares del IPS, estimando un perjuicio económico de varios millones de dólares.",
       "Las supuestas fallas en la ejecución del proyecto retrasaron la puesta en marcha de los quirófanos y generaron pérdidas para el Instituto de Previsión Social.",
@@ -4349,7 +4454,7 @@
       "Micaela Ayelén Quiñonez Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/micaela-ayelen-quinonez-ramirez-1792600956828.png",
     "summary_bullets": [
       "El embajador de Marruecos destaca el crecimiento económico y la estabilidad institucional de Paraguay como base para la cooperación bilateral",
       "Se enfatiza la colaboración en comercio, inversión, agricultura, energía y logística, con énfasis en proyectos de energías renovables y alta velocidad",
@@ -4391,7 +4496,12 @@
       "El Nacional"
     ],
     "source_file": "Micaela Ayelén Quiñonez Ramirez 05-08-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "expansion-empleo-paraguay-2017-2026-20260805",
@@ -4429,7 +4539,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Nelson Coronel 05-08-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1.4,
+      "panX": -1,
+      "panY": -83
+    }
   },
   {
     "id": "paraguay-tech-fest-2026-impulsa-la-innovacion-y-atrae-inversiones-tecnologicas-20260805",
@@ -4441,7 +4556,7 @@
       "Avis Jhovanca Benitez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/avis-jhovanca-benitez-1792533958323.png",
+    "author_image": "/authors/avis-jhovanca-benitez-1792600936003.png",
     "summary_bullets": [
       "El Paraguay Tech Fest 2026 reunió a más de 20 países para impulsar la innovación y la inversión tecnológica en el país.",
       "El evento destacó el crecimiento del sector tecnológico como motor de empleo y competitividad regional.",
@@ -4616,7 +4731,7 @@
       "Héctor Ramirez"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/hector-ramirez-1792601401922.png",
     "summary_bullets": [
       "El uso de micro túneles plásticos permite adelantar la cosecha de sandía entre 20 y 30 días, capturando precios de mercado más altos en octubre y noviembre.",
       "La tecnología protege las plantas de heladas invernales, reduciendo pérdidas y optimizando el uso del agua.",
@@ -4631,7 +4746,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Héctor Ramirez 05-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "anuncian-inversion-40-millones-para-instalar-primer-frigorifico-san-pedro-20260805",
@@ -4691,7 +4811,7 @@
       "Sofía Moscarda"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-moscarda-1792533972677.png",
+    "author_image": "/authors/sofia-moscarda-1792600969939.png",
     "summary_bullets": [
       "El 60 % de los trabajadores paraguayos se desempeñan en el sector informal, sin acceso a seguridad social ni derechos laborales.",
       "La informalidad concentra su mayor impacto en zonas rurales y entre la juventud, generando vulnerabilidad socioeconómica y limitando la recaudación fiscal.",
@@ -4748,7 +4868,7 @@
       "Tamara Fiorella Benítez Maciel"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/tamara-fiorella-benitez-maciel-1792601289717.png",
     "summary_bullets": [
       "El déficit fiscal de Paraguay se proyecta en 3,2 % del PIB para 2026 y 3,9 % para 2027, lejos de la meta del 1,5 % establecida para 2026.",
       "El aumento del déficit responde a compromisos de gasto y al deterioro de la recaudación, lo que eleva la presión sobre la deuda pública.",
@@ -4791,7 +4911,12 @@
       "Banco Central del Paraguay (BCP)"
     ],
     "source_file": "Tamara Fiorella Benítez Maciel 05-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "apreciacion-guarani-2026-20260803",
@@ -4803,7 +4928,7 @@
       "Dahiana Paiva"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/dahiana-paiva-1792534003309.png",
+    "author_image": "/authors/dahiana-paiva-1792600945847.png",
     "summary_bullets": [
       "El guaraní cotiza a 5.961 por dólar, una apreciación acumulada superior al 10 % en lo que va del año.",
       "El fenómeno se atribuye al fuerte crecimiento del PIB paraguayo (≈ 6,6 % en 2025) y a la caída de las tasas de interés en EE. UU.",
@@ -4866,7 +4991,7 @@
       "Liz Rocio Peña Bloy"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/liz-rocio-pena-bloy-1792533991207.png",
+    "author_image": "/authors/liz-rocio-pena-bloy-1792600993214.png",
     "summary_bullets": [
       "Los combustibles privados aumentaron hasta un 39% por el alza del precio internacional del petróleo.",
       "Petropar mantiene precios más bajos para mitigar el impacto en la población, aunque reserva la opción de reajustes futuros.",
@@ -4925,7 +5050,7 @@
       "Aracely Villalba Russi"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/aracely-villalba-russi-1792533947633.png",
+    "author_image": "/authors/aracely-villalba-russi-1792600927675.png",
     "summary_bullets": [
       "Turquía lleva a cabo una auditoría en once frigoríficos de Paraguay para evaluar la calidad y seguridad de la carne bovina.",
       "El proceso incluye la verificación de la trazabilidad del ganado y las condiciones sanitarias de las plantas.",
