@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { FilterBar } from './components/FilterBar';
 import { CarnegieEditorialGrid } from './components/CarnegieEditorialGrid';
+import { AcademicPlatformEconomiaIV } from './components/AcademicPlatformEconomiaIV';
 import { NewsDetailModal } from './components/NewsDetailModal';
 import { GlobalGlossary } from './components/GlobalGlossary';
 import { AboutSection } from './components/AboutSection';
@@ -42,13 +43,16 @@ export function App() {
 
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState<boolean>(() => isAuthenticated());
 
-  // Navigation tab state: 'news' | 'glossary' | 'about' | 'admin' | 'login' | 'create'
-  const [activeTab, setActiveTab] = useState<'news' | 'glossary' | 'about' | 'admin' | 'login' | 'create'>(() => {
+  // Navigation tab state: 'news' | 'glossary' | 'about' | 'admin' | 'login' | 'create' | 'economia-iv'
+  const [activeTab, setActiveTab] = useState<'news' | 'glossary' | 'about' | 'admin' | 'login' | 'create' | 'economia-iv'>(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
       if (path === '/login' || hash === '#login') {
         return 'login';
+      }
+      if (path === '/economia-iv' || hash === '#economia-iv' || hash === '#feria-2026') {
+        return 'economia-iv';
       }
       if (
         path === '/admin' ||
@@ -195,6 +199,8 @@ export function App() {
 
       if (path === '/login' || hash === '#login') {
         setActiveTab('login');
+      } else if (path === '/economia-iv' || hash === '#economia-iv' || hash === '#feria-2026') {
+        setActiveTab('economia-iv');
       } else if (
         path === '/admin' ||
         path === '/nuevo-articulo' ||
@@ -219,7 +225,7 @@ export function App() {
   }, []);
 
   // Sync route and handle protected route redirect when activeTab changes
-  const handleTabChange = (tab: 'news' | 'glossary' | 'about' | 'admin' | 'login' | 'create') => {
+  const handleTabChange = (tab: 'news' | 'glossary' | 'about' | 'admin' | 'login' | 'create' | 'economia-iv') => {
     if (tab !== 'glossary') setGlossaryTermFocus('');
 
     if (tab === 'admin') {
@@ -247,6 +253,10 @@ export function App() {
       } else if (tab === 'login') {
         if (window.location.pathname !== '/login') {
           window.history.pushState(null, '', '/login');
+        }
+      } else if (tab === 'economia-iv') {
+        if (window.location.hash !== '#economia-iv') {
+          window.history.pushState(null, '', '#economia-iv');
         }
       } else {
         if (window.location.pathname === '/admin' || window.location.pathname === '/login') {
@@ -444,6 +454,14 @@ export function App() {
     >
       {/* Top Navbar */}
       <Navbar
+        currentView={activeTab}
+        onNavigate={(view) => {
+          if (view === 'asistente') {
+            setIsAIAssistantOpen(true);
+          } else {
+            handleTabChange(view as any);
+          }
+        }}
         activeTab={activeTab === 'create' ? 'admin' : activeTab}
         setActiveTab={handleTabChange}
         articlesCount={publishedArticles.length}
@@ -568,6 +586,9 @@ export function App() {
 
         {/* VIEW 6: About Section */}
         {activeTab === 'about' && <AboutSection />}
+
+        {/* VIEW 7: Plataforma Académica Economía IV (Feria 2026) */}
+        {activeTab === 'economia-iv' && <AcademicPlatformEconomiaIV />}
       </main>
 
       {/* Footer */}
