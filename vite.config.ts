@@ -175,7 +175,7 @@ export default defineConfig(({ mode }) => {
                 const activeDataset = (Array.isArray(articles) && articles.length > 0) ? articles : newsData
 
                 const completion = await groq.chat.completions.create({
-                  model: 'openai/gpt-oss-120b',
+                  model: 'llama-3.1-8b-instant',
                   messages: [
                     {
                       role: 'system',
@@ -247,7 +247,7 @@ Instrucciones:
                 const groq = new Groq({ apiKey })
 
                 const completion = await groq.chat.completions.create({
-                  model: 'openai/gpt-oss-120b',
+                  model: 'llama-3.1-8b-instant',
                   messages: [
                     {
                       role: 'system',

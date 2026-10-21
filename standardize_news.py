@@ -1,4 +1,3 @@
-from standardize_news import FALLBACK_MODEL
 import os
 import sys
 import re
@@ -46,7 +45,8 @@ client = Groq(api_key=api_key)
 
 RAW_FOLDER = "entradas_crudos"
 OUTPUT_FILE = os.path.join("src", "data", "news.json")
-MODEL_NAME = "openai/gpt-oss-120b"
+MODEL_NAME = "llama-3.1-8b-instant"
+FALLBACK_MODEL = "llama-3.1-8b-instant"
 
 def slugify(text: str) -> str:
     """Convierte texto en un slug kebab-case limpio."""

@@ -72,7 +72,7 @@ export async function queryAIAssistant(
   });
 
   const completion = await groq.chat.completions.create({
-    model: 'openai/gpt-oss-120b',
+    model: 'llama-3.1-8b-instant',
     messages: [
       {
         role: 'system',
@@ -151,7 +151,7 @@ export async function analyzeArticleDraft(params: {
   });
 
   const completion = await groq.chat.completions.create({
-    model: 'openai/gpt-oss-120b',
+    model: 'llama-3.1-8b-instant',
     messages: [
       {
         role: 'system',
