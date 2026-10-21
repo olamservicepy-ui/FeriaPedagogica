@@ -7,9 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Tipografía estilo Carnegie Endowment
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         carnegie: ['"Libre Franklin"', 'News Gothic', 'Trade Gothic', 'system-ui', 'sans-serif'],
-        // Tipografía para el cuerpo del texto de las investigaciones
         editorial: ['"Newsreader"', 'Georgia', 'serif'],
       },
     },

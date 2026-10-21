@@ -89,7 +89,7 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
               </div>
 
               {/* Título estilo Carnegie con subrayado al hover */}
-              <h2 className="font-bold text-2xl sm:text-3xl text-[#1A2530] leading-snug tracking-tight underline-offset-4 decoration-2 decoration-[#004F8A] group-hover:underline">
+              <h2 className="font-semibold text-2xl sm:text-[28px] text-[#111827] leading-[1.25] tracking-[-0.02em] underline-offset-4 decoration-2 decoration-[#004F8A] group-hover:underline">
                 {leadArticle.title}
               </h2>
 
