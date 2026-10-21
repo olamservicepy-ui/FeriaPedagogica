@@ -79,7 +79,7 @@ export async function queryAIAssistant(
   )).join('\n\n');
 
   const completion = await groq.chat.completions.create({
-    model: 'mixtral-8x7b-32768',
+    model: 'openai/gpt-oss-20b',
     messages: [
       {
         role: 'system',
@@ -159,7 +159,7 @@ export async function analyzeArticleDraft(params: {
   });
 
   const completion = await groq.chat.completions.create({
-    model: 'mixtral-8x7b-32768',
+    model: 'openai/gpt-oss-20b',
     messages: [
       {
         role: 'system',
