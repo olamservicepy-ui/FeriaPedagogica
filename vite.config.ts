@@ -174,6 +174,13 @@ export default defineConfig(({ mode }) => {
                 const groq = new Groq({ apiKey })
                 const activeDataset = (Array.isArray(articles) && articles.length > 0) ? articles : newsData
 
+                const context = (activeDataset || []).slice(0, 25).map((a: any, i: number) => (
+                  `[${i + 1}] Título: ${a.title}
+   Autor: ${Array.isArray(a.authors) ? a.authors.join(', ') : (a.authors || '')}
+   Tema: ${a.topic || a.category || ''}
+   Resumen: ${a.summary_bullets?.[0] || a.summary || ''}`
+                )).join('\n\n')
+
                 const completion = await groq.chat.completions.create({
                   model: 'llama-3.1-8b-instant',
                   messages: [
@@ -181,7 +188,8 @@ export default defineConfig(({ mode }) => {
                       role: 'system',
                       content: `Eres el Asistente Académico del Observatorio Económico de Relaciones Internacionales.
 Tu única fuente de información son las investigaciones y noticias redactadas por los estudiantes del curso:
-${JSON.stringify(activeDataset)}
+
+${context}
 
 Instrucciones:
 1. Responde de forma clara, pedagógica y ejecutiva en español.
