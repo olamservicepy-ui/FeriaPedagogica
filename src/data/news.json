@@ -481,7 +481,7 @@
       "Mayara Saribel Garay Acosta"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/mayara-saribel-garay-acosta-1792601649625.png",
     "summary_bullets": [
       "Paraguay fortalece la imagen de sus empresas mediante la estrategia Marca País, otorgando licencias a 150 compañías.",
       "El objetivo es impulsar la internacionalización y mejorar la competitividad en sectores como agroalimentarios, logística y tecnología.",
@@ -521,7 +521,12 @@
       "Diario Última Hora"
     ],
     "source_file": "Mayara Saribel Garay Acosta 16-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "casas-de-cambio-paraguayas-luchan-por-mantener-utilidades-pese-al-aumento-del-dolar-20260916",
@@ -1227,7 +1232,7 @@
       "Mayara Saribel Garay Acosta"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/mayara-saribel-garay-acosta-1792601649625.png",
     "summary_bullets": [
       "Asoban solicita al Senado que el BCP publique todas las medidas excepcionales en procesos de fusión y absorción bancaria.",
       "La demanda se basa en la necesidad de reforzar la confianza de los ahorristas y la institucionalidad del sistema financiero paraguayo.",
@@ -1270,7 +1275,12 @@
       "Banco Central del Paraguay (BCP)"
     ],
     "source_file": "Mayara Saribel Garay Acosta 09-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "viceministro-plan-energetico-ande-paraguay-20260909",
@@ -2309,7 +2319,7 @@
       "Mayara Saribel Garay Acosta"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/mayara-saribel-garay-acosta-1792601649625.png",
     "summary_bullets": [
       "El PGN 2027 proyecta una presión tributaria del 11,2% del PIB, sin incremento respecto al periodo anterior.",
       "Se espera un aumento del 8,6% en la recaudación de impuestos, pero el crecimiento económico proyectado neutraliza el efecto sobre el porcentaje.",
@@ -2353,7 +2363,12 @@
       "Medio de Prensa"
     ],
     "source_file": "Mayara Saribel Garay Acosta 02-09-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-morosidad-2-3-2026-20260902",
@@ -2846,7 +2861,7 @@
       "Mayara Saribel Garay Acosta"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/mayara-saribel-garay-acosta-1792601649625.png",
     "summary_bullets": [
       "El Gobierno paraguayo crea un Ministerio de Energía, Minería e Hidrocarburos para centralizar la planificación y supervisión del sector.",
       "El nuevo ministerio asumirá la rectoría estratégica de las binacionales Itaipú y Yacyretá, así como de las entidades autárquicas ANDE y Petropar.",
@@ -2887,7 +2902,12 @@
       "Diario Última Hora (Paraguay)"
     ],
     "source_file": "Mayara Saribel Garay Acosta 19-08-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "diputados-aprueba-usd-286-millones-para-el-corredor-suroeste-20260819",
@@ -3521,7 +3541,7 @@
       "Mayara Saribel Garay Acosta"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/mayara-saribel-garay-acosta-1792601649625.png",
     "summary_bullets": [
       "Expo Maquila y Plaza Mipymes se integran a la Paraguay Business Week 2026, generando oportunidades de negocio en Hernandarias",
       "Alto Paraná Invest Forum 2026 busca atraer USD 1.000 millones en inversiones públicas y privadas",
@@ -3560,7 +3580,12 @@
       "Alto Paraná Invest Forum 2026"
     ],
     "source_file": "Mayara Saribel Garay Acosta 12-08-26.pdf",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-crece-pero-el-bienestar-no-avanza-al-mismo-ritmo-20260812",
@@ -4763,7 +4788,7 @@
       "Mayara Saribel Garay Acosta"
     ],
     "author_role": "Estudiante Investigador • Relaciones Internacionales",
-    "author_image": "/authors/sofia-valenzuela.jpg",
+    "author_image": "/authors/mayara-saribel-garay-acosta-1792601649625.png",
     "summary_bullets": [
       "Inversión de USD 40 millones para construir el primer frigorífico en San Pedro.",
       "El proyecto busca generar cientos de empleos directos e indirectos y fortalecer la producción ganadera local.",
@@ -4799,7 +4824,12 @@
       "Ultima Hora"
     ],
     "source_file": "Mayara Saribel Garay Acosta 05-08-26.docx",
-    "status": "published"
+    "status": "published",
+    "photoCrop": {
+      "zoom": 1,
+      "panX": 0,
+      "panY": 0
+    }
   },
   {
     "id": "paraguay-entre-los-paises-con-mayor-empleo-informal-6-de-cada-10-trabajadores-sin-proteccion-plena-20260804",
