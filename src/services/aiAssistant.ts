@@ -79,7 +79,7 @@ export async function queryAIAssistant(
   )).join('\n\n');
 
   const completion = await groq.chat.completions.create({
-    model: 'llama-3.1-8b-instant',
+    model: 'llama-3.3-70b-versatile',
     messages: [
       {
         role: 'system',
@@ -159,7 +159,7 @@ export async function analyzeArticleDraft(params: {
   });
 
   const completion = await groq.chat.completions.create({
-    model: 'llama-3.1-8b-instant',
+    model: 'llama-3.3-70b-versatile',
     messages: [
       {
         role: 'system',
