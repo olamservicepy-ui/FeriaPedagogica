@@ -1,10 +1,10 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import newsData from './data/news.json';
-import type { NewsArticle, GlossaryItem } from './types/news';
+import type { NewsArticle, GlossaryItem, PhotoCrop } from './types/news';
 import { Navbar } from './components/Navbar';
 import { HeroBanner } from './components/HeroBanner';
 import { FilterBar } from './components/FilterBar';
-import { NewsCard } from './components/NewsCard';
+import { CarnegieEditorialGrid } from './components/CarnegieEditorialGrid';
 import { NewsDetailModal } from './components/NewsDetailModal';
 import { GlobalGlossary } from './components/GlobalGlossary';
 import { AboutSection } from './components/AboutSection';
@@ -14,9 +14,23 @@ import { AIAssistantModal } from './components/AIAssistantModal';
 import { LoginView } from './components/LoginView';
 import { AdminDashboard } from './components/AdminDashboard';
 import { ToastNotification, type ToastMessage } from './components/ToastNotification';
+import { PhotoCropperModal } from './components/PhotoCropperModal';
+import { getAuthorPhotoCrop, getAuthorImage, setAuthorPhotoOverride } from './data/authors';
 import { loadAllArticles, saveArticle, deleteArticle, clearAllArticles, syncNewsToDisk, setLocalArticles } from './services/storage';
 import { isAuthenticated } from './services/auth';
 import { Newspaper } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+
+const gridContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
 
 export function App() {
   const [articles, setArticles] = useState<NewsArticle[]>(() => {
@@ -58,6 +72,19 @@ export function App() {
   const [glossaryTermFocus, setGlossaryTermFocus] = useState<string>('');
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
 
+  // Framing & Cropper Modal State
+  const [cropperModal, setCropperModal] = useState<{
+    isOpen: boolean;
+    authorName: string;
+    image: string;
+    crop: PhotoCrop;
+  }>({
+    isOpen: false,
+    authorName: '',
+    image: '',
+    crop: { zoom: 1, panX: 0, panY: 0 },
+  });
+
   // Floating Toasts system
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
@@ -76,6 +103,63 @@ export function App() {
   const dismissToast = (id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
+
+  // Open the Framing / Crop Tool for a student
+  const handleOpenCropper = useCallback((authorName: string, image?: string, crop?: PhotoCrop) => {
+    const authorImg = image || getAuthorImage(authorName);
+    const authorCrop = crop || getAuthorPhotoCrop(authorName);
+    setCropperModal({
+      isOpen: true,
+      authorName,
+      image: authorImg,
+      crop: authorCrop,
+    });
+  }, []);
+
+  // Save new crop and image across all student articles
+  const handleSaveCropper = useCallback(async (authorName: string, newImage: string, newCrop: PhotoCrop) => {
+    setAuthorPhotoOverride(authorName, newImage, newCrop);
+
+    const normTarget = authorName.toLowerCase().trim();
+    setArticles((prev) => {
+      const updated = prev.map((art) => {
+        const isAuthor = (art.authors || []).some((auth) => {
+          const name = typeof auth === 'string' ? auth : (auth as any)?.name || '';
+          return name.toLowerCase().trim() === normTarget;
+        });
+        if (isAuthor) {
+          return {
+            ...art,
+            author_image: newImage,
+            photoCrop: newCrop,
+          };
+        }
+        return art;
+      });
+
+      setLocalArticles(updated);
+      syncNewsToDisk(updated);
+      return updated;
+    });
+
+    setSelectedArticle((prev) => {
+      if (!prev) return null;
+      const isSelectedAuthor = (prev.authors || []).some((auth) => {
+        const name = typeof auth === 'string' ? auth : (auth as any)?.name || '';
+        return name.toLowerCase().trim() === normTarget;
+      });
+      if (isSelectedAuthor) {
+        return {
+          ...prev,
+          author_image: newImage,
+          photoCrop: newCrop,
+        };
+      }
+      return prev;
+    });
+
+    showToast(`¡Foto y encuadre de ${authorName} actualizados en todas sus investigaciones!`, 'success');
+  }, [showToast]);
 
   // Sync auth status periodically or on visibility change
   useEffect(() => {
@@ -391,6 +475,7 @@ export function App() {
             onPreviewArticle={(art) => setSelectedArticle(art)}
             onBackToHome={() => handleTabChange('news')}
             onLogout={handleLogout}
+            onOpenCropper={handleOpenCropper}
             showToast={showToast}
           />
         )}
@@ -453,16 +538,20 @@ export function App() {
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-                  {filteredArticles.map((article) => (
-                    <NewsCard
-                      key={article.id}
-                      article={article}
-                      onSelect={(art) => setSelectedArticle(art)}
-                      onSelectAuthor={handleSelectAuthor}
-                    />
-                  ))}
-                </div>
+                <motion.div
+                  key={`${selectedRegion}-${selectedTopic}-${selectedAuthor}-${searchQuery}`}
+                  variants={gridContainerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-40px" }}
+                  className="pt-2"
+                >
+                  <CarnegieEditorialGrid
+                    articles={filteredArticles}
+                    onSelectArticle={(art) => setSelectedArticle(art)}
+                    onSelectAuthor={handleSelectAuthor}
+                  />
+                </motion.div>
               )}
             </div>
           </div>
@@ -493,8 +582,10 @@ export function App() {
       {selectedArticle && (
         <NewsDetailModal
           article={selectedArticle}
+          allArticles={publishedArticles}
           allGlossary={allGlossaryItems}
           onClose={() => setSelectedArticle(null)}
+          onSelectArticle={(art) => setSelectedArticle(art)}
           onSelectTerm={handleSelectTermFromArticle}
           onSelectAuthor={handleSelectAuthor}
         />
@@ -504,9 +595,12 @@ export function App() {
       {previewArticle && (
         <NewsDetailModal
           article={previewArticle}
+          allArticles={articles}
           allGlossary={allGlossaryItems}
           onClose={() => setPreviewArticle(null)}
+          onSelectArticle={(art) => setPreviewArticle(art)}
           onSelectTerm={handleSelectTermFromArticle}
+          onOpenCropper={handleOpenCropper}
         />
       )}
 
@@ -518,6 +612,16 @@ export function App() {
           articles={publishedArticles}
         />
       )}
+
+      {/* Photo Cropper & Framing Modal */}
+      <PhotoCropperModal
+        isOpen={cropperModal.isOpen}
+        authorName={cropperModal.authorName}
+        initialImage={cropperModal.image}
+        initialCrop={cropperModal.crop}
+        onClose={() => setCropperModal((prev) => ({ ...prev, isOpen: false }))}
+        onSave={handleSaveCropper}
+      />
 
       {/* Floating Toast Notification System */}
       <ToastNotification toasts={toasts} onDismiss={dismissToast} />

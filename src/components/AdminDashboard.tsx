@@ -5,6 +5,7 @@ import {
   Clock,
   Eye,
   Edit3,
+  Edit2,
   Archive,
   Trash2,
   Plus,
@@ -13,16 +14,21 @@ import {
   Calendar,
   LogOut,
   ArrowLeft,
-  FileText,
   AlertTriangle,
-  ExternalLink,
   BookOpen,
   Save,
+  Sliders,
+  Filter,
+  ChevronDown,
+  Layers,
+  X,
+  Check,
 } from 'lucide-react';
-import type { NewsArticle } from '../types/news';
+import type { NewsArticle, PhotoCrop } from '../types/news';
 import { getAdminUser, logout } from '../services/auth';
 import { syncNewsToDisk } from '../services/storage';
 import { EditArticleModal } from './EditArticleModal';
+import { AUTHOR_PROFILES, getAuthorPhotoCrop, getAuthorImage, getAuthorProfile } from '../data/authors';
 
 interface AdminDashboardProps {
   articles: NewsArticle[];
@@ -34,6 +40,7 @@ interface AdminDashboardProps {
   onPreviewArticle: (article: NewsArticle) => void;
   onBackToHome: () => void;
   onLogout: () => void;
+  onOpenCropper?: (author: string, image?: string, crop?: PhotoCrop) => void;
   showToast: (message: string, type?: 'success' | 'info' | 'warning' | 'error') => void;
 }
 
@@ -47,16 +54,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   onPreviewArticle,
   onBackToHome,
   onLogout,
+  onOpenCropper,
   showToast,
 }) => {
   const adminUser = getAdminUser();
-  const [activeTab, setActiveTab] = useState<'pending' | 'published' | 'all'>('pending');
+  const [activeTab, setActiveTab] = useState<'pending' | 'published' | 'authors' | 'inventory' | 'all'>('pending');
   const [searchQuery, setSearchQuery] = useState('');
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null);
   const [confirmDeleteArticle, setConfirmDeleteArticle] = useState<NewsArticle | null>(null);
   const [confirmClearAll, setConfirmClearAll] = useState(false);
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [isSyncing, setIsSyncing] = useState(false);
+
+  // States for Inventory & Name Reassignment/Normalization
+  const [inventorySearchTerm, setInventorySearchTerm] = useState('');
+  const [selectedStudentFilter, setSelectedStudentFilter] = useState('ALL');
+  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
+  const [reassigningArticle, setReassigningArticle] = useState<NewsArticle | null>(null);
+  const [normalizeNameInput, setNormalizeNameInput] = useState('');
+  const [propagateNameToAll, setPropagateNameToAll] = useState(true);
 
   const handleSyncDisk = async () => {
     setIsSyncing(true);
@@ -102,6 +118,141 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       return matchTitle || matchAuthor || matchRegion || matchTopic;
     });
   }, [tabArticles, searchQuery]);
+
+  // Extract unique authors across all registered profiles and catalog articles
+  const uniqueAuthors = useMemo(() => {
+    const map = new Map<string, {
+      fullName: string;
+      role: string;
+      career: string;
+      avatar: string;
+      photoCrop: PhotoCrop;
+      articleCount: number;
+    }>();
+
+    // 1. Official authors registered in AUTHOR_PROFILES
+    Object.values(AUTHOR_PROFILES).forEach((p) => {
+      const name = p.name.trim();
+      if (!map.has(name)) {
+        map.set(name, {
+          fullName: name,
+          role: p.role || 'Estudiante Investigadora',
+          career: p.school || 'Relaciones Internacionales',
+          avatar: getAuthorImage(name),
+          photoCrop: getAuthorPhotoCrop(name),
+          articleCount: 0,
+        });
+      }
+    });
+
+    // 2. Count articles and register any author in articles
+    articles.forEach((art) => {
+      const rawName = typeof art.authors?.[0] === 'string'
+        ? art.authors[0].trim()
+        : (art.authors?.[0] as any)?.name?.trim() || '';
+      if (!rawName) return;
+
+      const profile = getAuthorProfile(rawName);
+      const canonicalName = profile?.name || rawName;
+
+      if (!map.has(canonicalName)) {
+        map.set(canonicalName, {
+          fullName: canonicalName,
+          role: art.author_role || profile?.role || 'Estudiante Investigador',
+          career: profile?.school || 'Relaciones Internacionales',
+          avatar: art.author_image || getAuthorImage(canonicalName),
+          photoCrop: art.photoCrop || profile?.photoCrop || getAuthorPhotoCrop(canonicalName),
+          articleCount: 1,
+        });
+      } else {
+        const item = map.get(canonicalName)!;
+        item.articleCount += 1;
+        if (art.author_image && !item.avatar) {
+          item.avatar = art.author_image;
+        }
+      }
+    });
+
+    return Array.from(map.values()).sort((a, b) => b.articleCount - a.articleCount || a.fullName.localeCompare(b.fullName));
+  }, [articles]);
+
+  // Filtered articles for the Inventory & Author Assignment view
+  const inventoryFilteredArticles = useMemo(() => {
+    return articles.filter((art) => {
+      const authorName = typeof art.authors?.[0] === 'string'
+        ? art.authors[0].trim()
+        : (art.authors?.[0] as any)?.name?.trim() || '';
+
+      const matchesStudent =
+        selectedStudentFilter === 'ALL' ||
+        authorName.toLowerCase() === selectedStudentFilter.toLowerCase();
+
+      const term = inventorySearchTerm.trim().toLowerCase();
+      const matchesSearch =
+        !term ||
+        art.title.toLowerCase().includes(term) ||
+        (art.topic || '').toLowerCase().includes(term) ||
+        (art.region || '').toLowerCase().includes(term) ||
+        authorName.toLowerCase().includes(term);
+
+      return matchesStudent && matchesSearch;
+    });
+  }, [articles, selectedStudentFilter, inventorySearchTerm]);
+
+  // Open Reassign / Normalize Author Modal
+  const openReassignModal = (art: NewsArticle) => {
+    setReassigningArticle(art);
+    const authorName = typeof art.authors?.[0] === 'string'
+      ? art.authors[0].trim()
+      : (art.authors?.[0] as any)?.name?.trim() || '';
+    setNormalizeNameInput(authorName);
+    setPropagateNameToAll(true);
+  };
+
+  // Save changes from Author Reassignment / Normalization Modal
+  const handleSaveNormalizedAuthor = async () => {
+    if (!reassigningArticle || !normalizeNameInput.trim()) return;
+
+    const previousName = typeof reassigningArticle.authors?.[0] === 'string'
+      ? reassigningArticle.authors[0].trim()
+      : (reassigningArticle.authors?.[0] as any)?.name?.trim() || '';
+    const newName = normalizeNameInput.trim();
+
+    const targetAvatar = getAuthorImage(newName);
+    const targetCrop = getAuthorPhotoCrop(newName);
+
+    const prevNorm = previousName.toLowerCase();
+    const updatedArticles = articles.map((item) => {
+      const isTarget = item.id === reassigningArticle.id;
+      const itemName = typeof item.authors?.[0] === 'string'
+        ? item.authors[0].trim().toLowerCase()
+        : (item.authors?.[0] as any)?.name?.trim().toLowerCase() || '';
+      const isSameAuthor = itemName === prevNorm;
+
+      if (isTarget || (propagateNameToAll && isSameAuthor)) {
+        return {
+          ...item,
+          authors: [newName],
+          author_image: targetAvatar,
+          photoCrop: targetCrop,
+        };
+      }
+      return item;
+    });
+
+    if (onUpdateAllArticles) {
+      await onUpdateAllArticles(updatedArticles);
+    } else {
+      for (const a of updatedArticles) {
+        if (a.id === reassigningArticle.id || (propagateNameToAll && ((typeof a.authors?.[0] === 'string' ? a.authors[0] : (a.authors?.[0] as any)?.name)?.toLowerCase() === prevNorm))) {
+          await onUpdateArticle(a);
+        }
+      }
+    }
+
+    setReassigningArticle(null);
+    showToast(`✅ Autor reasignado y unificado a "${newName}" en el catálogo.`, 'success');
+  };
 
   // Action: Approve (publish)
   const handleApprove = async (article: NewsArticle) => {
@@ -177,18 +328,92 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
-  // Action: Save and propagate edits to all articles
-  const handleSaveAll = async (updatedList: NewsArticle[]) => {
+  // Función en el Admin para guardar tanto la foto como los datos en el disco
+  const handleSaveAll = async (
+    updatedNews: NewsArticle[],
+    newAvatarFile?: File,
+    authorName?: string
+  ) => {
+    let finalAvatarUrl = '';
+
+    // 1. Si se cargó un archivo de foto nuevo, se manda a guardar a public/authors
+    if (newAvatarFile && authorName) {
+      const reader = new FileReader();
+      reader.readAsDataURL(newAvatarFile);
+      await new Promise((resolve) => {
+        reader.onloadend = async () => {
+          const fileExt = newAvatarFile.name.split('.').pop() || 'jpg';
+          const cleanSlug = authorName
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]/g, '-');
+          const filename = `${cleanSlug}.${fileExt}`;
+
+          try {
+            const res = await fetch('/api/save-avatar', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                filename,
+                base64Data: reader.result,
+              }),
+            });
+            const data = await res.json();
+            finalAvatarUrl = data.url; // e.g., '/authors/araceli-paredes.jpg'
+          } catch (e) {
+            console.error('Error guardando imagen:', e);
+          }
+          resolve(null);
+        };
+      });
+    }
+
+    // 2. Si se generó una URL de avatar nueva, se la asignamos a todas las noticias de ese autor
+    let newsToSave = updatedNews;
+    if (finalAvatarUrl && authorName) {
+      newsToSave = updatedNews.map((item) => {
+        const matchesAuthor = (item.authors || []).some((auth) => {
+          const aName = typeof auth === 'string' ? auth : (auth as any)?.name || '';
+          return aName.trim().toLowerCase() === authorName.trim().toLowerCase();
+        });
+        if (!matchesAuthor) return item;
+
+        return {
+          ...item,
+          author_image: finalAvatarUrl,
+          authors: (item.authors || []).map((auth: any) => {
+            if (typeof auth === 'string') {
+              return auth.trim().toLowerCase() === authorName.trim().toLowerCase() ? authorName : auth;
+            }
+            return auth?.name?.trim().toLowerCase() === authorName.trim().toLowerCase()
+              ? { ...auth, avatar: finalAvatarUrl }
+              : auth;
+          }),
+        };
+      });
+    }
+
+    // 3. Escribir news.json en el disco duro
     try {
-      if (onUpdateAllArticles) {
-        await onUpdateAllArticles(updatedList);
+      const response = await fetch('/api/save-news', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newsToSave, null, 2),
+      });
+
+      if (response.ok) {
+        if (onUpdateAllArticles) {
+          await onUpdateAllArticles(newsToSave);
+        }
+        setEditingArticle(null);
+        showToast('✅ Cambios guardados permanentemente en el servidor local.', 'success');
       } else {
-        await syncNewsToDisk(updatedList);
+        showToast('❌ Ocurrió un error al guardar en disco.', 'error');
       }
-      setEditingArticle(null);
-      showToast(`¡Artículos guardados y unificados exitosamente (${updatedList.length} en catálogo)!`, 'success');
-    } catch {
-      showToast('Error al guardar y unificar las noticias.', 'error');
+    } catch (error) {
+      console.error('Error al contactar la API local:', error);
+      showToast('Error de conexión con el servidor local.', 'error');
     }
   };
 
@@ -323,11 +548,36 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
           </div>
 
-          {/* Total Investigaciones */}
+          {/* Card Investigadores */}
           <div
-            onClick={() => setActiveTab('all')}
+            onClick={() => setActiveTab('authors')}
             className={`p-5 rounded-3xl border transition-all duration-300 cursor-pointer ${
-              activeTab === 'all'
+              activeTab === 'authors'
+                ? 'bg-indigo-50/80 border-indigo-300 shadow-sm ring-2 ring-indigo-400/30'
+                : 'bg-white/80 backdrop-blur-md border-slate-200/80 hover:border-indigo-200 hover:bg-indigo-50/30'
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-indigo-800 uppercase tracking-wider font-mono">
+                Investigadores
+              </span>
+              <div className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                <User className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="mt-3">
+              <div className="text-3xl font-bold tracking-tight text-slate-900 font-sans">
+                {uniqueAuthors.length}
+              </div>
+              <p className="text-xs text-slate-500 mt-1">Encuadre y Retratos</p>
+            </div>
+          </div>
+
+          {/* Card Inventario & Unificación */}
+          <div
+            onClick={() => setActiveTab('inventory')}
+            className={`p-5 rounded-3xl border transition-all duration-300 cursor-pointer ${
+              activeTab === 'inventory'
                 ? 'bg-slate-100/90 border-slate-400 shadow-sm ring-2 ring-slate-400/20'
                 : 'bg-white/80 backdrop-blur-md border-slate-200/80 hover:bg-slate-50'
             }`}
@@ -337,33 +587,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 Inventario
               </span>
               <div className="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
-                <FileText className="w-4 h-4" />
+                <Layers className="w-4 h-4" />
               </div>
             </div>
             <div className="mt-3">
               <div className="text-3xl font-bold tracking-tight text-slate-900 font-sans">
                 {articles.length}
               </div>
-              <p className="text-xs text-slate-500 mt-1">Total de Artículos en Base</p>
-            </div>
-          </div>
-
-          {/* Acceso Rápido Portada */}
-          <div
-            onClick={onBackToHome}
-            className="p-5 rounded-3xl bg-white/80 backdrop-blur-md border border-slate-200/80 hover:border-slate-300 transition-all duration-300 cursor-pointer flex flex-col justify-between group"
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider font-mono">
-                Sitio Principal
-              </span>
-              <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-all" />
-            </div>
-            <div className="mt-2">
-              <span className="text-sm font-semibold text-slate-900 block group-hover:text-emerald-800 transition-colors">
-                Ver portada en vivo →
-              </span>
-              <p className="text-xs text-slate-400 mt-0.5">Comprobar cómo ven los usuarios el portal.</p>
+              <p className="text-xs text-slate-500 mt-1">Reasignar y Unificar</p>
             </div>
           </div>
         </div>
@@ -371,16 +602,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Tab Selector & Search Filter Bar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-white/80 backdrop-blur-md p-3.5 rounded-3xl border border-slate-200/80 shadow-xs">
           {/* Tabs */}
-          <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-100 text-xs font-semibold">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-slate-100 text-xs font-semibold">
             <button
               onClick={() => setActiveTab('pending')}
-              className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'pending'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-white text-slate-900 shadow-xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <span>⏳ Pendientes de Aprobación</span>
+              <span>⏳ Pendientes</span>
               <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-100 text-amber-800 font-mono">
                 {pendingArticles.length}
               </span>
@@ -388,9 +619,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
             <button
               onClick={() => setActiveTab('published')}
-              className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'published'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-white text-slate-900 shadow-xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -401,10 +632,40 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </button>
 
             <button
+              onClick={() => setActiveTab('authors')}
+              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                activeTab === 'authors'
+                  ? 'bg-white text-slate-900 shadow-xs font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <User className="w-3.5 h-3.5 text-indigo-600" />
+              <span>Investigadores & Retratos</span>
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-800 font-mono">
+                {uniqueAuthors.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('inventory')}
+              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                activeTab === 'inventory'
+                  ? 'bg-white text-slate-900 shadow-xs font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5 text-slate-600" />
+              <span>Inventario & Asignación</span>
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-200 text-slate-800 font-mono">
+                {articles.length}
+              </span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('all')}
-              className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'all'
-                  ? 'bg-white text-slate-900 shadow-xs'
+                  ? 'bg-white text-slate-900 shadow-xs font-bold'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -412,22 +673,268 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </button>
           </div>
 
-          {/* Search Bar */}
-          <div className="relative min-w-[260px] sm:w-72">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <Search className="w-4 h-4" />
+          {/* Search Bar (active on pending, published, all) */}
+          {activeTab !== 'authors' && activeTab !== 'inventory' && (
+            <div className="relative min-w-[260px] sm:w-72">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <Search className="w-4 h-4" />
+              </div>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Buscar por título, autor o tema..."
+                className="w-full pl-9 pr-4 py-2 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
+              />
             </div>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar por título, autor o tema..."
-              className="w-full pl-9 pr-4 py-2 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
-            />
-          </div>
+          )}
         </div>
 
-        {/* Content List Section */}
+        {/* ========================================================================= */}
+        {/* VIEW 1: INVESTIGADORES Y ENCUADRE FOTOGRÁFICO (STRICTLY ADMIN ONLY)       */}
+        {/* ========================================================================= */}
+        {activeTab === 'authors' && (
+          <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <User className="w-5 h-5 text-indigo-600" />
+                  <span>Investigadores Oficiales y Encuadre Fotográfico</span>
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Ajustá el zoom y la posición de la cabeza para garantizar rostros 100% nítidos en todas las noticias del estudiante.
+                </p>
+              </div>
+              <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                {uniqueAuthors.length} Investigadores Registrados
+              </span>
+            </div>
+
+            {/* List of Authors with Live Framing Controls */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {uniqueAuthors.map((author) => {
+                const crop = author.photoCrop || { zoom: 1, panX: 0, panY: 0 };
+                return (
+                  <div
+                    key={author.fullName}
+                    className="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 hover:border-slate-300 transition flex flex-col justify-between space-y-4"
+                  >
+                    <div className="space-y-3">
+                      {/* Live Crop Thumbnail Preview */}
+                      <div className="relative w-full h-40 rounded-xl overflow-hidden bg-slate-950 border border-slate-200 select-none">
+                        <div
+                          className="w-full h-full relative"
+                          style={{
+                            transform: `scale(${crop.zoom}) translate(${crop.panX}px, ${crop.panY}px)`,
+                            transformOrigin: 'top center',
+                          }}
+                        >
+                          <img
+                            src={author.avatar}
+                            alt={author.fullName}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        </div>
+                        {/* Soft corner indicator */}
+                        <div className="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded backdrop-blur-xs font-mono">
+                          {crop.zoom.toFixed(1)}x
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="text-sm font-bold text-slate-900 truncate" title={author.fullName}>
+                          {author.fullName}
+                        </h4>
+                        <p className="text-xs text-slate-500 truncate">{author.career}</p>
+                        <p className="text-[11px] font-semibold text-indigo-700 mt-1">
+                          {author.articleCount} {author.articleCount === 1 ? 'dictamen publicado' : 'dictámenes publicados'}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Exclusively located here in Admin: Subir y Encuadrar */}
+                    <button
+                      type="button"
+                      onClick={() => onOpenCropper?.(author.fullName, author.avatar, crop)}
+                      className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-indigo-700 shadow-xs transition cursor-pointer"
+                    >
+                      <Sliders className="w-3.5 h-3.5" />
+                      <span>Subir y Encuadrar</span>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* ========================================================================= */}
+        {/* VIEW 2: INVENTARIO DE ARTÍCULOS Y REASIGNACIÓN DE AUTOR                   */}
+        {/* ========================================================================= */}
+        {activeTab === 'inventory' && (
+          <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <Layers className="w-5 h-5 text-indigo-600" />
+                  <span>Inventario de Artículos y Asignación de Autores</span>
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Filtrá por estudiante o renombrá nombres duplicados para unificarlos a los oficiales.
+                </p>
+              </div>
+
+              {/* Search & Student Filter Actions */}
+              <div className="flex flex-wrap items-center gap-3">
+                {/* Search Input */}
+                <div className="relative">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Buscar dictamen o tema..."
+                    value={inventorySearchTerm}
+                    onChange={(e) => setInventorySearchTerm(e.target.value)}
+                    className="pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 w-48 sm:w-56 text-slate-800"
+                  />
+                </div>
+
+                {/* Filter by Student Button with Dropdown */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-bold rounded-xl border transition cursor-pointer ${
+                      selectedStudentFilter !== 'ALL'
+                        ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
+                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    <Filter className="w-3.5 h-3.5" />
+                    <span>
+                      {selectedStudentFilter === 'ALL'
+                        ? 'Filtrar por Alumno'
+                        : selectedStudentFilter.split(' ')[0]}
+                    </span>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  </button>
+
+                  {/* Filter Popover */}
+                  {isFilterDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-200 p-2 z-30 space-y-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedStudentFilter('ALL');
+                          setIsFilterDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-3 py-1.5 text-xs rounded-lg font-semibold flex items-center justify-between cursor-pointer ${
+                          selectedStudentFilter === 'ALL'
+                            ? 'bg-slate-900 text-white'
+                            : 'text-slate-700 hover:bg-slate-100'
+                        }`}
+                      >
+                        <span>Mostrar Todos ({articles.length})</span>
+                      </button>
+
+                      <div className="h-[1px] bg-slate-100 my-1" />
+
+                      <div className="max-h-56 overflow-y-auto space-y-0.5">
+                        {uniqueAuthors.map((auth) => (
+                          <button
+                            key={auth.fullName}
+                            type="button"
+                            onClick={() => {
+                              setSelectedStudentFilter(auth.fullName);
+                              setIsFilterDropdownOpen(false);
+                            }}
+                            className={`w-full text-left px-3 py-1.5 text-xs rounded-lg flex items-center justify-between transition cursor-pointer ${
+                              selectedStudentFilter === auth.fullName
+                                ? 'bg-indigo-50 text-indigo-700 font-bold'
+                                : 'text-slate-700 hover:bg-slate-100'
+                            }`}
+                          >
+                            <span className="truncate mr-2">{auth.fullName}</span>
+                            <span className="text-[10px] text-slate-600 bg-slate-200 px-1.5 py-0.2 rounded-full font-mono">
+                              {auth.articleCount}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Inventory Table */}
+            <div className="overflow-x-auto rounded-2xl border border-slate-200">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold uppercase tracking-wider">
+                  <tr>
+                    <th className="py-3 px-4">Artículo / Título</th>
+                    <th className="py-3 px-4">Eje Temático</th>
+                    <th className="py-3 px-4">Fecha</th>
+                    <th className="py-3 px-4">Investigador Asignado</th>
+                    <th className="py-3 px-4 text-right">Acción</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 bg-white">
+                  {inventoryFilteredArticles.map((art) => {
+                    const artAuthor = typeof art.authors?.[0] === 'string'
+                      ? art.authors[0]
+                      : (art.authors?.[0] as any)?.name || 'Estudiante Investigador';
+                    const artProfile = getAuthorProfile(artAuthor);
+                    const artAvatar = art.author_image
+                      || (typeof art.authors?.[0] === 'object' && (art.authors[0] as any)?.avatar)
+                      || artProfile?.image
+                      || getAuthorImage(artAuthor);
+
+                    return (
+                      <tr key={art.id} className="hover:bg-slate-50/70 transition">
+                        <td className="py-3.5 px-4 font-bold text-slate-900 max-w-sm">
+                          <p className="line-clamp-2 leading-snug">{art.title}</p>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-bold tracking-wide uppercase border border-slate-200">
+                            {art.topic || art.thematicAxis || art.region}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 text-slate-500 whitespace-nowrap">
+                          {art.date}
+                        </td>
+                        <td className="py-3.5 px-4 whitespace-nowrap">
+                          <div className="flex items-center gap-2">
+                            <img
+                              src={artAvatar}
+                              alt=""
+                              className="w-5 h-5 rounded-full object-cover object-top border border-slate-300"
+                            />
+                            <span className="font-semibold text-slate-800">{artAuthor}</span>
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                          <button
+                            type="button"
+                            onClick={() => openReassignModal(art)}
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-indigo-50 hover:text-indigo-800 hover:border-indigo-200 text-slate-700 border border-slate-300 shadow-xs transition cursor-pointer"
+                          >
+                            <Edit2 className="w-3 h-3 text-slate-500" />
+                            <span>Reasignar / Unificar</span>
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+
+        {/* ========================================================================= */}
+        {/* VIEW 3: ARTÍCULOS POR REVISAR / PUBLICADAS / TODAS                        */}
+        {/* ========================================================================= */}
+        {activeTab !== 'authors' && activeTab !== 'inventory' && (
         <div className="space-y-4">
           {filteredArticles.length === 0 ? (
             <div className="p-12 text-center rounded-3xl bg-white/70 backdrop-blur-md border border-slate-200/80 space-y-3">
@@ -546,6 +1053,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         <span>Editar</span>
                       </button>
 
+                      {/* Button: Reasignar Autor */}
+                      <button
+                        onClick={() => openReassignModal(article)}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-white border border-slate-200 text-slate-700 hover:bg-indigo-50 hover:text-indigo-800 hover:border-indigo-200 text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
+                        title="Reasignar autor o unificar duplicados"
+                      >
+                        <Edit2 className="w-3.5 h-3.5 text-indigo-600" />
+                        <span className="hidden sm:inline">Reasignar</span>
+                      </button>
+
                       {/* Button: Vista Previa */}
                       <button
                         onClick={() => onPreviewArticle(article)}
@@ -570,6 +1087,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
           )}
         </div>
+        )}
       </main>
 
       {/* Edit Article Modal */}
@@ -651,6 +1169,110 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 className="px-4 py-2 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-semibold transition-colors shadow-xs cursor-pointer"
               >
                 Sí, Vaciar Todo
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 5. MODAL DE ASIGNACIÓN Y UNIFICACIÓN DE NOMBRES (STRICTLY ADMIN ONLY) */}
+      {reassigningArticle && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+          <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col animate-in zoom-in-95 duration-150">
+            <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <div>
+                <h3 className="text-base font-bold text-slate-900">
+                  Reasignar Autor y Unificar Duplicados
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Unificá la autoría para mantener la lista oficial de investigadores.
+                </p>
+              </div>
+              <button
+                onClick={() => setReassigningArticle(null)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-[11px] font-bold uppercase text-slate-500 mb-1">
+                  Dictamen que se está modificando
+                </label>
+                <p className="text-xs font-semibold text-slate-800 bg-slate-50 p-2.5 rounded-xl border border-slate-200 line-clamp-2">
+                  {reassigningArticle.title}
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase text-slate-500 mb-1">
+                  Elegir de entre los investigadores registrados
+                </label>
+                <select
+                  value={normalizeNameInput}
+                  onChange={(e) => setNormalizeNameInput(e.target.value)}
+                  className="w-full text-xs font-semibold p-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                >
+                  <option value="">-- Seleccionar investigador registrado --</option>
+                  {uniqueAuthors.map((auth) => (
+                    <option key={auth.fullName} value={auth.fullName}>
+                      {auth.fullName} ({auth.articleCount} artículos)
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase text-slate-500 mb-1">
+                  O corregir / escribir nombre oficial exacto
+                </label>
+                <input
+                  type="text"
+                  value={normalizeNameInput}
+                  onChange={(e) => setNormalizeNameInput(e.target.value)}
+                  placeholder="Ej: Araceli Alejandra Paredes Sugastti"
+                  className="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800"
+                />
+              </div>
+
+              <div className="pt-2">
+                <label className="flex items-start gap-2.5 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={propagateNameToAll}
+                    onChange={(e) => setPropagateNameToAll(e.target.checked)}
+                    className="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                  />
+                  <span className="text-xs text-slate-600 leading-tight">
+                    Unificar <strong>todas</strong> las noticias que tengan el autor anterior (
+                    <span className="text-slate-800 font-bold">
+                      {typeof reassigningArticle.authors?.[0] === 'string'
+                        ? reassigningArticle.authors[0]
+                        : (reassigningArticle.authors?.[0] as any)?.name}
+                    </span>
+                    ) a este nombre y su foto de perfil.
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setReassigningArticle(null)}
+                className="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-200 transition cursor-pointer"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveNormalizedAuthor}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-xs transition cursor-pointer"
+              >
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span>Guardar y Sincronizar</span>
               </button>
             </div>
           </div>

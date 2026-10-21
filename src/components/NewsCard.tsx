@@ -1,11 +1,13 @@
 import React from 'react';
-import { Calendar, Users, ArrowUpRight, Compass, BookOpen, Clock } from 'lucide-react';
-import type { NewsArticle } from '../types/news';
+import { ArrowUpRight, Sliders } from 'lucide-react';
+import type { NewsArticle, PhotoCrop } from '../types/news';
+import { getAuthorImage, getAuthorProfile, getAuthorPhotoCrop } from '../data/authors';
 
 interface NewsCardProps {
   article: NewsArticle;
   onSelect: (article: NewsArticle) => void;
   onSelectAuthor?: (author: string) => void;
+  onOpenCropper?: (author: string, image: string, crop: PhotoCrop) => void;
   selectedAuthor?: string;
 }
 
@@ -13,22 +15,9 @@ export const NewsCard: React.FC<NewsCardProps> = ({
   article,
   onSelect,
   onSelectAuthor,
+  onOpenCropper,
   selectedAuthor,
 }) => {
-  // Region-specific accent colors (light mode)
-  const getRegionBadgeStyle = (region: string) => {
-    switch (region.toLowerCase()) {
-      case 'américa latina':
-        return 'bg-emerald-50 text-emerald-800 border-emerald-200';
-      case 'asia-pacífico':
-        return 'bg-amber-50 text-amber-900 border-amber-200';
-      case 'europa':
-        return 'bg-blue-50 text-blue-900 border-blue-200';
-      case 'global':
-      default:
-        return 'bg-indigo-50 text-indigo-900 border-indigo-200';
-    }
-  };
 
   const formatDate = (dateStr: string) => {
     try {
@@ -41,111 +30,126 @@ export const NewsCard: React.FC<NewsCardProps> = ({
   };
 
   const totalWords = (article.full_text?.join(' ') || '').split(/\s+/).length;
-  const readTimeMinutes = Math.max(2, Math.ceil(totalWords / 160));
+  const readTimeMinutes = article.read_time_minutes || Math.max(2, Math.ceil(totalWords / 160));
+
+  const primaryAuthor = typeof article.authors?.[0] === 'string'
+    ? article.authors[0]
+    : (article.authors?.[0] as any)?.name || 'Estudiante Investigador';
+
+  const authorProfile = getAuthorProfile(primaryAuthor);
+  const authorImg = article.author_image
+    || (typeof article.authors?.[0] === 'object' && (article.authors[0] as any)?.avatar)
+    || authorProfile?.image
+    || getAuthorImage(primaryAuthor);
+
+  const crop: PhotoCrop = article.photoCrop
+    || authorProfile?.photoCrop
+    || getAuthorPhotoCrop(primaryAuthor);
 
   return (
     <article
       onClick={() => onSelect(article)}
-      className="group relative flex flex-col justify-between rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/60 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out p-6 md:p-7 cursor-pointer overflow-hidden font-sans"
+      className="group cursor-pointer flex flex-col bg-white border border-slate-200/90 rounded-none overflow-hidden transition-all duration-300 hover:shadow-lg"
     >
-      <div>
-        {/* Meta badges: Region & Topic & Read Time */}
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-3.5">
-          <div className="flex items-center gap-2">
-            <span
-              className={`px-3 py-1 rounded-xl text-xs font-semibold tracking-wide border transition-all duration-300 ease-out ${getRegionBadgeStyle(
-                article.region
-              )}`}
-            >
-              {article.region}
-            </span>
-            <span className="px-2.5 py-1 rounded-xl text-xs font-medium bg-slate-100/80 backdrop-blur-sm hover:bg-slate-200/80 border border-slate-200/40 text-slate-700 transition-all duration-300 ease-out">
-              {article.topic}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-mono">
-            <Clock className="w-3.5 h-3.5 text-slate-400" />
-            <span>{readTimeMinutes} min</span>
-          </div>
+      {/* 1. Contenedor de la Imagen con Zoom sutil al hover */}
+      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100 select-none border-b border-slate-200/60">
+        <div
+          className="w-full h-full relative transition-transform duration-500 ease-out group-hover:scale-105"
+          style={{
+            transform: `scale(${crop.zoom}) translate(${crop.panX}px, ${crop.panY}px)`,
+            transformOrigin: 'top center',
+          }}
+        >
+          <img
+            src={authorImg}
+            alt={primaryAuthor}
+            className="w-full h-full object-cover object-top"
+          />
         </div>
 
-        {/* Title */}
-        <h3 className="text-lg md:text-xl font-semibold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors duration-300 ease-out line-clamp-2 leading-snug mb-3">
-          {article.title}
-        </h3>
-
-        {/* Executive summary bullets teaser */}
-        {article.summary_bullets && article.summary_bullets.length > 0 && (
-          <p className="text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] line-clamp-3 mb-4">
-            {article.summary_bullets[0]}
-          </p>
+        {/* Botón rápido para encuadrar foto */}
+        {onOpenCropper && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenCropper(primaryAuthor, authorImg, crop);
+            }}
+            className="absolute top-3 right-3 p-1.5 rounded-sm bg-white/90 hover:bg-white text-slate-700 hover:text-slate-900 shadow-sm border border-slate-200 backdrop-blur-sm transition cursor-pointer z-10"
+            title={`Ajustar encuadre de ${primaryAuthor}`}
+          >
+            <Sliders className="w-3.5 h-3.5" />
+          </button>
         )}
       </div>
 
-      {/* Footer metadata */}
-      <div className="pt-4 mt-auto border-t border-slate-100/80">
-        <div className="flex items-center justify-between gap-2 mb-3 text-xs text-slate-500">
-          <div className="flex items-center gap-1.5 truncate max-w-[68%]">
-            <Users className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <div className="truncate flex items-center gap-1">
-              {article.authors.map((author, idx) => {
-                const isSelected = selectedAuthor === author;
-                return (
-                  <React.Fragment key={author}>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectAuthor?.(author);
-                      }}
-                      className={`truncate transition-colors hover:underline cursor-pointer font-medium ${
-                        isSelected
-                          ? 'text-emerald-700 font-semibold underline'
-                          : 'hover:text-emerald-700 text-slate-600'
-                      }`}
-                      title={`Filtrar publicaciones de ${author}`}
-                    >
-                      {author}
-                    </button>
-                    {idx < article.authors.length - 1 && <span className="text-slate-400">,</span>}
-                  </React.Fragment>
-                );
-              })}
-            </div>
+      {/* 2. Cuerpo Editorial */}
+      <div className="p-6 flex flex-col flex-1 justify-between">
+        <div className="space-y-3">
+          {/* Píldora de Categoría / Tipo de contenido */}
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[11px] font-bold tracking-widest uppercase text-slate-700 bg-slate-100 px-2.5 py-1 rounded-sm border border-slate-200">
+              {article.thematicAxis || article.topic || 'ANÁLISIS COYUNTURAL'}
+            </span>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              {article.region}
+            </span>
           </div>
-          <div className="flex items-center gap-1.5 shrink-0 font-mono">
-            <Calendar className="w-3.5 h-3.5 text-slate-400" />
-            <span>{formatDate(article.date)}</span>
-          </div>
+
+          {/* Título: Tipografía Carnegie + Subrayado animado al hover en cualquier parte de la tarjeta */}
+          <h3 className="font-carnegie font-bold text-xl sm:text-2xl text-slate-900 leading-snug tracking-tight underline-offset-4 decoration-2 decoration-slate-900 group-hover:underline">
+            {article.title}
+          </h3>
+
+          {/* Resumen institucional */}
+          <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed font-normal">
+            {article.lead || (article.summary_bullets && article.summary_bullets[0]) || ''}
+          </p>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs">
-            {article.glossary?.length > 0 && (
-              <span
-                className="inline-flex items-center gap-1 text-slate-600 bg-slate-100/80 backdrop-blur-sm border border-slate-200/40 px-2.5 py-0.5 rounded-xl transition-all duration-300 ease-out"
-                title={`${article.glossary.length} términos de glosario analizados`}
-              >
-                <BookOpen className="w-3 h-3 text-emerald-600" />
-                <span>{article.glossary.length} términos</span>
-              </span>
-            )}
-            {article.ir_perspective && (
-              <span
-                className="inline-flex items-center gap-1 text-slate-600 bg-slate-100/80 backdrop-blur-sm border border-slate-200/40 px-2.5 py-0.5 rounded-xl transition-all duration-300 ease-out"
-                title="Incluye análisis de perspectiva en relaciones internacionales"
-              >
-                <Compass className="w-3 h-3 text-emerald-700" />
-                <span>Perspectiva RRII</span>
-              </span>
-            )}
+        {/* Metadatos inferiores y Fila de Investigador */}
+        <div className="pt-6 mt-4 border-t border-slate-100 space-y-3">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <span>{formatDate(article.date).toUpperCase()}</span>
+            <span>•</span>
+            <span>{readTimeMinutes} MINUTE READ</span>
           </div>
 
-          <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 group-hover:text-emerald-800 group-hover:translate-x-0.5 transition-all duration-300 ease-out">
-            Leer análisis
-            <ArrowUpRight className="w-4 h-4" />
-          </span>
+          <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100/70 text-xs">
+            <div className="flex items-center gap-2 truncate max-w-[70%]">
+              <span className="text-slate-400 font-medium">Por:</span>
+              <div className="truncate flex items-center gap-1 font-semibold text-slate-800">
+                {article.authors.map((author, idx) => {
+                  const isSelected = selectedAuthor === author;
+                  return (
+                    <React.Fragment key={author}>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelectAuthor?.(author);
+                        }}
+                        className={`truncate transition-colors hover:underline cursor-pointer ${
+                          isSelected
+                            ? 'text-sky-800 font-bold underline'
+                            : 'hover:text-sky-800 text-slate-700'
+                        }`}
+                        title={`Filtrar publicaciones de ${author}`}
+                      >
+                        {author}
+                      </button>
+                      {idx < article.authors.length - 1 && <span className="text-slate-400">,</span>}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            </div>
+
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 group-hover:text-sky-800 group-hover:translate-x-0.5 transition-all shrink-0">
+              Leer análisis
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </span>
+          </div>
         </div>
       </div>
     </article>

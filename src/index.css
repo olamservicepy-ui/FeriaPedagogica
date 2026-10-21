@@ -1,20 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+  --font-carnegie: "Libre Franklin", "News Gothic", "Trade Gothic", system-ui, sans-serif;
+  --font-editorial: "Newsreader", Georgia, serif;
+  --font-sans: "Libre Franklin", "News Gothic", "Trade Gothic", system-ui, sans-serif;
+  --font-display: "Libre Franklin", "News Gothic", "Trade Gothic", system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
 }
 
 @layer base {
   :root {
-    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
-    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
-    --font-serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+    --font-carnegie: "Libre Franklin", "News Gothic", "Trade Gothic", system-ui, sans-serif;
+    --font-editorial: "Newsreader", Georgia, serif;
+    --font-sans: "Libre Franklin", "News Gothic", "Trade Gothic", system-ui, sans-serif;
+    --font-display: "Libre Franklin", "News Gothic", "Trade Gothic", system-ui, sans-serif;
+    --font-serif: "Newsreader", Georgia, serif;
   }
 
   html,
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+    font-family: 'Libre Franklin', system-ui, sans-serif;
     background-color: #F8F9FA;
     color: #0f172a;
     overflow-x: hidden;
@@ -31,11 +37,19 @@
   }
 }
 
-/* Clases editoriales Apple SF Pro */
+/* Clases editoriales y tipográficas */
 .font-editorial,
+.font-serif,
+.font-newsreader {
+  font-family: var(--font-editorial, "Newsreader", Georgia, serif);
+}
+
+.font-carnegie,
 .font-brand,
+.font-sans,
+.font-libre,
 .font-apple {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+  font-family: var(--font-carnegie, "Libre Franklin", "News Gothic", "Trade Gothic", system-ui, sans-serif);
 }
 
 /* Tarjeta y contenedor con acabado Apple: frosted glass, bordes limpios y sombras ultraligeras */

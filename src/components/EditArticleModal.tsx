@@ -9,13 +9,14 @@ import {
   Users
 } from 'lucide-react';
 import type { NewsArticle, GlossaryItem } from '../types/news';
+import { saveAvatarToDisk } from '../services/storage';
 
 interface EditArticleModalProps {
   article: NewsArticle;
   allNews?: NewsArticle[];
   onClose: () => void;
   onSave: (updatedArticle: NewsArticle) => void;
-  onSaveAll?: (updatedNews: NewsArticle[]) => void;
+  onSaveAll?: (updatedNews: NewsArticle[], newAvatarFile?: File, authorName?: string) => Promise<void> | void;
 }
 
 const REGIONS = [
@@ -83,6 +84,7 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
   const [authorAvatar, setAuthorAvatar] = useState<string>(
     article.author_image || existingAuthorsMap.get(initialAuthorName) || ''
   );
+  const [newAvatarFile, setNewAvatarFile] = useState<File | null>(null);
   const [authorRole, setAuthorRole] = useState(
     article.author_role || 'Estudiante Investigador • Relaciones Internacionales'
   );
@@ -103,14 +105,34 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
     }
   };
 
-  // Subida de imagen en base64 para vista previa inmediata
+  // Subida de imagen en base64 para vista previa inmediata y guardado a disco en public/authors/
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setNewAvatarFile(file);
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         if (typeof reader.result === 'string') {
-          setAuthorAvatar(reader.result);
+          const base64 = reader.result;
+          setAuthorAvatar(base64);
+
+          // Guardar directamente en public/authors/ en el servidor local
+          try {
+            const ext = file.name.split('.').pop() || 'png';
+            const authorBase = (customAuthorName || selectedAuthorName || 'author')
+              .toLowerCase()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .replace(/[^a-z0-9]/g, '_');
+            const filename = `${authorBase}_${Date.now()}.${ext}`;
+
+            const saveRes = await saveAvatarToDisk(filename, base64);
+            if (saveRes.success && saveRes.url) {
+              setAuthorAvatar(saveRes.url);
+            }
+          } catch (err) {
+            console.warn('Error al guardar avatar en disco:', err);
+          }
         }
       };
       reader.readAsDataURL(file);
@@ -273,7 +295,7 @@ export const EditArticleModal: React.FC<EditArticleModalProps> = ({
         return item;
       });
 
-      onSaveAll(updatedArticles);
+      onSaveAll(updatedArticles, newAvatarFile || undefined, finalAuthorName);
     } else {
       onSave(updatedArticle);
     }

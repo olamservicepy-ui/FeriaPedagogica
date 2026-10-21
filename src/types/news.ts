@@ -8,6 +8,33 @@ export interface IRPerspective {
   strategic_recommendations: string[];
 }
 
+export interface KeyIndicator {
+  label: string;
+  value: string;
+  note: string;
+}
+
+export interface AcademicMetadata {
+  university?: string;
+  faculty?: string;
+  school?: string;
+  department?: string;
+  location?: string;
+  reviewers?: string;
+  fairEdition?: string;
+}
+
+export interface ArticleSection {
+  heading: string;
+  content: string;
+}
+
+export interface PhotoCrop {
+  zoom: number;
+  panX: number;
+  panY: number;
+}
+
 export interface NewsArticle {
   id: string;
   title: string;
@@ -23,8 +50,18 @@ export interface NewsArticle {
   read_time_minutes?: number;
   author_image?: string;
   author_role?: string;
+  photoCrop?: PhotoCrop;
   source_file?: string;
   status?: 'draft' | 'published';
+  documentRef?: string;
+  issn?: string;
+  lead?: string;
+  thematicAxis?: string;
+  classification?: string;
+  executiveSummary?: string;
+  keyIndicators?: KeyIndicator[];
+  sections?: ArticleSection[];
+  academicMetadata?: AcademicMetadata;
 }
 
 export interface GlobalGlossaryEntry {

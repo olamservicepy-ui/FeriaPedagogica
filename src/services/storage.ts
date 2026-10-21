@@ -245,7 +245,7 @@ export async function saveArticle(article: NewsArticle): Promise<{
 }
 
 /**
- * Persist the full articles array to src/data/news.json via /api/update-news
+ * Persist the full articles array to src/data/news.json via /api/save-news or /api/update-news
  */
 export async function syncNewsToDisk(articles: NewsArticle[]): Promise<{
   success: boolean;
@@ -253,21 +253,62 @@ export async function syncNewsToDisk(articles: NewsArticle[]): Promise<{
   error?: string;
 }> {
   try {
-    const res = await fetch('/api/update-news', {
+    // Attempt /api/save-news first
+    let res = await fetch('/api/save-news', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(articles),
+      body: JSON.stringify(articles, null, 2),
+    });
+
+    if (!res.ok) {
+      // Fallback to /api/update-news
+      res = await fetch('/api/update-news', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(articles),
+      });
+    }
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      return { success: false, error: data.error || `HTTP ${res.status}` };
+    }
+    const data = await res.json();
+    return { success: true, count: data.count || articles.length };
+  } catch (err: any) {
+    console.warn('syncNewsToDisk error:', err);
+    return { success: false, error: err?.message || String(err) };
+  }
+}
+
+/**
+ * Persist an author avatar to public/authors/ via /api/save-avatar
+ */
+export async function saveAvatarToDisk(filename: string, base64Data: string): Promise<{
+  success: boolean;
+  url?: string;
+  error?: string;
+}> {
+  try {
+    const res = await fetch('/api/save-avatar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ filename, base64Data }),
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
       return { success: false, error: data.error || `HTTP ${res.status}` };
     }
     const data = await res.json();
-    return { success: true, count: data.count };
+    return { success: true, url: data.url };
   } catch (err: any) {
-    console.warn('syncNewsToDisk error:', err);
+    console.warn('saveAvatarToDisk error:', err);
     return { success: false, error: err?.message || String(err) };
   }
 }

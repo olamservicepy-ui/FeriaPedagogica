@@ -1,36 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
+  Share2,
+  Printer,
   Calendar,
   Clock,
-  BookOpen,
-  Link as LinkIcon,
-  Printer,
-  Share2,
-  ChevronLeft,
-  Check
+  TrendingUp,
+  CheckCircle,
+  ChevronRight,
+  BookMarked,
+  Sliders
 } from 'lucide-react';
-import type { NewsArticle, GlossaryItem } from '../types/news';
-import { getAuthorImage, getAuthorProfile } from '../data/authors';
+import type { NewsArticle, GlossaryItem, PhotoCrop } from '../types/news';
+import { getAuthorImage, getAuthorProfile, getAuthorPhotoCrop } from '../data/authors';
 import { InteractiveText } from './InteractiveText';
-import { IRPerspectiveCard } from './IRPerspectiveCard';
 
 interface NewsDetailModalProps {
   article: NewsArticle | null;
-  allGlossary: GlossaryItem[];
+  allArticles?: NewsArticle[];
+  allGlossary?: GlossaryItem[];
   onClose: () => void;
+  onSelectArticle?: (article: NewsArticle) => void;
   onSelectTerm?: (term: string) => void;
   onSelectAuthor?: (author: string) => void;
+  onOpenCropper?: (author: string, image: string, crop: PhotoCrop) => void;
 }
 
 export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
   article,
-  allGlossary,
+  allArticles = [],
+  allGlossary = [],
   onClose,
-  onSelectTerm,
+  onSelectArticle,
   onSelectAuthor,
+  onOpenCropper,
 }) => {
-  const [copied, setCopied] = React.useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
 
   // Close on Escape key
   useEffect(() => {
@@ -55,9 +60,20 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
 
   if (!article) return null;
 
-  const primaryAuthor = article.authors[0] || 'Investigador';
-  const authorPhoto = article.author_image || getAuthorImage(primaryAuthor);
+  const primaryAuthor = typeof article.authors?.[0] === 'string'
+    ? article.authors[0]
+    : (article.authors?.[0] as any)?.name || 'Estudiante Investigador';
+
   const authorProfile = getAuthorProfile(primaryAuthor);
+
+  const authorPhoto = article.author_image
+    || (typeof article.authors?.[0] === 'object' && (article.authors[0] as any)?.avatar)
+    || authorProfile?.image
+    || getAuthorImage(primaryAuthor);
+
+  const currentCrop: PhotoCrop = article.photoCrop
+    || authorProfile?.photoCrop
+    || getAuthorPhotoCrop(primaryAuthor);
 
   // Combine article glossary with global glossary for in-text enrichment
   const combinedGlossaryMap = new Map<string, GlossaryItem>();
@@ -73,287 +89,500 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
   }
   const combinedGlossary = Array.from(combinedGlossaryMap.values());
 
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const totalWords = (article.full_text?.join(' ') || '').split(/\s+/).length;
+  const readTimeMinutes = article.read_time_minutes || Math.max(2, Math.ceil(totalWords / 160));
+
+  // Author other publications in the observatory
+  const authorOtherArticles = allArticles.filter((a) => {
+    if (a.id === article.id) return false;
+    return (a.authors || []).some((auth) => {
+      const name = typeof auth === 'string' ? auth : (auth as any)?.name || '';
+      return name.trim().toLowerCase() === primaryAuthor.trim().toLowerCase();
+    });
+  });
+
+  // Next article in sequence
+  let nextArticle: NewsArticle | null = null;
+  if (allArticles && allArticles.length > 0) {
+    const currentIndex = allArticles.findIndex((a) => a.id === article.id);
+    if (currentIndex === -1) {
+      nextArticle = allArticles[0] || null;
+    } else {
+      const nextIndex = (currentIndex + 1) % allArticles.length;
+      nextArticle = allArticles[nextIndex] || null;
+    }
+  }
+
+  const handleShare = () => {
+    if (navigator?.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2200);
+    }
   };
 
   const handlePrint = () => {
     window.print();
   };
 
-  const totalWords = (article.full_text?.join(' ') || '').split(/\s+/).length;
-  const readTimeMinutes = Math.max(2, Math.ceil(totalWords / 160));
+  const documentRef = article.documentRef || `OERII-2026-DP-${article.id.slice(0, 8).toUpperCase()}`;
+  const issn = article.issn || "2709-8435";
+  const classification = article.classification || "Dictamen de Coyuntura Económica";
+  const thematicAxis = article.thematicAxis || article.topic || "POLÍTICA MONETARIA Y REGULACIÓN FINANCIERA";
+  const fieldName = article.region || "América Latina y Mercosur";
 
-  const getRegionBadgeStyle = (region: string) => {
-    switch (region.toLowerCase()) {
-      case 'américa latina':
-        return 'bg-emerald-50/90 text-emerald-800 border-emerald-200/80';
-      case 'asia-pacífico':
-        return 'bg-amber-50/90 text-amber-900 border-amber-200/80';
-      case 'europa':
-        return 'bg-blue-50/90 text-blue-900 border-blue-200/80';
-      case 'global':
-      default:
-        return 'bg-indigo-50/90 text-indigo-900 border-indigo-200/80';
-    }
+  // Academic metadata
+  const academicMetadata = {
+    university: article.academicMetadata?.university || authorProfile?.institution || "Universidad Nacional de Itapúa",
+    faculty: article.academicMetadata?.faculty || authorProfile?.faculty || "Facultad de Humanidades, Ciencias Sociales y Cultura Guaraní",
+    school: article.academicMetadata?.school || authorProfile?.school || "Licenciatura en Relaciones Internacionales",
+    department: article.academicMetadata?.department || authorProfile?.department || "Observatorio Económico y Político Regional",
+    location: article.academicMetadata?.location || authorProfile?.location || "Campus Universitario • Encarnación, Paraguay",
+    reviewers: article.academicMetadata?.reviewers || authorProfile?.reviewers || "Cátedra de Economía Internacional & Integración Regional",
+    fairEdition: article.academicMetadata?.fairEdition || authorProfile?.fairEdition || "Feria Pedagógica Universitaria 2026"
   };
+
+  // Indicators: custom or generated
+  const indicators = (article.keyIndicators && article.keyIndicators.length > 0)
+    ? article.keyIndicators
+    : [
+        {
+          label: "Región y Marco Geoeconómico",
+          value: article.region || "Mercosur / Regional",
+          note: article.topic || "Economía Internacional"
+        },
+        {
+          label: "Conceptos Teóricos Auditados",
+          value: `${article.glossary?.length || 4} Variables`,
+          note: "Glosario Enriquecido de R.R.I.I."
+        },
+        {
+          label: "Dictamen Académico",
+          value: "Homologado",
+          note: academicMetadata.reviewers
+        },
+        {
+          label: "Fuentes Primarias",
+          value: `${article.sources?.length || 1} Registro(s)`,
+          note: article.sources?.[0] || "Prensa Especializada & Organismos"
+        }
+      ];
+
+  const leadText = article.lead || (article.summary_bullets && article.summary_bullets[0]) || '';
+  const executiveSummary = article.executiveSummary || (article.summary_bullets && article.summary_bullets.join(' ')) || '';
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 lg:p-6 bg-slate-900/25 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-y-auto animate-in fade-in duration-300 select-none sm:select-text"
     >
-      <div
-        className="relative w-full h-full md:h-auto md:max-h-[92vh] max-w-4xl bg-white/95 backdrop-blur-xl border border-white/80 md:rounded-2xl shadow-2xl flex flex-col overflow-hidden text-slate-900 font-sans transition-all duration-200 ease-out transform scale-100 opacity-100"
-      >
-        {/* Top Sticky Bar */}
-        <div className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-white/80 border-b border-slate-200/50 backdrop-blur-md">
-          <button
-            onClick={onClose}
-            className="inline-flex items-center gap-1.5 sm:gap-2 text-xs font-semibold text-slate-700 hover:text-slate-950 transition-all duration-300 ease-out cursor-pointer"
-          >
-            <ChevronLeft className="w-4 h-4 text-emerald-700" />
-            <span className="truncate max-w-[120px] sm:max-w-none">Volver a portada</span>
-          </button>
-
-          <div className="flex items-center gap-1.5 sm:gap-2">
+      {/* MAIN MODAL CONTAINER (LIGHT INSTITUTIONAL LUXURY) */}
+      <div className="w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col bg-white rounded-3xl border border-slate-300/80 shadow-2xl overflow-hidden relative text-slate-900 font-sans">
+        
+        {/* ========================================================================= */}
+        {/* BARRA SUPERIOR LIMPIA (REQUERIMIENTO 1: SOLO COMPARTIR, IMPRIMIR Y CERRAR) */}
+        {/* ========================================================================= */}
+        <div className="h-14 px-6 border-b border-slate-200 bg-white flex items-center justify-end shrink-0 z-20">
+          <div className="flex items-center gap-2">
+            
+            {/* Botón Compartir */}
             <button
-              onClick={handleCopyLink}
+              onClick={handleShare}
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg shadow-sm transition cursor-pointer"
               title="Copiar enlace"
-              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100/80 transition-all duration-300 ease-out cursor-pointer"
-              aria-label="Compartir"
             >
-              {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Share2 className="w-4 h-4" />}
+              <Share2 className="w-3.5 h-3.5 text-slate-600" />
+              <span>{copiedLink ? "Copiado" : "Compartir"}</span>
             </button>
+
+            {/* Botón Imprimir */}
             <button
               onClick={handlePrint}
-              title="Imprimir o guardar como PDF"
-              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100/80 transition-all duration-300 ease-out hidden sm:inline-flex cursor-pointer"
-              aria-label="Imprimir"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg shadow-sm transition cursor-pointer"
+              title="Imprimir documento"
             >
-              <Printer className="w-4 h-4" />
+              <Printer className="w-3.5 h-3.5 text-slate-600" />
+              <span>Imprimir</span>
             </button>
+
+            <div className="h-4 w-[1px] bg-slate-200 mx-1" />
+
+            {/* Botón Cerrar */}
             <button
               onClick={onClose}
-              aria-label="Cerrar lectura"
-              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100/80 transition-all duration-300 ease-out cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg shadow-sm transition cursor-pointer"
+              aria-label="Cerrar ventana"
             >
-              <X className="w-5 h-5" />
+              <span>Cerrar</span>
+              <X className="w-4 h-4 text-slate-700" />
             </button>
+
           </div>
         </div>
 
-        {/* Scrollable Article Content */}
+        {/* SCROLLABLE READING CANVAS */}
         <div className="flex-1 overflow-y-auto">
-          {/* Hero Editorial con Fondo Difuminado del Autor (h-[380px] a h-[460px]) */}
-          <div className="relative w-full h-[380px] sm:h-[420px] md:h-[460px] overflow-hidden flex flex-col justify-end p-6 sm:p-8 md:p-10 select-none bg-slate-100">
-            {/* Foto del alumno como fondo editorial */}
-            <img
-              src={authorPhoto}
-              alt={primaryAuthor}
-              className="absolute inset-0 w-full h-full object-cover object-top filter brightness-[0.98] transition-transform duration-700 ease-out hover:scale-105"
-            />
 
-            {/* Sombra sutil superior para contraste nítido bajo la barra fija */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-900/10 to-transparent pointer-events-none" />
-
-            {/* Directiva: degradado superpuesto que difumine suavemente la imagen hacia abajo sin bordes duros */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#F8F9FA] via-[#F8F9FA]/85 to-transparent pointer-events-none" />
-
-            {/* Metadatos y título principal directamente sobre el hero con contraste nítido */}
-            <div className="relative z-10 space-y-3 sm:space-y-4">
-              {/* Badges con efecto glass */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span
-                  className={`px-3 py-1 rounded-xl text-xs font-semibold backdrop-blur-md border shadow-xs uppercase tracking-wider ${getRegionBadgeStyle(
-                    article.region
-                  )}`}
-                >
-                  {article.region}
-                </span>
-                <span className="px-3 py-1 rounded-xl text-xs font-semibold bg-white/85 backdrop-blur-md text-slate-800 border border-white/60 shadow-xs">
-                  {article.topic}
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium bg-white/85 backdrop-blur-md text-slate-700 border border-white/60 shadow-xs font-mono">
-                  <Clock className="w-3.5 h-3.5 text-slate-500" />
-                  {readTimeMinutes} min de lectura
-                </span>
-              </div>
-
-              {/* Título Principal Tipografía Apple */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] font-semibold tracking-tight text-slate-900 leading-tight font-sans break-words max-w-3xl drop-shadow-xs">
-                {article.title}
-              </h1>
-
-              {/* Autor, Alumno y Fecha sobre el Hero */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                <div className="inline-flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-white/90 backdrop-blur-md border border-white/80 shadow-sm">
-                  <img
-                    src={authorPhoto}
-                    alt={primaryAuthor}
-                    className="w-8 h-8 rounded-full object-cover border border-emerald-600/40 shrink-0"
-                  />
-                  <div className="min-w-0">
-                    <div className="text-xs font-semibold text-slate-900 flex items-center gap-1.5">
-                      <span className="text-slate-500 font-mono text-[11px]">Investigación:</span>
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        {article.authors.map((author, idx) => (
-                          <button
-                            key={author}
-                            type="button"
-                            onClick={() => {
-                              onSelectAuthor?.(author);
-                              onClose();
-                            }}
-                            className="text-emerald-800 hover:text-emerald-950 hover:underline cursor-pointer font-semibold transition-colors"
-                            title={`Filtrar publicaciones de ${author}`}
-                          >
-                            {author}{idx < article.authors.length - 1 ? ',' : ''}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <span className="text-[11px] text-slate-500 block truncate font-mono">
-                      {article.author_role || authorProfile?.role || 'Feria Pedagógica • Cátedra de Relaciones Internacionales'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/80 backdrop-blur-md border border-white/60 text-xs font-mono text-slate-600 shadow-xs">
-                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Publicado: {article.date}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Article Body - Paso completamente fluido sin bordes duros desde el degradado #F8F9FA */}
-          <div className="px-4 py-6 sm:px-8 sm:py-8 md:px-12 md:py-8 space-y-6 sm:space-y-8 bg-[#F8F9FA]">
-
-          {/* Executive Summary Box */}
-          {article.summary_bullets && article.summary_bullets.length > 0 && (
-            <div className="rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 p-5 sm:p-6 space-y-3 overflow-hidden break-words shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-800 font-mono">
-                <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
-                Puntos Clave del Análisis
-              </div>
-              <ul className="space-y-2.5">
-                {article.summary_bullets.map((bullet, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 sm:gap-3 text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] break-words font-sans">
-                    <span className="text-emerald-600 font-bold shrink-0 mt-0.5">•</span>
-                    <span className="break-words flex-1 min-w-0">{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Article Full Text with In-Text Interactive Glossary Tooltips */}
-          <div className="space-y-5 sm:space-y-6 text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] break-words">
-            {article.full_text.map((paragraph, idx) => (
-              <InteractiveText
-                key={idx}
-                text={paragraph}
-                glossary={combinedGlossary}
-                className="text-justify"
+          {/* ========================================================================= */}
+          {/* HERO BANNER CON FOTO Y DEGRADADO NO AGRESIVO (REQUERIMIENTOS 2, 4 Y 5)      */}
+          {/* ========================================================================= */}
+          <div className="relative w-full h-[400px] sm:h-[460px] md:h-[500px] bg-slate-100 overflow-hidden select-none border-b border-slate-200">
+            
+            {/* Imagen del alumno con Zoom y Encuadre aplicados dinámicamente */}
+            <div
+              className="w-full h-full relative"
+              style={{
+                transform: `scale(${currentCrop.zoom}) translate(${currentCrop.panX}px, ${currentCrop.panY}px)`,
+                transformOrigin: 'top center',
+                transition: 'transform 0.15s ease-out',
+              }}
+            >
+              <img
+                src={authorPhoto}
+                alt={primaryAuthor}
+                className="w-full h-full object-cover object-top"
               />
-            ))}
-          </div>
+            </div>
 
-          {/* Guide banner for interactive glossary tooltips */}
-          <div className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed bg-emerald-50/60 backdrop-blur-sm rounded-xl p-3.5 border border-emerald-200/60 flex items-center gap-2.5">
-            <BookOpen className="w-4 h-4 text-emerald-700 shrink-0" />
-            <span className="leading-normal font-sans">
-              <strong>Guía interactiva:</strong> Los conceptos con subrayado punteado verde poseen definiciones académicas del glosario. Toca o pasa el cursor sobre ellos para consultar su concepto.
-            </span>
-          </div>
+            {/* 
+              REQUERIMIENTO 4: DEGRADADO NO AGRESIVO
+              El degradado blanco se retrajo drásticamente al fondo:
+              - La cara, ojos, boca y barbilla quedan al 100% LIMPIOS y transparentes.
+              - El degradado blanco solo aparece suavemente en el último 15% inferior (via-15%)
+                para que el título sea legible sin tapar facciones.
+            */}
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent via-15% pointer-events-none" />
 
-          {/* Perspectiva de Relaciones Internacionales */}
-          {article.ir_perspective && (
-            <IRPerspectiveCard perspective={article.ir_perspective} />
-          )}
-
-          {/* Article Glossary Box */}
-          {article.glossary && article.glossary.length > 0 && (
-            <section className="rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 p-5 sm:p-7 md:p-8 space-y-4 overflow-hidden break-words font-sans shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
-              <div className="flex items-center gap-3 pb-3 border-b border-slate-200/50">
-                <div className="p-2 rounded-xl bg-emerald-100/90 text-emerald-800 shrink-0">
-                  <BookOpen className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-base sm:text-lg font-semibold tracking-tight text-slate-900">
-                    Glosario Conceptual del Artículo
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    Términos técnicos y diplomáticos empleados en este documento
-                  </p>
-                </div>
+            {/* Botón de ajuste rápido flotante en el Hero (Solo si onOpenCropper está habilitado) */}
+            {onOpenCropper && (
+              <div className="absolute top-5 right-6 z-20">
+                <button
+                  type="button"
+                  onClick={() => onOpenCropper(primaryAuthor, authorPhoto, currentCrop)}
+                  className="flex items-center gap-1.5 bg-white/90 hover:bg-white text-slate-800 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-md border border-slate-200/80 backdrop-blur-md transition cursor-pointer"
+                  title="Ajustar encuadre o cambiar foto de esta investigadora"
+                >
+                  <Sliders className="w-3.5 h-3.5 text-slate-600" />
+                  <span>Ajustar Encuadre / Zoom</span>
+                </button>
               </div>
+            )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
-                {article.glossary.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 sm:p-5 rounded-xl bg-white/90 backdrop-blur-sm border border-slate-200/60 hover:border-emerald-300 transition-all duration-300 ease-out shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] overflow-hidden break-words"
+            {/* REQUERIMIENTO 2: SOLO LA CATEGORIA ARRIBA (SE ELIMINÓ 'PONENCIA HOMOLOGADA') */}
+            <div className="absolute top-5 left-6 z-10 pointer-events-none">
+              <span className="px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-white/95 text-slate-900 shadow-sm border border-slate-200">
+                {thematicAxis}
+              </span>
+            </div>
+
+            {/* ZONA INFERIOR DEL HERO: FECHA, TITULO Y PASTILLA DE AUTOR */}
+            <div className="absolute inset-x-0 bottom-0 px-6 sm:px-10 pb-6 pt-6 z-10">
+              <div className="max-w-4xl space-y-3">
+                
+                {/* Metadatos de Lectura */}
+                <div className="flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-700">
+                  <span className="flex items-center gap-1.5 bg-white/90 px-2.5 py-1 rounded-md border border-slate-200 backdrop-blur-sm">
+                    <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                    {article.date || "Septiembre de 2026"}
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-white/90 px-2.5 py-1 rounded-md border border-slate-200 backdrop-blur-sm">
+                    <Clock className="w-3.5 h-3.5 text-slate-500" />
+                    {readTimeMinutes} min de lectura técnica
+                  </span>
+                  <span className="text-slate-600 font-medium">
+                    • {fieldName}
+                  </span>
+                </div>
+
+                {/* Titular Principal en Tipografía Carnegie Endowment */}
+                <h1 className="font-carnegie font-extrabold text-2xl sm:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight">
+                  {article.title}
+                </h1>
+
+                {/* Pastilla del Investigador en la Portada */}
+                <div className="pt-1 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onSelectAuthor?.(primaryAuthor);
+                      onClose();
+                    }}
+                    className="flex items-center gap-2.5 bg-white/95 px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm backdrop-blur-md hover:bg-slate-50 transition cursor-pointer"
+                    title={`Filtrar publicaciones de ${primaryAuthor}`}
                   >
-                    <div className="flex items-center justify-between mb-1.5 gap-2">
-                      <span className="font-semibold text-xs sm:text-sm text-emerald-800 tracking-tight truncate">
-                        {item.term}
-                      </span>
-                      {onSelectTerm && (
-                        <button
-                          onClick={() => {
-                            onClose();
-                            onSelectTerm(item.term);
-                          }}
-                          className="text-[10px] sm:text-[11px] text-slate-500 hover:text-emerald-700 underline shrink-0 transition-colors"
-                        >
-                          Ver en A-Z
-                        </button>
-                      )}
+                    <div className="w-7 h-7 rounded-full overflow-hidden border border-slate-300 shrink-0">
+                      <img
+                        src={authorPhoto}
+                        alt={primaryAuthor}
+                        className="w-full h-full object-cover object-top"
+                      />
                     </div>
-                    <p className="text-slate-600 font-normal leading-relaxed text-[13px] sm:text-[14px] font-sans break-words">
-                      {item.definition}
+                    <div className="text-left">
+                      <p className="text-xs font-bold text-slate-900 leading-none">
+                        {primaryAuthor}
+                      </p>
+                      <p className="text-[10px] text-slate-600 leading-none mt-0.5">
+                        {authorProfile?.role || article.author_role || "Estudiante Investigador"} • R.R.I.I.
+                      </p>
+                    </div>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          {/* ARTICLE BODY & METRIC MATRICES */}
+          <div className="max-w-4xl mx-auto px-6 sm:px-10 py-8 space-y-9">
+
+            {/* Subtitle / Lead Paragraph */}
+            {leadText && (
+              <p className="text-base sm:text-lg text-slate-800 leading-relaxed font-normal border-l-4 border-slate-900 pl-4 bg-slate-50/70 py-2 rounded-r-lg font-editorial">
+                {leadText}
+              </p>
+            )}
+
+            {/* Official Macroeconomic / Indicator Grid */}
+            <section aria-label="Indicadores Clave" className="space-y-2.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-slate-700" />
+                Variables Económicas Auditadas por la Investigación
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {indicators.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl hover:border-slate-300 transition"
+                  >
+                    <p className="text-[11px] font-semibold text-slate-600 uppercase tracking-tight">
+                      {item.label}
+                    </p>
+                    <p className="text-xl font-bold text-slate-900 mt-1 tracking-tight">
+                      {item.value}
+                    </p>
+                    <p className="text-[10px] text-slate-600 mt-1 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                      {item.note}
                     </p>
                   </div>
                 ))}
               </div>
             </section>
-          )}
 
-          {/* Sources / References */}
-          {article.sources && article.sources.length > 0 && (
-            <section className="rounded-2xl bg-white/70 backdrop-blur-sm border border-slate-200/60 p-5 sm:p-6 space-y-3 overflow-hidden break-words font-sans shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]">
-              <h4 className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-slate-500 font-bold flex items-center gap-2">
-                <LinkIcon className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                Fuentes & Referencias Académicas Consultadas
-              </h4>
-              <ul className="space-y-2 text-xs text-slate-600 font-mono">
-                {article.sources.map((src, idx) => (
-                  <li key={idx} className="flex items-start gap-2 break-words">
-                    <span className="text-emerald-700 font-bold shrink-0">[{idx + 1}]</span>
-                    <span className="break-words flex-1">{src}</span>
-                  </li>
-                ))}
-              </ul>
+            {/* Executive Summary Statement Box */}
+            {executiveSummary && (
+              <div className="p-5 rounded-xl bg-slate-100/80 border border-slate-200">
+                <div className="flex items-center gap-2 mb-2 text-slate-800 text-xs font-bold uppercase tracking-wider">
+                  <BookMarked className="w-4 h-4 text-slate-700" />
+                  <span>Síntesis Ejecutiva del Informe</span>
+                </div>
+                <p className="text-sm sm:text-base text-slate-800 leading-relaxed">
+                  {executiveSummary}
+                </p>
+              </div>
+            )}
+
+            {/* Body Content Sections */}
+            <div className="space-y-8 divide-y divide-slate-200/80">
+              {article.sections && article.sections.length > 0 ? (
+                article.sections.map((sec, idx) => (
+                  <article key={idx} className={idx > 0 ? "pt-7" : ""}>
+                    <h2 className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3">
+                      {sec.heading}
+                    </h2>
+                    <InteractiveText
+                      text={sec.content}
+                      glossary={combinedGlossary}
+                      className="text-slate-800 leading-relaxed text-sm sm:text-base text-justify font-serif"
+                    />
+                  </article>
+                ))
+              ) : article.full_text && article.full_text.length > 0 ? (
+                article.full_text.map((paragraph, idx) => {
+                  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+                  const heading = `${romanNumerals[idx] || (idx + 1)}. Desarrollo del Análisis de Coyuntura`;
+                  return (
+                    <article key={idx} className={idx > 0 ? 'pt-7' : ''}>
+                      <h2 className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3">
+                        {heading}
+                      </h2>
+                      <InteractiveText
+                        text={paragraph}
+                        glossary={combinedGlossary}
+                        className="text-slate-800 leading-relaxed text-sm sm:text-base text-justify font-serif"
+                      />
+                    </article>
+                  );
+                })
+              ) : (
+                <p className="text-slate-500 italic">No hay contenido disponible.</p>
+              )}
+            </div>
+
+            {/* Perspectiva de Relaciones Internacionales */}
+            {(article.ir_perspective?.geopolitical_context ||
+              (article.ir_perspective?.strategic_recommendations &&
+                article.ir_perspective.strategic_recommendations.length > 0)) && (
+              <section className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-bold text-slate-900 uppercase tracking-wider">
+                  <TrendingUp className="w-4 h-4 text-slate-800" />
+                  <span>Perspectiva de Relaciones Internacionales y Geopolítica</span>
+                </div>
+
+                {article.ir_perspective.geopolitical_context && (
+                  <p className="text-slate-700 text-sm leading-relaxed">
+                    {article.ir_perspective.geopolitical_context}
+                  </p>
+                )}
+
+                {article.ir_perspective.strategic_recommendations &&
+                  article.ir_perspective.strategic_recommendations.length > 0 && (
+                    <div className="space-y-2 pt-2 border-t border-slate-200">
+                      <span className="text-xs font-semibold text-slate-800 uppercase tracking-wider block">
+                        Recomendaciones Estratégicas:
+                      </span>
+                      <ul className="space-y-1.5 text-xs sm:text-sm text-slate-700">
+                        {article.ir_perspective.strategic_recommendations.map((rec, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <span className="text-slate-900 font-bold">•</span>
+                            <span>{rec}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+              </section>
+            )}
+
+            {/* Institutional Dossier / Student Profile Card */}
+            <section className="mt-10 pt-8 border-t-2 border-slate-200">
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-7 space-y-6">
+                
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                  <div className="relative shrink-0">
+                    <img
+                      src={authorPhoto}
+                      alt={primaryAuthor}
+                      className="w-20 h-20 rounded-2xl object-cover object-top border-2 border-slate-300 shadow-sm"
+                    />
+                    <div className="absolute -bottom-1.5 -right-1.5 bg-slate-900 text-white p-1 rounded-full shadow">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1 text-center sm:text-left flex-1">
+                    <div className="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-slate-200 text-slate-800 uppercase tracking-wide">
+                      Ficha Técnica del Investigador
+                    </div>
+                    <h4
+                      onClick={() => {
+                        onSelectAuthor?.(primaryAuthor);
+                        onClose();
+                      }}
+                      className="text-xl font-bold text-slate-900 hover:text-slate-700 hover:underline cursor-pointer transition-colors"
+                      title={`Filtrar publicaciones de ${primaryAuthor}`}
+                    >
+                      {primaryAuthor}
+                    </h4>
+                    <p className="text-xs font-semibold text-slate-700">
+                      {authorProfile?.role || article.author_role || "Estudiante Investigador"} • {authorProfile?.academicId || "Mat. R.R.I.I. 2023"}
+                    </p>
+                    <p className="text-xs text-slate-700 font-medium">
+                      Línea de Estudio: {authorProfile?.specialization || article.topic}
+                    </p>
+                    {authorProfile?.email && (
+                      <p className="text-[11px] text-slate-500 font-mono">
+                        {authorProfile.email}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Academic Affiliation Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-4 border-t border-slate-200 text-xs">
+                  <div>
+                    <span className="font-bold text-slate-700 uppercase tracking-wider text-[10px] block">
+                      Unidad Académica
+                    </span>
+                    <p className="text-slate-900 font-medium mt-0.5">
+                      {academicMetadata.faculty}
+                    </p>
+                    <p className="text-slate-600 text-[11px]">
+                      {academicMetadata.school} • {academicMetadata.university}
+                    </p>
+                  </div>
+
+                  <div>
+                    <span className="font-bold text-slate-700 uppercase tracking-wider text-[10px] block">
+                      Entorno de Investigación
+                    </span>
+                    <p className="text-slate-900 font-medium mt-0.5">
+                      {academicMetadata.fairEdition}
+                    </p>
+                    <p className="text-slate-600 text-[11px]">
+                      {academicMetadata.location}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Other publications by this author in the fair */}
+                {authorOtherArticles.length > 0 && (
+                  <div className="pt-4 border-t border-slate-200 space-y-2">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+                      Otras investigaciones de {primaryAuthor} ({authorOtherArticles.length}):
+                    </span>
+                    <div className="space-y-1.5">
+                      {authorOtherArticles.map((other) => (
+                        <button
+                          key={other.id}
+                          type="button"
+                          onClick={() => onSelectArticle?.(other)}
+                          className="w-full text-left p-2.5 rounded-xl bg-white border border-slate-200 hover:border-slate-400 transition flex items-center justify-between text-xs cursor-pointer group"
+                        >
+                          <span className="font-medium text-slate-800 truncate group-hover:text-slate-950">
+                            {other.title}
+                          </span>
+                          <ChevronRight className="w-4 h-4 text-slate-400 shrink-0 ml-2 group-hover:text-slate-700" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Formal Document Verification Stamp */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 text-[11px] text-slate-600 border-t border-slate-200">
+                  <span>Dictaminado por: {academicMetadata.reviewers} • {classification}</span>
+                  <span className="font-mono text-slate-700">Registro: {documentRef} • ISSN {issn}</span>
+                </div>
+
+              </div>
             </section>
-          )}
+
+            {/* Footer Switcher between Dispatches */}
+            {nextArticle && (
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200">
+                <div className="text-xs text-slate-600">
+                  Observatorio Económico y Político de Relaciones Internacionales
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-slate-600">Siguiente reporte:</span>
+                  <button
+                    onClick={() => onSelectArticle?.(nextArticle)}
+                    className="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
+                  >
+                    <span>Examinar Siguiente</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
 
-        {/* Modal Footer */}
-        <div className="px-4 py-3 sm:px-6 sm:py-4 bg-white/80 border-t border-slate-200/50 backdrop-blur-md flex items-center justify-between text-xs text-slate-600 font-sans">
-          <span className="truncate max-w-[180px] sm:max-w-none">Feria Pedagógica RRII</span>
-          <button
-            onClick={onClose}
-            className="px-5 py-2.5 min-h-[40px] rounded-xl bg-white/90 hover:bg-slate-100 text-slate-800 font-medium border border-slate-200/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out"
-          >
-            Cerrar Lectura
-          </button>
-        </div>
       </div>
     </div>
   );

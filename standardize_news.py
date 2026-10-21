@@ -1,3 +1,4 @@
+from standardize_news import FALLBACK_MODEL
 import os
 import sys
 import re
@@ -175,32 +176,40 @@ def standardize_with_groq(raw_text: str, filename: str, fallback_author: str, fa
     }}
     """
 
-    max_retries = 5
-    for attempt in range(max_retries):
-        try:
-            response = client.chat.completions.create(
-                model=MODEL_NAME,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": f"Archivo: {filename}\n\nContenido del trabajo del alumno:\n{raw_text[:6000]}"}
-                ],
-                response_format={"type": "json_object"},
-                temperature=0.1
-            )
-            data = json.loads(response.choices[0].message.content)
-            return data
-        except Exception as e:
-            err_msg = str(e)
-            if "rate_limit" in err_msg.lower() or "429" in err_msg:
-                wait_time = 10 + attempt * 5
-                print(f"    [⏳ Rate limit] Reintentando en {wait_time}s (intento {attempt + 1}/{max_retries})...")
-                time.sleep(wait_time)
-            elif attempt < max_retries - 1:
-                print(f"    [!] Error en Groq: {err_msg[:80]}. Reintentando en 3s...")
-                time.sleep(3)
-            else:
-                print(f"[-] Error definitivo en Groq al procesar '{filename}': {e}")
-                return None
+    models_to_try = [MODEL_NAME, FALLBACK_MODEL]
+    for model_candidate in models_to_try:
+        max_retries = 4
+        for attempt in range(max_retries):
+            try:
+                response = client.chat.completions.create(
+                    model=model_candidate,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": f"Archivo: {filename}\n\nContenido del trabajo del alumno:\n{raw_text[:6000]}"}
+                    ],
+                    response_format={"type": "json_object"},
+                    temperature=0.1
+                )
+                data = json.loads(response.choices[0].message.content)
+                return data
+            except Exception as e:
+                err_msg = str(e)
+                if "rate_limit" in err_msg.lower() or "429" in err_msg:
+                    if model_candidate != models_to_try[-1] and attempt == 0:
+                        print(f"    [⚡ Rate limit en {model_candidate}] Alternando al modelo '{FALLBACK_MODEL}'...")
+                        break
+                    wait_time = 15 + attempt * 10
+                    print(f"    [⏳ Rate limit en {model_candidate}] Reintentando en {wait_time}s (intento {attempt + 1}/{max_retries})...")
+                    time.sleep(wait_time)
+                elif attempt < max_retries - 1:
+                    print(f"    [!] Error en Groq: {err_msg[:80]}. Reintentando en 3s...")
+                    time.sleep(3)
+                else:
+                    if model_candidate != models_to_try[-1]:
+                        print(f"    [↳ Alternando al modelo de respaldo '{FALLBACK_MODEL}']...")
+                        break
+                    print(f"[-] Error definitivo en Groq al procesar '{filename}': {e}")
+                    return None
 
 def main():
     if not os.path.exists(RAW_FOLDER):
@@ -330,7 +339,7 @@ def main():
                 json.dump(existing_news, f, ensure_ascii=False, indent=2)
 
         # Pausa suave de cortesía para respetar límites de tokens por minuto (TPM)
-        time.sleep(2.5)
+        time.sleep(1.2)
 
     print(f"\n[🚀] Ingesta completada con éxito.")
     print(f"Nuevos artículos procesados en esta sesión: {processed_count}")

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Filter, RotateCcw, GraduationCap, User } from 'lucide-react';
+import { Filter, RotateCcw, GraduationCap } from 'lucide-react';
+import { getAuthorImage } from '../data/authors';
 
 interface FilterBarProps {
   regions: string[];
@@ -49,7 +50,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           {hasActiveFilters && (
             <button
               onClick={onReset}
-              className="inline-flex items-center gap-1 text-slate-500 hover:text-rose-600 transition-colors font-medium cursor-pointer"
+              className="inline-flex items-center gap-1 text-slate-500 hover:text-rose-600 transition-colors duration-700 ease-out font-medium cursor-pointer"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Restablecer</span>
@@ -71,10 +72,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 key={reg}
                 type="button"
                 onClick={() => setSelectedRegion(reg)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-700 ease-out cursor-pointer ${
                   isSelected
                     ? 'bg-emerald-700 text-white font-semibold shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)]'
-                    : 'bg-slate-100/80 backdrop-blur-sm hover:bg-slate-200/80 border border-slate-200/40 text-slate-700 hover:text-slate-900 shadow-[0_2px_8px_rgba(0,0,0,0.02)]'
+                    : 'bg-white/80 backdrop-blur-md hover:bg-slate-200/80 border border-slate-200/50 text-slate-700 hover:text-slate-900 shadow-[0_2px_8px_rgba(0,0,0,0.02)]'
                 }`}
               >
                 {reg}
@@ -97,10 +98,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 key={top}
                 type="button"
                 onClick={() => setSelectedTopic(top)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-700 ease-out cursor-pointer ${
                   isSelected
                     ? 'bg-slate-900 text-white font-semibold shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)]'
-                    : 'bg-slate-100/80 backdrop-blur-sm hover:bg-slate-200/80 border border-slate-200/40 text-slate-700 hover:text-slate-900 shadow-[0_2px_8px_rgba(0,0,0,0.02)]'
+                    : 'bg-white/80 backdrop-blur-md hover:bg-slate-200/80 border border-slate-200/50 text-slate-700 hover:text-slate-900 shadow-[0_2px_8px_rgba(0,0,0,0.02)]'
                 }`}
               >
                 {top}
@@ -110,12 +111,12 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         </div>
       </div>
 
-      {/* Student Author Selector & Pills */}
+      {/* Student Author Selector & Visual Portrait Pills */}
       <div className="space-y-2 pt-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-500 uppercase tracking-wider">
             <GraduationCap className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Por Alumno / Investigador:</span>
+            <span>Por Investigador / Alumno:</span>
           </div>
 
           {/* Quick Dropdown selector for rapid author selection */}
@@ -124,7 +125,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               value={selectedAuthor}
               onChange={(e) => setSelectedAuthor(e.target.value)}
               aria-label="Seleccionar autor o alumno"
-              className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-white/80 backdrop-blur-sm border border-slate-200/60 text-slate-700 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-xs transition-all duration-300 ease-out cursor-pointer"
+              className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-white/80 backdrop-blur-md border border-slate-200/60 text-slate-700 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 shadow-xs transition-all duration-700 ease-out cursor-pointer"
             >
               <option value="TODOS">Todos los alumnos ({authors.length})</option>
               {authors.map((author) => (
@@ -139,21 +140,29 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {['TODOS', ...authors].map((auth) => {
             const isSelected = selectedAuthor === auth;
+            const authorImg = auth !== 'TODOS' ? getAuthorImage(auth) : null;
+
             return (
               <button
                 key={auth}
                 type="button"
                 onClick={() => setSelectedAuthor(auth)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer ${
+                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-700 ease-out cursor-pointer border ${
                   isSelected
-                    ? 'bg-emerald-800 text-white font-semibold shadow-[0_4px_20px_-4px_rgba(6,95,70,0.2)]'
-                    : 'bg-slate-100/80 backdrop-blur-sm hover:bg-slate-200/80 border border-slate-200/40 text-slate-700 hover:text-slate-900 shadow-[0_2px_8px_rgba(0,0,0,0.02)]'
+                    ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                    : 'bg-white/80 backdrop-blur-md text-slate-700 border-slate-200/80 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300'
                 }`}
               >
-                {auth !== 'TODOS' && (
-                  <User className={`w-3 h-3 ${isSelected ? 'text-emerald-200' : 'text-slate-400'}`} />
+                {authorImg && (
+                  <img
+                    src={authorImg}
+                    alt={auth}
+                    className="w-4 h-4 rounded-full object-cover object-top border border-slate-300 shrink-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
                 )}
-                <span>{auth === 'TODOS' ? 'Todos los Alumnos' : auth}</span>
+                <span className="whitespace-nowrap">
+                  {auth === 'TODOS' ? 'Todos los Alumnos' : auth}
+                </span>
               </button>
             );
           })}

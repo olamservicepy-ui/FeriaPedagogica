@@ -1,12 +1,22 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
     server: {
       watch: {
         ignored: ['**/entradas_crudos/**', '**/*.pdf', '**/*.docx'],
@@ -16,8 +26,112 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
       {
-        name: 'groq-chat-api',
+        name: 'local-api-handler',
         configureServer(server) {
+          // Endpoint para guardar news.json directamente en el disco
+          server.middlewares.use('/api/save-news', (req, res) => {
+            if (req.method === 'POST') {
+              let body = ''
+              req.on('data', (chunk) => {
+                body += chunk
+              })
+              req.on('end', () => {
+                try {
+                  const filePath = path.resolve(__dirname, 'src/data/news.json')
+                  let formatted = body
+                  try {
+                    const parsed = JSON.parse(body)
+                    formatted = JSON.stringify(parsed, null, 2)
+                  } catch {
+                    // keep raw body if not valid JSON string
+                  }
+                  fs.writeFileSync(filePath, formatted, 'utf-8')
+                  res.statusCode = 200
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({ status: 'ok', message: 'Noticias guardadas en disco' }))
+                } catch (err: any) {
+                  res.statusCode = 500
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({ error: err?.message || String(err) }))
+                }
+              })
+            } else {
+              res.statusCode = 405
+              res.end()
+            }
+          })
+
+          // Endpoint para guardar avatares en public/authors/
+          server.middlewares.use('/api/save-avatar', (req, res) => {
+            if (req.method === 'POST') {
+              let body = ''
+              req.on('data', (chunk) => {
+                body += chunk
+              })
+              req.on('end', () => {
+                try {
+                  const { filename, base64Data } = JSON.parse(body)
+                  const dirPath = path.resolve(__dirname, 'public/authors')
+                  if (!fs.existsSync(dirPath)) {
+                    fs.mkdirSync(dirPath, { recursive: true })
+                  }
+                  const safeFilename = (filename || `avatar_${Date.now()}.png`).replace(/[^a-zA-Z0-9_.-]/g, '_')
+                  const filePath = path.join(dirPath, safeFilename)
+                  const data = (base64Data || '').replace(/^data:image\/\w+;base64,/, '')
+                  fs.writeFileSync(filePath, Buffer.from(data, 'base64'))
+
+                  res.statusCode = 200
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({ status: 'ok', url: `/authors/${safeFilename}` }))
+                } catch (err: any) {
+                  res.statusCode = 500
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({ error: err?.message || String(err) }))
+                }
+              })
+            } else {
+              res.statusCode = 405
+              res.end()
+            }
+          })
+
+          // Endpoint compatible con /api/update-news
+          server.middlewares.use('/api/update-news', (req, res) => {
+            if (req.method === 'POST') {
+              let body = ''
+              req.on('data', (chunk) => {
+                body += chunk
+              })
+              req.on('end', () => {
+                try {
+                  const filePath = path.resolve(__dirname, 'src/data/news.json')
+                  const parsed = body ? JSON.parse(body) : []
+                  if (!Array.isArray(parsed)) {
+                    res.statusCode = 400
+                    res.setHeader('Content-Type', 'application/json')
+                    res.end(JSON.stringify({ error: 'El contenido debe ser un arreglo de noticias.' }))
+                    return
+                  }
+                  fs.writeFileSync(filePath, JSON.stringify(parsed, null, 2), 'utf-8')
+                  res.statusCode = 200
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({ success: true, count: parsed.length }))
+                } catch (error: any) {
+                  res.statusCode = 500
+                  res.setHeader('Content-Type', 'application/json')
+                  res.end(JSON.stringify({
+                    error: 'Error al escribir el archivo',
+                    details: error?.message || String(error)
+                  }))
+                }
+              })
+            } else {
+              res.statusCode = 405
+              res.end()
+            }
+          })
+
+          // Endpoint para consultas con IA Groq
           server.middlewares.use('/api/chat', async (req, res) => {
             if (req.method !== 'POST') {
               res.statusCode = 405
@@ -54,9 +168,7 @@ export default defineConfig(({ mode }) => {
                 }
 
                 const { default: Groq } = await import('groq-sdk')
-                const fs = await import('node:fs')
-                const path = await import('node:path')
-                const filePath = path.resolve(process.cwd(), 'src/data/news.json')
+                const filePath = path.resolve(__dirname, 'src/data/news.json')
                 const newsData = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 
                 const groq = new Groq({ apiKey })
@@ -102,6 +214,7 @@ Instrucciones:
             })
           })
 
+          // Endpoint para análisis editorial con Groq
           server.middlewares.use('/api/analyze', async (req, res) => {
             if (req.method !== 'POST') {
               res.statusCode = 405
@@ -173,52 +286,8 @@ Analiza la noticia y responde EXCLUSIVAMENTE con un objeto JSON válido con la s
               }
             })
           })
-
-          server.middlewares.use('/api/update-news', async (req, res) => {
-            if (req.method !== 'POST') {
-              res.statusCode = 405
-              res.setHeader('Content-Type', 'application/json')
-              res.end(JSON.stringify({ error: 'Método no permitido' }))
-              return
-            }
-
-            let body = ''
-            req.on('data', (chunk) => {
-              body += chunk
-            })
-
-            req.on('end', async () => {
-              try {
-                const fs = await import('node:fs')
-                const path = await import('node:path')
-                const filePath = path.resolve(process.cwd(), 'src/data/news.json')
-
-                const parsed = body ? JSON.parse(body) : []
-                if (!Array.isArray(parsed)) {
-                  res.statusCode = 400
-                  res.setHeader('Content-Type', 'application/json')
-                  res.end(JSON.stringify({ error: 'El contenido debe ser un arreglo de noticias.' }))
-                  return
-                }
-
-                fs.writeFileSync(filePath, JSON.stringify(parsed, null, 2), 'utf-8')
-                res.statusCode = 200
-                res.setHeader('Content-Type', 'application/json')
-                res.end(JSON.stringify({ success: true, count: parsed.length }))
-              } catch (error: any) {
-                console.error('Error al actualizar news.json en Vite dev server:', error)
-                res.statusCode = 500
-                res.setHeader('Content-Type', 'application/json')
-                res.end(JSON.stringify({
-                  error: 'Error al escribir el archivo',
-                  details: error?.message || String(error)
-                }))
-              }
-            })
-          })
         }
       }
     ],
   }
 })
-
