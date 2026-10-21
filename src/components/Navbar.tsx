@@ -1,21 +1,9 @@
 // src/components/Navbar.tsx
-import React, { useState } from 'react';
-import {
-  Newspaper,
-  BookOpen,
-  GraduationCap,
-  Sparkles,
-  ShieldCheck,
-  Lock,
-  Menu,
-  X,
-  LogOut,
-  Building2,
-} from 'lucide-react';
+import React from 'react';
 
-export interface NavbarProps {
-  currentView?: string;
-  onNavigate?: (view: string) => void;
+interface NavbarProps {
+  currentView: string;
+  onNavigate: (view: string) => void;
   activeTab?: string;
   setActiveTab?: (tab: any) => void;
   articlesCount?: number;
@@ -28,301 +16,110 @@ export interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   currentView,
   onNavigate,
-  activeTab,
-  setActiveTab,
-  articlesCount,
-  glossaryCount,
-  onOpenAIAssistant,
   isAdminLoggedIn,
   onLogout,
 }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const active = currentView || activeTab || 'news';
-
-  const handleNav = (view: string) => {
-    if (view === 'asistente') {
-      if (onOpenAIAssistant) {
-        onOpenAIAssistant();
-        setMobileMenuOpen(false);
-        return;
-      }
-    }
-    if (onNavigate) {
-      onNavigate(view);
-    } else if (setActiveTab) {
-      setActiveTab(view);
-    }
-    setMobileMenuOpen(false);
-  };
-
   return (
-    <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
-      {/* 1. Franja institucional superior de la Feria Pedagógica */}
-      <div className="w-full bg-[#002A54] text-white py-1.5 px-4 sm:px-8 text-center border-b border-[#001D3D]">
-        <p className="text-[10px] sm:text-xs tracking-wider uppercase font-semibold">
-          FERIA PEDAGÓGICA - FACULTAD DE HUMANIDADES, CIENCIAS SOCIALES Y CULTURA GUARANÍ - EDICIÓN 2026
-        </p>
+    <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+      {/* 1. FRANJA INSTITUCIONAL PRINCIPAL */}
+      <div className="w-full bg-slate-50 border-b border-slate-200/80 py-2.5 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          
+          {/* EXTREMO IZQUIERDO: Logo de la UNI */}
+          <div className="flex-shrink-0 flex items-center justify-center">
+            <img
+              src="/logo-uni.png"
+              alt="Universidad Nacional de Itapúa"
+              className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+            />
+          </div>
+
+          {/* TEXTOS CENTRALES EN DOS FILAS JERÁRQUICAS */}
+          <div className="flex-1 text-center px-2">
+            {/* Fila 1: Universidad */}
+            <h1 className="text-xs sm:text-sm md:text-base font-extrabold uppercase tracking-wider text-[#002A54] leading-tight">
+              Universidad Nacional de Itapúa
+            </h1>
+            {/* Fila 2: Facultad */}
+            <h2 className="text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-wide text-slate-600 leading-tight mt-0.5">
+              Facultad de Humanidades, Ciencias Sociales y Cultura Guaraní
+            </h2>
+          </div>
+
+          {/* EXTREMO DERECHO: Logo de la Facultad de Humanidades */}
+          <div className="flex-shrink-0 flex items-center justify-center">
+            <img
+              src="/logo-humanidades.png"
+              alt="Facultad de Humanidades, Ciencias Sociales y Cultura Guaraní"
+              className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+            />
+          </div>
+
+        </div>
       </div>
 
-      {/* 2. Barra Principal de Navegación */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      {/* 2. BARRA DE ACCIÓN Y NAVEGACIÓN */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
         
-        {/* Identidad / Logotipo a la izquierda */}
-        <div
-          onClick={() => handleNav('news')}
-          className="cursor-pointer flex items-center gap-3 select-none group"
-        >
-          <div className="w-9 h-9 rounded-lg bg-[#002A54] group-hover:bg-[#004F8A] text-white flex items-center justify-center transition-colors shadow-xs">
-            <Building2 className="w-5 h-5 text-[#BAE6FD]" />
-          </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-[#002A54] uppercase">
-                Economía IV
-              </span>
-              <span className="text-[10px] sm:text-xs font-bold text-[#004F8A] bg-[#009EDB]/15 px-2 py-0.5 rounded">
-                2026
-              </span>
-            </div>
-            <span className="hidden sm:inline text-[10px] text-slate-500 font-medium">
-              Observatorio de Relaciones Internacionales
-            </span>
-          </div>
+        {/* Identificador breve de Cátedra */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#004F8A]">
+            Economía IV • Edición 2026
+          </span>
         </div>
 
-        {/* Enlaces de Escritorio a la derecha */}
-        <nav className="hidden md:flex items-center gap-2">
-          {/* 1. Investigaciones */}
+        {/* Botones de navegación a la derecha */}
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
-            type="button"
-            onClick={() => handleNav('news')}
-            className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-              active === 'news' || active === 'economia-iv'
-                ? 'bg-[#004F8A] text-white shadow-xs'
+            onClick={() => onNavigate('news')}
+            className={`px-3 py-1 text-xs font-semibold rounded transition-colors cursor-pointer ${
+              currentView === 'news' || currentView === 'economia-iv'
+                ? 'bg-[#004F8A] text-white shadow-sm'
                 : 'text-slate-600 hover:text-[#004F8A] hover:bg-slate-100'
             }`}
           >
-            <Newspaper className="w-3.5 h-3.5" />
-            <span>Investigaciones</span>
-            {articlesCount !== undefined && articlesCount > 0 && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                active === 'news' || active === 'economia-iv'
-                  ? 'bg-white/20 text-white'
-                  : 'bg-slate-200 text-slate-700'
-              }`}>
-                {articlesCount}
-              </span>
-            )}
+            Investigaciones
           </button>
 
-          {/* 2. Glosario */}
           <button
-            type="button"
-            onClick={() => handleNav('glossary')}
-            className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-              active === 'glossary'
-                ? 'bg-[#004F8A] text-white shadow-xs'
-                : 'text-slate-600 hover:text-[#004F8A] hover:bg-slate-100'
-            }`}
+            onClick={() => onNavigate('asistente')}
+            className="px-3 py-1 text-xs font-semibold rounded border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer"
           >
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Glosario</span>
-            {glossaryCount !== undefined && glossaryCount > 0 && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                active === 'glossary'
-                  ? 'bg-white/20 text-white'
-                  : 'bg-slate-200 text-slate-700'
-              }`}>
-                {glossaryCount}
-              </span>
-            )}
+            Asistente IA
           </button>
 
-          {/* 3. Institucional */}
-          <button
-            type="button"
-            onClick={() => handleNav('about')}
-            className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-              active === 'about'
-                ? 'bg-[#004F8A] text-white shadow-xs'
-                : 'text-slate-600 hover:text-[#004F8A] hover:bg-slate-100'
-            }`}
-          >
-            <GraduationCap className="w-3.5 h-3.5" />
-            <span>Institucional</span>
-          </button>
-
-          {/* 4. Asistente IA */}
-          <button
-            type="button"
-            onClick={() => handleNav('asistente')}
-            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-md border border-[#009EDB]/40 bg-[#009EDB]/10 text-[#004F8A] hover:bg-[#009EDB]/20 transition-colors cursor-pointer shadow-2xs"
-            title="Consultar al Asistente Académico IA con Llama-3"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#009EDB]" />
-            <span>Asistente IA</span>
-          </button>
-
-          {/* 5. Panel Admin / Salir */}
           {isAdminLoggedIn ? (
-            <div className="flex items-center gap-1 ml-1 pl-2 border-l border-slate-200">
+            <div className="flex items-center gap-2">
               <button
-                type="button"
-                onClick={() => handleNav('admin')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-                  active === 'admin' || active === 'create'
-                    ? 'bg-slate-900 text-white shadow-xs'
-                    : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
+                onClick={() => onNavigate('admin')}
+                className={`px-3 py-1 text-xs font-semibold rounded transition-colors cursor-pointer ${
+                  currentView === 'admin'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Panel Admin ✓</span>
+                Panel Admin ✓
               </button>
               {onLogout && (
                 <button
-                  type="button"
                   onClick={onLogout}
-                  className="p-1.5 text-slate-400 hover:text-rose-600 transition-colors cursor-pointer"
-                  title="Cerrar sesión de administrador"
+                  className="px-2 py-1 text-xs text-rose-600 hover:underline cursor-pointer"
                 >
-                  <LogOut className="w-3.5 h-3.5" />
+                  Salir
                 </button>
               )}
             </div>
           ) : (
             <button
-              type="button"
-              onClick={() => handleNav('admin')}
-              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer ml-1 ${
-                active === 'admin' || active === 'login'
-                  ? 'bg-slate-900 text-white'
-                  : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
-              }`}
+              onClick={() => onNavigate('admin')}
+              className="px-3 py-1 text-xs font-semibold rounded text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
             >
-              <Lock className="w-3.5 h-3.5" />
-              <span>Admin</span>
+              Panel Admin
             </button>
           )}
-        </nav>
-
-        {/* Botón Móvil Hamburguesa */}
-        <div className="flex md:hidden items-center">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
-            aria-label="Abrir menú de navegación"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
 
       </div>
-
-      {/* Menú Móvil Desplegable */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2 shadow-lg animate-in slide-in-from-top-2 duration-150">
-          <button
-            type="button"
-            onClick={() => handleNav('news')}
-            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
-              active === 'news' || active === 'economia-iv'
-                ? 'bg-[#004F8A] text-white'
-                : 'text-slate-700 hover:bg-slate-100'
-            }`}
-          >
-            <div className="flex items-center gap-2.5">
-              <Newspaper className="w-4 h-4" />
-              <span>Investigaciones</span>
-            </div>
-            {articlesCount !== undefined && (
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">
-                {articlesCount}
-              </span>
-            )}
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleNav('glossary')}
-            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
-              active === 'glossary'
-                ? 'bg-[#004F8A] text-white'
-                : 'text-slate-700 hover:bg-slate-100'
-            }`}
-          >
-            <div className="flex items-center gap-2.5">
-              <BookOpen className="w-4 h-4" />
-              <span>Glosario Conceptual</span>
-            </div>
-            {glossaryCount !== undefined && (
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">
-                {glossaryCount}
-              </span>
-            )}
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleNav('about')}
-            className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
-              active === 'about'
-                ? 'bg-[#004F8A] text-white'
-                : 'text-slate-700 hover:bg-slate-100'
-            }`}
-          >
-            <GraduationCap className="w-4 h-4" />
-            <span>Institucional / Acerca de</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleNav('asistente')}
-            className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg text-xs font-semibold bg-[#009EDB]/15 text-[#004F8A] border border-[#009EDB]/30"
-          >
-            <Sparkles className="w-4 h-4 text-[#009EDB]" />
-            <span>Asistente Académico IA</span>
-          </button>
-
-          <div className="pt-2 border-t border-slate-100">
-            {isAdminLoggedIn ? (
-              <div className="flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={() => handleNav('admin')}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-slate-900 text-white"
-                >
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Panel Admin ✓</span>
-                </button>
-                {onLogout && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onLogout();
-                      setMobileMenuOpen(false);
-                    }}
-                    className="flex items-center gap-1 text-xs text-rose-600 hover:underline px-2 py-1"
-                  >
-                    <LogOut className="w-3.5 h-3.5" />
-                    <span>Cerrar sesión</span>
-                  </button>
-                )}
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => handleNav('admin')}
-                className="w-full flex items-center gap-2 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100"
-              >
-                <Lock className="w-4 h-4" />
-                <span>Ingreso Administrador</span>
-              </button>
-            )}
-          </div>
-        </div>
-      )}
     </header>
   );
 };
