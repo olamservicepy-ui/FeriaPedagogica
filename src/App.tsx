@@ -18,6 +18,18 @@ import { getAuthorPhotoCrop, getAuthorImage, setAuthorPhotoOverride } from './da
 import { loadAllArticles, saveArticle, deleteArticle, clearAllArticles, syncNewsToDisk, setLocalArticles } from './services/storage';
 import { isAuthenticated } from './services/auth';
 import { Newspaper } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+
+const gridContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
 
 export function App() {
   const [articles, setArticles] = useState<NewsArticle[]>(() => {
@@ -390,7 +402,7 @@ export function App() {
               />
             </div>
 
-            {/* Grilla Asimétrica Carnegie */}
+            {/* Grilla Asimétrica con Scroll Reveal */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {filteredArticles.length === 0 ? (
                 <div className="p-12 text-center rounded-xl bg-slate-50 border border-slate-200 space-y-3">
@@ -406,11 +418,19 @@ export function App() {
                   </button>
                 </div>
               ) : (
-                <CarnegieEditorialGrid
-                  articles={filteredArticles as any}
-                  onSelectArticle={(art: any) => setSelectedArticle(art)}
-                  onSelectAuthor={handleSelectAuthor}
-                />
+                <motion.div
+                  key={`${selectedRegion}-${selectedTopic}-${selectedAuthor}-${searchQuery}`}
+                  variants={gridContainerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                >
+                  <CarnegieEditorialGrid
+                    articles={filteredArticles as any}
+                    onSelectArticle={(art: any) => setSelectedArticle(art)}
+                    onSelectAuthor={handleSelectAuthor}
+                  />
+                </motion.div>
               )}
             </div>
           </div>
