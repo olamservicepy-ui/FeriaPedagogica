@@ -2,10 +2,10 @@
 import React from 'react';
 import type { NewsArticle } from '../types/news';
 import { getAuthorImage, getAuthorPhotoCrop } from '../data/authors';
-import BorderGlow from './reactbits/BorderGlow';
 import GlassSurface from './reactbits/GlassSurface';
 import AnimatedContent from './reactbits/AnimatedContent';
 import BlurText from './reactbits/BlurText';
+import SpotlightCard from './reactbits/SpotlightCard';
 
 interface Props {
   articles: NewsArticle[];
@@ -47,10 +47,10 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
   return (
     <div className="w-full max-w-7xl mx-auto py-4">
       
-      {/* 1. SECCIÓN ASIMÉTRICA PRINCIPAL (Lead + 3 notas laterales con AnimatedContent) */}
+      {/* 1. SECCIÓN ASIMÉTRICA PRINCIPAL (Lead + 3 notas laterales con AnimatedContent y SpotlightCard) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-10 border-b border-slate-200">
         
-        {/* Noticia Principal (Lead - 7 columnas con AnimatedContent y BorderGlow) */}
+        {/* Noticia Principal (Lead - 7 columnas con AnimatedContent y SpotlightCard) */}
         {leadArticle && (
           <AnimatedContent
             distance={50}
@@ -60,20 +60,20 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
             threshold={0.1}
             className="lg:col-span-7 h-full"
           >
-            <BorderGlow
-              edgeSensitivity={35}
-              glowColor="215 90 55"
-              backgroundColor="#ffffff"
-              borderRadius={24}
-              glowRadius={36}
-              glowIntensity={1.1}
-              coneSpread={26}
-              animated={true}
-              colors={['#2563eb', '#38bdf8', '#818cf8']}
-              className="h-full cursor-pointer hover:shadow-xl transition-all"
+            <SpotlightCard
+              theme="light"
+              spotlightColor="#004F8A"
+              intensity={0.28}
+              spotlightSize={360}
+              softness={0.7}
+              borderGlow={0.8}
+              proximity={90}
+              smoothing={0.25}
+              flare={true}
+              className="rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-sm hover:shadow-xl transition-all cursor-pointer h-full"
               onClick={() => onSelectArticle(leadArticle)}
             >
-              <div className="p-6 sm:p-7 flex flex-col justify-between h-full group">
+              <div className="flex flex-col justify-between h-full group">
                 <div>
                   {/* Contenedor de la Foto con Zoom sutil y encuadre del alumno */}
                   <div className="relative w-full overflow-hidden bg-slate-100 mb-4 rounded-xl border border-slate-200/80 aspect-[16/10] max-h-[380px]">
@@ -124,11 +124,11 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
                   <span>{leadArticle.date || 'Edición 2026'} • 3 MIN READ</span>
                 </div>
               </div>
-            </BorderGlow>
+            </SpotlightCard>
           </AnimatedContent>
         )}
 
-        {/* Lateral Asimétrico (5 columnas con AnimatedContent en cascada stagger) */}
+        {/* Lateral Asimétrico (5 columnas con AnimatedContent en cascada stagger y SpotlightCards) */}
         <div className="lg:col-span-5 flex flex-col justify-between">
           <AnimatedContent
             distance={35}
@@ -137,7 +137,7 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
             ease="power3.out"
             stagger={0.12}
             threshold={0.1}
-            className="flex flex-col justify-between divide-y divide-slate-200 h-full"
+            className="flex flex-col justify-between gap-4 h-full"
           >
             {sideArticles.map((article, idx) => {
               const hasThumbnail = idx === 0;
@@ -146,51 +146,60 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
               const crop = article.photoCrop || getAuthorPhotoCrop(author);
 
               return (
-                <article
+                <SpotlightCard
                   key={article.id}
+                  theme="light"
+                  spotlightColor="#004F8A"
+                  intensity={0.22}
+                  spotlightSize={260}
+                  softness={0.7}
+                  borderGlow={0.7}
+                  proximity={75}
+                  smoothing={0.25}
+                  flare={true}
+                  className="rounded-2xl p-4 sm:p-4.5 border border-slate-200/90 shadow-sm hover:shadow-md transition-all cursor-pointer group h-full flex flex-col justify-between"
                   onClick={() => onSelectArticle(article)}
-                  className={`group cursor-pointer py-4 first:pt-0 last:pb-0 ${
-                    hasThumbnail ? 'flex gap-4' : 'flex flex-col'
-                  }`}
                 >
-                  {hasThumbnail && (
-                    <div className="w-28 sm:w-32 h-24 flex-shrink-0 overflow-hidden bg-slate-100 border border-slate-200 relative rounded-lg">
-                      <img
-                        src={img}
-                        alt={author}
-                        style={{
-                          transform: `scale(${crop?.zoom || 1}) translate(${crop?.panX || 0}%, ${crop?.panY || 0}%)`,
-                        }}
-                        className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
-                      />
-                    </div>
-                  )}
+                  <div className={`flex ${hasThumbnail ? 'gap-4 items-start' : 'flex-col'} h-full justify-between`}>
+                    {hasThumbnail && (
+                      <div className="w-24 sm:w-28 h-20 sm:h-24 flex-shrink-0 overflow-hidden bg-slate-100 border border-slate-200 relative rounded-lg">
+                        <img
+                          src={img}
+                          alt={author}
+                          style={{
+                            transform: `scale(${crop?.zoom || 1}) translate(${crop?.panX || 0}%, ${crop?.panY || 0}%)`,
+                          }}
+                          className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+                        />
+                      </div>
+                    )}
 
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#004F8A]">
-                        {article.topic || 'Comentario'}
-                      </span>
-                      <h3 className="font-bold text-base text-[#1A2530] leading-snug mt-1 underline-offset-2 decoration-1 decoration-[#004F8A] group-hover:underline">
-                        {article.title}
-                      </h3>
-                    </div>
+                    <div className="flex-1 flex flex-col justify-between h-full">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#004F8A]">
+                          {article.topic || 'Comentario'}
+                        </span>
+                        <h3 className="font-bold text-base text-[#1A2530] leading-snug mt-1 underline-offset-2 decoration-1 decoration-[#004F8A] group-hover:underline">
+                          {article.title}
+                        </h3>
+                      </div>
 
-                    <div className="text-xs text-slate-500 pt-2 flex items-center justify-between">
-                      <span className="font-medium text-slate-700">
-                        {author}
-                      </span>
-                      <span>3 MIN READ</span>
+                      <div className="text-xs text-slate-500 pt-2 flex items-center justify-between">
+                        <span className="font-medium text-slate-700">
+                          {author}
+                        </span>
+                        <span>3 MIN READ</span>
+                      </div>
                     </div>
                   </div>
-                </article>
+                </SpotlightCard>
               );
             })}
           </AnimatedContent>
         </div>
       </div>
 
-      {/* 2. BLOQUE EDITORIAL ASIMÉTRICO DE PURO TEXTO CON GLASSSURFACE + ANIMATEDCONTENT */}
+      {/* 2. BLOQUE EDITORIAL ASIMÉTRICO DE PURO TEXTO CON GLASSSURFACE + ANIMATEDCONTENT + SPOTLIGHTCARD */}
       {textOnlyArticles.length > 0 && (
         <div className="py-8 border-b border-slate-200">
           <GlassSurface
@@ -208,17 +217,24 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
               ease="power3.out"
               stagger={0.1}
               threshold={0.1}
-              className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-200"
+              className="w-full grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              {textOnlyArticles.map((item, idx) => {
+              {textOnlyArticles.map((item) => {
                 const author = getPrimaryAuthor(item);
                 return (
-                  <article
+                  <SpotlightCard
                     key={item.id}
+                    theme="light"
+                    spotlightColor="#009EDB"
+                    intensity={0.22}
+                    spotlightSize={240}
+                    softness={0.7}
+                    borderGlow={0.65}
+                    proximity={70}
+                    smoothing={0.25}
+                    flare={true}
+                    className="rounded-2xl p-5 border border-slate-200/90 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between group h-full"
                     onClick={() => onSelectArticle(item)}
-                    className={`group cursor-pointer flex flex-col justify-between ${
-                      idx > 0 ? 'pt-4 md:pt-0 md:pl-6' : ''
-                    }`}
                   >
                     <div>
                       <div className="flex items-center gap-2 mb-1">
@@ -240,7 +256,7 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
                       <span className="font-medium text-slate-700">{author}</span>
                       <span>2 MIN READ</span>
                     </div>
-                  </article>
+                  </SpotlightCard>
                 );
               })}
             </AnimatedContent>
@@ -248,7 +264,7 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
         </div>
       )}
 
-      {/* 3. RESTO DE NOTICIAS EN CUADRÍCULA CON ANIMATEDCONTENT STAGGER Y BORDER GLOW */}
+      {/* 3. RESTO DE NOTICIAS EN CUADRÍCULA CON ANIMATEDCONTENT STAGGER Y SPOTLIGHTCARD */}
       {restArticles.length > 0 && (
         <AnimatedContent
           distance={60}
@@ -266,19 +282,20 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
 
             return (
               <div key={article.id} className="h-full">
-                <BorderGlow
-                  edgeSensitivity={28}
-                  glowColor="215 85 60"
-                  backgroundColor="#ffffff"
-                  borderRadius={18}
-                  glowRadius={32}
-                  glowIntensity={0.9}
-                  coneSpread={24}
-                  colors={['#3b82f6', '#60a5fa', '#93c5fd']}
-                  className="h-full cursor-pointer hover:shadow-lg transition-all"
+                <SpotlightCard
+                  theme="light"
+                  spotlightColor="#004F8A"
+                  intensity={0.24}
+                  spotlightSize={280}
+                  softness={0.7}
+                  borderGlow={0.75}
+                  proximity={80}
+                  smoothing={0.25}
+                  flare={true}
+                  className="rounded-2xl p-0 border border-slate-200/90 shadow-sm hover:shadow-lg transition-all cursor-pointer h-full flex flex-col justify-between overflow-hidden group"
                   onClick={() => onSelectArticle(article)}
                 >
-                  <div className="flex flex-col justify-between h-full group">
+                  <div className="flex flex-col justify-between h-full">
                     <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
                       <img
                         src={img}
@@ -293,7 +310,7 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
                       </span>
                     </div>
 
-                    <div className="p-4 flex flex-col flex-1 justify-between">
+                    <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between">
                       <div>
                         <h4 className="font-bold text-base text-[#1A2530] leading-snug underline-offset-2 decoration-1 decoration-[#004F8A] group-hover:underline">
                           {article.title}
@@ -309,7 +326,7 @@ export const CarnegieEditorialGrid: React.FC<Props> = ({ articles, onSelectArtic
                       </div>
                     </div>
                   </div>
-                </BorderGlow>
+                </SpotlightCard>
               </div>
             );
           })}

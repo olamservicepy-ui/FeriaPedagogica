@@ -3,6 +3,8 @@ import { ArrowUpRight, Sliders } from 'lucide-react';
 import type { NewsArticle, PhotoCrop } from '../types/news';
 import { getAuthorImage, getAuthorProfile, getAuthorPhotoCrop } from '../data/authors';
 
+import SpotlightCard from './reactbits/SpotlightCard';
+
 interface NewsCardProps {
   article: NewsArticle;
   onSelect: (article: NewsArticle) => void;
@@ -47,9 +49,18 @@ export const NewsCard: React.FC<NewsCardProps> = ({
     || getAuthorPhotoCrop(primaryAuthor);
 
   return (
-    <article
+    <SpotlightCard
+      theme="light"
+      spotlightColor="#004F8A"
+      intensity={0.24}
+      spotlightSize={280}
+      softness={0.7}
+      borderGlow={0.75}
+      proximity={80}
+      smoothing={0.25}
+      flare={true}
+      className="group cursor-pointer flex flex-col border border-slate-200/90 rounded-2xl p-0 overflow-hidden transition-all duration-300 hover:shadow-lg"
       onClick={() => onSelect(article)}
-      className="group cursor-pointer flex flex-col bg-white border border-slate-200/90 rounded-none overflow-hidden transition-all duration-300 hover:shadow-lg"
     >
       {/* 1. Contenedor de la Imagen con Zoom sutil al hover */}
       <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100 select-none border-b border-slate-200/60">
@@ -152,6 +163,6 @@ export const NewsCard: React.FC<NewsCardProps> = ({
           </div>
         </div>
       </div>
-    </article>
+    </SpotlightCard>
   );
 };

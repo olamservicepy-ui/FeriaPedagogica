@@ -1,4 +1,5 @@
 import React from 'react';
+import SpotlightCard from './reactbits/SpotlightCard';
 
 export interface Author {
   name: string;
@@ -24,9 +25,18 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick }) =>
   const displayImage = author?.avatar || article.coverImage || '/placeholder.jpg';
 
   return (
-    <article
+    <SpotlightCard
+      theme="light"
+      spotlightColor="#004F8A"
+      intensity={0.24}
+      spotlightSize={280}
+      softness={0.7}
+      borderGlow={0.75}
+      proximity={80}
+      smoothing={0.25}
+      flare={true}
+      className="group cursor-pointer flex flex-col border border-slate-200/90 rounded-2xl p-0 overflow-hidden transition-all duration-300 hover:shadow-lg"
       onClick={onClick}
-      className="group cursor-pointer flex flex-col bg-white border border-slate-200/90 rounded-none overflow-hidden transition-all duration-300 hover:shadow-lg"
     >
       {/* 1. Contenedor de la Imagen con Zoom sutil al hover */}
       <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
@@ -65,6 +75,6 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick }) =>
           <span>{article.readTime || '3 MINUTE READ'}</span>
         </div>
       </div>
-    </article>
+    </SpotlightCard>
   );
 };
