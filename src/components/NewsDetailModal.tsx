@@ -37,15 +37,24 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
   onOpenCropper,
 }) => {
   const [copiedLink, setCopiedLink] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    if (isClosing) return;
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 380);
+  };
 
   // Close on Escape key press
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') handleClose();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [isClosing]);
 
   if (!article) return null;
 
@@ -148,12 +157,19 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-y-auto animate-in fade-in duration-300 select-none sm:select-text"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) handleClose();
+      }}
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-y-auto select-none sm:select-text transition-opacity duration-300 ${
+        isClosing ? 'opacity-0 pointer-events-none' : 'opacity-100 animate-in fade-in duration-300'
+      }`}
     >
       {/* MAIN MODAL CONTAINER (DARK INSTITUTIONAL LUXURY) */}
       <div
         key={article.id}
-        className="w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col bg-zinc-950 rounded-3xl border border-white/15 shadow-2xl overflow-hidden relative text-slate-100 font-sans blur-in-expand"
+        className={`w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col bg-zinc-950 rounded-3xl border border-white/15 shadow-2xl overflow-hidden relative text-slate-100 font-sans ${
+          isClosing ? 'blur-out-contract' : 'blur-in-expand'
+        }`}
       >
         
         {/* ========================================================================= */}
@@ -186,7 +202,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
 
             {/* Botón Cerrar */}
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-zinc-800 hover:bg-zinc-700 border border-white/20 rounded-lg shadow-sm transition cursor-pointer"
               aria-label="Cerrar ventana"
             >
@@ -287,7 +303,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                     type="button"
                     onClick={() => {
                       onSelectAuthor?.(primaryAuthor);
-                      onClose();
+                      handleClose();
                     }}
                     className="flex items-center gap-2.5 bg-black/85 px-3 py-1.5 rounded-xl border border-white/15 shadow-sm backdrop-blur-md hover:bg-zinc-900 transition cursor-pointer"
                     title={`Filtrar publicaciones de ${primaryAuthor}`}
