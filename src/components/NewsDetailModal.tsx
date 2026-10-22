@@ -316,14 +316,14 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
 
             {/* Subtitle / Lead Paragraph */}
             {leadText && (
-              <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal border-l-4 border-sky-500 pl-4 bg-zinc-900/60 py-2 rounded-r-lg font-editorial">
+              <p className="text-base sm:text-lg text-white leading-relaxed font-normal border-l-4 border-sky-500 pl-4 bg-zinc-900/60 py-2 rounded-r-lg font-editorial">
                 {leadText}
               </p>
             )}
 
             {/* Official Macroeconomic / Indicator Grid */}
             <section aria-label="Indicadores Clave" className="space-y-2.5">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-sky-400 flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-sky-400" />
                 Variables Económicas Auditadas por la Investigación
               </h3>
@@ -340,7 +340,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                     <p className="text-xl font-bold text-white mt-1 tracking-tight">
                       {item.value}
                     </p>
-                    <p className="text-[10px] text-slate-400 mt-1 flex items-center gap-1">
+                    <p className="text-[10px] text-slate-300 mt-1 flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       {item.note}
                     </p>
@@ -356,7 +356,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                   <BookMarked className="w-4 h-4 text-sky-400" />
                   <span>Síntesis Ejecutiva del Informe</span>
                 </div>
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+                <p className="text-sm sm:text-base text-white leading-relaxed">
                   {executiveSummary}
                 </p>
               </div>
@@ -384,7 +384,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                     <InteractiveText
                       text={sec.content}
                       glossary={combinedGlossary}
-                      className="text-slate-300 leading-relaxed text-sm sm:text-base text-justify font-serif"
+                      className="text-white leading-relaxed text-sm sm:text-base text-justify font-serif"
                     />
                   </article>
                 ))
@@ -411,13 +411,13 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                       <InteractiveText
                         text={paragraph}
                         glossary={combinedGlossary}
-                        className="text-slate-300 leading-relaxed text-sm sm:text-base text-justify font-serif"
+                        className="text-white leading-relaxed text-sm sm:text-base text-justify font-serif"
                       />
                     </article>
                   );
                 })
               ) : (
-                <p className="text-slate-500 italic">No hay contenido disponible.</p>
+                <p className="text-slate-400 italic">No hay contenido disponible.</p>
               )}
             </div>
 
@@ -432,7 +432,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                 </div>
 
                 {article.ir_perspective.geopolitical_context && (
-                  <p className="text-slate-300 text-sm leading-relaxed">
+                  <p className="text-white text-sm leading-relaxed">
                     {article.ir_perspective.geopolitical_context}
                   </p>
                 )}
@@ -440,10 +440,10 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                 {article.ir_perspective.strategic_recommendations &&
                   article.ir_perspective.strategic_recommendations.length > 0 && (
                     <div className="space-y-2 pt-2 border-t border-zinc-800">
-                      <span className="text-xs font-semibold text-slate-200 uppercase tracking-wider block">
+                      <span className="text-xs font-semibold text-white uppercase tracking-wider block">
                         Recomendaciones Estratégicas:
                       </span>
-                      <ul className="space-y-1.5 text-xs sm:text-sm text-slate-300">
+                      <ul className="space-y-1.5 text-xs sm:text-sm text-white">
                         {article.ir_perspective.strategic_recommendations.map((rec, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <span className="text-sky-400 font-bold">•</span>
