@@ -151,7 +151,10 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-y-auto animate-in fade-in duration-300 select-none sm:select-text"
     >
       {/* MAIN MODAL CONTAINER (DARK INSTITUTIONAL LUXURY) */}
-      <div className="w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col bg-zinc-950 rounded-3xl border border-white/15 shadow-2xl overflow-hidden relative text-slate-100 font-sans">
+      <div
+        key={article.id}
+        className="w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col bg-zinc-950 rounded-3xl border border-white/15 shadow-2xl overflow-hidden relative text-slate-100 font-sans blur-in-expand"
+      >
         
         {/* ========================================================================= */}
         {/* BARRA SUPERIOR LIMPIA */}
