@@ -6,7 +6,6 @@ import {
   Calendar,
   Clock,
   TrendingUp,
-  CheckCircle,
   ChevronRight,
   BookMarked,
   Sliders
@@ -490,109 +489,35 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
               </section>
             )}
 
-            {/* Institutional Dossier / Student Profile Card */}
-            <section className="mt-10 pt-8 border-t-2 border-slate-200">
-              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-7 space-y-6">
-                
-                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-                  <div className="relative shrink-0">
-                    <img
-                      src={authorPhoto}
-                      alt={primaryAuthor}
-                      className="w-20 h-20 rounded-2xl object-cover object-top border-2 border-slate-300 shadow-sm"
-                    />
-                    <div className="absolute -bottom-1.5 -right-1.5 bg-slate-900 text-white p-1 rounded-full shadow">
-                      <CheckCircle className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1 text-center sm:text-left flex-1">
-                    <div className="inline-block px-2.5 py-0.5 rounded text-[11px] font-bold bg-slate-200 text-slate-800 uppercase tracking-wide">
-                      Ficha Técnica del Investigador
-                    </div>
-                    <h4
-                      onClick={() => {
-                        onSelectAuthor?.(primaryAuthor);
-                        onClose();
-                      }}
-                      className="text-xl font-bold text-slate-900 hover:text-slate-700 hover:underline cursor-pointer transition-colors"
-                      title={`Filtrar publicaciones de ${primaryAuthor}`}
+            {/* Other publications by this author in the fair */}
+            {authorOtherArticles.length > 0 && (
+              <div className="mt-8 pt-6 border-t border-slate-200 space-y-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+                  Otras investigaciones de {primaryAuthor} ({authorOtherArticles.length}):
+                </span>
+                <div className="space-y-1.5">
+                  {authorOtherArticles.map((other) => (
+                    <button
+                      key={other.id}
+                      type="button"
+                      onClick={() => onSelectArticle?.(other)}
+                      className="w-full text-left p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition flex items-center justify-between text-xs cursor-pointer group"
                     >
-                      {primaryAuthor}
-                    </h4>
-                    <p className="text-xs font-semibold text-slate-700">
-                      {authorProfile?.role || article.author_role || "Estudiante Investigador"} • {authorProfile?.academicId || "Mat. R.R.I.I. 2023"}
-                    </p>
-                    <p className="text-xs text-slate-700 font-medium">
-                      Línea de Estudio: {authorProfile?.specialization || article.topic}
-                    </p>
-                    {authorProfile?.email && (
-                      <p className="text-[11px] text-slate-500 font-mono">
-                        {authorProfile.email}
-                      </p>
-                    )}
-                  </div>
+                      <span className="font-medium text-slate-800 truncate group-hover:text-slate-950">
+                        {other.title}
+                      </span>
+                      <ChevronRight className="w-4 h-4 text-slate-400 shrink-0 ml-2 group-hover:text-slate-700" />
+                    </button>
+                  ))}
                 </div>
-
-                {/* Academic Affiliation Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-4 border-t border-slate-200 text-xs">
-                  <div>
-                    <span className="font-bold text-slate-700 uppercase tracking-wider text-[10px] block">
-                      Unidad Académica
-                    </span>
-                    <p className="text-slate-900 font-medium mt-0.5">
-                      {academicMetadata.faculty}
-                    </p>
-                    <p className="text-slate-600 text-[11px]">
-                      {academicMetadata.school} • {academicMetadata.university}
-                    </p>
-                  </div>
-
-                  <div>
-                    <span className="font-bold text-slate-700 uppercase tracking-wider text-[10px] block">
-                      Entorno de Investigación
-                    </span>
-                    <p className="text-slate-900 font-medium mt-0.5">
-                      {academicMetadata.fairEdition}
-                    </p>
-                    <p className="text-slate-600 text-[11px]">
-                      {academicMetadata.location}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Other publications by this author in the fair */}
-                {authorOtherArticles.length > 0 && (
-                  <div className="pt-4 border-t border-slate-200 space-y-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
-                      Otras investigaciones de {primaryAuthor} ({authorOtherArticles.length}):
-                    </span>
-                    <div className="space-y-1.5">
-                      {authorOtherArticles.map((other) => (
-                        <button
-                          key={other.id}
-                          type="button"
-                          onClick={() => onSelectArticle?.(other)}
-                          className="w-full text-left p-2.5 rounded-xl bg-white border border-slate-200 hover:border-slate-400 transition flex items-center justify-between text-xs cursor-pointer group"
-                        >
-                          <span className="font-medium text-slate-800 truncate group-hover:text-slate-950">
-                            {other.title}
-                          </span>
-                          <ChevronRight className="w-4 h-4 text-slate-400 shrink-0 ml-2 group-hover:text-slate-700" />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Formal Document Verification Stamp */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 text-[11px] text-slate-600 border-t border-slate-200">
-                  <span>Dictaminado por: {academicMetadata.reviewers} • {classification}</span>
-                  <span className="font-mono text-slate-700">Registro: {documentRef} • ISSN {issn}</span>
-                </div>
-
               </div>
-            </section>
+            )}
+
+            {/* Formal Document Verification Stamp */}
+            <div className="mt-8 pt-4 flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-500 border-t border-slate-200">
+              <span>Dictaminado por: {academicMetadata.reviewers} • {classification}</span>
+              <span className="font-mono text-slate-600">Registro: {documentRef} • ISSN {issn}</span>
+            </div>
 
             {/* Footer Switcher between Dispatches */}
             {nextArticle && (
