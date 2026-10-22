@@ -61,25 +61,18 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* 2. BARRA DE ACCIÓN Y NAVEGACIÓN */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
         
-        {/* Identificador breve de Cátedra */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#004F8A]">
-            Economía IV • Edición 2026
-          </span>
-        </div>
+        {/* Identificador breve de Cátedra (enlace a inicio) */}
+        <button
+          type="button"
+          onClick={() => onNavigate('news')}
+          className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#004F8A] hover:opacity-80 transition-opacity cursor-pointer bg-transparent border-none p-0 text-left"
+          title="Ir al inicio"
+        >
+          Economía IV • Edición 2026
+        </button>
 
         {/* Botones de navegación a la derecha */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            onClick={() => onNavigate('news')}
-            className={`px-3 py-1 text-xs font-semibold rounded transition-colors cursor-pointer ${
-              currentView === 'news' || currentView === 'economia-iv'
-                ? 'bg-[#004F8A] text-white shadow-sm'
-                : 'text-slate-600 hover:text-[#004F8A] hover:bg-slate-100'
-            }`}
-          >
-            Investigaciones
-          </button>
 
           <button
             onClick={() => onNavigate('asistente')}
