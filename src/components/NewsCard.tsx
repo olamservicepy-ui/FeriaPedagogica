@@ -50,20 +50,20 @@ export const NewsCard: React.FC<NewsCardProps> = ({
 
   return (
     <SpotlightCard
-      theme="light"
-      spotlightColor="#004F8A"
-      intensity={0.24}
+      theme="dark"
+      spotlightColor="#38bdf8"
+      intensity={0.28}
       spotlightSize={280}
       softness={0.7}
-      borderGlow={0.75}
+      borderGlow={0.8}
       proximity={80}
       smoothing={0.25}
       flare={true}
-      className="group cursor-pointer flex flex-col border border-slate-200/90 rounded-2xl p-0 overflow-hidden transition-all duration-300 hover:shadow-lg"
+      className="group cursor-pointer flex flex-col border border-white/10 bg-zinc-950 rounded-2xl p-0 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-sky-500/30 text-slate-100"
       onClick={() => onSelect(article)}
     >
       {/* 1. Contenedor de la Imagen con Zoom sutil al hover */}
-      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100 select-none border-b border-slate-200/60">
+      <div className="relative w-full aspect-[16/10] overflow-hidden bg-zinc-900 select-none border-b border-white/10">
         <div
           className="w-full h-full relative transition-transform duration-500 ease-out group-hover:scale-105"
           style={{
@@ -86,7 +86,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
               e.stopPropagation();
               onOpenCropper(primaryAuthor, authorImg, crop);
             }}
-            className="absolute top-3 right-3 p-1.5 rounded-sm bg-white/90 hover:bg-white text-slate-700 hover:text-slate-900 shadow-sm border border-slate-200 backdrop-blur-sm transition cursor-pointer z-10"
+            className="absolute top-3 right-3 p-1.5 rounded-lg bg-black/80 hover:bg-black text-slate-200 hover:text-white shadow-sm border border-white/20 backdrop-blur-sm transition cursor-pointer z-10"
             title={`Ajustar encuadre de ${primaryAuthor}`}
           >
             <Sliders className="w-3.5 h-3.5" />
@@ -99,37 +99,37 @@ export const NewsCard: React.FC<NewsCardProps> = ({
         <div className="space-y-3">
           {/* Píldora de Categoría / Tipo de contenido */}
           <div className="flex items-center justify-between gap-2">
-            <span className="text-[11px] font-bold tracking-widest uppercase text-slate-700 bg-slate-100 px-2.5 py-1 rounded-sm border border-slate-200">
+            <span className="text-[11px] font-bold tracking-widest uppercase text-sky-300 bg-zinc-900 px-2.5 py-1 rounded-md border border-white/10">
               {article.thematicAxis || article.topic || 'ANÁLISIS COYUNTURAL'}
             </span>
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
               {article.region}
             </span>
           </div>
 
-          {/* Título: Tipografía Carnegie + Subrayado animado al hover en cualquier parte de la tarjeta */}
-          <h3 className="font-carnegie font-bold text-xl sm:text-2xl text-slate-900 leading-snug tracking-tight underline-offset-4 decoration-2 decoration-slate-900 group-hover:underline">
+          {/* Título */}
+          <h3 className="font-carnegie font-bold text-xl sm:text-2xl text-white leading-snug tracking-tight underline-offset-4 decoration-2 decoration-sky-400 group-hover:underline">
             {article.title}
           </h3>
 
           {/* Resumen institucional */}
-          <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed font-normal">
+          <p className="text-sm text-slate-400 line-clamp-3 leading-relaxed font-normal">
             {article.lead || (article.summary_bullets && article.summary_bullets[0]) || ''}
           </p>
         </div>
 
         {/* Metadatos inferiores y Fila de Investigador */}
-        <div className="pt-6 mt-4 border-t border-slate-100 space-y-3">
-          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+        <div className="pt-6 mt-4 border-t border-white/10 space-y-3">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
             <span>{formatDate(article.date).toUpperCase()}</span>
             <span>•</span>
             <span>{readTimeMinutes} MINUTE READ</span>
           </div>
 
-          <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100/70 text-xs">
+          <div className="flex items-center justify-between gap-2 pt-1 border-t border-white/10 text-xs">
             <div className="flex items-center gap-2 truncate max-w-[70%]">
               <span className="text-slate-400 font-medium">Por:</span>
-              <div className="truncate flex items-center gap-1 font-semibold text-slate-800">
+              <div className="truncate flex items-center gap-1 font-semibold text-slate-200">
                 {article.authors.map((author, idx) => {
                   const isSelected = selectedAuthor === author;
                   return (
@@ -142,8 +142,8 @@ export const NewsCard: React.FC<NewsCardProps> = ({
                         }}
                         className={`truncate transition-colors hover:underline cursor-pointer ${
                           isSelected
-                            ? 'text-sky-800 font-bold underline'
-                            : 'hover:text-sky-800 text-slate-700'
+                            ? 'text-sky-400 font-bold underline'
+                            : 'hover:text-sky-300 text-slate-300'
                         }`}
                         title={`Filtrar publicaciones de ${author}`}
                       >
@@ -156,7 +156,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
               </div>
             </div>
 
-            <span className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 group-hover:text-sky-800 group-hover:translate-x-0.5 transition-all shrink-0">
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-sky-400 group-hover:text-sky-300 group-hover:translate-x-0.5 transition-all shrink-0">
               Leer análisis
               <ArrowUpRight className="w-3.5 h-3.5" />
             </span>

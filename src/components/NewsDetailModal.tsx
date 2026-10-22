@@ -8,12 +8,13 @@ import {
   TrendingUp,
   ChevronRight,
   BookMarked,
-  Sliders
+  Sliders,
 } from 'lucide-react';
-import type { NewsArticle, GlossaryItem, PhotoCrop } from '../types/news';
+import type { NewsArticle, GlossaryItem, PhotoCrop, KeyIndicator } from '../types/news';
 import { getAuthorImage, getAuthorProfile, getAuthorPhotoCrop } from '../data/authors';
 import { InteractiveText } from './InteractiveText';
 import BlurText from './reactbits/BlurText';
+import GradualBlur from './reactbits/GradualBlur';
 
 interface NewsDetailModalProps {
   article: NewsArticle | null;
@@ -37,7 +38,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
 }) => {
   const [copiedLink, setCopiedLink] = useState(false);
 
-  // Close on Escape key
+  // Close on Escape key press
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -46,20 +47,9 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (article) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [article]);
-
   if (!article) return null;
 
+  // Primary Author Resolution
   const primaryAuthor = typeof article.authors?.[0] === 'string'
     ? article.authors[0]
     : (article.authors?.[0] as any)?.name || 'Estudiante Investigador';
@@ -75,75 +65,48 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
     || authorProfile?.photoCrop
     || getAuthorPhotoCrop(primaryAuthor);
 
-  // Combine article glossary with global glossary for in-text enrichment
-  const combinedGlossaryMap = new Map<string, GlossaryItem>();
-  for (const item of allGlossary) {
-    if (item.term && item.definition) {
-      combinedGlossaryMap.set(item.term.toLowerCase(), item);
-    }
-  }
-  for (const item of article.glossary || []) {
-    if (item.term && item.definition) {
-      combinedGlossaryMap.set(item.term.toLowerCase(), item);
-    }
-  }
-  const combinedGlossary = Array.from(combinedGlossaryMap.values());
+  // Filter other publications by the same author
+  const authorOtherArticles = allArticles.filter(
+    (a) => a.id !== article.id && a.authors?.some((auth: any) =>
+      (typeof auth === 'string' ? auth : auth.name) === primaryAuthor
+    )
+  );
 
+  // Find next article for pagination in footer
+  const currentIndex = allArticles.findIndex((a) => a.id === article.id);
+  const nextArticle = currentIndex >= 0 && currentIndex < allArticles.length - 1
+    ? allArticles[currentIndex + 1]
+    : allArticles[0] && allArticles[0].id !== article.id
+      ? allArticles[0]
+      : null;
+
+  // Combine article glossary with global glossary
+  const combinedGlossary = [...(article.glossary || []), ...allGlossary];
+
+  // Reading time calculation
   const totalWords = (article.full_text?.join(' ') || '').split(/\s+/).length;
-  const readTimeMinutes = article.read_time_minutes || Math.max(2, Math.ceil(totalWords / 160));
+  const readTimeMinutes = article.read_time_minutes || Math.max(3, Math.ceil(totalWords / 160));
 
-  // Author other publications in the observatory
-  const authorOtherArticles = allArticles.filter((a) => {
-    if (a.id === article.id) return false;
-    return (a.authors || []).some((auth) => {
-      const name = typeof auth === 'string' ? auth : (auth as any)?.name || '';
-      return name.trim().toLowerCase() === primaryAuthor.trim().toLowerCase();
-    });
-  });
+  const thematicAxis = article.thematicAxis || article.topic || "Integración Regional";
+  const fieldName = article.region || "Relaciones Internacionales";
 
-  // Next article in sequence
-  let nextArticle: NewsArticle | null = null;
-  if (allArticles && allArticles.length > 0) {
-    const currentIndex = allArticles.findIndex((a) => a.id === article.id);
-    if (currentIndex === -1) {
-      nextArticle = allArticles[0] || null;
-    } else {
-      const nextIndex = (currentIndex + 1) % allArticles.length;
-      nextArticle = allArticles[nextIndex] || null;
-    }
-  }
-
-  const handleShare = () => {
-    if (navigator?.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedLink(true);
-      setTimeout(() => setCopiedLink(false), 2200);
-    }
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const documentRef = article.documentRef || `OERII-2026-DP-${article.id.slice(0, 8).toUpperCase()}`;
-  const issn = article.issn || "2709-8435";
-  const classification = article.classification || "Dictamen de Coyuntura Económica";
-  const thematicAxis = article.thematicAxis || article.topic || "POLÍTICA MONETARIA Y REGULACIÓN FINANCIERA";
-  const fieldName = article.region || "América Latina y Mercosur";
-
-  // Academic metadata
+  // Institutional metadata
   const academicMetadata = {
     university: article.academicMetadata?.university || authorProfile?.institution || "Universidad Nacional de Itapúa",
     faculty: article.academicMetadata?.faculty || authorProfile?.faculty || "Facultad de Humanidades, Ciencias Sociales y Cultura Guaraní",
     school: article.academicMetadata?.school || authorProfile?.school || "Licenciatura en Relaciones Internacionales",
     department: article.academicMetadata?.department || authorProfile?.department || "Observatorio Económico y Político Regional",
     location: article.academicMetadata?.location || authorProfile?.location || "Campus Universitario • Encarnación, Paraguay",
-    reviewers: article.academicMetadata?.reviewers || authorProfile?.reviewers || "Cátedra de Economía Internacional & Integración Regional",
+    reviewers: article.academicMetadata?.reviewers || authorProfile?.reviewers || "Cátedra de Economía Internacional IV",
     fairEdition: article.academicMetadata?.fairEdition || authorProfile?.fairEdition || "Feria Pedagógica Universitaria 2026"
   };
 
-  // Indicators: custom or generated
-  const indicators = (article.keyIndicators && article.keyIndicators.length > 0)
+  const documentRef = article.documentRef || `UNI-FP26-RI-${String(article.id).padStart(3, '0')}`;
+  const issn = article.issn || "2709-8435";
+  const classification = article.classification || "Análisis Estratégico Homologado";
+
+  // Indicators / Macro variables
+  const indicators: KeyIndicator[] = (article.keyIndicators && article.keyIndicators.length > 0)
     ? article.keyIndicators
     : [
         {
@@ -171,63 +134,73 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
   const leadText = article.lead || (article.summary_bullets && article.summary_bullets[0]) || '';
   const executiveSummary = article.executiveSummary || (article.summary_bullets && article.summary_bullets.join(' ')) || '';
 
+  const handleShare = () => {
+    navigator.clipboard?.writeText(window.location.href);
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2000);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-y-auto animate-in fade-in duration-300 select-none sm:select-text"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-2 sm:p-4 md:p-6 overflow-y-auto animate-in fade-in duration-300 select-none sm:select-text"
     >
-      {/* MAIN MODAL CONTAINER (LIGHT INSTITUTIONAL LUXURY) */}
-      <div className="w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col bg-white rounded-3xl border border-slate-300/80 shadow-2xl overflow-hidden relative text-slate-900 font-sans">
+      {/* MAIN MODAL CONTAINER (DARK INSTITUTIONAL LUXURY) */}
+      <div className="w-full max-w-5xl xl:max-w-6xl max-h-[92vh] flex flex-col bg-zinc-950 rounded-3xl border border-white/15 shadow-2xl overflow-hidden relative text-slate-100 font-sans">
         
         {/* ========================================================================= */}
-        {/* BARRA SUPERIOR LIMPIA (REQUERIMIENTO 1: SOLO COMPARTIR, IMPRIMIR Y CERRAR) */}
+        {/* BARRA SUPERIOR LIMPIA */}
         {/* ========================================================================= */}
-        <div className="h-14 px-6 border-b border-slate-200 bg-white flex items-center justify-end shrink-0 z-20">
+        <div className="h-14 px-6 border-b border-white/10 bg-zinc-950/95 flex items-center justify-end shrink-0 z-20">
           <div className="flex items-center gap-2">
             
             {/* Botón Compartir */}
             <button
               onClick={handleShare}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg shadow-sm transition cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-300 bg-zinc-900 hover:bg-zinc-800 border border-white/10 rounded-lg shadow-sm transition cursor-pointer"
               title="Copiar enlace"
             >
-              <Share2 className="w-3.5 h-3.5 text-slate-600" />
+              <Share2 className="w-3.5 h-3.5 text-slate-400" />
               <span>{copiedLink ? "Copiado" : "Compartir"}</span>
             </button>
 
             {/* Botón Imprimir */}
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg shadow-sm transition cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-slate-300 bg-zinc-900 hover:bg-zinc-800 border border-white/10 rounded-lg shadow-sm transition cursor-pointer"
               title="Imprimir documento"
             >
-              <Printer className="w-3.5 h-3.5 text-slate-600" />
+              <Printer className="w-3.5 h-3.5 text-slate-400" />
               <span>Imprimir</span>
             </button>
 
-            <div className="h-4 w-[1px] bg-slate-200 mx-1" />
+            <div className="h-4 w-[1px] bg-zinc-800 mx-1" />
 
             {/* Botón Cerrar */}
             <button
               onClick={onClose}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-slate-800 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-lg shadow-sm transition cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-zinc-800 hover:bg-zinc-700 border border-white/20 rounded-lg shadow-sm transition cursor-pointer"
               aria-label="Cerrar ventana"
             >
               <span>Cerrar</span>
-              <X className="w-4 h-4 text-slate-700" />
+              <X className="w-4 h-4 text-slate-300" />
             </button>
 
           </div>
         </div>
 
         {/* SCROLLABLE READING CANVAS */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto relative">
 
           {/* ========================================================================= */}
-          {/* HERO BANNER CON FOTO Y DEGRADADO NO AGRESIVO (REQUERIMIENTOS 2, 4 Y 5)      */}
+          {/* HERO BANNER CON FOTO Y DEGRADADO NO AGRESIVO HACIA NEGRO                  */}
           {/* ========================================================================= */}
-          <div className="relative w-full h-[400px] sm:h-[460px] md:h-[500px] bg-slate-100 overflow-hidden select-none border-b border-slate-200">
+          <div className="relative w-full h-[400px] sm:h-[460px] md:h-[500px] bg-zinc-900 overflow-hidden select-none border-b border-white/10">
             
             {/* Imagen del alumno con Zoom y Encuadre aplicados dinámicamente */}
             <div
@@ -245,14 +218,8 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
               />
             </div>
 
-            {/* 
-              REQUERIMIENTO 4: DEGRADADO NO AGRESIVO
-              El degradado blanco se retrajo drásticamente al fondo:
-              - La cara, ojos, boca y barbilla quedan al 100% LIMPIOS y transparentes.
-              - El degradado blanco solo aparece suavemente en el último 15% inferior (via-15%)
-                para que el título sea legible sin tapar facciones.
-            */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent via-15% pointer-events-none" />
+            {/* Degradado oscuro suave que no cubre los ojos del autor */}
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent via-15% pointer-events-none" />
 
             {/* Botón de ajuste rápido flotante en el Hero (Solo si onOpenCropper está habilitado) */}
             {onOpenCropper && (
@@ -260,18 +227,18 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenCropper(primaryAuthor, authorPhoto, currentCrop)}
-                  className="flex items-center gap-1.5 bg-white/90 hover:bg-white text-slate-800 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-md border border-slate-200/80 backdrop-blur-md transition cursor-pointer"
+                  className="flex items-center gap-1.5 bg-black/85 hover:bg-black text-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-md border border-white/20 backdrop-blur-md transition cursor-pointer"
                   title="Ajustar encuadre o cambiar foto de esta investigadora"
                 >
-                  <Sliders className="w-3.5 h-3.5 text-slate-600" />
+                  <Sliders className="w-3.5 h-3.5 text-sky-400" />
                   <span>Ajustar Encuadre / Zoom</span>
                 </button>
               </div>
             )}
 
-            {/* REQUERIMIENTO 2: SOLO LA CATEGORIA ARRIBA (SE ELIMINÓ 'PONENCIA HOMOLOGADA') */}
+            {/* Categoría arriba */}
             <div className="absolute top-5 left-6 z-10 pointer-events-none">
-              <span className="px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-white/95 text-slate-900 shadow-sm border border-slate-200">
+              <span className="px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-black/85 text-sky-300 shadow-sm border border-sky-400/30 backdrop-blur-md">
                 {thematicAxis}
               </span>
             </div>
@@ -281,21 +248,21 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
               <div className="max-w-4xl space-y-3">
                 
                 {/* Metadatos de Lectura */}
-                <div className="flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-700">
-                  <span className="flex items-center gap-1.5 bg-white/90 px-2.5 py-1 rounded-md border border-slate-200 backdrop-blur-sm">
-                    <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                <div className="flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-300">
+                  <span className="flex items-center gap-1.5 bg-black/75 px-2.5 py-1 rounded-md border border-white/15 backdrop-blur-sm">
+                    <Calendar className="w-3.5 h-3.5 text-sky-400" />
                     {article.date || "Septiembre de 2026"}
                   </span>
-                  <span className="flex items-center gap-1.5 bg-white/90 px-2.5 py-1 rounded-md border border-slate-200 backdrop-blur-sm">
-                    <Clock className="w-3.5 h-3.5 text-slate-500" />
+                  <span className="flex items-center gap-1.5 bg-black/75 px-2.5 py-1 rounded-md border border-white/15 backdrop-blur-sm">
+                    <Clock className="w-3.5 h-3.5 text-sky-400" />
                     {readTimeMinutes} min de lectura técnica
                   </span>
-                  <span className="text-slate-600 font-medium">
+                  <span className="text-slate-400 font-medium">
                     • {fieldName}
                   </span>
                 </div>
 
-                {/* Titular Principal en Tipografía Carnegie Endowment con BlurText */}
+                {/* Titular Principal con BlurText */}
                 <BlurText
                   key={article.id}
                   text={article.title}
@@ -308,7 +275,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                   stepDuration={0.28}
                   blur={10}
                   distance={20}
-                  className="font-carnegie font-extrabold text-2xl sm:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight"
+                  className="font-carnegie font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white leading-tight tracking-tight"
                 />
 
                 {/* Pastilla del Investigador en la Portada */}
@@ -319,10 +286,10 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                       onSelectAuthor?.(primaryAuthor);
                       onClose();
                     }}
-                    className="flex items-center gap-2.5 bg-white/95 px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm backdrop-blur-md hover:bg-slate-50 transition cursor-pointer"
+                    className="flex items-center gap-2.5 bg-black/85 px-3 py-1.5 rounded-xl border border-white/15 shadow-sm backdrop-blur-md hover:bg-zinc-900 transition cursor-pointer"
                     title={`Filtrar publicaciones de ${primaryAuthor}`}
                   >
-                    <div className="w-7 h-7 rounded-full overflow-hidden border border-slate-300 shrink-0">
+                    <div className="w-7 h-7 rounded-full overflow-hidden border border-white/20 shrink-0">
                       <img
                         src={authorPhoto}
                         alt={primaryAuthor}
@@ -330,10 +297,10 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                       />
                     </div>
                     <div className="text-left">
-                      <p className="text-xs font-bold text-slate-900 leading-none">
+                      <p className="text-xs font-bold text-white leading-none">
                         {primaryAuthor}
                       </p>
-                      <p className="text-[10px] text-slate-600 leading-none mt-0.5">
+                      <p className="text-[10px] text-slate-400 leading-none mt-0.5">
                         {authorProfile?.role || article.author_role || "Estudiante Investigador"} • R.R.I.I.
                       </p>
                     </div>
@@ -349,15 +316,15 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
 
             {/* Subtitle / Lead Paragraph */}
             {leadText && (
-              <p className="text-base sm:text-lg text-slate-800 leading-relaxed font-normal border-l-4 border-slate-900 pl-4 bg-slate-50/70 py-2 rounded-r-lg font-editorial">
+              <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal border-l-4 border-sky-500 pl-4 bg-zinc-900/60 py-2 rounded-r-lg font-editorial">
                 {leadText}
               </p>
             )}
 
             {/* Official Macroeconomic / Indicator Grid */}
             <section aria-label="Indicadores Clave" className="space-y-2.5">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-slate-700" />
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-sky-400" />
                 Variables Económicas Auditadas por la Investigación
               </h3>
 
@@ -365,16 +332,16 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                 {indicators.map((item, index) => (
                   <div
                     key={index}
-                    className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl hover:border-slate-300 transition"
+                    className="bg-zinc-900/80 border border-white/10 p-3.5 rounded-xl hover:border-sky-500/30 transition"
                   >
-                    <p className="text-[11px] font-semibold text-slate-600 uppercase tracking-tight">
+                    <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-tight">
                       {item.label}
                     </p>
-                    <p className="text-xl font-bold text-slate-900 mt-1 tracking-tight">
+                    <p className="text-xl font-bold text-white mt-1 tracking-tight">
                       {item.value}
                     </p>
-                    <p className="text-[10px] text-slate-600 mt-1 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                    <p className="text-[10px] text-slate-400 mt-1 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
                       {item.note}
                     </p>
                   </div>
@@ -384,19 +351,19 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
 
             {/* Executive Summary Statement Box */}
             {executiveSummary && (
-              <div className="p-5 rounded-xl bg-slate-100/80 border border-slate-200">
-                <div className="flex items-center gap-2 mb-2 text-slate-800 text-xs font-bold uppercase tracking-wider">
-                  <BookMarked className="w-4 h-4 text-slate-700" />
+              <div className="p-5 rounded-xl bg-zinc-900/80 border border-white/10">
+                <div className="flex items-center gap-2 mb-2 text-sky-400 text-xs font-bold uppercase tracking-wider">
+                  <BookMarked className="w-4 h-4 text-sky-400" />
                   <span>Síntesis Ejecutiva del Informe</span>
                 </div>
-                <p className="text-sm sm:text-base text-slate-800 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                   {executiveSummary}
                 </p>
               </div>
             )}
 
             {/* Body Content Sections */}
-            <div className="space-y-8 divide-y divide-slate-200/80">
+            <div className="space-y-8 divide-y divide-white/10">
               {article.sections && article.sections.length > 0 ? (
                 article.sections.map((sec, idx) => (
                   <article key={idx} className={idx > 0 ? "pt-7" : ""}>
@@ -412,12 +379,12 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                       stepDuration={0.25}
                       blur={6}
                       distance={14}
-                      className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3"
+                      className="font-carnegie text-lg sm:text-xl font-bold text-white tracking-tight mb-3"
                     />
                     <InteractiveText
                       text={sec.content}
                       glossary={combinedGlossary}
-                      className="text-slate-800 leading-relaxed text-sm sm:text-base text-justify font-serif"
+                      className="text-slate-300 leading-relaxed text-sm sm:text-base text-justify font-serif"
                     />
                   </article>
                 ))
@@ -439,12 +406,12 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                         stepDuration={0.25}
                         blur={6}
                         distance={14}
-                        className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3"
+                        className="font-carnegie text-lg sm:text-xl font-bold text-white tracking-tight mb-3"
                       />
                       <InteractiveText
                         text={paragraph}
                         glossary={combinedGlossary}
-                        className="text-slate-800 leading-relaxed text-sm sm:text-base text-justify font-serif"
+                        className="text-slate-300 leading-relaxed text-sm sm:text-base text-justify font-serif"
                       />
                     </article>
                   );
@@ -458,28 +425,28 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
             {(article.ir_perspective?.geopolitical_context ||
               (article.ir_perspective?.strategic_recommendations &&
                 article.ir_perspective.strategic_recommendations.length > 0)) && (
-              <section className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-900 uppercase tracking-wider">
-                  <TrendingUp className="w-4 h-4 text-slate-800" />
+              <section className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-bold text-sky-400 uppercase tracking-wider">
+                  <TrendingUp className="w-4 h-4 text-sky-400" />
                   <span>Perspectiva de Relaciones Internacionales y Geopolítica</span>
                 </div>
 
                 {article.ir_perspective.geopolitical_context && (
-                  <p className="text-slate-700 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed">
                     {article.ir_perspective.geopolitical_context}
                   </p>
                 )}
 
                 {article.ir_perspective.strategic_recommendations &&
                   article.ir_perspective.strategic_recommendations.length > 0 && (
-                    <div className="space-y-2 pt-2 border-t border-slate-200">
-                      <span className="text-xs font-semibold text-slate-800 uppercase tracking-wider block">
+                    <div className="space-y-2 pt-2 border-t border-zinc-800">
+                      <span className="text-xs font-semibold text-slate-200 uppercase tracking-wider block">
                         Recomendaciones Estratégicas:
                       </span>
-                      <ul className="space-y-1.5 text-xs sm:text-sm text-slate-700">
+                      <ul className="space-y-1.5 text-xs sm:text-sm text-slate-300">
                         {article.ir_perspective.strategic_recommendations.map((rec, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-slate-900 font-bold">•</span>
+                            <span className="text-sky-400 font-bold">•</span>
                             <span>{rec}</span>
                           </li>
                         ))}
@@ -491,8 +458,8 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
 
             {/* Other publications by this author in the fair */}
             {authorOtherArticles.length > 0 && (
-              <div className="mt-8 pt-6 border-t border-slate-200 space-y-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+              <div className="mt-8 pt-6 border-t border-white/10 space-y-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
                   Otras investigaciones de {primaryAuthor} ({authorOtherArticles.length}):
                 </span>
                 <div className="space-y-1.5">
@@ -501,12 +468,12 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                       key={other.id}
                       type="button"
                       onClick={() => onSelectArticle?.(other)}
-                      className="w-full text-left p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition flex items-center justify-between text-xs cursor-pointer group"
+                      className="w-full text-left p-2.5 rounded-xl bg-zinc-900/80 border border-white/10 hover:border-sky-500/40 hover:bg-zinc-900 transition flex items-center justify-between text-xs cursor-pointer group"
                     >
-                      <span className="font-medium text-slate-800 truncate group-hover:text-slate-950">
+                      <span className="font-medium text-slate-200 truncate group-hover:text-white">
                         {other.title}
                       </span>
-                      <ChevronRight className="w-4 h-4 text-slate-400 shrink-0 ml-2 group-hover:text-slate-700" />
+                      <ChevronRight className="w-4 h-4 text-slate-400 shrink-0 ml-2 group-hover:text-sky-300" />
                     </button>
                   ))}
                 </div>
@@ -514,23 +481,23 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
             )}
 
             {/* Formal Document Verification Stamp */}
-            <div className="mt-8 pt-4 flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-500 border-t border-slate-200">
+            <div className="mt-8 pt-4 flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-500 border-t border-white/10">
               <span>Dictaminado por: {academicMetadata.reviewers} • {classification}</span>
-              <span className="font-mono text-slate-600">Registro: {documentRef} • ISSN {issn}</span>
+              <span className="font-mono text-slate-400">Registro: {documentRef} • ISSN {issn}</span>
             </div>
 
             {/* Footer Switcher between Dispatches */}
             {nextArticle && (
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200">
-                <div className="text-xs text-slate-600">
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
+                <div className="text-xs text-slate-400">
                   Observatorio Económico y Político de Relaciones Internacionales
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-600">Siguiente reporte:</span>
+                  <span className="text-xs text-slate-400">Siguiente reporte:</span>
                   <button
                     onClick={() => onSelectArticle?.(nextArticle)}
-                    className="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer shadow-md"
                   >
                     <span>Examinar Siguiente</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -540,9 +507,25 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
             )}
 
           </div>
+
+          {/* Gradual blur at the bottom of the modal scroll area */}
+          <GradualBlur
+            position="bottom"
+            height="4.5rem"
+            strength={2}
+            layers={8}
+            curve="ease-out"
+            exponential={true}
+            tint="rgba(9, 9, 11, 0.85)"
+            autoHide={true}
+            zIndex={15}
+          />
+
         </div>
 
       </div>
     </div>
   );
 };
+
+export default NewsDetailModal;

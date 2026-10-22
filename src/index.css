@@ -6,10 +6,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
-  color: #0f172a;
-  background-color: #ffffff;
+  color: #f1f5f9;
+  background-color: #000000;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -44,13 +43,15 @@ body {
   html {
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
+    background-color: #000000;
+    color: #f1f5f9;
   }
 
   /* Titulares predeterminados Apple Editorial */
   h1, h2, h3 {
     letter-spacing: -0.025em;
     font-weight: 600;
-    color: #0f172a;
+    color: #ffffff;
   }
 }
 
@@ -71,35 +72,35 @@ body {
 
 /* Tarjeta y contenedor con acabado Apple: frosted glass, bordes limpios y sombras ultraligeras */
 .apple-card {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(18, 18, 18, 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 1rem;
-  border: 1px solid rgba(226, 232, 240, 0.6);
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.5);
   transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .apple-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.7);
 }
 
-/* Scrollbar refinado estilo macOS */
+/* Scrollbar refinado estilo macOS oscuro */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #27272a;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #3f3f46;
 }

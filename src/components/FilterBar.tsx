@@ -52,16 +52,16 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   }, []);
 
   return (
-    <div className="w-full flex items-center justify-between py-3 border-y border-slate-200 bg-white" ref={dropdownRef}>
+    <div className="w-full flex items-center justify-between py-3 border-y border-white/10 bg-black" ref={dropdownRef}>
       
       {/* Botón Principal del Desplegable */}
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`flex items-center gap-2.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded border transition-colors ${
+          className={`flex items-center gap-2.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-all cursor-pointer ${
             isOpen || activeFiltersCount > 0
-              ? 'bg-[#004F8A] text-white border-[#004F8A]'
-              : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+              ? 'bg-[#004F8A] text-white border-sky-500/50 shadow-[0_0_15px_rgba(0,158,219,0.25)]'
+              : 'bg-zinc-900/90 text-slate-200 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800'
           }`}
         >
           <Filter className="w-3.5 h-3.5" />
@@ -76,22 +76,22 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
         {/* Panel Desplegable Flotante */}
         {isOpen && (
-          <div className="absolute left-0 top-full mt-2 w-[340px] sm:w-[440px] bg-white border border-slate-200 shadow-xl rounded-lg p-5 z-50 space-y-5 text-slate-800">
+          <div className="absolute left-0 top-full mt-2 w-[340px] sm:w-[440px] bg-zinc-950 border border-white/15 shadow-2xl rounded-2xl p-5 z-50 space-y-5 text-slate-200 backdrop-blur-xl">
             
             {/* 1. Región Geoeconómica */}
             <div>
-              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#002A54] mb-2">
+              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-sky-400 mb-2">
                 <Globe className="w-3.5 h-3.5 text-[#009EDB]" />
                 Región Geoeconómica
               </label>
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-700 focus:outline-none focus:border-[#004F8A]"
+                className="w-full text-xs font-medium bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-sky-500"
               >
-                <option value="TODAS">Todas las regiones</option>
+                <option value="TODAS" className="bg-zinc-900 text-slate-200">Todas las regiones</option>
                 {regions.map((reg) => (
-                  <option key={reg} value={reg}>
+                  <option key={reg} value={reg} className="bg-zinc-900 text-slate-200">
                     {reg}
                   </option>
                 ))}
@@ -100,18 +100,18 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
             {/* 2. Eje Temático */}
             <div>
-              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#002A54] mb-2">
+              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-sky-400 mb-2">
                 <Tag className="w-3.5 h-3.5 text-[#009EDB]" />
                 Eje Temático
               </label>
               <select
                 value={selectedTopic}
                 onChange={(e) => setSelectedTopic(e.target.value)}
-                className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-700 focus:outline-none focus:border-[#004F8A]"
+                className="w-full text-xs font-medium bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-sky-500"
               >
-                <option value="TODOS">Todos los ejes temáticos</option>
+                <option value="TODOS" className="bg-zinc-900 text-slate-200">Todos los ejes temáticos</option>
                 {topics.map((top) => (
-                  <option key={top} value={top}>
+                  <option key={top} value={top} className="bg-zinc-900 text-slate-200">
                     {top}
                   </option>
                 ))}
@@ -120,18 +120,18 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
             {/* 3. Investigador / Alumno */}
             <div>
-              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#002A54] mb-2">
+              <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-sky-400 mb-2">
                 <User className="w-3.5 h-3.5 text-[#009EDB]" />
                 Investigador / Alumno
               </label>
               <select
                 value={selectedAuthor}
                 onChange={(e) => setSelectedAuthor(e.target.value)}
-                className="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded px-3 py-2 text-slate-700 focus:outline-none focus:border-[#004F8A]"
+                className="w-full text-xs font-medium bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-sky-500"
               >
-                <option value="TODOS">Todos los alumnos</option>
+                <option value="TODOS" className="bg-zinc-900 text-slate-200">Todos los alumnos</option>
                 {authors.map((auth) => (
-                  <option key={auth} value={auth}>
+                  <option key={auth} value={auth} className="bg-zinc-900 text-slate-200">
                     {auth}
                   </option>
                 ))}
@@ -139,17 +139,17 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             </div>
 
             {/* Botones de acción dentro del panel */}
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <div className="pt-3 border-t border-zinc-800 flex items-center justify-between">
               <button
                 onClick={onReset}
-                className="text-xs text-slate-500 hover:text-rose-600 flex items-center gap-1 transition-colors cursor-pointer"
+                className="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1 transition-colors cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
                 Limpiar filtros
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="px-4 py-1.5 bg-[#002A54] hover:bg-[#004F8A] text-white text-xs font-semibold rounded flex items-center gap-1 transition-colors cursor-pointer"
+                className="px-4 py-1.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1 transition-colors cursor-pointer shadow-md"
               >
                 <Check className="w-3 h-3" />
                 Aplicar
@@ -161,13 +161,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
       {/* Contadores y botón de Restablecer a la derecha */}
       <div className="flex items-center gap-4 text-xs">
-        <span className="text-slate-500 font-medium">
-          Mostrando <strong className="text-[#002A54]">{filteredCount}</strong> de {totalCount} análisis
+        <span className="text-slate-400 font-medium">
+          Mostrando <strong className="text-white font-bold">{filteredCount}</strong> de {totalCount} análisis
         </span>
         {activeFiltersCount > 0 && (
           <button
             onClick={onReset}
-            className="flex items-center gap-1 text-slate-500 hover:text-[#004F8A] font-semibold transition-colors cursor-pointer"
+            className="flex items-center gap-1 text-sky-400 hover:text-sky-300 font-semibold transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3 h-3" />
             Restablecer
@@ -178,3 +178,5 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     </div>
   );
 };
+
+export default FilterBar;

@@ -19,6 +19,7 @@ import { loadAllArticles, saveArticle, deleteArticle, clearAllArticles, syncNews
 import { isAuthenticated } from './services/auth';
 import { Newspaper } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import GradualBlur from './components/reactbits/GradualBlur';
 
 const gridContainerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -315,7 +316,7 @@ export function App() {
   };
 
   return (
-    <div id="top" className="min-h-screen flex flex-col bg-white text-slate-900 font-sans antialiased">
+    <div id="top" className="min-h-screen flex flex-col bg-black text-slate-100 font-sans antialiased relative selection:bg-sky-500/30 selection:text-sky-200">
       {/* Navbar Superior */}
       <Navbar
         currentView={activeTab}
@@ -373,13 +374,13 @@ export function App() {
 
         {/* VISTA 4: PORTADA DE NOTICIAS CON GRILLA EDITORIAL CARNEGIE */}
         {activeTab === 'news' && (
-          <div className="space-y-6 pb-16">
+          <div className="space-y-6 pb-20">
             {/* Cabecera Principal */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
-              <span className="inline-block px-3 py-1 mb-2 text-xs font-bold tracking-widest uppercase bg-[#009EDB]/15 text-[#004F8A] rounded-sm">
+              <span className="inline-block px-3 py-1 mb-2 text-xs font-bold tracking-widest uppercase bg-[#009EDB]/20 text-[#38bdf8] border border-[#009EDB]/30 rounded-full">
                 Observatorio Económico Internacional
               </span>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-[#002A54] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                 Plataforma de divulgación académica de Economía IV
               </h1>
             </div>
@@ -405,14 +406,14 @@ export function App() {
             {/* Grilla Asimétrica con Scroll Reveal */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {filteredArticles.length === 0 ? (
-                <div className="p-12 text-center rounded-xl bg-slate-50 border border-slate-200 space-y-3">
-                  <Newspaper className="w-10 h-10 text-slate-400 mx-auto" />
-                  <h3 className="text-lg font-semibold text-slate-900">
+                <div className="p-12 text-center rounded-2xl bg-zinc-950 border border-white/10 space-y-3">
+                  <Newspaper className="w-10 h-10 text-slate-500 mx-auto" />
+                  <h3 className="text-lg font-semibold text-white">
                     No se encontraron investigaciones publicadas
                   </h3>
                   <button
                     onClick={handleResetFilters}
-                    className="mt-2 px-4 py-2 bg-[#004F8A] text-white text-xs font-semibold rounded hover:bg-[#002A54]"
+                    className="mt-2 px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold rounded-lg shadow-md transition-colors"
                   >
                     Restablecer filtros
                   </button>
@@ -503,6 +504,20 @@ export function App() {
       />
 
       <ToastNotification toasts={toasts} onDismiss={dismissToast} />
+
+      {/* Gradual Blur en el borde inferior fijo de la pantalla */}
+      <GradualBlur
+        target="page"
+        position="bottom"
+        height="5rem"
+        strength={2.5}
+        layers={10}
+        curve="ease-out"
+        exponential={true}
+        tint="rgba(0, 0, 0, 0.85)"
+        autoHide={true}
+        zIndex={30}
+      />
     </div>
   );
 }
