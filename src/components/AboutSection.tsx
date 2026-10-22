@@ -1,5 +1,6 @@
 import { Award, BookOpen, Terminal, Sparkles, CheckCircle2, Code2, Users2 } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import BlurText from './reactbits/BlurText';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -39,9 +40,18 @@ export const AboutSection: React.FC = () => {
           <Award className="w-4 h-4 text-emerald-600" />
           Feria Pedagógica Universitaria
         </div>
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 font-sans">
-          Sobre el Observatorio Editorial
-        </h2>
+        <BlurText
+          text="Sobre el Observatorio Editorial"
+          as="h2"
+          effect="blur"
+          animateBy="words"
+          direction="top"
+          delay={90}
+          stepDuration={0.35}
+          blur={10}
+          distance={24}
+          className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 font-sans justify-center"
+        />
         <p className="text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] max-w-2xl mx-auto font-sans">
           Un espacio de articulación académica entre la teoría de la economía política internacional y el pensamiento estratégico diplomático.
         </p>

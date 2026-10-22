@@ -14,6 +14,7 @@ import {
 import type { NewsArticle, GlossaryItem, PhotoCrop } from '../types/news';
 import { getAuthorImage, getAuthorProfile, getAuthorPhotoCrop } from '../data/authors';
 import { InteractiveText } from './InteractiveText';
+import BlurText from './reactbits/BlurText';
 
 interface NewsDetailModalProps {
   article: NewsArticle | null;
@@ -295,10 +296,21 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                   </span>
                 </div>
 
-                {/* Titular Principal en Tipografía Carnegie Endowment */}
-                <h1 className="font-carnegie font-extrabold text-2xl sm:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight">
-                  {article.title}
-                </h1>
+                {/* Titular Principal en Tipografía Carnegie Endowment con BlurText */}
+                <BlurText
+                  key={article.id}
+                  text={article.title}
+                  as="h1"
+                  effect="blur"
+                  animateBy="words"
+                  direction="top"
+                  trigger="load"
+                  delay={50}
+                  stepDuration={0.28}
+                  blur={10}
+                  distance={20}
+                  className="font-carnegie font-extrabold text-2xl sm:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight"
+                />
 
                 {/* Pastilla del Investigador en la Portada */}
                 <div className="pt-1 flex items-center gap-3">
@@ -389,9 +401,20 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
               {article.sections && article.sections.length > 0 ? (
                 article.sections.map((sec, idx) => (
                   <article key={idx} className={idx > 0 ? "pt-7" : ""}>
-                    <h2 className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3">
-                      {sec.heading}
-                    </h2>
+                    <BlurText
+                      key={`${article.id}-sec-${idx}`}
+                      text={sec.heading}
+                      as="h2"
+                      effect="blur"
+                      animateBy="words"
+                      direction="top"
+                      trigger="view"
+                      delay={40}
+                      stepDuration={0.25}
+                      blur={6}
+                      distance={14}
+                      className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3"
+                    />
                     <InteractiveText
                       text={sec.content}
                       glossary={combinedGlossary}
@@ -405,9 +428,20 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                   const heading = `${romanNumerals[idx] || (idx + 1)}. Desarrollo del Análisis de Coyuntura`;
                   return (
                     <article key={idx} className={idx > 0 ? 'pt-7' : ''}>
-                      <h2 className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3">
-                        {heading}
-                      </h2>
+                      <BlurText
+                        key={`${article.id}-full-${idx}`}
+                        text={heading}
+                        as="h2"
+                        effect="blur"
+                        animateBy="words"
+                        direction="top"
+                        trigger="view"
+                        delay={40}
+                        stepDuration={0.25}
+                        blur={6}
+                        distance={14}
+                        className="font-carnegie text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3"
+                      />
                       <InteractiveText
                         text={paragraph}
                         glossary={combinedGlossary}

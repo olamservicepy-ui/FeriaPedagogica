@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { BookOpen, Search, FileText, ArrowRight } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import type { NewsArticle, GlobalGlossaryEntry } from '../types/news';
+import BlurText from './reactbits/BlurText';
 
 interface GlobalGlossaryProps {
   articles: NewsArticle[];
@@ -118,9 +119,18 @@ export const GlobalGlossary: React.FC<GlobalGlossaryProps> = ({
           <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
           Compendio Conceptual
         </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 break-words font-sans">
-          Glosario Global de Economía Internacional
-        </h2>
+        <BlurText
+          text="Glosario Global de Economía Internacional"
+          as="h2"
+          effect="blur"
+          animateBy="words"
+          direction="top"
+          delay={90}
+          stepDuration={0.35}
+          blur={10}
+          distance={24}
+          className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 break-words font-sans justify-center"
+        />
         <p className="text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] font-sans">
           Índice unificado y desduplicado con todos los conceptos teóricos, regulatorios y geopolíticos analizados en las investigaciones de la feria.
         </p>

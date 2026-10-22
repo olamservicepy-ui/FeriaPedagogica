@@ -1,5 +1,7 @@
 import { Search, Compass, Globe, X } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import GlassSurface from './reactbits/GlassSurface';
+import BlurText from './reactbits/BlurText';
 
 interface HeroBannerProps {
   searchQuery: string;
@@ -53,18 +55,36 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
         className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4 sm:space-y-6 relative z-10"
       >
         {/* Top Tag */}
-        <motion.div variants={itemVariants}>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/80 backdrop-blur-md border border-slate-200/60 text-slate-700 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-slate-300 transition-all duration-700 ease-out max-w-full">
-            <Compass className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-            <span className="truncate font-sans">Feria Pedagógica Universitaria de Relaciones Internacionales</span>
-          </div>
+        <motion.div variants={itemVariants} className="flex justify-center">
+          <GlassSurface
+            width="auto"
+            height={38}
+            borderRadius={19}
+            displace={0.4}
+            backgroundOpacity={0.12}
+            className="px-4 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-slate-200/80 inline-flex"
+          >
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+              <Compass className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span className="truncate font-sans">Feria Pedagógica Universitaria de Relaciones Internacionales</span>
+            </div>
+          </GlassSurface>
         </motion.div>
 
-        {/* Main Headline */}
+        {/* Main Headline with BlurText */}
         <motion.div variants={itemVariants} className="space-y-2 sm:space-y-3">
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 font-sans leading-tight break-words">
-            Análisis de Economía Internacional & Geopolítica Global
-          </h1>
+          <BlurText
+            text="Análisis de Economía Internacional & Geopolítica Global"
+            as="h1"
+            effect="blur"
+            animateBy="words"
+            direction="top"
+            delay={90}
+            stepDuration={0.35}
+            blur={12}
+            distance={28}
+            className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 font-sans leading-tight break-words justify-center"
+          />
           <p className="text-slate-600 font-normal leading-relaxed text-[15px] sm:text-[17px] max-w-2xl mx-auto font-sans">
             Plataforma de divulgación académica y pensamiento estratégico elaborada por estudiantes. Investigaciones coyunturales, perspectiva de relaciones internacionales y glosario conceptual interactivo.
           </p>
